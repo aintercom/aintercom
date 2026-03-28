@@ -19,6 +19,24 @@
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--t1);font-family:var(--f-ui);display:flex;flex-direction:column;}
 
+/* ── COOKIE BANNER ── */
+#cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0c1118;border-top:2px solid #1e2d3d;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;box-shadow:0 -4px 24px rgba(0,0,0,.5);}
+#cookie-banner.hidden{display:none;}
+.cookie-text{font-family:'Share Tech Mono',monospace;font-size:11px;color:#7a9ab5;line-height:1.6;flex:1;min-width:220px;}
+.cookie-text a{color:#00d97e;text-decoration:none;}
+.cookie-text a:hover{text-decoration:underline;}
+.cookie-btns{display:flex;gap:8px;flex-shrink:0;}
+.cookie-btn-accept{font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;padding:8px 20px;border-radius:3px;border:none;background:#00d97e;color:#000;cursor:pointer;transition:filter .15s;}
+.cookie-btn-accept:hover{filter:brightness(1.12);}
+.cookie-btn-settings{font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;padding:8px 16px;border-radius:3px;border:1px solid #253545;background:transparent;color:#7a9ab5;cursor:pointer;transition:all .15s;}
+.cookie-btn-settings:hover{border-color:#3d5568;color:#e8f0f8;}
+
+/* ── FOOTER LEGAL ── */
+#legal-footer{position:fixed;bottom:0;left:0;right:0;z-index:9998;text-align:center;padding:6px;pointer-events:none;}
+#legal-footer.banner-visible{bottom:60px;}
+#legal-footer a{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#243040;text-decoration:none;pointer-events:all;transition:color .15s;}
+#legal-footer a:hover{color:#3d5568;}
+
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
@@ -339,6 +357,25 @@ body{background:var(--bg);color:var(--t1);font-family:var(--f-ui);display:flex;f
 </style>
 </head>
 <body>
+
+<!-- ══════════════════════════════════
+     BANNIÈRE COOKIES
+══════════════════════════════════ -->
+<div id="cookie-banner">
+  <div class="cookie-text">
+    🍪 Ce site utilise des cookies techniques nécessaires à son fonctionnement (localStorage uniquement — aucun traçage tiers).<br>
+    En continuant, vous acceptez leur utilisation. <a href="mentions-legales.html" target="_blank">Mentions légales</a>
+  </div>
+  <div class="cookie-btns">
+    <button class="cookie-btn-settings" onclick="openCookieSettings()">Paramètres</button>
+    <button class="cookie-btn-accept" onclick="acceptCookies()">Accepter</button>
+  </div>
+</div>
+
+<!-- FOOTER LÉGAL -->
+<div id="legal-footer">
+  <a href="mentions-legales.html" target="_blank">MENTIONS LÉGALES</a>
+</div>
 
 <!-- ══════════════════════════════════
      ÉCRAN PROFILS
@@ -1772,9 +1809,31 @@ setInterval(()=>{
 },1000);
 
 /* ══════════════════════════════════════════
+   COOKIES RGPD
+══════════════════════════════════════════ */
+function initCookieBanner(){
+  const banner=document.getElementById('cookie-banner');
+  const footer=document.getElementById('legal-footer');
+  if(localStorage.getItem('ai_cookies_accepted')==='true'){
+    banner.classList.add('hidden');
+  } else {
+    footer.classList.add('banner-visible');
+  }
+}
+function acceptCookies(){
+  localStorage.setItem('ai_cookies_accepted','true');
+  document.getElementById('cookie-banner').classList.add('hidden');
+  document.getElementById('legal-footer').classList.remove('banner-visible');
+}
+function openCookieSettings(){
+  alert('Paramètres cookies\n\n✓ Cookies techniques (obligatoires) : localStorage pour sauvegarder vos projets et préférences.\n✗ Aucun cookie de traçage, publicité ou analytics.\n\nPour refuser, désactivez le stockage local dans votre navigateur.');
+}
+
+/* ══════════════════════════════════════════
    INIT
 ══════════════════════════════════════════ */
 applyI18n();
+initCookieBanner();
 migrateProfilePins().then(() => showProfilesScreen());
 </script>
 </body>
