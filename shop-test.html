@@ -44,10 +44,9 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:60p
 
 /* Image héros */
 .hero-visual{position:relative;display:flex;align-items:center;justify-content:center;}
-.hero-visual-frame{width:340px;height:480px;border:1px solid rgba(201,149,106,.2);border-radius:4px;background:var(--surface);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.hero-visual-frame::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(201,149,106,.08) 0%,transparent 65%);}
-.hero-product-shape{width:80px;height:260px;background:linear-gradient(160deg,var(--rose-light) 0%,var(--rose) 40%,var(--rose-dim) 100%);border-radius:40px;position:relative;box-shadow:0 0 60px rgba(201,149,106,.2),inset 0 2px 4px rgba(255,255,255,.15);}
-.hero-product-shape::after{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);}
+.hero-visual-frame{width:340px;height:480px;border:1px solid rgba(201,149,106,.15);border-radius:4px;background:transparent;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.hero-visual-frame::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,rgba(201,149,106,.07) 0%,transparent 70%);pointer-events:none;}
+.hero-product-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;border-radius:3px;}
 .hero-badge{position:absolute;top:20px;right:20px;font-family:var(--f-mono);font-size:8px;letter-spacing:3px;color:var(--rose);border:1px solid rgba(201,149,106,.3);padding:5px 10px;border-radius:2px;background:rgba(201,149,106,.05);}
 
 /* Contenu hero */
@@ -116,7 +115,6 @@ footer{padding:24px 48px;border-top:1px solid var(--border);display:flex;align-i
   .hero-inner{grid-template-columns:1fr;gap:36px;}
   .hero-visual{order:-1;}
   .hero-visual-frame{width:200px;height:280px;}
-  .hero-product-shape{width:52px;height:160px;}
   footer{padding:20px 24px;}
 }
 </style>
@@ -137,7 +135,7 @@ footer{padding:24px 48px;border-top:1px solid var(--border);display:flex;align-i
     <!-- Visuel produit -->
     <div class="hero-visual">
       <div class="hero-visual-frame">
-        <div class="hero-product-shape"></div>
+        <img class="hero-product-img" src="aurum.png" alt="AURUM — Stimulateur Air Pulse Or Rose">
         <div class="hero-badge">ÉDITION LIMITÉE</div>
       </div>
     </div>
