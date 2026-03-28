@@ -43,7 +43,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:60p
 .hero-bg::after{content:'';position:absolute;inset:0;background-image:linear-gradient(transparent 49%,rgba(139,124,248,.012) 50%);background-size:100% 4px;pointer-events:none;}
 
 /* Étoiles */
-.stars{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.stars{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
 .star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite var(--delay,0s);}
 @keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.6}}
 
@@ -51,7 +51,8 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:60p
 
 /* Visuel produit */
 .hero-visual{display:flex;align-items:center;justify-content:center;}
-.hero-visual-frame{width:360px;height:460px;border:1px solid rgba(139,124,248,.15);border-radius:8px;background:var(--surface);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.hero-visual-frame{width:360px;height:460px;border:1px solid rgba(255,255,255,.1);border-radius:8px;background:var(--surface);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;z-index:1;}
+.noctis-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;border-radius:7px;}
 .hero-visual-frame::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(139,124,248,.06) 0%,transparent 65%);pointer-events:none;}
 .product-visual{display:flex;flex-direction:column;align-items:center;gap:0;position:relative;}
 .mask-shape{width:220px;height:90px;background:linear-gradient(160deg,#f5f0f8 0%,#e8e0f0 40%,#d4ccee 100%);border-radius:50px;position:relative;box-shadow:0 0 60px rgba(139,124,248,.2),inset 0 2px 4px rgba(255,255,255,.25);}
@@ -147,7 +148,6 @@ footer{padding:24px 48px;border-top:1px solid var(--border);display:flex;align-i
   .hero-inner{grid-template-columns:1fr;gap:36px;}
   .hero-visual{order:-1;}
   .hero-visual-frame{width:260px;height:300px;}
-  .mask-shape{width:160px;height:66px;}
   #proof{padding:50px 20px;}
   .testimonials{grid-template-columns:1fr;}
   footer{padding:20px 24px;}
@@ -173,16 +173,7 @@ footer{padding:24px 48px;border-top:1px solid var(--border);display:flex;align-i
     <!-- Visuel -->
     <div class="hero-visual">
       <div class="hero-visual-frame">
-        <div class="product-visual">
-          <div class="mask-shape">
-            <div class="mask-strap-l"></div>
-            <div class="mask-strap-r"></div>
-            <div class="mask-dot-l"></div>
-            <div class="mask-dot-r"></div>
-            <div class="mask-logo">NOCTIS</div>
-          </div>
-          <div class="product-shadow"></div>
-        </div>
+        <img class="noctis-img" src="noctis-image.png" alt="NOCTIS — Masque de sommeil luxe soie indigo">
         <div class="hero-badge">ÉDITION INAUGURALE</div>
         <div class="hero-badge-b">SOIE · POINTS D'ACUPRESSION · USB-C</div>
       </div>
