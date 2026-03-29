@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PRO GLOSSARY 1000 — AINTERCOM</title>
+<title>Technical Glossary — Production — AINTERCOM</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -171,7 +171,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--f-body);min-height:1
     </div>
   </a>
   <div class="h-right">
-    <div class="h-count" id="total-count">50 / 1000</div>
+    <div class="h-count" id="total-count">350 / 1000</div>
     <a class="h-back" href="../index.html">← ACCUEIL</a>
   </div>
 </header>
@@ -179,8 +179,8 @@ body{background:var(--bg);color:var(--t1);font-family:var(--f-body);min-height:1
 <!-- HERO + SEARCH -->
 <div id="hero">
   <div class="hero-eyebrow">DICTIONNAIRE DE RÉFÉRENCE MONDIAL</div>
-  <h1 class="hero-title">ULTIMATE<br><span>PRO GLOSSARY</span><br>1000</h1>
-  <p class="hero-sub">1 000 termes techniques de la production événementielle. Bilingue FR / EN. Pour les régisseurs, techniciens, producteurs et prestataires.</p>
+  <h1 class="hero-title">LEXIQUE TECHNIQUE<br><span>TECHNICAL GLOSSARY</span></h1>
+  <p class="hero-sub">Dictionnaire de référence de la production événementielle (FR / EN). 1 000 termes bilingues pour les régisseurs, techniciens, producteurs et prestataires.</p>
   <div class="search-wrap">
     <input class="search-input" id="search-input" type="text" placeholder="Rechercher un terme FR ou EN…" autocomplete="off" autocorrect="off" spellcheck="false">
     <span class="search-icon" id="search-icon">⌕</span>
@@ -1255,13 +1255,423 @@ const GLOSSARY = [
     def_fr:'Build : phase d\'assemblage et d\'installation de la totalité du rig et des équipements techniques sur le site de l\'événement. Strike : phase de démontage et de retour en stock. Deux phases critiques en termes de sécurité.',
     def_en:'Build: the assembly and installation phase of the complete rig and technical equipment on the event site. Strike: the dismantling and return-to-stock phase. Both are critical phases in terms of safety.'},
 
-/* ══════════════════════════════════════════════════════
-   ─── BATCH 05 : VIDÉO & MAPPING (251–350) ───
-   ─── BATCH 06 : PROD & LOGISTIQUE (351–450) ───
-   ─── BATCH 07–10 : ÉLECTRICITÉ, SÉCURITÉ ERP, BOOKING, JURIDIQUE, DIGITAL ───
+  /* ══════════════════════════════════════════════════════
+   ─── BATCH 03 : VIDÉO & MAPPING (251–350) ───
 ══════════════════════════════════════════════════════ */
 
-/* ── FIN DU GLOSSAIRE ── */
+  /* ─── Résolution & Formats Vidéo ─── */
+  {id:251,fr:'Résolution 4K / UHD',en:'4K / UHD (Ultra High Definition)',cat:'VIDÉO',
+    def_fr:'Format vidéo de haute résolution : 4096×2160 pixels (format cinéma DCI) ou 3840×2160 pixels (UHD). Nécessite 4 fois la bande passante du Full HD pour le direct live.',
+    def_en:'High-resolution video format: 4096×2160 pixels (DCI cinema format) or 3840×2160 pixels (UHD). Requires 4 times the bandwidth of Full HD for live streaming.'},
+
+  {id:252,fr:'Résolution 8K / HiVision',en:'8K / 10K HiVision',cat:'VIDÉO',
+    def_fr:'Format ultra-résolut 7680×4320 pixels (8K) ou 10240×4320 pixels (10K). Peu utilisé en spectacle live mais déploiement en cours pour les écrans géants LED outdoor.',
+    def_en:'Ultra-high resolution format 7680×4320 pixels (8K) or 10240×4320 pixels (10K). Rarely used in live entertainment but increasingly deployed for giant outdoor LED screens.'},
+
+  {id:253,fr:'Full HD / 1080p',en:'Full HD / 1080p (Progressive)',cat:'VIDÉO',
+    def_fr:'Résolution standard de 1920×1080 pixels en mode progressive (ou 1080i entrelacé). Référence incontournable pour les diffusions HD et reste dominante dans les petits événements.',
+    def_en:'Standard resolution of 1920×1080 pixels in progressive mode (or 1080i interlaced). The reference for HD broadcasts and still dominant in smaller events.'},
+
+  {id:254,fr:'HD Ready / 720p',en:'HD Ready / 720p',cat:'VIDÉO',
+    def_fr:'Résolution de 1280×720 pixels. Qualité HD minimale. Courant sur les téléviseurs d\'entrée de gamme et les diffusions web bande passante limitée.',
+    def_en:'Resolution of 1280×720 pixels. Minimum HD quality. Common on entry-level TVs and bandwidth-limited web streaming.'},
+
+  {id:255,fr:'Aspect ratio (16:9, 4:3, 21:9)',en:'Aspect Ratio',cat:'VIDÉO',
+    def_fr:'Rapport d\'aspect de la vidéo : 16:9 (cinéma widescreen), 4:3 (télédéfini), 21:9 (cinéma anamorphe). Détermine les barres noires (letterbox) ou recadrage lors du changement de format.',
+    def_en:'Video aspect ratio: 16:9 (widescreen cinema), 4:3 (standard definition), 21:9 (anamorphic cinema). Determines black bars (letterbox) or cropping when changing format.'},
+
+  {id:256,fr:'Frame rate (FPS) — 24p, 30p, 50p, 60p',en:'Frame Rate — 24p, 30p, 50p, 60p',cat:'VIDÉO',
+    def_fr:'Fréquence d\'affichage (images par seconde) : 24p (cinéma), 30p (NTSC), 50p (PAL), 60p (NTSC haute fréquence), 120p (ultra-fluide). Synchronisation critique avec l\'intercom et le timecode.',
+    def_en:'Display frequency (frames per second): 24p (cinema), 30p (NTSC), 50p (PAL), 60p (NTSC high frequency), 120p (ultra-smooth). Critical sync with intercom and timecode.'},
+
+  {id:257,fr:'Entrelacement vs Progressive (i vs p)',en:'Interlaced vs Progressive (i vs p)',cat:'VIDÉO',
+    def_fr:'Entrelacé (i) = deux champs par image (lignes paires puis impaires), utilisé en télédiffusion classique. Progressif (p) = image complète par seconde, standard pour le cinéma et le live. Progressive offre meilleure fluidité.',
+    def_en:'Interlaced (i) = two fields per frame (even/odd lines), used in traditional broadcasting. Progressive (p) = complete frame per second, standard for cinema and live. Progressive offers better smoothness.'},
+
+  {id:258,fr:'Timing vidéo (timecode)',en:'Video Timecode (TC / SMPTE)',cat:'VIDÉO',
+    def_fr:'Code temporel (HH:MM:SS:FF) identifiant chaque image d\'une vidéo pour la synchronisation avec son, lumière et autres éléments. Générateurs de timecode (TC gen) essentiels pour le live sync.',
+    def_en:'Time code (HH:MM:SS:FF) identifying each video frame for synchronisation with audio, lighting and other elements. Timecode generators critical for live sync.'},
+
+  {id:259,fr:'Gamut de couleur (Rec.709, DCI P3, Rec.2020)',en:'Colour Gamut (Rec.709, DCI P3, Rec.2020)',cat:'VIDÉO',
+    def_fr:'Espace de couleur définissant la plage des teintes reproductibles : Rec.709 (standard diffusion), DCI P3 (cinéma), Rec.2020 (broadcast ultra HD). Crucial pour l\'étalonnage des écrans LED.',
+    def_en:'Colour space defining the range of reproducible hues: Rec.709 (broadcast standard), DCI P3 (cinema), Rec.2020 (UHD broadcast). Critical for LED screen calibration.'},
+
+  {id:260,fr:'Profondeur de couleur (8-bit, 10-bit, 12-bit)',en:'Colour Depth (8-bit, 10-bit, 12-bit)',cat:'VIDÉO',
+    def_fr:'Nombre de bits par canal couleur : 8-bit (256 nuances/canal, 16 millions de couleurs), 10-bit (1024 nuances), 12-bit (4096 nuances). 10-bit obligatoire pour l\'étalonnage professionnel et le mapping haute definition.',
+    def_en:'Bits per colour channel: 8-bit (256 shades/channel, 16 million colours), 10-bit (1024 shades), 12-bit (4096 shades). 10-bit mandatory for professional grading and mapping.'},
+
+  {id:261,fr:'Curbe gamma (gamma correction)',en:'Gamma Correction',cat:'VIDÉO',
+    def_fr:'Courbe non-linéaire (généralement γ = 2.2 ou 2.4) compressant les données vidéo pour l\'adaptation à la perception visuelle humaine et aux limitations de bande passante. Encodée dans chaque format.',
+    def_en:'Non-linear curve (typically γ = 2.2 or 2.4) compressing video data for human visual perception and bandwidth constraints. Encoded in each format.'},
+
+  {id:262,fr:'Transfert vidéo (color space)',en:'Video Transfer Function / Colour Space',cat:'VIDÉO',
+    def_fr:'Fonction mathématique convertissant les données numériques en luminosité perçue. Rec.709, HLG (Hybrid Log-Gamma) pour HDR, PQ (Perceptual Quantization) pour HDR10 — définie la densité de contraste.',
+    def_en:'Mathematical function converting digital data to perceived brightness. Rec.709, HLG (Hybrid Log-Gamma) for HDR, PQ (Perceptual Quantization) for HDR10—defines contrast density.'},
+
+  {id:263,fr:'HDR (High Dynamic Range)',en:'HDR — High Dynamic Range',cat:'VIDÉO',
+    def_fr:'Technologie étendant la gamme dynamique vidéo (contraste) et la gamut de couleur au-delà de la norme Rec.709. Formats : HDR10, HDR10+, HLG, Dolby Vision. Nécessite écrans et processing spécifiques.',
+    def_en:'Technology extending video dynamic range (contrast) and colour gamut beyond Rec.709 standard. Formats: HDR10, HDR10+, HLG, Dolby Vision. Requires specific screens and processing.'},
+
+  {id:264,fr:'SDR (Standard Dynamic Range)',en:'SDR — Standard Dynamic Range',cat:'VIDÉO',
+    def_fr:'Format vidéo classique avec gamme dynamique et gamut limités par rapport au HDR. Reste la norme pour la plupart des diffusions ET pour les petits écrans de spectacle (efficacité énergétique).',
+    def_en:'Standard video format with limited dynamic range and colour gamut compared to HDR. Remains the standard for most broadcasts and small event screens (energy efficiency).'},
+
+  {id:265,fr:'MTF (Modulation Transfer Function)',en:'MTF — Modulation Transfer Function',cat:'VIDÉO',
+    def_fr:'Mesure de la sharpness et du contraste d\'une image : MTF = (Lmax - Lmin) / (Lmax + Lmin). Critique pour évaluer la qualité réelle d\'un projecteur ou d\'un écran au-delà de la simple résolution.',
+    def_en:'Measure of image sharpness and contrast: MTF = (Lmax - Lmin) / (Lmax + Lmin). Critical for evaluating genuine quality of a projector or screen beyond mere resolution.'},
+
+  /* ─── Codecs & Compression ─── */
+  {id:266,fr:'H.264 / AVC (Advanced Video Coding)',en:'H.264 / AVC',cat:'VIDÉO',
+    def_fr:'Codec vidéo standard de compression intermédiaire (1080p24/30/50/60, 10-bit). Tolérance ≤ 100 ms latence. Très performant pour le live : taux compression 50:1 sans perte perceptible.',
+    def_en:'Standard intermediate video codec (1080p24/30/50/60, 10-bit). Tolerance ≤ 100 ms latency. Highly efficient for live: 50:1 compression without perceptible loss.'},
+
+  {id:267,fr:'H.265 / HEVC (High Efficiency Video Coding)',en:'H.265 / HEVC',cat:'VIDÉO',
+    def_fr:'Codec de nouvelle génération doublant l\'efficacité du H.264 pour 4K et HDR. Compression 200:1 possible. Latence variable selon implémentation. Support GPU obligatoire pour le live temps réel.',
+    def_en:'Next-generation codec doubling H.264 efficiency for 4K and HDR. 200:1 compression possible. Variable latency depending on implementation. GPU support required for real-time live.'},
+
+  {id:268,fr:'ProRes (Intermediate Codec)',en:'ProRes (Apple)',cat:'VIDÉO',
+    def_fr:'Codec sans perte/faible perte (ProRes 422, 422 HQ) conçu pour l\'édition professionnelle et le mastering. Bitstre élevé (250–500 Mbps) mais latence nulle. Référence Mac/Final Cut Pro.',
+    def_en:'Lossless/visually lossless codec (ProRes 422, 422 HQ) designed for professional editing and mastering. High bitrate (250–500 Mbps) but zero latency. Mac/Final Cut Pro standard.'},
+
+  {id:269,fr:'DNxHD / DNxH.264 (Avid)',en:'DNxHD / DNxH.264 (Avid)',cat:'VIDÉO',
+    def_fr:'Codec intermédiaire sans perte Avid : alternative ProRes sur plateforme aviéenne. Bitstre 175–500 Mbps selon le profil. Support natif Dans Avid Media Composer, Vegas Pro, HitFilm.',
+    def_en:'Avid\'s lossless intermediate codec: ProRes alternative on Avid platform. Bitrate 175–500 Mbps depending on profile. Native support in Avid Media Composer, Vegas Pro, HitFilm.'},
+
+  {id:270,fr:'JPEG 2000',en:'JPEG 2000 (J2K)',cat:'VIDÉO',
+    def_fr:'Codec sans perte pour le cinema numérique (DCI) : 2K et 4K. Bitrate variable. Standard de diffusion virtuelle pour projections numériques professionnelles en salle.',
+    def_en:'Lossless codec for digital cinema (DCI): 2K and 4K. Variable bitrate. Standard for virtual cinema distribution to professional digital projection venues.'},
+
+  {id:271,fr:'Avid DNxUC',en:'Avid DNxUC (Universal Codec)',cat:'VIDÉO',
+    def_fr:'Codec universel Avid permettant la lecture en temps réel de plusieurs résolutions et frame rates sans re-encoding. Conçu pour l\'édition rapide d\'événements en direct.',
+    def_en:'Avid\'s universal codec enabling real-time playback of multiple resolutions and frame rates without re-encoding. Designed for fast editing of live events.'},
+
+  {id:272,fr:'Apple ProRes RAW',en:'ProRes RAW (Camera RAW)',cat:'VIDÉO',
+    def_fr:'Format RAW non compressé captant les données brutes du capteur caméra. Manipulation maximale de couleur et contraste en post-production. Bitstre très élevé (~2 Gbps pour 4K). Premium mastering.',
+    def_en:'Uncompressed RAW format capturing raw sensor data from camera. Maximum color and contrast manipulation in post-production. Very high bitrate (~2 Gbps for 4K). Premium mastering.'},
+
+  {id:273,fr:'AV1',en:'AV1 (Alliance for Open Media)',cat:'VIDÉO',
+    def_fr:'Codec open-source de prochaine génération (après H.265), compression 30 % supérieure. Support matériel limité actuellement. Adoption progressive pour le streaming YouTube/Netflix.',
+    def_en:'Next-generation open-source codec (after H.265), 30% better compression. Limited hardware support currently. Gradual adoption for YouTube/Netflix streaming.'},
+
+  {id:274,fr:'CineForm (GoPro)',en:'CineForm (GoPro)',cat:'VIDÉO',
+    def_fr:'Codec sans perte comprimé (losslessly compressed) natif pour GoPro et éditeurs associés. Faible latence GPU. Bitstre 500 Mbps–2.8 Gbps selon résolution. Populaire en adventure & action sport.',
+    def_en:'Losslessly compressed codec native to GoPro devices. Low GPU latency. Bitrate 500 Mbps–2.8 Gbps depending on resolution. Popular in adventure and action sports.'},
+
+  {id:275,fr:'MotionJPEG (M-JPEG / MJPEG)',en:'Motion JPEG (M-JPEG)',cat:'VIDÉO',
+    def_fr:'Compression JPEG appliquée image par image (chaque frame encodée indépendamment sans prédiction temporelle). Décodage simple mais bitstre élevé. Utilisé en caméras de surveillance.',
+    def_en:'JPEG compression applied frame-by-frame (each frame encoded independently without temporal prediction). Simple decoding but high bitrate. Used in surveillance cameras.'},
+
+  /* ─── Interfaces Vidéo & Signaux ─── */
+  {id:276,fr:'SDI (Serial Digital Interface)',en:'SDI — Serial Digital Interface',cat:'VIDÉO',
+    def_fr:'Interface numérique série haute vitesse pour diffusion professionnel : 270 Mbps (SD), 1.485 Gbps (HD-SDI), 2.97 Gbps (3G-SDI), 11.88 Gbps (6G-SDI), 24 Gbps (12G-SDI).',
+    def_en:'High-speed serial digital interface for professional broadcast: 270 Mbps (SD), 1.485 Gbps (HD-SDI), 2.97 Gbps (3G-SDI), 11.88 Gbps (6G-SDI), 24 Gbps (12G-SDI).'},
+
+  {id:277,fr:'HDMI (High-Definition Multimedia Interface)',en:'HDMI',cat:'VIDÉO',
+    def_fr:'Interface audio-vidéo numérique grand public : HDMI 1.4 (10.2 Gbps), 2.0 (18 Gbps), 2.1 (48 Gbps 8K60). Limité à ~10 m sans ampli. Répandu sur projecteurs et moniteurs courante.',
+    def_en:'Consumer audio-video digital interface: HDMI 1.4 (10.2 Gbps), 2.0 (18 Gbps), 2.1 (48 Gbps 8K60). Limited to ~10 m without amplifier. Common on projectors and monitors.'},
+
+  {id:278,fr:'DisplayPort / Mini-DisplayPort',en:'DisplayPort',cat:'VIDÉO',
+    def_fr:'Interface vidéo-audio haute bande passante (DP 1.2 : 32.4 Gbps; DP 2.0 : 80 Gbps) conçue pour ordinateurs et studios. Meilleur pour le live direct computer-to-screen que HDMI.',
+    def_en:'High-bandwidth video-audio interface (DP 1.2: 32.4 Gbps; DP 2.0: 80 Gbps) designed for computers and studios. Better than HDMI for live computer-to-screen.'},
+
+  {id:279,fr:'DVI-D',en:'DVI-D (Digital Video Interface)',cat:'VIDÉO',
+    def_fr:'Interface vidéo numérique simple, largement obsolète, remplacée par HDMI et DisplayPort. Bitrate limité à ~4.95 Gbps. Présent sur anciens projecteurs et carte vidéo.',
+    def_en:'Simple digital video interface, largely obsolete, replaced by HDMI and DisplayPort. Bitrate limited to ~4.95 Gbps. Found on older projectors and video cards.'},
+
+  {id:280,fr:'VGA / D-Sub (Analog Video)',en:'VGA / D-Sub (Analog)',cat:'VIDÉO',
+    def_fr:'Interface analogique obsolète (bleu triax). Utilisation résiduelle sur très vieux matériel. Sensible aux interférences sur longue distance. N\'utiliser qu\'en dernier recours.',
+    def_en:'Obsolete analog interface (blue triax connector). Residual use on old equipment. Prone to interference over long distances. Use only as last resort.'},
+
+  {id:281,fr:'Fiber Optic (SM / MM, 1 Gbps – 10 Gbps)',en:'Fiber Optic SDI / HDMI',cat:'VIDÉO',
+    def_fr:'Transport du signal vidéo sur fibre optique : immun aux parasites réseau haute tension. Portée jusqu\'à 2 km. Convertisseurs électro-optiques requis. Onéreux mais fiable pour long distance.',
+    def_en:'Video signal transmission over fiber optic: immune to high-voltage interference. Range up to 2 km. Electro-optical converters required. Expensive but reliable for long distances.'},
+
+  {id:282,fr:'USB-C (Thunderbolt 3/4)',en:'USB-C / Thunderbolt 3/4',cat:'VIDÉO',
+    def_fr:'Interface polyvalente moderne : USB 3.1 vidéo native, ou USB-C Alt Mode HDMI/DisplayPort. Débit jusqu\'à 40 Gbps (Thunderbolt 4). Généralisation sur ordinateurs portables actuels.',
+    def_en:'Modern versatile interface: USB 3.1 native video or USB-C Alt Mode HDMI/DisplayPort. Throughput up to 40 Gbps (Thunderbolt 4). Generalization on current laptops.'},
+
+  {id:283,fr:'Genlock (Genlocksynchronisation)',en:'Genlock (Synchronisation)',cat:'VIDÉO',
+    def_fr:'Synchronisation de la fréquence de balayage horizontal d\'une source vidéo avec la fréquence d\'une horloge de référence (généralement signal vidéo d\'une source maître). Critique pour mélanges vidéo sans artefact.',
+    def_en:'Synchronising the horizontal scan rate of a video source with a reference clock frequency (typically video signal from a master source). Critical for seamless video mixing.'},
+
+  {id:284,fr:'Référence timecode (LTC / MTC)',en:'Timecode Reference (LTC / MTC)',cat:'VIDÉO',
+    def_fr:'Signal d\'horloge numérique synchronisant tous les appareils vidéo, audio et lumière : LTC (Linear Timecode analogique) ou MTC (MIDI Timecode). Généralement à 24p, 25p ou 30p.',
+    def_en:'Digital clock signal syncing all video, audio and lighting devices: LTC (Linear Timecode analog) or MTC (MIDI Timecode). Typically at 24p, 25p or 30p.'},
+
+  {id:285,fr:'Vectorscope & Waveform Monitor',en:'Vectorscope & Waveform Monitor',cat:'VIDÉO',
+    def_fr:'Outils d\'analyse vidéo : Vectorscope affiche les points de couleur dans l\'espace chrominance (teinte/saturation), Waveform affiche l\'amplitude de luminance ligne par ligne. Essentiels pour l\'étalonnage couleur.',
+    def_en:'Video analysis tools: Vectorscope displays colour points in chrominance space (hue/saturation), Waveform shows luminance amplitude line-by-line. Essential for colour grading.'},
+
+  /* ─── Technologie LED ─── */
+  {id:286,fr:'Pitch LED (pixel pitch)',en:'LED Pixel Pitch',cat:'VIDÉO',
+    def_fr:'Distance entre le centre de deux pixels LED consécutifs (en mm) : petit pitch = meilleur définition mais plus d\'énergie. Pitch courant : 1.2 mm (indoor ultra-bright), 3 mm (tour), 6–10 mm (outdoor stade).',
+    def_en:'Distance between centres of two consecutive LED pixels (in mm): small pitch = better definition but more power. Common pitches: 1.2 mm (indoor ultra-bright), 3 mm (tower), 6–10 mm (outdoor stadium).'},
+
+  {id:287,fr:'Densité LCD (lumens/m²)',en:'LED Display Brightness (nits / cd/m²)',cat:'VIDÉO',
+    def_fr:'Luminosité de l\'écran LED mesurée en nits (cd/m²). Indoor : 500–1500 nits, Outdoor jour : 2000–5000 nits, Outdoor stade nuit : 5000–10000 nits. Crucial pour visibilité en plein jour.',
+    def_en:'LED screen brightness measured in nits (cd/m²). Indoor: 500–1500 nits, Outdoor day: 2000–5000 nits, Stadium night: 5000–10000 nits. Crucial for daytime visibility.'},
+
+  {id:288,fr:'Consommation LED (Watts/m²)',en:'LED Power Consumption (W/m²)',cat:'VIDÉO',
+    def_fr:'Puissance électrique d\'une dalle LED : indoor 100–200 W/m², outdoor 300–600 W/m². Détermine la section électrique, les générateurs requis, et les frais de production énergétique.',
+    def_en:'Electrical power of an LED panel: indoor 100–200 W/m², outdoor 300–600 W/m². Determines electrical wiring, required generators and production energy costs.'},
+
+  {id:289,fr:'Fréquence de rafraîchissement LED (Hz)',en:'LED Refresh Rate (Hz)',cat:'VIDÉO',
+    def_fr:'Nombre de fois par seconde que chaque pixel LED est mis à jour : typiquement 1920–7680 Hz. Plus haute fréquence = meilleur antialiasing et stabilité apparent face aux caméras (reduction scintillement).',
+    def_en:'Number of times per second each LED pixel refreshes: typically 1920–7680 Hz. Higher frequency = better antialiasing and apparent stability for cameras (flicker reduction).'},
+
+  {id:290,fr:'Angle de vision LED (deg)',en:'LED Viewing Angle',cat:'VIDÉO',
+    def_fr:'Amplitude horizontale et verticale de l\'angle de vision où la luminosité chute à 50 % du maximum : typiquement 110° (horizontal) × 60° (vertical). Important pour les lourds écrans non-frontal.',
+    def_en:'Horizontal and vertical amplitude of viewing angle where brightness drops to 50% max: typically 110° (horiz) × 60° (vert). Important for off-axis large screens.'},
+
+  {id:291,fr:'CMY LED vs RGB LED',en:'CMY LED vs RGB LED Colour Mixing',cat:'VIDÉO',
+    def_fr:'RGB = trois LEDs rouge/vert/bleu par pixel créant la couleur par synthèse additive. CMY = cyan/magenta/jaune permettant la synthèse soustractive (souvent moins lumineux mais plus nuancé).',
+    def_en:'RGB = three red/green/blue LEDs per pixel via additive synthesis. CMY = cyan/magenta/yellow enabling subtractive synthesis (often less bright but more nuanced colours).'},
+
+  {id:292,fr:'Dynamic contrast ratio (DCR)',en:'Dynamic Contrast Ratio (DCR)',cat:'VIDÉO',
+    def_fr:'Ratio de contraste mesurée entre 100 % blanc et 0 % noir (écran éteint) d\'un écran LED, corrigé du bruit d\'environnement. Typiquement > 3000:1. Déclarations fabricant souvent optimistes.',
+    def_en:'Contrast ratio between 100% white and 0% black (display off) of an LED screen, corrected for environmental noise. Typically > 3000:1. Manufacturer claims often optimistic.'},
+
+  {id:293,fr:'Uniformité chromatique (Delta uv)',en:'Colour Uniformity (Δu Δv)',cat:'VIDÉO',
+    def_fr:'Mesure de la variation de couleur d\'une dalle LED : Δ < 0.005 = excellente, Δ > 0.010 = visible à l\'oeil nu. Important pour murs LED multi-dalles où chaque dalle peut avoir légère dérive chromatique.',
+    def_en:'Measure of colour variation across an LED panel: Δ < 0.005 = excellent, Δ > 0.010 = visible to naked eye. Important for multi-panel LED walls where each panel may have slight colour drift.'},
+
+  {id:294,fr:'Dérive thermique LED',en:'LED Thermal Drift',cat:'VIDÉO',
+    def_fr:'Variation chromatique et lumineuse due à l\'échauffement des LEDs (~0.1 %/°C pour luminance, ~0.5 %/°C pour couleur). Ventilation et thermostats critiques en outdoor stade haute puissance.',
+    def_en:'Colour and brightness variation due to LED heating (~0.1%/°C for luminance, ~0.5%/°C for colour). Cooling and thermostats critical for high-power outdoor stadium screens.'},
+
+  {id:295,fr:'Étalonnage LED (white balance)',en:'LED Calibration (White Balance)',cat:'VIDÉO',
+    def_fr:'Ajustement des gains RGB et de la température de couleur de chaque dalle pour assurer cohérence chromatique d\'un mur complet de plusieurs modules. Utilise référence D65 (6500K) ou D55 (5500K).',
+    def_en:'Adjustment of RGB gains and colour temperature for each panel to ensure colour consistency across a multi-module LED wall. Uses D65 (6500K) or D55 (5500K) reference.'},
+
+  {id:296,fr:'WiFi vs câble Ethernet pour mapping',en:'WiFi vs Wired Ethernet',cat:'VIDÉO',
+    def_fr:'Contrôle du mapping : WiFi = flexibilité mais latence variable et interférences; Ethernet câblé = déterministe, latence < 1 ms, robustesse supérieure. Toujours préférer câtégorie 6A minimum en direct live.',
+    def_en:'Mapping control: WiFi = flexibility but variable latency and interference; wired Ethernet = deterministic, latency < 1 ms, superior robustness. Always prefer Cat 6A minimum for live direct.'},
+
+  {id:297,fr:'Power-over-Ethernet (PoE+/++)',en:'Power-over-Ethernet (PoE+/++)',cat:'VIDÉO',
+    def_fr:'Technologie transmettant alimentation et données sur même câble Ethernet : PoE+ = 30W, PoE++ = 60W, High Power PoE = 95W. Utilisé pour petis devices LED / LED strips / contrôleurs mappe.',
+    def_en:'Technology transmitting power and data over same Ethernet cable: PoE+ = 30W, PoE++ = 60W, High Power PoE = 95W. Used for small LED devices/LED strips/LED control boards.'},
+
+  {id:298,fr:'Latence réseau (ms)',en:'Network Latency',cat:'VIDÉO',
+    def_fr:'Délai de transmission d\'une commande réseau d\'un client vers un serveur : < 1 ms (RDS local), 1–10 ms (LAN), 10–50 ms (WAN internet). Acceptable pour mapping statique, critique pour live interactive.',
+    def_en:'Transmission delay for network command from client to server: < 1 ms (local RTK), 1–10 ms (LAN), 10–50 ms (WAN internet). Acceptable for static mapping, critical for live interactive.'},
+
+  {id:299,fr:'Gigue (Jitter)',en:'Network Jitter',cat:'VIDÉO',
+    def_fr:'Variation de latence réseau d\'une trame à l\'autre : jitter < 1 ms = excellent, > 10 ms = problématique. Jitter élevé crée des "saccades" dans le rendu mapping temps réel.',
+    def_en:'Latency variation frame-to-frame: jitter < 1 ms = excellent, > 10 ms = problematic. High jitter creates "stuttering" in real-time mapping.'},
+
+  {id:300,fr:'Bande passante requise mapping 4K',en:'Bandwidth Requirements — 4K Mapping',cat:'VIDÉO',
+    def_fr:'Bande passante sans compression : 4K 60p RGB 10-bit ≈ 30 Gbps brut (non-compressé), codé H.265 ≈ 150–300 Mbps live. Chaque couche/track mapping additionnel = ×1 bande.',
+    def_en:'Uncompressed bandwidth: 4K 60p RGB 10-bit ≈ 30 Gbps raw, H.265 encoded ≈ 150–300 Mbps live. Each additional mapping layer/track = ×1 bandwidth.'},
+
+  /* ─── Serveurs Média & Players ─── */
+  {id:301,fr:'Media Server (Resolume, Qlab, Green Hippo)',en:'Media Server (Resolume, Qlab, Green Hippo)',cat:'VIDÉO',
+    def_fr:'Logiciel professionnel de lecture et de mixage vidéo : Resolume Avenue (Resolume Pro pour studio), Qlab (Mac theater-centric), GreenHippo (Linux optimisé processing). Gère livecam, keying, effects, output multiples.',
+    def_en:'Professional software for video playback and mixing: Resolume Avenue (Resolume Pro for studio), Qlab (Mac theater-centric), GreenHippo (Linux process-optimized). Handles livecam, keying, effects, multiple outputs.'},
+
+  {id:302,fr:'Grand Master (fader)',en:'Grand Master / Master Fader',cat:'VIDÉO',
+    def_fr:'Curseur global contrôlant l\'opacité/alpha de l\'ensemble des couches vidéo dans un mixeur : 0 % (transparent) à 100 % (opaque). Différent du volume maître audio. Utilisé pour blackout ou fadeout collectif.',
+    def_en:'Global slider controlling opacity/alpha of all video layers in a mixer: 0% (transparent) to 100% (opaque). Different from master audio fader. Used for collective blackout or fadeout.'},
+
+  {id:303,fr:'Stockage SSD vs HDD performance',en:'Storage — SSD vs HDD Performance',cat:'VIDÉO',
+    def_fr:'SSD = lecture séquentielle 500+ MB/s, I/O aléatoire faible latence, silencieux; HDD = lecture séquentielle 100–200 MB/s, latence élevée (~10 ms), bruit. Pour vidéo 4K brute : SSD NVMe PCIe 4.0 requis.',
+    def_en:'SSD = 500+ MB/s sequential read, low-latency random I/O, silent; HDD = 100–200 MB/s sequential, high latency (~10 ms), noisy. For raw 4K video: NVMe PCIe 4.0 SSD required.'},
+
+  {id:304,fr:'Processeur GPU vs CPU vidéo',en:'GPU vs CPU for Video Processing',cat:'VIDÉO',
+    def_fr:'GPU (NVIDIA CUDA, AMD OpenCL) = parallélisation massivement parallèle idéale pour effets vidéo temps réel (keying, color grading, tracking). CPU = traitement séquentiel, mieux pour codage/décodage.',
+    def_en:'GPU (NVIDIA CUDA, AMD OpenCL) = massively parallel ideal for real-time video effects (keying, grading, tracking). CPU = sequential processing, better for encoding/decoding.'},
+
+  {id:305,fr:'Baie disque (RAID)',en:'RAID Storage',cat:'VIDÉO',
+    def_fr:'Configuration de stockage distribué : RAID 0 (performance), RAID 1 (sauvegarde), RAID 5/6 (redondance), RAID 10 (balance). Pour production live 4K : RAID 5+ avec hot-spare requis.',
+    def_en:'Distributed storage configuration: RAID 0 (performance), RAID 1 (backup), RAID 5/6 (redundancy), RAID 10 (balanced). For live 4K production: RAID 5+ with hot spare required.'},
+
+  {id:306,fr:'Cache disque (buffer)',en:'Disk Cache / Buffer',cat:'VIDÉO',
+    def_fr:'Mémoire temporaire entre un lecteur vidéo et un codeur/décodeur : cache réduit les pauses (stutter) lors de pics d\'accès disque. Buffer video typiquement 100–500 frames.',
+    def_en:'Temporary memory between video player and encoder/decoder: cache reduces stuttering during disk access peaks. Video buffer typically 100–500 frames.'},
+
+  {id:307,fr:'Synchronisation multimap (cluster)',en:'Multi-Server Sync / Cluster',cat:'VIDÉO',
+    def_fr:'Coordination de plusieurs serveurs média jouant des vidéos en parallèle, maintenant la synchronisation par timecode ou network sync: essentialité pour les écrans géants multi-server.',
+    def_en:'Coordination of multiple media servers playing videos in parallel, maintaining sync via timecode or network sync: essential for giant multi-server screens.'},
+
+  {id:308,fr:'Failover (redundance serveur)',en:'Failover / Server Redundancy',cat:'VIDÉO',
+    def_fr:'Système automatique basculant vers serveur de secours en cas de défaillance du PRIMARY. Temps de commutation < 100 ms pour spectacle. Requires heartbeat monitoring et hot-standby.',
+    def_en:'Automatic switchover to backup server on primary failure. Switchover time < 100 ms for shows. Requires heartbeat monitoring and hot-standby.'},
+
+  {id:309,fr:'Plugin / AE plugin (After Effects)',en:'Video Plugins / After Effects Extension',cat:'VIDÉO',
+    def_fr:'Extensions logicielles s\'intégrant à serveur média ou éditeur vidéo : keying (Keylight), color grading (Colorista), effects (Sapphire Red Giant). Ecosystem riche pour After Effects.',
+    def_en:'Software extensions integrating media server or video editor: keying (Keylight), grading (Colorista), effects (Sapphire Red Giant). Rich ecosystem for After Effects.'},
+
+  {id:310,fr:'Export / Render vidéo',en:'Video Export / Rendering',cat:'VIDÉO',
+    def_fr:'Processus de création d\'un fichier vidéo finalisé à partir d\'une composition. Paramètres : codec, bitrate, résolution, frame rate, audio mix. Temps render selon complexité (realtime–10×realtime).',
+    def_en:'Process of creating a finalized video file from a composition. Parameters: codec, bitrate, resolution, frame rate, audio mix. Render time from realtime to 10×realtime depending on complexity.'},
+
+  /* ─── Protocoles Réseau Vidéo ─── */
+  {id:311,fr:'NDI (Network Device Interface)',en:'NDI — Network Device Interface',cat:'VIDÉO',
+    def_fr:'Protocole Newtek permettant transport vidéo/audio natif sur Ethernet standard (1 Gbps suffisant pour Full HD, 10 Gbps pour 4K). Latence < 100 ms. Univers IP, scalable, très utilisé studio broadcast.',
+    def_en:'Newtek protocol enabling native video/audio transport over standard Ethernet (1 Gbps sufficient for Full HD, 10 Gbps for 4K). Latency < 100 ms. IP-based, scalable, widely used in broadcast studios.'},
+
+  {id:312,fr:'SRT (Secure Reliable Transport)',en:'SRT — Secure Reliable Transport',cat:'VIDÉO',
+    def_fr:'Protocole open-source transport bidirectionnel H.264/H.265 résilient aux pertes réseau : adaptative bitrate, chiffrement AES-256. Populaire streaming long-distance et remote production.',
+    def_en:'Open-source bidirectional H.264/H.265 transport protocol resilient to packet loss: adaptive bitrate, AES-256 encryption. Popular for long-distance streaming and remote production.'},
+
+  {id:313,fr:'RIST (Reliable Internet Stream Transport)',en:'RIST — Reliable Internet Stream Transport',cat:'VIDÉO',
+    def_fr:'Protocole transport vidéo fiable défini par VSF (Video Services Forum) : correction perte paquets, synchronisation, chiffrage. Alternative SRT davantage broadcast-centrique.',
+    def_en:'Reliable video transport protocol specified by VSF (Video Services Forum): packet loss correction, sync, encryption. SRT alternative more broadcast-centric.'},
+
+  {id:314,fr:'RTMP (Real-Time Messaging Protocol)',en:'RTMP (Adobe)',cat:'VIDÉO',
+    def_fr:'Protocole diffusion live stream vers YouTube, Facebook, Twitch (hérité, maintenant sur DASH/HLS). Latence intrinsèque ~20–30 secondes (buffer), moins idéal pour vrai temps réel.',
+    def_en:'Live streaming protocol to YouTube, Facebook, Twitch (legacy, now DASH/HLS). Inherent latency ~20–30 seconds (buffer), less ideal for true real-time.'},
+
+  {id:315,fr:'DASH / HLS (streaming protocol)',en:'DASH / HLS Streaming',cat:'VIDÉO',
+    def_fr:'Protocoles diffusion adaptative vidéo sur HTTP : DASH (ISO-MPEG) et HLS (Apple). Latence ~10 secondes, scalabilité réseau supérieure, idéal broadcast mais pas direct live.',
+    def_en:'Adaptive HTTP video streaming protocols: DASH (ISO-MPEG) and HLS (Apple). Latency ~10 seconds, superior network scalability, ideal for broadcast but not live direct.'},
+
+  /* ─── Projection Mapping 3D ─── */
+  {id:316,fr:'Projection mapping (video mapping)',en:'Projection Mapping',cat:'VIDÉO',
+    def_fr:'Technique de projection vidéo precise 3D sur surface architecturale complexe pour immerger audience dans environnement amplifié. Déformation géométrique (warping) et alignement (blending) pixel-perfect.',
+    def_en:'Technique of precise 3D video projection on complex architectural surfaces to immerse audience in amplified environment. Geometric distortion (warping) and pixel-perfect alignment (blending).'},
+
+  {id:317,fr:'Masque de projection (mask)',en:'Projection Mask',cat:'VIDÉO',
+    def_fr:'Délimitation de la zone de projection vidéo utile (polygone ou path) pour éviter débordement indesir sur zone noire adjacente (ex. fenêtres, murs voisins). Permet overlapping controlé.',
+    def_en:'Delimitation of the useful video projection area (polygon or path) to prevent spillover to adjacent dark zone (e.g. windows, neighbouring walls). Allows controlled overlapping.'},
+
+  {id:318,fr:'3D Model / Pointcloud',en:'3D Model / Point Cloud',cat:'VIDÉO',
+    def_fr:'Capture numérisée 3D de surface mappée : maillage 3D CAO ou nuage de points LiDAR. Permet calcul automatique de warping/blending pour chaque projecteur sans calibration manuelle laborieuse.',
+    def_en:'Digital 3D capture of mapped surface: 3D mesh CAD or LiDAR point cloud. Enables automatic warping/blending calculation per projector without laborious manual calibration.'},
+
+  {id:319,fr:'Distorsion optique (lens correction)',en:'Optical Distortion',cat:'VIDÉO',
+    def_fr:'Déformation introduite par la lentille d\'un projecteur (barrel/pincushion). Corrigée par warping logiciel inverse (lens profile). Courant sur ultra-wide-angle et zoom fort.',
+    def_en:'Distortion introduced by projector lens (barrel/pincushion). Corrected by inverse software warping (lens profile). Common on ultra-wide-angle and high-zoom lenses.'},
+
+  {id:320,fr:'Recalage (registration)',en:'Registration / Alignment',cat:'VIDÉO',
+    def_fr:'Alignement pixel-precise de chaque couche vidéo/projecteur en X/Y/Rotation : utilise pattern d\'étalons sur surface de test, mesure écarts caméra de validation. Critique pour multi-projecteur.',
+    def_en:'Pixel-precise alignment of each video layer/projector in X/Y/Rotation: uses gauge pattern on test surface, measured by validation camera. Critical for multi-projector.'},
+
+  {id:321,fr:'Soft-edge blending (edge blending)',en:'Soft-Edge Blending',cat:'VIDÉO',
+    def_fr:'Technique de fusion progressive de la bordure entre deux projections : gradation linéaire (ramp) ou courbe pour dissolution imperceptible chevauchement. Élimine \''ligne de couture\'' caractéristique.',
+    def_en:'Progressive edge fusion between two projections: linear ramp or curve for imperceptible dissolve of overlap. Eliminates characteristic ''seam line''.'},
+
+  {id:322,fr:'Calibration photométrique (color matching)',en:'Photometric Calibration',cat:'VIDÉO',
+    def_fr:'Ajustement des courbes gamma, gains RGB, et niveaux de noir/blanc de chaque projecteur pour assurer cohérence luminosité/couleur sur l\'ensemble de la surface mappée.',
+    def_en:'Adjustment of gamma curves, RGB gains and black/white levels per projector to ensure brightness/colour consistency across entire mapped surface.'},
+
+  {id:323,fr:'Profondeur de champ (focus stack)',en:'Depth of Field / Focus Stacking',cat:'VIDÉO',
+    def_fr:'Technique combinant plusieurs images avec différentes mises au point pour obtenir netteté uniforme sur profondeur surface 3D complexe. Importante projection mapping architecturale.',
+    def_en:'Technique combining multiple images at different focus planes for uniform sharpness across complex 3D surface depth. Important for architectural projection mapping.'},
+
+  {id:324,fr:'Live camera tracking (vitagraphe)',en:'Live Camera Tracking',cat:'VIDÉO',
+    def_fr:'Suivi temps réel de la position/orientation caméra spectatrice relativement au mapping, adaptant la projection en perspective : déformation continu (anamorphic shift). Crée immersion perspective correcte.',
+    def_en:'Real-time tracking of spectator camera position/orientation relative to mapping, adapting projection in perspective: continuous deformation (anamorphic shift). Creates correct perspective immersion.'},
+
+  {id:325,fr:'Interactive mapping (audience interaction)',en:'Interactive Projection Mapping',cat:'VIDÉO',
+    def_fr:'Intégration capteur audience (motion, audio, touch) déclenchant transformation mapping dynamique en temps réel : responsive installation transformant audience en acteur participant.',
+    def_en:'Integration of audience sensors (motion, audio, touch) triggering dynamic mapping transformation in real-time: responsive installation transforming audience into participating actor.'},
+
+  /* ─── Warping, Blending & Synchronisation ─── */
+  {id:326,fr:'Software warping (meshwarp)',en:'Software Warping/Meshwarp',cat:'VIDÉO',
+    def_fr:'Déformation géométrique logicielle d\'une image vidéo : déplacement de points de contrôle pour adapter image plane à surface courbe/inclinée. Kernel mathématique habituellement interpolation bilinéaire.',
+    def_en:'Software geometric distortion of video image: control point displacement to adapt flat image to curved/tilted surface. Math kernel usually bilinear interpolation.'},
+
+  {id:327,fr:'Hardware warping (projector)',en:'Projector-Native Warping',cat:'VIDÉO',
+    def_fr:'Déformation directe au sein du processeur vidéo du projecteur (contrast aux serveur média centralisant warping). Réduit latence mais moins flexible. Présent sur projecteurs mapping professionnel haut-de-gamme.',
+    def_en:'Distortion within projector\'s video processor (versus centralized server warping). Reduces latency but less flexible. Present on high-end professional mapping projectors.'},
+
+  {id:328,fr:'Ambient light suppression',en:'Ambient Light Rejection',cat:'VIDÉO',
+    def_fr:'Technique vidéo-traitement réduisant l\'impact lumière ambiante confondant (éclairage existant architecture) sur clarté image projetée. Augmentation gain luminosité projection ou réduction lumière ambiante.',
+    def_en:'Video processing technique reducing impact of confounding ambient light (existing architecture lighting) on projected image clarity. Brightness gain increase or ambient light reduction.'},
+
+  {id:329,fr:'Genlock en projection (frame lock)',en:'Frame Lock / Genlock in Projection',cat:'VIDÉO',
+    def_fr:'Synchronisation de la fréquence balayage de chaque projecteur avec signal timecode maître centralisé : élimine scintillement syncronisation et micro-variations frame rate.',
+    def_en:'Synchronisation of each projector\'s scan frequency with centralized master timecode: eliminates sync flicker and frame rate micro-variations.'},
+
+  {id:330,fr:'Playback sync (timeline)',en:'Playback Sync / Timeline',cat:'VIDÉO',
+    def_fr:'Synchronisation temporelle du playback vidéo de multiples serveurs/projecteurs sur ligne temps centrale (conducteur spectacle). Lecture frame-by-frame en tempo strict requis.',
+    def_en:'Temporal synchronisation of video playback across multiple servers/projectors on central timeline (show conductor). Frame-by-frame playback at strict tempo required.'},
+
+  /* ─── Tests & Étalonnage ─── */
+  {id:331,fr:'Color checker chart (24-patch)',en:'ColorChecker Chart',cat:'VIDÉO',
+    def_fr:'Référence couleur standard industrie : 24 patches de teintes connues (Gretag Macbeth). Capturée lors calibration pour profil ICC correction blance balance.',
+    def_en:'Industry-standard colour reference: 24 known-colour patches (Gretag Macbeth). Captured during calibration for ICC profile white balance correction.'},
+
+  {id:332,fr:'Scintillation (flicker)',en:'Flicker / Temporal Aliasing',cat:'VIDÉO',
+    def_fr:'Artefact visuel causé par désalignement frame rate vidéo-projecteur (29.97 Hz vs 30 Hz, ou bruit horloge). Détectable caméra haute fréquence. Genlock obligatoire pour l\'étudiancer.',
+    def_en:'Visual artifact caused by video-projector frame-rate misalignment (29.97 Hz vs 30 Hz or clock jitter). Detectable by high-frame-rate camera. Genlock mandatory to fix.'},
+
+  {id:333,fr:'Artefact de compression (blocking)',en:'Compression Artifacts / Blocking',cat:'VIDÉO',
+    def_fr:'Défaut visible d\'une vidéo en excès compression H.264/H.265 : bloc 8×8 pixellisé. Réduit par baisse ratio compression ou augmentation bitrate. Courant sur streaming internet.',
+    def_en:'Visible defect of overly-compressed H.264/H.265 video: pixelated 8×8 blocks. Reduced by lower compression ratio or higher bitrate. Common in internet streaming.'},
+
+  {id:334,fr:'Grain vidéo (noise)',en:'Video Grain / Noise',cat:'VIDÉO',
+    def_fr:'Bruit aléatoire dans données vidéo, issu capteur (ISO élevé, temps exposition court) ou compression. Augmente avec baisse lumière environnement. Réduit filtrage mais perte détail.',
+    def_en:'Random noise in video data, from sensor (high ISO, short exposure) or compression. Increases with lower ambient light. Filter reduces noise but loses detail.'},
+
+  {id:335,fr:'Inpainting / Content-Aware Fill',en:'Inpainting / Content-Aware',cat:'VIDÉO',
+    def_fr:'Algorithme IA comblant région manquante/endommagée d\'une image par extrapolation des pixels voisins. Utilisé masquer inadvertance (cable malveillant, équipement parasit).',
+    def_en:'AI algorithm filling missing/damaged image region by extrapolating neighbouring pixels. Used to mask accidental content (unwanted cable, equipment occlusion).'},
+
+  /* ─── Gestion & Standards ─── */
+  {id:336,fr:'Digital asset management (DAM)',en:'Digital Asset Management (DAM)',cat:'VIDÉO',
+    def_fr:'Système centralisé de catalogage et archivage fichiers vidéo : métadonnées, versions, permissions. Plateforme : Bright Roll, Extensis, MediaBeacon. Indispensable production grande scale.',
+    def_en:'Centralized system for cataloguing/archiving video files: metadata, versions, permissions. Platforms: Bright Roll, Extensis, MediaBeacon. Essential for large-scale production.'},
+
+  {id:337,fr:'Color space ISO standard',en:'Colour Space Standards',cat:'VIDÉO',
+    def_fr:'Normes internationales définissant espaces couleur vidéo : BT.709 (HD broadcast), BT.2020 (UHD), DCI-P3 (cinema). Réconciliation critique entre source capture et ecran affichage.',
+    def_en:'International standards defining video colour spaces: BT.709 (HD broadcast), BT.2020 (UHD), DCI-P3 (cinema). Critical reconciliation between capture source and display.'},
+
+  {id:338,fr:'ICC Profile (colour management)',en:'ICC Profile (Colour Management)',cat:'VIDÉO',
+    def_fr:'Fichier binaire décrivant processus conversion couleur spécifique équipements : scanner, projecteur, écran. Permet rendu couleur cohérent multi-chaîne production.',
+    def_en:'Binary file describing colour conversion process for specific equipment: scanner, projector, screen. Enables consistent colour rendering across multi-chain production.'},
+
+  {id:339,fr:'Étalonnage colorimétrique (color grading)',en:'Color Grading / Colour Timing',cat:'VIDÉO',
+    def_fr:'Processus artistique d\'ajustement couleur/luminosité vidéo : correction objectif (blanc balancé, exposition), ou créatif (LUT, virage sépia, tonalité cinéma).',
+    def_en:'Artistic process of adjusting video colour/brightness: objective correction (white balance, exp) or creative (LUT, sepia, cinema tone).'},
+
+  {id:340,fr:'LUT (Look-Up Table)',en:'LUT — Look-Up Table',cat:'VIDÉO',
+    def_fr:'Table mathématique mappage valeurs entrée vers sortie couleur : 1D LUT (courbe gamma), 3D LUT (colorimétrie précise). Format .cube standard industrie. Critères étalonnage cinema.',
+    def_en:'Math table mapping input to output colour values: 1D LUT (gamma curve), 3D LUT (precise colourimetry). .cube format industry standard. Essential cinema grading.'},
+
+  {id:341,fr:'Log recording (flat image)',en:'Log Recording / Flat Image',cat:'VIDÉO',
+    def_fr:'Enregistrement vidéo en espace logarithmique comprimant dynamique dans canaux RVB pour maximiser plage capturable post-processing : réduction banding/posterisation.',
+    def_en:'Video recording in logarithmic space compressing dynamics into RGB channels for max post-processing latitude: reduces banding/posterisation.'},
+
+  {id:342,fr:'Proxy editing',en:'Proxy Editing',cat:'VIDÉO',
+    def_fr:'Édition sur résolution basse/codec allégé accélérant rendu (offline), puis relink finale haute résolution. Débit réduction 10:1 tout en conservant structure édition.',
+    def_en:'Editing on lower resolution/lighter codec accelerating render (offline), then final high-resolution relink. 10:1 bitrate reduction while preserving edit structure.'},
+
+  {id:343,fr:'Transcoding',en:'Transcoding',cat:'VIDÉO',
+    def_fr:'Conversion d\'une vidéo source codec A vers codec B : exemple H.264 ProRes pour archivage, ou 4K → HD streaming. Perte génération possible avec codec lossy.',
+    def_en:'Converting source video from codec A to codec B: e.g. H.264 to ProRes for archival, or 4K to HD streaming. Possible generation loss with lossy codec.'},
+
+  {id:344,fr:'Version control (file versioning)',en:'Version Control (File Versioning)',cat:'VIDÉO',
+    def_fr:'Gestion historique fichier vidéo : V1, V2, V3 avec date/auteur/changelog. Critique pour itération créative et récupération version antérieure cas erreur définitive.',
+    def_en:'Management of video file history: V1, V2, V3 with date/author/changelog. Critical for creative iteration and recovery of previous version if catastrophic error.'},
+
+  {id:345,fr:'QC (Quality Control) workflow',en:'QC — Quality Control Workflow',cat:'VIDÉO',
+    def_fr:'Processus validation pré-diffusion : vérification codec/résolution/audio, détection artefact, synchronisation timecode, respect spec client. Rapport QC documenté avant greenlight.',
+    def_en:'Pre-broadcast validation process: checking codec/resolution/audio, artifact detection, timecode sync, client specs compliance. Documented QC report before greenlight.'},
+
+  {id:346,fr:'Meta-data vidéo (header)',en:'Video Metadata / Header',cat:'VIDÉO',
+    def_fr:'Informations intégrées fichier vidéo : résolution, codec, frame rate, colorimetry, création date/auteur. Critique pour workflows automatisés et compatibilité downstream.',
+    def_en:'Information embedded in video file: resolution, codec, frame rate, colourimetry, creation date/author. Critical for automated workflows and downstream compatibility.'},
+
+  {id:347,fr:'Essence vs Container (mux)',en:'Essence vs Container (Mux)',cat:'VIDÉO',
+    def_fr:'Essence = flux vidéo pur (H.264, ProRes). Container = enveloppe multiplexée (MOV, MKV, TS) contenant essence + metadata + audio + subs. Même essence peut > plusieurs containers.',
+    def_en:'Essence = pure video stream (H.264, ProRes). Container = multiplexed wrapper (MOV, MKV, TS) containing essence + metadata + audio + subs. Same essence in multiple containers.'},
+
+  {id:348,fr:'Frame variable rate (VFR)',en:'Variable Frame Rate (VFR)',cat:'VIDÉO',
+    def_fr:'Enregistrement vidéo sans frame rate constant : trame i à timestamp Ti + ΔT variable. Économise stockage mais incompatible plupart lecteurs. Convertir constant CFR pour compatibilité.',
+    def_en:'Video recording without constant frame rate: frame i at timestamp Ti + variable ΔT. Saves storage but incompatible with most players. Convert to constant CFR for compatibility.'},
+
+  {id:349,fr:'Out of Gamut warning',en:'Out of Gamut Warning',cat:'VIDÉO',
+    def_fr:'Alerté visualisation couleur impossible reproduire sur affichage/sortie cible (hors espace reconstitué couleur). Logiciel color grading avertit zone ''danger'' correction requise.',
+    def_en:'Alert for colour impossible to reproduce on target display/output (out of target colour space). Grading software warns ''danger'' zone requiring correction.'},
+
+  {id:350,fr:'Archivage format (master)',en:'Archive Format (Master)',cat:'VIDÉO',
+    def_fr:'Format stockage long-terme vidéo master : ProRes (Mac preferred) ou DNxHD (Avid). Sans perte visible, bitstre ~400 Mbps. Inclut metadata complètes et logs. Backup redondant géographiquement requis.',
+    def_en:'Long-term video master storage format: ProRes (Mac preferred) or DNxHD (Avid). Visually lossless, ~400 Mbps bitrate. Includes full metadata and logs. Geographically redundant backup required.'},
+
+/* ══════════════════════════════════════════════════════
+   ── FIN DU GLOSSAIRE ──
+══════════════════════════════════════════════════════ */
 ];
 
 /* ══════════════════════════════════════════════════════
