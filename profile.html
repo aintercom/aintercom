@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AINTERCOM — Mon Profil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #1a1a1a;
+            --surface-alt: #242424;
+            --border: #2a2a2a;
+            --gold: #d4af37;
+            --gold-dim: #b8941e;
+            --gold-glow: rgba(212, 175, 55, 0.2);
+            --text: #f5f5f5;
+            --text-secondary: #b0b0b0;
+            --success: #00d97e;
+            --error: #ff3b3b;
+            --warning: #ffb800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg) 0%, #1a1515 50%, var(--bg) 100%);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: var(--surface);
+            border-bottom: 2px solid var(--gold);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .back-btn {
+            all: unset;
+            cursor: pointer;
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+        }
+
+        main {
+            flex: 1;
+            padding: 32px;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .profile-container {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--surface-alt);
+            border: 2px solid var(--gold);
+            object-fit: cover;
+            margin: 0 auto 16px;
+            display: block;
+        }
+
+        .profile-avatar.placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--gold);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: var(--gold);
+            margin-bottom: 8px;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="url"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="url"]:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-glow);
+        }
+
+        input[readonly] {
+            background: rgba(212, 175, 55, 0.05);
+            cursor: not-allowed;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        button {
+            all: unset;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-save {
+            flex: 1;
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .btn-save:hover:not(:disabled) {
+            background: var(--gold-dim);
+            box-shadow: 0 0 16px var(--gold-glow);
+        }
+
+        .btn-save:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-password {
+            flex: 1;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-password:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-save.loading .loading-spinner {
+            display: block;
+        }
+
+        .btn-save.loading span {
+            display: none;
+        }
+
+        .message {
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.success {
+            background: rgba(0, 217, 126, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .message.error {
+            background: rgba(255, 59, 59, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <a href="dashboard.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Retour
+            </a>
+            <a href="index.html" class="logo">AINTERCOM</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="profile-container">
+            <div class="profile-header">
+                <img id="avatarPreview" class="profile-avatar placeholder" src="https://via.placeholder.com/120?text=%F0%9F%91%A4" alt="Avatar">
+                <h1>Mon Profil</h1>
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="firstName">Prénom</label>
+                    <input type="text" id="firstName" placeholder="Votre prénom">
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Nom</label>
+                    <input type="text" id="lastName" placeholder="Votre nom">
+                </div>
+
+                <div class="form-group">
+                    <label for="avatarUrl">URL Avatar</label>
+                    <input type="url" id="avatarUrl" placeholder="https://exemple.com/avatar.jpg">
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-save">
+                        <span>Enregistrer</span>
+                        <div class="loading-spinner"></div>
+                    </button>
+                    <button type="button" class="btn-password" id="resetPasswordBtn">
+                        <i class="fas fa-key"></i>
+                        Changer le mot de passe
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+
+    <script>
+        // Configuration Supabase
+        const supabase = window.supabaseClient || supabaseInitClient();
+
+        // Éléments du DOM
+        const profileForm = document.getElementById('profileForm');
+        const emailInput = document.getElementById('email');
+        const firstNameInput = document.getElementById('firstName');
+        const lastNameInput = document.getElementById('lastName');
+        const avatarUrlInput = document.getElementById('avatarUrl');
+        const avatarPreview = document.getElementById('avatarPreview');
+        const resetPasswordBtn = document.getElementById('resetPasswordBtn');
+        const messageDiv = document.getElementById('message');
+        const saveBtn = profileForm.querySelector('.btn-save');
+
+        /**
+         * Afficher un message
+         */
+        function showMessage(text, type = 'success') {
+            messageDiv.textContent = text;
+            messageDiv.className = `message show ${type}`;
+            setTimeout(() => messageDiv.classList.remove('show'), 5000);
+        }
+
+        /**
+         * Charger le profil utilisateur
+         */
+        async function loadProfile() {
+            try {
+                const { data: { user } } = await supabase.auth.getUser();
+                
+                if (!user) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // Afficher l'email
+                emailInput.value = user.email || '';
+
+                // Récupérer le profil depuis la table profiles
+                const { data: profile, error } = await supabase
+                    .from('profiles')
+                    .select('*')
+                    .eq('id', user.id)
+                    .single();
+
+                if (error && error.code !== 'PGRST116') {
+                    throw error;
+                }
+
+                // Si le profil existe, pré-remplir les champs
+                if (profile) {
+                    firstNameInput.value = profile.first_name || '';
+                    lastNameInput.value = profile.last_name || '';
+                    avatarUrlInput.value = profile.avatar_url || '';
+                    updateAvatarPreview(profile.avatar_url);
+                } else {
+                    // Profil n'existe pas : créer une entrée vide
+                    await supabase
+                        .from('profiles')
+                        .insert([{
+                            id: user.id,
+                            first_name: '',
+                            last_name: '',
+                            avatar_url: ''
+                        }]);
+
+                    // Si utilisateur vient de Google, pré-remplir avec ses métadonnées
+                    if (user.user_metadata) {
+                        const fullName = user.user_metadata.full_name || '';
+                        const [firstName, lastName] = fullName.split(' ');
+                        const avatarUrl = user.user_metadata.avatar_url || '';
+
+                        firstNameInput.value = firstName || '';
+                        lastNameInput.value = lastName || '';
+                        avatarUrlInput.value = avatarUrl || '';
+                        updateAvatarPreview(avatarUrl);
+                    }
+                }
+            } catch (error) {
+                console.error('Erreur chargement profil:', error.message);
+                showMessage('Erreur lors du chargement du profil', 'error');
+            }
+        }
+
+        /**
+         * Mettre à jour l'aperçu avatar
+         */
+        function updateAvatarPreview(url) {
+            if (url && url.trim()) {
+                avatarPreview.src = url;
+                avatarPreview.classList.remove('placeholder');
+            } else {
+                avatarPreview.src = 'https://via.placeholder.com/120?text=%F0%9F%91%A4';
+                avatarPreview.classList.add('placeholder');
+            }
+        }
+
+        /**
+         * Sauvegarder le profil
+         */
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            try {
+                saveBtn.disabled = true;
+                saveBtn.classList.add('loading');
+
+                const { data: { user } } = await supabase.auth.getUser();
+
+                const { error } = await supabase
+                    .from('profiles')
+                    .update({
+                        first_name: firstNameInput.value,
+                        last_name: lastNameInput.value,
+                        avatar_url: avatarUrlInput.value,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('id', user.id);
+
+                if (error) throw error;
+
+                updateAvatarPreview(avatarUrlInput.value);
+                showMessage('Profil enregistré avec succès !', 'success');
+            } catch (error) {
+                console.error('Erreur sauvegarde:', error.message);
+                showMessage('Erreur lors de la sauvegarde', 'error');
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.classList.remove('loading');
+            }
+        });
+
+        /**
+         * Bouton réinitialiser mot de passe
+         */
+        resetPasswordBtn.addEventListener('click', async () => {
+            try {
+                resetPasswordBtn.disabled = true;
+
+                const { data, error } = await supabase.auth.resetPasswordForEmail(emailInput.value, {
+                    redirectTo: `${window.location.origin}/auth/reset-password`
+                });
+
+                if (error) throw error;
+
+                showMessage('Email de réinitialisation envoyé !', 'success');
+            } catch (error) {
+                console.error('Erreur réinitialisation:', error.message);
+                showMessage('Erreur lors de l\'envoi', 'error');
+            } finally {
+                resetPasswordBtn.disabled = false;
+            }
+        });
+
+        /**
+         * Aperçu avatar en temps réel
+         */
+        avatarUrlInput.addEventListener('change', () => {
+            updateAvatarPreview(avatarUrlInput.value);
+        });
+
+        // Charger le profil au démarrage
+        document.addEventListener('DOMContentLoaded', loadProfile);
+    </script>
+</body>
+</html>
