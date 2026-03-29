@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRO GLOSSARY 1000 — AINTERCOM</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060809;--bg2:#0a0d10;--surface:#0e1318;--panel:#121920;--panel2:#161f28;
+  --border:#192330;--border2:#1f2e3d;--border3:#283d52;
+  --green:#00d97e;--green-dim:#009a5a;--green-glow:rgba(0,217,126,.14);
+  --amber:#ffb300;--red:#ff3b3b;--blue:#2d9cff;--purple:#9b59f5;
+  --t1:#e8f4ff;--t2:#7a9ab5;--t3:#3d5568;--t4:#1e2d3d;
+  --f-hero:'Bebas Neue',sans-serif;
+  --f-display:'Oswald',sans-serif;
+  --f-body:'Inter',sans-serif;
+  --f-mono:'Share Tech Mono',monospace;
+  --max:1280px;
+  --px:clamp(16px,4vw,48px);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--t1);font-family:var(--f-body);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+::-webkit-scrollbar{width:3px;background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--border3);border-radius:2px;}
+
+/* ───────────────── HEADER ───────────────── */
+#header{
+  background:rgba(6,8,9,.95);border-bottom:2px solid var(--border2);
+  padding:0 var(--px);height:64px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  position:sticky;top:0;z-index:100;
+  backdrop-filter:blur(20px);
+}
+.h-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+.logo-mark{width:34px;height:34px;background:var(--green);clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:8px;font-weight:700;color:#000;}
+.h-name{font-family:var(--f-hero);font-size:17px;letter-spacing:5px;color:var(--t1);line-height:1;}
+.h-sub{font-family:var(--f-mono);font-size:8px;letter-spacing:2px;color:var(--t3);}
+.h-right{display:flex;align-items:center;gap:10px;}
+.h-count{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--green);background:var(--green-glow);border:1px solid rgba(0,217,126,.25);padding:4px 12px;border-radius:2px;}
+.h-back{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--t3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);border-radius:2px;transition:color .15s;}
+.h-back:hover{color:var(--t1);}
+
+/* ───────────────── HERO ───────────────── */
+#hero{
+  padding:clamp(40px,6vw,80px) var(--px) clamp(32px,5vw,60px);
+  max-width:var(--max);margin:0 auto;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+}
+.hero-eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:6px;color:var(--green);margin-bottom:18px;opacity:.8;}
+.hero-title{font-family:var(--f-hero);font-size:clamp(42px,7vw,90px);letter-spacing:3px;color:var(--t1);line-height:.92;margin-bottom:16px;}
+.hero-title span{color:var(--green);}
+.hero-sub{font-family:var(--f-body);font-size:clamp(15px,1.8vw,18px);font-weight:300;color:var(--t2);max-width:620px;line-height:1.65;margin-bottom:36px;}
+
+/* ───────────────── SEARCH ───────────────── */
+.search-wrap{width:100%;max-width:680px;position:relative;margin-bottom:10px;}
+.search-input{
+  width:100%;background:var(--surface);border:1px solid var(--border2);
+  color:var(--t1);border-radius:4px;
+  padding:14px 52px 14px 18px;
+  font-family:var(--f-body);font-size:16px;font-weight:300;
+  outline:none;transition:border-color .15s;
+}
+.search-input:focus{border-color:var(--green);}
+.search-input::placeholder{color:var(--t3);}
+.search-icon{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:18px;pointer-events:none;}
+.search-clear{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--t2);font-size:18px;background:none;border:none;cursor:pointer;display:none;padding:2px 4px;}
+.search-meta{font-family:var(--f-mono);font-size:9px;letter-spacing:2px;color:var(--t3);text-align:center;margin-top:6px;height:16px;}
+
+/* ───────────────── FILTERS ───────────────── */
+#filters{
+  padding:0 var(--px) 24px;
+  max-width:var(--max);margin:0 auto;
+}
+.filter-scroll{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;}
+.filter-scroll::-webkit-scrollbar{display:none;}
+.filter-btn{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:2px;
+  padding:7px 14px;border-radius:2px;
+  border:1px solid var(--border2);background:transparent;
+  color:var(--t3);cursor:pointer;transition:all .15s;
+  white-space:nowrap;flex-shrink:0;
+}
+.filter-btn:hover{color:var(--t1);border-color:var(--border3);}
+.filter-btn.active{border-color:var(--green);color:var(--green);background:var(--green-glow);}
+
+/* ───────────────── GRID ───────────────── */
+#glossary-grid{
+  padding:0 var(--px) 80px;
+  max-width:var(--max);margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:2px;
+}
+/* no results */
+#no-results{
+  grid-column:1/-1;text-align:center;padding:80px 20px;
+  font-family:var(--f-mono);font-size:12px;letter-spacing:3px;color:var(--t3);
+  display:none;
+}
+
+/* ───────────────── CARD ───────────────── */
+.g-card{
+  background:var(--surface);border:1px solid var(--border);
+  padding:20px 22px;
+  position:relative;overflow:hidden;
+  transition:background .18s,border-color .18s,transform .18s;
+}
+.g-card:hover{background:var(--panel);border-color:var(--border2);transform:translateY(-1px);}
+.g-card::before{
+  content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+  background:var(--cat-color,var(--green));opacity:.7;
+}
+/* Category badge */
+.g-cat{
+  font-family:var(--f-mono);font-size:9px;letter-spacing:3px;
+  color:var(--cat-color,var(--green));margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.g-cat::after{content:'';flex:1;height:1px;background:var(--cat-color,var(--green));opacity:.15;}
+/* Terms */
+.g-terms{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
+.g-fr{font-family:var(--f-display);font-size:clamp(16px,2vw,20px);font-weight:700;letter-spacing:1px;color:var(--t1);flex:1;min-width:120px;}
+.g-sep{font-family:var(--f-mono);font-size:12px;color:var(--t3);margin-top:3px;flex-shrink:0;}
+.g-en{font-family:var(--f-display);font-size:clamp(14px,1.8vw,17px);font-weight:400;letter-spacing:1px;color:var(--t2);flex:1;min-width:120px;font-style:italic;}
+/* Definition */
+.g-def{font-family:var(--f-body);font-size:13px;font-weight:300;color:var(--t2);line-height:1.65;margin-bottom:12px;}
+.g-def-en{font-family:var(--f-body);font-size:12px;font-weight:300;color:var(--t3);line-height:1.6;padding-top:8px;border-top:1px solid var(--border);display:none;}
+.g-card.show-en .g-def-en{display:block;}
+/* Footer actions */
+.g-actions{display:flex;align-items:center;gap:6px;margin-top:4px;}
+.g-btn{font-family:var(--f-mono);font-size:9px;letter-spacing:1px;padding:5px 10px;border-radius:2px;border:1px solid var(--border2);background:transparent;color:var(--t3);cursor:pointer;transition:all .15s;}
+.g-btn:hover{color:var(--t1);border-color:var(--border3);}
+.g-btn.copied{color:var(--green);border-color:var(--green);}
+.g-btn-def{flex:1;text-align:left;}
+.g-num{font-family:var(--f-mono);font-size:9px;color:var(--t4);margin-left:auto;flex-shrink:0;}
+
+/* ───────────────── CATEGORY COLORS ───────────────── */
+.cat-RÉGIE{--cat-color:#00d97e;}
+.cat-AUDIO{--cat-color:#2d9cff;}
+.cat-LUMIÈRE{--cat-color:#ffb300;}
+.cat-VIDÉO{--cat-color:#00e5ff;}
+.cat-STRUCTURE{--cat-color:#ff6b35;}
+.cat-ÉLECTRICITÉ{--cat-color:#ffeb3b;}
+.cat-SCÉNOGRAPHIE{--cat-color:#e91e63;}
+.cat-SÉCURITÉ{--cat-color:#ff3b3b;}
+.cat-LOGISTIQUE{--cat-color:#9b59f5;}
+.cat-CATERING{--cat-color:#4caf50;}
+.cat-BOOKING{--cat-color:#ff9800;}
+.cat-JURIDIQUE{--cat-color:#90a4ae;}
+.cat-DIGITAL{--cat-color:#00bcd4;}
+
+/* ───────────────── RESPONSIVE ───────────────── */
+@media(max-width:600px){
+  #glossary-grid{grid-template-columns:1fr;}
+  .g-terms{flex-direction:column;gap:4px;}
+  .g-sep{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <a class="h-logo" href="index.html">
+    <div class="logo-mark">AI</div>
+    <div>
+      <div class="h-name">PRO GLOSSARY</div>
+      <div class="h-sub">PRODUCTION ÉVÉNEMENTIELLE</div>
+    </div>
+  </a>
+  <div class="h-right">
+    <div class="h-count" id="total-count">50 / 1000</div>
+    <a class="h-back" href="index.html">← ACCUEIL</a>
+  </div>
+</header>
+
+<!-- HERO + SEARCH -->
+<div id="hero">
+  <div class="hero-eyebrow">DICTIONNAIRE DE RÉFÉRENCE MONDIAL</div>
+  <h1 class="hero-title">ULTIMATE<br><span>PRO GLOSSARY</span><br>1000</h1>
+  <p class="hero-sub">1 000 termes techniques de la production événementielle. Bilingue FR / EN. Pour les régisseurs, techniciens, producteurs et prestataires.</p>
+  <div class="search-wrap">
+    <input class="search-input" id="search-input" type="text" placeholder="Rechercher un terme FR ou EN…" autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="search-icon" id="search-icon">⌕</span>
+    <button class="search-clear" id="search-clear" onclick="clearSearch()" title="Effacer">✕</button>
+  </div>
+  <div class="search-meta" id="search-meta"></div>
+</div>
+
+<!-- FILTERS -->
+<div id="filters">
+  <div class="filter-scroll" id="filter-scroll">
+    <button class="filter-btn active" data-cat="ALL" onclick="setFilter('ALL',this)">TOUT</button>
+    <button class="filter-btn" data-cat="RÉGIE" onclick="setFilter('RÉGIE',this)">RÉGIE</button>
+    <button class="filter-btn" data-cat="AUDIO" onclick="setFilter('AUDIO',this)">AUDIO</button>
+    <button class="filter-btn" data-cat="LUMIÈRE" onclick="setFilter('LUMIÈRE',this)">LUMIÈRE</button>
+    <button class="filter-btn" data-cat="VIDÉO" onclick="setFilter('VIDÉO',this)">VIDÉO</button>
+    <button class="filter-btn" data-cat="STRUCTURE" onclick="setFilter('STRUCTURE',this)">STRUCTURE</button>
+    <button class="filter-btn" data-cat="ÉLECTRICITÉ" onclick="setFilter('ÉLECTRICITÉ',this)">ÉLECTRICITÉ</button>
+    <button class="filter-btn" data-cat="SCÉNOGRAPHIE" onclick="setFilter('SCÉNOGRAPHIE',this)">SCÉNOGRAPHIE</button>
+    <button class="filter-btn" data-cat="SÉCURITÉ" onclick="setFilter('SÉCURITÉ',this)">SÉCURITÉ</button>
+    <button class="filter-btn" data-cat="LOGISTIQUE" onclick="setFilter('LOGISTIQUE',this)">LOGISTIQUE</button>
+    <button class="filter-btn" data-cat="CATERING" onclick="setFilter('CATERING',this)">CATERING</button>
+    <button class="filter-btn" data-cat="BOOKING" onclick="setFilter('BOOKING',this)">BOOKING</button>
+    <button class="filter-btn" data-cat="JURIDIQUE" onclick="setFilter('JURIDIQUE',this)">JURIDIQUE</button>
+    <button class="filter-btn" data-cat="DIGITAL" onclick="setFilter('DIGITAL',this)">DIGITAL</button>
+  </div>
+</div>
+
+<!-- GRID -->
+<div id="glossary-grid">
+  <div id="no-results">⊘ AUCUN RÉSULTAT — Essayez un autre terme ou changez de filtre.</div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   GLOSSAIRE — DONNÉES
+   Structure : { id, fr, en, cat, def_fr, def_en }
+   cat = RÉGIE | AUDIO | LUMIÈRE | VIDÉO | STRUCTURE |
+         ÉLECTRICITÉ | SCÉNOGRAPHIE | SÉCURITÉ | LOGISTIQUE |
+         CATERING | BOOKING | JURIDIQUE | DIGITAL
+   ── BATCH 01 : 50 termes — Régie Plateau & Accueil Technique ──
+══════════════════════════════════════════════════════ */
+const GLOSSARY = [
+
+  /* ─── RÉGIE ─── */
+  {id:1,fr:'Conducteur',en:'Rundown / Show Flow',cat:'RÉGIE',
+    def_fr:'Document chronologique détaillant l\'enchaînement de toutes les séquences d\'un spectacle ou événement, avec horaires, durées et responsables.',
+    def_en:'Chronological document detailing the sequence of all show segments, with timings, durations and responsible departments.'},
+
+  {id:2,fr:'Séquence / Cue',en:'Cue',cat:'RÉGIE',
+    def_fr:'Unité de déclenchement dans un conducteur correspondant à une action précise (lumière, son, vidéo, plateau). Chaque cue a un numéro, un intitulé et une durée.',
+    def_en:'A triggering unit in a rundown corresponding to a specific action (light, sound, video, stage). Each cue has a number, label and duration.'},
+
+  {id:3,fr:'Appel / GO',en:'Go / Standby',cat:'RÉGIE',
+    def_fr:'Commande vocale ou électronique déclenchant l\'exécution d\'une séquence. "Standby" est l\'annonce préparatoire, "Go" est le déclencheur.',
+    def_en:'Vocal or electronic command triggering the execution of a cue. "Standby" is the preparatory warning, "Go" is the trigger.'},
+
+  {id:4,fr:'Régisseur général',en:'Production Manager / Show Caller',cat:'RÉGIE',
+    def_fr:'Responsable de la coordination globale du spectacle. Il appelle les cues, coordonne tous les départements techniques et artistiques en temps réel.',
+    def_en:'Responsible for overall show coordination. Calls cues, coordinates all technical and artistic departments in real time.'},
+
+  {id:5,fr:'Chef de plateau',en:'Stage Manager',cat:'RÉGIE',
+    def_fr:'Responsable de la zone scène. Coordonne les entrées/sorties d\'artistes, gère le backline, et sert de relais entre la régie et le plateau.',
+    def_en:'Responsible for the stage area. Coordinates artist entries/exits, manages backline, and liaises between production desk and stage.'},
+
+  {id:6,fr:'Heure de coupure',en:'Curfew',cat:'RÉGIE',
+    def_fr:'Heure limite imposée par la salle, la préfecture ou le promoteur après laquelle la musique et le spectacle doivent impérativement s\'arrêter.',
+    def_en:'Deadline imposed by the venue, authorities or promoter after which music and performance must stop without exception.'},
+
+  {id:7,fr:'Rider technique',en:'Technical Rider',cat:'RÉGIE',
+    def_fr:'Document contractuel fourni par l\'artiste ou son management listant l\'ensemble des exigences techniques nécessaires à la production du spectacle.',
+    def_en:'Contractual document provided by the artist or management listing all technical requirements needed to produce the show.'},
+
+  {id:8,fr:'Plan de scène',en:'Stage Plot',cat:'RÉGIE',
+    def_fr:'Schéma vue de dessus représentant la disposition des instruments, amplificateurs, stands et positions des musiciens sur la scène.',
+    def_en:'Top-view diagram showing the layout of instruments, amplifiers, stands and musician positions on stage.'},
+
+  {id:9,fr:'Fiche technique',en:'Tech Spec / Technical Specifications',cat:'RÉGIE',
+    def_fr:'Document récapitulant toutes les spécifications techniques d\'un lieu ou d\'une production : dimensions scène, puissance électrique, équipements disponibles.',
+    def_en:'Document summarizing all technical specifications of a venue or production: stage dimensions, electrical power, available equipment.'},
+
+  {id:10,fr:'Timecode',en:'Timecode (LTC/MTC)',cat:'RÉGIE',
+    def_fr:'Signal de synchronisation temporelle (SMPTE ou MTC) permettant de synchroniser son, lumière, vidéo et automatismes sur une référence horaire commune.',
+    def_en:'Time synchronization signal (SMPTE or MTC) used to sync audio, lighting, video and automation to a common time reference.'},
+
+  {id:11,fr:'Show caller',en:'Show Caller',cat:'RÉGIE',
+    def_fr:'Personne en charge d\'appeler les cues depuis la régie en suivant le conducteur. Peut être distincte du régisseur général sur les grands shows.',
+    def_en:'Person responsible for calling cues from the production desk following the rundown. May be distinct from the production manager on large shows.'},
+
+  {id:12,fr:'Intercom / Partyline',en:'Intercom / Party Line',cat:'RÉGIE',
+    def_fr:'Système de communication interne full-duplex reliant tous les départements techniques (régie, plateau, son, lumière, vidéo) pendant le show.',
+    def_en:'Full-duplex internal communication system connecting all technical departments (production, stage, audio, lighting, video) during the show.'},
+
+  {id:13,fr:'Balances',en:'Soundcheck',cat:'RÉGIE',
+    def_fr:'Phase de vérification et réglage du système son avant l\'ouverture des portes, avec les artistes sur scène testant leurs instruments et retours.',
+    def_en:'Verification and adjustment phase for the sound system before doors open, with artists on stage testing their instruments and monitors.'},
+
+  {id:14,fr:'Line check',en:'Line Check',cat:'RÉGIE',
+    def_fr:'Vérification rapide des liaisons et niveaux sans la présence des artistes, en activant chaque source audio pour confirmer la continuité du signal.',
+    def_en:'Quick verification of connections and levels without artists present, by activating each audio source to confirm signal continuity.'},
+
+  {id:15,fr:'Accueil technique',en:'Technical Advance / Load-In',cat:'RÉGIE',
+    def_fr:'Phase de réception et d\'installation du matériel technique en salle ou sur site, précédant les balances. Inclut le montage scène, l\'accroche et le câblage.',
+    def_en:'Phase of receiving and installing technical equipment in the venue or on site, preceding soundcheck. Includes stage build, rigging and cabling.'},
+
+  /* ─── AUDIO ─── */
+  {id:16,fr:'Console FOH',en:'Front of House (FOH) Console',cat:'AUDIO',
+    def_fr:'Table de mixage principale positionnée face à la scène dans la salle, destinée à mixer le son pour le public. Distincte de la console moniteur.',
+    def_en:'Main mixing console positioned facing the stage in the venue, used to mix sound for the audience. Distinct from the monitor console.'},
+
+  {id:17,fr:'Console moniteur',en:'Monitor Console / Wedge Console',cat:'AUDIO',
+    def_fr:'Console dédiée au mixage des retours de scène, généralement placée en coulisse ou en bord de scène. Gère les mix individuels de chaque musicien.',
+    def_en:'Console dedicated to mixing stage monitors, usually placed in the wings or at the side of stage. Manages individual mixes for each musician.'},
+
+  {id:18,fr:'Retour de scène',en:'Stage Monitor / Wedge',cat:'AUDIO',
+    def_fr:'Enceinte inclinée posée sur scène face aux musiciens leur permettant d\'entendre leur propre mix (voix, instruments) pendant la performance.',
+    def_en:'Angled loudspeaker placed on stage facing the musicians, allowing them to hear their own mix (vocals, instruments) during performance.'},
+
+  {id:19,fr:'IEM (In-Ear Monitor)',en:'IEM (In-Ear Monitor)',cat:'AUDIO',
+    def_fr:'Système de retour intra-auriculaire sans fil permettant aux artistes de recevoir leur mix personnalisé directement dans les oreilles via des écouteurs moulés.',
+    def_en:'Wireless in-ear monitoring system allowing artists to receive their personalized mix directly in their ears via custom-moulded earphones.'},
+
+  {id:20,fr:'PA (Public Address)',en:'PA System / Line Array',cat:'AUDIO',
+    def_fr:'Système de sonorisation principal destiné à diffuser le son vers le public. Comprend généralement des accrochages de modules en ligne (line array) et des subs au sol.',
+    def_en:'Main sound reinforcement system designed to deliver sound to the audience. Typically comprises flown line array modules and ground-stacked subwoofers.'},
+
+  {id:21,fr:'Subwoofer',en:'Subwoofer / Sub',cat:'AUDIO',
+    def_fr:'Enceinte dédiée à la reproduction des basses fréquences (20 Hz - 120 Hz). Placée au sol sous la scène ou en délestage latéral (cardioid sub array).',
+    def_en:'Loudspeaker dedicated to reproducing low frequencies (20 Hz–120 Hz). Placed on the floor under the stage or in a cardioid sub array configuration.'},
+
+  {id:22,fr:'DI Box',en:'Direct Injection Box (DI)',cat:'AUDIO',
+    def_fr:'Boîtier électronique convertissant un signal asymétrique haute impédance (guitare, basse, clavier) en signal symétrique basse impédance compatible console.',
+    def_en:'Electronic device converting an unbalanced high-impedance signal (guitar, bass, keyboard) into a balanced low-impedance signal compatible with a console.'},
+
+  {id:23,fr:'Snake / Multicore',en:'Multicore / Snake',cat:'AUDIO',
+    def_fr:'Câble regroupant plusieurs liaisons XLR dans une même gaine, reliant la scène à la console. Peut être analogique ou numérique (CAT5/6, fibre optique).',
+    def_en:'Cable grouping multiple XLR connections within a single sheath, linking the stage to the console. Can be analogue or digital (CAT5/6, fibre optic).'},
+
+  {id:24,fr:'Splitter',en:'Splitter',cat:'AUDIO',
+    def_fr:'Boîtier répartissant les signaux de scène vers plusieurs consoles simultanément (FOH, moniteur, broadcast). Passif (transformateurs) ou actif (amplifié).',
+    def_en:'Unit distributing stage signals to multiple consoles simultaneously (FOH, monitor, broadcast). Passive (transformer-based) or active (buffered).'},
+
+  {id:25,fr:'Gain de structure',en:'Gain Structure',cat:'AUDIO',
+    def_fr:'Optimisation du niveau de signal à chaque étage de la chaîne audio pour maximiser le rapport signal/bruit et éviter la saturation ou le plancher de bruit.',
+    def_en:'Optimization of signal level at every stage of the audio chain to maximize signal-to-noise ratio and avoid clipping or noise floor issues.'},
+
+  {id:26,fr:'Compresseur',en:'Compressor',cat:'AUDIO',
+    def_fr:'Processeur dynamique réduisant la plage dynamique d\'un signal audio en atténuant les niveaux dépassant un seuil défini selon un ratio paramétrable.',
+    def_en:'Dynamic processor reducing the dynamic range of an audio signal by attenuating levels exceeding a defined threshold according to a set ratio.'},
+
+  {id:27,fr:'Égaliseur (EQ)',en:'Equalizer (EQ)',cat:'AUDIO',
+    def_fr:'Processeur modifiant l\'équilibre fréquentiel d\'un signal audio. Peut être paramétrique (fréquence, largeur de bande, gain) ou graphique (bandes fixes).',
+    def_en:'Processor modifying the frequency balance of an audio signal. Can be parametric (frequency, bandwidth, gain) or graphic (fixed bands).'},
+
+  {id:28,fr:'HF / Radiomicro',en:'RF / Wireless Microphone',cat:'AUDIO',
+    def_fr:'Système de microphone sans fil utilisant des radiofréquences (UHF/VHF) pour transmettre le signal du micro à un récepteur sans câble physique.',
+    def_en:'Wireless microphone system using radio frequencies (UHF/VHF) to transmit the signal from the microphone to a receiver without a physical cable.'},
+
+  {id:29,fr:'Input list',en:'Input List',cat:'AUDIO',
+    def_fr:'Document listant canal par canal toutes les sources sonores à connecter à la console : instrument, micro, type de connecteur, numéro de canal, notes.',
+    def_en:'Document listing channel by channel all sound sources to be connected to the console: instrument, microphone, connector type, channel number, notes.'},
+
+  {id:30,fr:'Delay (effet)',en:'Delay / Echo',cat:'AUDIO',
+    def_fr:'Effet audio créant une ou plusieurs répétitions d\'un signal avec un temps de retard paramétrable. Utilisé pour l\'espace, la profondeur et les effets rythmiques.',
+    def_en:'Audio effect creating one or more repetitions of a signal with an adjustable delay time. Used for space, depth and rhythmic effects.'},
+
+  /* ─── LUMIÈRE ─── */
+  {id:31,fr:'Lyres / Tête mobile',en:'Moving Head / Moving Light',cat:'LUMIÈRE',
+    def_fr:'Projecteur motorisé capable de se déplacer sur deux axes (pan/tilt) et de modifier couleur, gobos, zoom et effets à distance via DMX.',
+    def_en:'Motorized luminaire capable of moving on two axes (pan/tilt) and changing colour, gobos, zoom and effects remotely via DMX.'},
+
+  {id:32,fr:'DMX 512',en:'DMX 512',cat:'LUMIÈRE',
+    def_fr:'Protocole numérique standard de contrôle des équipements lumière, permettant de piloter jusqu\'à 512 canaux par univers sur une liaison série à 250 kbit/s.',
+    def_en:'Standard digital protocol for controlling lighting equipment, allowing up to 512 channels per universe on a 250 kbit/s serial link.'},
+
+  {id:33,fr:'Console lumière',en:'Lighting Console / Desk',cat:'LUMIÈRE',
+    def_fr:'Pupitre de contrôle permettant de programmer et déclencher les cues lumière (mémoires, effets, chases) via le protocole DMX ou Art-Net.',
+    def_en:'Control desk for programming and triggering lighting cues (memories, effects, chases) via DMX or Art-Net protocol.'},
+
+  {id:34,fr:'Gobo',en:'Gobo',cat:'LUMIÈRE',
+    def_fr:'Disque métallique ou en verre gravé inséré dans le système optique d\'un projecteur pour projeter une forme géométrique, un logo ou une texture.',
+    def_en:'Metal or glass disc with an etched pattern inserted into a fixture\'s optical system to project a geometric shape, logo or texture.'},
+
+  {id:35,fr:'Hazer / Machine à brouillard',en:'Hazer / Fog Machine',cat:'LUMIÈRE',
+    def_fr:'Appareil diffusant un voile de particules fines (water-based ou huile) dans l\'espace scénique pour rendre les faisceaux lumineux visibles.',
+    def_en:'Device diffusing a fine particle haze (water-based or oil) in the performance space to make light beams visible.'},
+
+  {id:36,fr:'Flood / Cyclorama',en:'Flood / Cyc Light',cat:'LUMIÈRE',
+    def_fr:'Projecteur à large diffusion utilisé pour éclairer uniformément un cyclorama (toile de fond) ou un aplat de couleur sur scène.',
+    def_en:'Wide-beam luminaire used to evenly illuminate a cyclorama (backdrop) or a flat colour wash on stage.'},
+
+  {id:37,fr:'Patch lumière',en:'Lighting Patch',cat:'LUMIÈRE',
+    def_fr:'Attribution des canaux DMX aux circuits d\'alimentation électrique et aux appareils en console. Définit quelle adresse DMX contrôle quel équipement.',
+    def_en:'Assignment of DMX channels to power circuits and fixtures in the console. Defines which DMX address controls which piece of equipment.'},
+
+  {id:38,fr:'Rig lumière',en:'Lighting Rig',cat:'LUMIÈRE',
+    def_fr:'Ensemble de la structure d\'accrochage et des appareils d\'éclairage d\'un spectacle : ponts, barres, moteurs, projecteurs, câblage.',
+    def_en:'The complete assembly of lighting support structures and fixtures for a show: trusses, bars, motors, luminaires and cabling.'},
+
+  /* ─── STRUCTURE ─── */
+  {id:39,fr:'Pont (structure)',en:'Truss',cat:'STRUCTURE',
+    def_fr:'Élément de structure en aluminium (triangulaire ou carrée) permettant d\'accrocher des équipements (lumière, son, vidéo) au-dessus de la scène ou de la salle.',
+    def_en:'Aluminium structural element (triangular or box section) for hanging equipment (lighting, audio, video) above the stage or venue.'},
+
+  {id:40,fr:'Moteur de levage',en:'Chain Motor / Electric Hoist',cat:'STRUCTURE',
+    def_fr:'Palan électrique à chaîne permettant de monter et descendre les structures en toute sécurité. Classifié par capacité de charge (250 kg, 500 kg, 1 t, 2 t).',
+    def_en:'Electric chain hoist for safely raising and lowering structures. Classified by load capacity (250 kg, 500 kg, 1 t, 2 t).'},
+
+  {id:41,fr:'Point d\'accroche',en:'Rigging Point / Load Point',cat:'STRUCTURE',
+    def_fr:'Emplacement structurellement validé sur une charpente, un plafond ou une structure de scène permettant de suspendre une charge calculée.',
+    def_en:'Structurally validated attachment point on a roof, ceiling or stage structure, rated for a calculated suspended load.'},
+
+  {id:42,fr:'Bridle',en:'Bridle',cat:'STRUCTURE',
+    def_fr:'Élingue en forme de V reliant deux points d\'accroche à une charge centrale pour répartir les efforts et centrer l\'équipement suspendu.',
+    def_en:'V-shaped sling connecting two rigging points to a central load to distribute forces and centre the suspended equipment.'},
+
+  {id:43,fr:'SWL (Charge de travail)',en:'SWL (Safe Working Load)',cat:'STRUCTURE',
+    def_fr:'Charge maximale autorisée à l\'utilisation pour un équipement de levage ou de rigging, généralement égale à la charge de rupture divisée par le coefficient de sécurité.',
+    def_en:'Maximum load permitted in use for a lifting or rigging component, typically equal to the breaking load divided by the safety factor.'},
+
+  /* ─── ÉLECTRICITÉ ─── */
+  {id:44,fr:'Distribution électrique',en:'Power Distribution',cat:'ÉLECTRICITÉ',
+    def_fr:'Ensemble des équipements assurant la répartition de l\'énergie électrique depuis la source (RGE, groupes, réseau) vers les différents postes techniques.',
+    def_en:'Set of equipment distributing electrical power from the source (main distro, generators, grid) to the various technical areas.'},
+
+  {id:45,fr:'RGE (Répartiteur Général Électrique)',en:'Main Power Distribution Panel',cat:'ÉLECTRICITÉ',
+    def_fr:'Armoire électrique principale du site ou de la production, recevant l\'alimentation source et distribuant les circuits vers les sous-tableaux sectoriels.',
+    def_en:'Main electrical distribution board for the site or production, receiving the source supply and distributing circuits to sectorial sub-panels.'},
+
+  {id:46,fr:'Groupe électrogène',en:'Generator / Genset',cat:'ÉLECTRICITÉ',
+    def_fr:'Moteur thermique couplé à un alternateur fournissant l\'énergie électrique en autonomie. Dimensionné en kVA selon les besoins de la production.',
+    def_en:'Internal combustion engine coupled to an alternator providing independent electrical power. Sized in kVA according to production needs.'},
+
+  {id:47,fr:'Puissance apparente / Puissance active',en:'Apparent Power / Active Power (kVA / kW)',cat:'ÉLECTRICITÉ',
+    def_fr:'La puissance apparente (kVA) est le produit de la tension et du courant. La puissance active (kW) est la puissance réellement consommée. Liées par le facteur de puissance (cos φ).',
+    def_en:'Apparent power (kVA) is the product of voltage and current. Active power (kW) is the power actually consumed. Related by the power factor (cos φ).'},
+
+  /* ─── SCÉNOGRAPHIE ─── */
+  {id:48,fr:'Cyc / Cyclorama',en:'Cyclorama / Cyc',cat:'SCÉNOGRAPHIE',
+    def_fr:'Grande toile ou paroi incurvée au fond de scène, éclairée pour créer un fond de couleur uniforme ou des effets de ciel. Peut être blanc ou coloré.',
+    def_en:'Large curved cloth or wall at the back of the stage, lit to create a uniform colour background or sky effects. Can be white or coloured.'},
+
+  /* ─── SÉCURITÉ ─── */
+  {id:49,fr:'ERP (Établissement Recevant du Public)',en:'Public Venue / ERP',cat:'SÉCURITÉ',
+    def_fr:'Classification réglementaire française définissant les règles de sécurité (évacuation, extincteurs, signalétique) pour tout lieu recevant du public.',
+    def_en:'French regulatory classification defining safety rules (evacuation, fire extinguishers, signage) for any venue receiving members of the public.'},
+
+  /* ─── LOGISTIQUE ─── */
+  {id:50,fr:'Roadcase',en:'Road Case / Flight Case',cat:'LOGISTIQUE',
+    def_fr:'Coffre de transport rigide à roulettes, renforcé avec mousse intérieure, conçu pour protéger les équipements fragiles lors des tournées et déplacements.',
+    def_en:'Rigid wheeled transport case reinforced with interior foam, designed to protect delicate equipment during touring and transport.'},
+
+/* ══════════════════════════════════════════════════════
+   ─── BATCH 02 : ajoutez vos 100 termes ici ───
+   Copiez ce bloc et remplissez :
+   {id:51, fr:'...', en:'...', cat:'...', def_fr:'...', def_en:'...'},
+   ↑↑↑ Continuez jusqu'à l'id:150, puis BATCH 03, etc. ↑↑↑
+══════════════════════════════════════════════════════ */
+
+/* ── FIN DU GLOSSAIRE ── */
+];
+
+/* ══════════════════════════════════════════════════════
+   MOTEUR DE RECHERCHE & RENDU
+══════════════════════════════════════════════════════ */
+let currentFilter = 'ALL';
+let currentQuery = '';
+
+const CAT_COLORS = {
+  'RÉGIE':'#00d97e','AUDIO':'#2d9cff','LUMIÈRE':'#ffb300','VIDÉO':'#00e5ff',
+  'STRUCTURE':'#ff6b35','ÉLECTRICITÉ':'#ffeb3b','SCÉNOGRAPHIE':'#e91e63',
+  'SÉCURITÉ':'#ff3b3b','LOGISTIQUE':'#9b59f5','CATERING':'#4caf50',
+  'BOOKING':'#ff9800','JURIDIQUE':'#90a4ae','DIGITAL':'#00bcd4'
+};
+
+function renderGrid(){
+  const q = currentQuery.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const grid = document.getElementById('glossary-grid');
+  const noRes = document.getElementById('no-results');
+
+  // Filter
+  let results = GLOSSARY.filter(item=>{
+    const matchCat = currentFilter==='ALL' || item.cat===currentFilter;
+    if(!q) return matchCat;
+    const haystack = (item.fr+' '+item.en+' '+item.def_fr+' '+item.def_en+' '+item.cat)
+      .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    return matchCat && haystack.includes(q);
+  });
+
+  // Remove old cards (keep no-results)
+  [...grid.querySelectorAll('.g-card')].forEach(c=>c.remove());
+
+  if(results.length===0){
+    noRes.style.display='block';
+    document.getElementById('search-meta').textContent='';
+    return;
+  }
+  noRes.style.display='none';
+
+  document.getElementById('search-meta').textContent = q
+    ? `${results.length} résultat${results.length>1?'s':''} pour "${currentQuery}"`
+    : `${results.length} terme${results.length>1?'s':''} · ${currentFilter==='ALL'?'Toutes catégories':currentFilter}`;
+
+  results.forEach(item=>{
+    const card = document.createElement('div');
+    card.className = `g-card cat-${CSS.escape(item.cat)}`;
+    card.style.setProperty('--cat-color', CAT_COLORS[item.cat]||'#00d97e');
+    card.innerHTML = `
+      <div class="g-cat">${item.cat}</div>
+      <div class="g-terms">
+        <div class="g-fr">${highlight(item.fr,q)}</div>
+        <div class="g-sep">↔</div>
+        <div class="g-en">${highlight(item.en,q)}</div>
+      </div>
+      <div class="g-def">${highlight(item.def_fr,q)}</div>
+      <div class="g-def-en">${item.def_en}</div>
+      <div class="g-actions">
+        <button class="g-btn g-btn-def" onclick="toggleEn(this)">+ EN</button>
+        <button class="g-btn" onclick="copyTerm(this,'${esc(item.fr)}','${esc(item.en)}')">COPIER</button>
+        <span class="g-num">#${String(item.id).padStart(4,'0')}</span>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function highlight(text, q){
+  if(!q||q.length<2) return text;
+  try{
+    const re = new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+    return text.replace(re,'<mark style="background:#00d97e22;color:#00d97e;border-radius:2px;">$1</mark>');
+  }catch(e){return text;}
+}
+
+function toggleEn(btn){
+  const card = btn.closest('.g-card');
+  const open = card.classList.toggle('show-en');
+  btn.textContent = open ? '- EN' : '+ EN';
+}
+
+function copyTerm(btn, fr, en){
+  navigator.clipboard.writeText(fr+' → '+en).then(()=>{
+    btn.textContent='✓ COPIÉ';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='COPIER';btn.classList.remove('copied');},1800);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');
+    ta.value=fr+' → '+en;
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    btn.textContent='✓ COPIÉ';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='COPIER';btn.classList.remove('copied');},1800);
+  });
+}
+
+function setFilter(cat, el){
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderGrid();
+}
+
+function clearSearch(){
+  document.getElementById('search-input').value='';
+  currentQuery='';
+  document.getElementById('search-clear').style.display='none';
+  document.getElementById('search-icon').style.display='inline';
+  renderGrid();
+  document.getElementById('search-input').focus();
+}
+
+function esc(s){return(s||'').replace(/'/g,"\\'");}
+
+// Live search
+document.getElementById('search-input').addEventListener('input',function(){
+  currentQuery = this.value;
+  const hasQ = currentQuery.length>0;
+  document.getElementById('search-clear').style.display = hasQ?'block':'none';
+  document.getElementById('search-icon').style.display = hasQ?'none':'inline';
+  renderGrid();
+});
+
+// Update total count
+document.getElementById('total-count').textContent = GLOSSARY.length+' / 1000';
+
+// Init
+renderGrid();
+</script>
+</body>
+</html>
