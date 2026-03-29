@@ -1,0 +1,336 @@
+<!-- HTML Documentation Index -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AINTERCOM OS — Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0a0e14 0%, #0f1419 100%);
+            color: #e8f4ff;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 2px solid #00d4ff;
+            padding-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #00d4ff;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 1.2em;
+            color: #a0b5cc;
+            font-style: italic;
+        }
+
+        .version {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.15);
+            color: #00d4ff;
+            padding: 5px 15px;
+            border-radius: 3px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .nav-card {
+            background: #1f2633;
+            border: 1px solid #2a3440;
+            border-radius: 8px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-card:hover {
+            background: #242d3a;
+            border-color: #00d4ff;
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .nav-card h3 {
+            font-size: 1.3em;
+            color: #00d4ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-card p {
+            color: #a0b5cc;
+            font-size: 0.95em;
+        }
+
+        .nav-card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            padding: 3px 10px;
+            border-radius: 2px;
+            font-size: 0.8em;
+            font-family: 'Share Tech Mono', monospace;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .getting-started {
+            background: rgba(0, 212, 255, 0.05);
+            border-left: 4px solid #00d4ff;
+            padding: 24px;
+            margin-bottom: 40px;
+            border-radius: 4px;
+        }
+
+        .getting-started h2 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .getting-started ol {
+            list-style-position: inside;
+            color: #a0b5cc;
+        }
+
+        .getting-started li {
+            margin: 8px 0;
+        }
+
+        .getting-started a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .getting-started a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            color: #5a7490;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #2a3440;
+            font-size: 0.9em;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: #00d97e;
+            color: #0a0e14;
+            padding: 4px 12px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tagline {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎙️ AINTERCOM OS <span class="status-badge">v1.0</span></h1>
+            <p class="tagline">Plateforme opérationnelle pour productions événementielles</p>
+            <span class="version">Documentation complète • 29 mars 2026</span>
+        </header>
+
+        <div class="getting-started">
+            <h2>🚀 Démarrage rapide</h2>
+            <ol>
+                <li>Ouvrez <a href="./dashboard.html">dashboard.html</a> dans votre navigateur</li>
+                <li>Consultez <a href="./QUICKSTART.md">QUICKSTART.md</a> pour les 5 étapes (5 min)</li>
+                <li>Créez une Callsheet → elle apparaît dans Show Control</li>
+                <li>Ajoutez du personnel → les métriques se mettent à jour</li>
+                <li>Explorez les autres modules!</li>
+            </ol>
+        </div>
+
+        <div class="nav-grid">
+            <!-- Documentation générale -->
+            <a href="./README.md" class="nav-card">
+                <h3>📖 README</h3>
+                <p>Vue d'ensemble de AINTERCOM OS, structure du projet et objectifs</p>
+                <div class="tags">
+                    <span class="tag">Overview</span>
+                    <span class="tag">v1.0</span>
+                </div>
+            </a>
+
+            <!-- Quick Start -->
+            <a href="./QUICKSTART.md" class="nav-card">
+                <h3>⚡ Quick Start</h3>
+                <p>Guide étape par étape pour démarrer en 5 minutes</p>
+                <div class="tags">
+                    <span class="tag">Débutants</span>
+                    <span class="tag">5 min</span>
+                </div>
+            </a>
+
+            <!-- Architecture -->
+            <a href="./ARCHITECTURE.md" class="nav-card">
+                <h3>🏗️ Architecture</h3>
+                <p>Architecture détaillée du système, flux de données et diagrammes</p>
+                <div class="tags">
+                    <span class="tag">Avancé</span>
+                    <span class="tag">Système</span>
+                </div>
+            </a>
+
+            <!-- Connexions -->
+            <a href="./CONNECTIONS.md" class="nav-card">
+                <h3>🔗 Connexions inter-modules</h3>
+                <p>Comment les modules communiquent et se synchronisent</p>
+                <div class="tags">
+                    <span class="tag">Synchronisation</span>
+                    <span class="tag">Patterns</span>
+                </div>
+            </a>
+
+            <!-- Supabase Setup -->
+            <a href="./SUPABASE_SETUP.md" class="nav-card">
+                <h3>☁️ Intégration Supabase</h3>
+                <p>Guide complet pour ajouter l'authentification et la sync cloud (v1.1)</p>
+                <div class="tags">
+                    <span class="tag">Backend</span>
+                    <span class="tag">v1.1</span>
+                </div>
+            </a>
+
+            <!-- Branding -->
+            <a href="./BRANDING.md" class="nav-card">
+                <h3>🎨 Branding & Design</h3>
+                <p>Design system, couleurs, typographies et icônes</p>
+                <div class="tags">
+                    <span class="tag">Design</span>
+                    <span class="tag">CSS</span>
+                </div>
+            </a>
+
+            <!-- Developer Guide -->
+            <a href="./DEVELOPER.md" class="nav-card">
+                <h3>🛠️ Guide du développeur</h3>
+                <p>Comment ajouter des modules, créer des connexions et déployer</p>
+                <div class="tags">
+                    <span class="tag">Desenvolvimento</span>
+                    <span class="tag">Avancé</span>
+                </div>
+            </a>
+
+            <!-- Verification -->
+            <a href="./VERIFICATION.md" class="nav-card">
+                <h3>✅ Vérification</h3>
+                <p>Checklist complète et tests manuels pour valider le système</p>
+                <div class="tags">
+                    <span class="tag">Testing</span>
+                    <span class="tag">QA</span>
+                </div>
+            </a>
+
+            <!-- Dashboard -->
+            <a href="./dashboard.html" class="nav-card" style="background: rgba(0, 212, 255, 0.1); border-color: #00d4ff;">
+                <h3>🎙️ Ouvrir le Dashboard</h3>
+                <p>Accédez à l'interface AINTERCOM OS et commencez à produire</p>
+                <div class="tags">
+                    <span class="tag">Application</span>
+                    <span class="tag">Live</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="getting-started">
+            <h2>📚 Parcours recommandé selon votre rôle</h2>
+
+            <h3 style="color: #a0b5cc; margin-top: 20px; margin-bottom: 10px;">👤 Utilisateur final</h3>
+            <ol>
+                <li><a href="./dashboard.html">Ouvrir le Dashboard</a></li>
+                <li>Lire <a href="./QUICKSTART.md">QUICKSTART.md</a></li>
+                <li>Créer votre première production</li>
+            </ol>
+
+            <h3 style="color: #a0b5cc; margin-top: 20px; margin-bottom: 10px;">💻 Développeur</h3>
+            <ol>
+                <li>Lire <a href="./README.md">README.md</a></li>
+                <li>Étudier <a href="./ARCHITECTURE.md">ARCHITECTURE.md</a></li>
+                <li>Consulter <a href="./DEVELOPER.md">DEVELOPER.md</a></li>
+                <li>Ajouter vos propres modules</li>
+            </ol>
+
+            <h3 style="color: #a0b5cc; margin-top: 20px; margin-bottom: 10px;">🎨 Designer</h3>
+            <ol>
+                <li>Explorer <a href="./BRANDING.md">BRANDING.md</a></li>
+                <li>Consulter <a href="./dashboard.html">le Dashboard</a></li>
+                <li>Adapter les couleurs et typographies</li>
+            </ol>
+
+            <h3 style="color: #a0b5cc; margin-top: 20px; margin-bottom: 10px;">🚀 DevOps/Déploiement</h3>
+            <ol>
+                <li>Lire <a href="./DEVELOPER.md">DEVELOPER.md</a></li>
+                <li>Préparer <a href="./SUPABASE_SETUP.md">SUPABASE_SETUP.md</a></li>
+                <li>Valider avec <a href="./VERIFICATION.md">VERIFICATION.md</a></li>
+            </ol>
+        </div>
+
+        <footer class="footer">
+            <p>🎙️ AINTERCOM OS v1.0 • Documentation • 29 mars 2026</p>
+            <p style="margin-top: 10px; color: #3a4a60;">Prête pour la production • Supabase en préparation pour v1.1</p>
+        </footer>
+    </div>
+</body>
+</html>

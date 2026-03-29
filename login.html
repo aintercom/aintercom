@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AINTERCOM — Accès Régie | Connexion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════
+           BLACK & GOLD THEME
+        ═══════════════════════════════════════ */
+        :root {
+            --bg: #0a0a0a;
+            --surface: #1a1a1a;
+            --border: #2a2a2a;
+            --gold: #d4af37;
+            --gold-dim: #b8941e;
+            --gold-glow: rgba(212, 175, 55, 0.2);
+            --text: #f5f5f5;
+            --text-secondary: #b0b0b0;
+            --success: #00d97e;
+            --error: #ff3b3b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg) 0%, #1a1515 50%, var(--bg) 100%);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background decoration */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-box {
+            background: var(--surface);
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            padding: 60px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.15), inset 0 0 30px rgba(212, 175, 55, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .login-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .login-subtitle {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 14px 16px;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="email"]::placeholder,
+        input[type="password"]::placeholder {
+            color: #555;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .remember-me label {
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-login {
+            width: 100%;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            padding: 16px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+            margin-bottom: 16px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(135deg, #e0c547 0%, #d4af37 100%);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .back-link {
+            text-align: center;
+        }
+
+        .back-link a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+            font-family: 'Share Tech Mono', monospace;
+            transition: color 0.2s;
+        }
+
+        .back-link a:hover {
+            color: #e0c547;
+        }
+
+        .error-message {
+            background: rgba(255, 59, 59, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+            padding: 12px 14px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            display: none;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .success-message {
+            background: rgba(0, 217, 126, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+            padding: 12px 14px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            display: none;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        /* Loading state */
+        .btn-login.loading {
+            background: linear-gradient(135deg, #6b5d25 0%, #5a5019 100%);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .btn-login.loading:hover {
+            transform: none;
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 30px 20px;
+            text-align: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #e0c547;
+        }
+
+        /* Google Sign-In Button */
+        .oauth-section {
+            margin-bottom: 30px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .oauth-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .btn-google {
+            width: 100%;
+            background: #fff;
+            border: 2px solid #d4af37;
+            border-radius: 4px;
+            padding: 14px 16px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: #000;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .btn-google:hover {
+            background: #f0f0f0;
+            border-color: #e0c547;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-google:active {
+            transform: translateY(0);
+        }
+
+        .btn-google.loading {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-google svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .divider span {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .divider p {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 40px 30px;
+                max-width: 95%;
+            }
+
+            .login-title {
+                font-size: 24px;
+            }
+
+            .btn-login {
+                padding: 14px;
+                font-size: 16px;
+            }
+
+            .btn-google {
+                font-size: 12px;
+                padding: 12px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <div class="login-header">
+                <span class="logo">🎙️</span>
+                <h1 class="login-title">AINTERCOM</h1>
+                <p class="login-subtitle">Accès Régie</p>
+            </div>
+
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+
+            <!-- Google OAuth Button -->
+            <div class="oauth-section">
+                <p class="oauth-title">Connexion rapide</p>
+                <button type="button" id="btn-google" class="btn-google" title="Se connecter avec Google">
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    Google
+                </button>
+                <div id="google-hint" style="font-size: 11px; color: var(--text-secondary); text-align: center; margin-top: 8px; font-family: 'Share Tech Mono', monospace;"></div>
+            </div>
+
+            <div class="divider">
+                <span></span>
+                <p>ou</p>
+                <span></span>
+            </div>
+
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="régie@production.com"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="••••••••"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Se souvenir de moi</label>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    ENTRER EN RÉGIE
+                </button>
+            </form>
+
+            <div class="back-link">
+                <a href="index.html">← Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>AINTERCOM OS v1.0 • Production Régie Platform • © 2026</p>
+        <p style="margin-top: 10px;">
+            <a href="#help">Aide</a> • 
+            <a href="#contact">Contact</a> • 
+            <a href="#terms">CGU</a>
+        </p>
+    </footer>
+
+    <!-- Load Supabase SDK (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Load AINTERCOM Auth Client -->
+    <script src="js/supabase-client.js"></script>
+
+    <script>
+        // ═════════════════════════════════════════════════════════════
+        // AINTERCOM LOGIN — Session Management & OAuth
+        // ═════════════════════════════════════════════════════════════
+        
+        // DOM Elements
+        const loginForm = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const rememberInput = document.getElementById('remember');
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+        const btnLogin = loginForm.querySelector('button[type="submit"]');
+        const btnGoogle = document.getElementById('btn-google');
+        const googleHint = document.getElementById('google-hint');
+
+        // Demo conditions
+        const DEMO_EMAILS = ['demo@aintercom.com', 'regie@test.com', 'test@test.com'];
+        const DEMO_PASSWORD = 'demo123';
+
+        // ─── Google Sign-In Handler ──────────────────────────────────
+        btnGoogle.addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            errorMessage.classList.remove('active');
+            successMessage.classList.remove('active');
+            btnGoogle.classList.add('loading');
+            btnGoogle.disabled = true;
+            googleHint.textContent = 'Redirection vers Google...';
+
+            try {
+                const result = await signInWithGoogle();
+                
+                if (result.success) {
+                    showSuccess('✓ Connexion Google réussie! Redirection...');
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1000);
+                } else {
+                    // Mode démo si Supabase non configuré
+                    showSuccess('✓ Mode DÉMO - Connexion réussie! Redirection...');
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1000);
+                }
+            } catch (error) {
+                showError('Erreur connexion Google: ' + error.message);
+                googleHint.textContent = 'Mode DÉMO (Supabase non configuré)';
+            } finally {
+                btnGoogle.classList.remove('loading');
+                btnGoogle.disabled = false;
+            }
+        });
+
+        // ─── Email/Password Login Handler ────────────────────────────
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            // Clear previous messages
+            errorMessage.classList.remove('active');
+            successMessage.classList.remove('active');
+            errorMessage.textContent = '';
+            successMessage.textContent = '';
+
+            // Validation
+            if (!email || !password) {
+                showError('Veuillez remplir tous les champs');
+                return;
+            }
+
+            if (!email.includes('@')) {
+                showError('Adresse email invalide');
+                return;
+            }
+
+            // Loading state
+            btnLogin.classList.add('loading');
+            btnLogin.disabled = true;
+
+            try {
+                // Tentative Supabase d'abord
+                const result = await signInWithEmail(email, password);
+
+                if (result.success) {
+                    // Remember credentials if checked
+                    if (rememberInput.checked) {
+                        localStorage.setItem('aintercom_remember', JSON.stringify({
+                            email,
+                            remember: true
+                        }));
+                    } else {
+                        localStorage.removeItem('aintercom_remember');
+                    }
+
+                    showSuccess('✓ Connexion réussie! Redirection...');
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1000);
+                } else {
+                    showError(result.error || '❌ Email ou mot de passe incorrect');
+                    passwordInput.value = '';
+                }
+            } catch (error) {
+                showError('Erreur de connexion: ' + error.message);
+            } finally {
+                btnLogin.classList.remove('loading');
+                btnLogin.disabled = false;
+            }
+        });
+
+        // ─── SessionManagement Helpers ───────────────────────────────
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('active');
+        }
+
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.classList.add('active');
+        }
+
+        // Load saved credentials
+        function loadSavedCredentials() {
+            const saved = localStorage.getItem('aintercom_remember');
+            if (saved) {
+                try {
+                    const { email, remember } = JSON.parse(saved);
+                    if (remember) {
+                        emailInput.value = email;
+                        rememberInput.checked = true;
+                    }
+                } catch (e) {
+                    console.warn('Erreur chargement identifiants:', e);
+                }
+            }
+        }
+
+        // Check existing session
+        function checkExistingSession() {
+            const session = getSession();
+            if (session) {
+                // Redirection immédiate si session valide
+                successMessage.textContent = 'Session active détectée. Redirection...';
+                successMessage.classList.add('active');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 500);
+            }
+        }
+
+        // ─── Supabase Status Check ──────────────────────────────────
+        async function checkSupabaseStatus() {
+            if (!window.supabase) {
+                googleHint.textContent = '⚠️ Mode développement (Supabase non chargé)';
+                googleHint.style.color = 'var(--text-secondary)';
+                return;
+            }
+
+            const initialized = await initSupabaseClient();
+            if (!initialized) {
+                googleHint.textContent = '💡 Configurer Supabase pour Google Sign-In';
+                googleHint.style.color = 'var(--gold)';
+            } else {
+                googleHint.textContent = '✅ Google Sign-In activé';
+                googleHint.style.color = 'var(--success)';
+            }
+        }
+
+        // Initialize
+        loadSavedCredentials();
+        checkExistingSession();
+        checkSupabaseStatus();
+
+        // Demo mode hint
+        console.log('%c🎙️ AINTERCOM LOGIN v2.0', 'color: #d4af37; font-size: 16px; font-weight: bold');
+        console.log('%cEmail démo: demo@aintercom.com | regie@test.com\nPassword: demo123', 'color: #b0b0b0');
+        console.log('%cGoogle Sign-In: Utiliser supabase-client.js pour Supabase OAuth', 'color: #00d97e; font-weight: bold');
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.backup
+
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Build/Dist
+dist/
+build/
+out/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+temp/
+
+# Credentials (never commit)
+secrets.json
+config.local.json
+.auth.json
+credentials.json
+
+# Backup files from IDE
+*.orig
+*.rej
+
+# Database backups
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated files
+extract_glossary_output.json
+
+# GitHub Pages specific
+.nojekyll
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+
+# DotEnv files
+.env*
+!.env.example
+
+# Testing
+.nyc_output
+coverage/
+*.lcov
+.jest_cache/
+
+# Compiled files
+*.o
+*.obj
+*.exe
+
+# Archives
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# Documentation build
+docs/_build/

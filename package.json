@@ -1,0 +1,64 @@
+{
+  "name": "aintercom",
+  "version": "2.0.0",
+  "description": "Production Régie Platform - Unified Dashboard for Live Events",
+  "author": "Morgan Spirli <morgan@aintercom.dev>",
+  "license": "MIT",
+  "homepage": "https://github.com/morganspirli/aintercom",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morganspirli/aintercom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/morganspirli/aintercom/issues"
+  },
+  "keywords": [
+    "production",
+    "régie",
+    "dashboard",
+    "event",
+    "live",
+    "concert",
+    "crew",
+    "management"
+  ],
+  "scripts": {
+    "dev": "live-server",
+    "start": "live-server",
+    "server": "python -m http.server 8000",
+    "preview": "http-server",
+    "build": "echo 'Static site - no build needed'",
+    "test": "echo 'Tests not configured yet'",
+    "lint": "echo 'ESLint not configured'",
+    "format": "prettier --write .",
+    "extract-glossary": "python3 extract_glossary.py",
+    "deploy": "git push origin main && echo '🚀 Deployed to GitHub Pages'",
+    "help": "cat << 'EOF'\n🎙️ AINTERCOM Commands\n=====================\nnpm run dev        - Start live-server (auto-reload)\nnpm run server     - Start HTTP server\nnpm run start      - Alias for dev\nnpm run build      - Static site (no build)\nnpm test           - Run tests\nnpm run format     - Format code\nnpm run extract-glossary - Extract 1000+ terms from modules/lexique.html\nnpm run deploy     - Push to GitHub Pages\nEOF"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2",
+    "prettier": "^3.0.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.43.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 2%",
+    "last 2 versions",
+    "Firefox ESR"
+  ],
+  "files": [
+    "*.html",
+    "*.md",
+    "css/",
+    "js/",
+    "modules/",
+    "assets/",
+    ".gitignore"
+  ]
+}

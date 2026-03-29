@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AINTERCOM OS — Console de production</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <div class="os-mark">🎙️</div>
+            <div class="os-name">AINTERCOM<span class="os-version">OS</span></div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <button class="nav-item active" data-module="show-control" data-icon="sliders">
+                <span class="nav-icon"><i class="fas fa-sliders-h"></i></span>
+                <span class="nav-label">Show Control</span>
+            </button>
+            <button class="nav-item" data-module="crew" data-icon="users">
+                <span class="nav-icon"><i class="fas fa-users"></i></span>
+                <span class="nav-label">Crew/Staff</span>
+            </button>
+            <button class="nav-item" data-module="accreditations" data-icon="badge">
+                <span class="nav-icon"><i class="fas fa-badge"></i></span>
+                <span class="nav-label">Accréditations</span>
+            </button>
+            <button class="nav-item" data-module="rider" data-icon="headphones">
+                <span class="nav-icon"><i class="fas fa-headphones"></i></span>
+                <span class="nav-label">Rider Technique</span>
+            </button>
+            <button class="nav-item" data-module="callsheet" data-icon="clipboard">
+                <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
+                <span class="nav-label">Callsheet</span>
+            </button>
+            <button class="nav-item" data-module="sign-flow" data-icon="pen-fancy">
+                <span class="nav-icon"><i class="fas fa-pen-fancy"></i></span>
+                <span class="nav-label">Sign Flow</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="lexique-toggle" id="lexique-toggle" title="Lexique technique">
+                <i class="fas fa-book"></i>
+            </button>
+            <button class="settings-toggle" id="settings-toggle" title="Paramètres">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- HEADER DE CONTENU -->
+        <header class="content-header">
+            <div class="header-left">
+                <h1 id="module-title">Show Control</h1>
+                <p id="module-subtitle" class="module-subtitle"></p>
+            </div>
+            <div class="header-right">
+                <div class="event-info">
+                    <span class="event-label">Événement:</span>
+                    <span id="event-name" class="event-name">—</span>
+                </div>
+                <button class="user-btn" id="user-btn">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="user-name">Connexion</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- CONTENU DES MODULES -->
+        <div class="modules-container">
+            <!-- SHOW CONTROL -->
+            <section id="show-control" class="module-content active">
+                <div class="module-grid">
+                    <div class="control-panel">
+                        <h3>🎬 État du show</h3>
+                        <div class="status-display">
+                            <div class="status-item">
+                                <label>Événement en cours</label>
+                                <input type="text" id="current-event" placeholder="Aucun événement" readonly>
+                            </div>
+                            <div class="status-item">
+                                <label>Horaire de début</label>
+                                <input type="time" id="show-start-time">
+                            </div>
+                            <div class="status-item">
+                                <label>Durée prévue</label>
+                                <input type="number" id="show-duration" placeholder="Minutes" min="0">
+                            </div>
+                            <div class="status-item">
+                                <label>Artiste/Production</label>
+                                <input type="text" id="show-artist" placeholder="Nom de l'artiste">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metrics-panel">
+                        <h3>📊 Indicateurs en direct</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <span class="metric-label">Personnes présentes</span>
+                                <span class="metric-value" id="crew-count">0</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Accréditations actives</span>
+                                <span class="metric-value" id="accred-count">0</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Documents signés</span>
+                                <span class="metric-value" id="sign-count">0</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Modules connectés</span>
+                                <span class="metric-value">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CREW/STAFF -->
+            <section id="crew" class="module-content">
+                <div class="module-grid">
+                    <div class="crew-form">
+                        <h3>👥 Gestion du personnel</h3>
+                        <form id="crew-form">
+                            <input type="text" id="crew-name" placeholder="Nom du membre" required>
+                            <input type="email" id="crew-email" placeholder="Email">
+                            <select id="crew-role">
+                                <option value="">Sélectionner un rôle</option>
+                                <option value="régie">Régie</option>
+                                <option value="technique">Technique</option>
+                                <option value="sécurité">Sécurité</option>
+                                <option value="accueil">Accueil</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                            <button type="submit" class="btn-primary">Ajouter au crew</button>
+                        </form>
+                    </div>
+
+                    <div class="crew-list">
+                        <h3>📋 Personnel enregistré</h3>
+                        <div id="crew-items" class="crew-items">
+                            <p class="empty-state">Aucun personnel enregistré</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ACCRÉDITATIONS -->
+            <section id="accreditations" class="module-content">
+                <div class="module-grid">
+                    <div class="accred-form">
+                        <h3>🎫 Générer une accréditation</h3>
+                        <form id="accred-form">
+                            <input type="text" id="accred-name" placeholder="Nom complet" required>
+                            <select id="accred-type">
+                                <option value="">Type d'accréditation</option>
+                                <option value="all-access">All Access</option>
+                                <option value="crew">Crew</option>
+                                <option value="technique">Technique</option>
+                                <option value="vip">VIP</option>
+                                <option value="press">Presse</option>
+                            </select>
+                            <input type="date" id="accred-date" required>
+                            <button type="submit" class="btn-primary">Générer badge</button>
+                        </form>
+                    </div>
+
+                    <div class="accred-list">
+                        <h3>🏷️ Badges actifs</h3>
+                        <div id="accred-items" class="accred-items">
+                            <p class="empty-state">Aucune accréditation générée</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIDER TECHNIQUE -->
+            <section id="rider" class="module-content">
+                <div class="module-grid">
+                    <div class="rider-form">
+                        <h3>🎚️ Spécifications technique</h3>
+                        <form id="rider-form">
+                            <div class="rider-section">
+                                <label>🎵 Audio</label>
+                                <textarea id="rider-audio" placeholder="Besoins audio..."></textarea>
+                            </div>
+                            <div class="rider-section">
+                                <label>💡 Lumière</label>
+                                <textarea id="rider-light" placeholder="Besoins de lumière..."></textarea>
+                            </div>
+                            <div class="rider-section">
+                                <label>📹 Vidéo</label>
+                                <textarea id="rider-video" placeholder="Besoins vidéo..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Sauvegarder rider</button>
+                        </form>
+                    </div>
+
+                    <div class="rider-display">
+                        <h3>📄 Rider actuel</h3>
+                        <div id="rider-content" class="rider-content">
+                            <p class="empty-state">Aucun rider technique défini</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CALLSHEET -->
+            <section id="callsheet" class="module-content">
+                <div class="module-grid">
+                    <div class="callsheet-form">
+                        <h3>📋 Créer une callsheet</h3>
+                        <form id="callsheet-form">
+                            <input type="text" id="callsheet-event" placeholder="Nom de l'événement" required>
+                            <input type="date" id="callsheet-date" required>
+                            <input type="time" id="callsheet-time" required>
+                            <textarea id="callsheet-notes" placeholder="Notes et directives..."></textarea>
+                            <button type="submit" class="btn-primary">Créer callsheet</button>
+                        </form>
+                    </div>
+
+                    <div class="callsheet-display">
+                        <h3>📄 Callsheet active</h3>
+                        <div id="callsheet-content" class="callsheet-content">
+                            <p class="empty-state">Aucune callsheet active</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SIGN FLOW -->
+            <section id="sign-flow" class="module-content">
+                <div class="module-grid">
+                    <div class="sign-form">
+                        <h3>✍️ Créer un document à signer</h3>
+                        <form id="sign-form">
+                            <input type="text" id="sign-title" placeholder="Titre du document" required>
+                            <textarea id="sign-content" placeholder="Contenu du document..." required></textarea>
+                            <input type="text" id="sign-signer" placeholder="Nom du signataire" required>
+                            <button type="submit" class="btn-primary">Créer pour signature</button>
+                        </form>
+                    </div>
+
+                    <div class="sign-list">
+                        <h3>📝 Signatures en cours</h3>
+                        <div id="sign-items" class="sign-items">
+                            <p class="empty-state">Aucun document en attente</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- LEXIQUE FLOTTANT -->
+    <div id="lexique-drawer" class="lexique-drawer">
+        <div class="lexique-header">
+            <h3>📚 Lexique technique</h3>
+            <button class="close-btn" id="close-lexique">✕</button>
+        </div>
+        <div class="lexique-content">
+            <div class="lexique-search-bar">
+                <input type="text" id="lexique-search" placeholder="🔍 Chercher terme... (FR/EN)" class="lexique-search-input">
+                <div class="lexique-filters">
+                    <button class="filter-btn active" data-category="ALL">Tous</button>
+                    <button class="filter-btn" data-category="RÉGIE">Régie</button>
+                    <button class="filter-btn" data-category="AUDIO">Audio</button>
+                    <button class="filter-btn" data-category="LUMIÈRE">Lumière</button>
+                    <button class="filter-btn" data-category="STRUCTURE">Structure</button>
+                    <button class="filter-btn" data-category="LOGISTIQUE">Logistique</button>
+                </div>
+            </div>
+            <div id="lexique-results" class="lexique-results"></div>
+        </div>
+    </div>
+
+    <!-- SETTINGS PANEL -->
+    <div id="settings-panel" class="settings-panel">
+        <div class="settings-header">
+            <h3>⚙️ Paramètres</h3>
+            <button class="close-btn" id="close-settings">✕</button>
+        </div>
+        <div class="settings-content">
+            <div class="setting-item">
+                <label>Mode sombre</label>
+                <input type="checkbox" id="theme-toggle" checked>
+            </div>
+            <div class="setting-item">
+                <label>Volume des notifications</label>
+                <input type="range" id="notif-volume" min="0" max="100" value="70">
+            </div>
+            <div class="setting-item">
+                <label>Langue</label>
+                <select id="language">
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            <div class="divider"></div>
+            <button class="btn-secondary" id="logout-btn">Se déconnecter</button>
+        </div>
+    </div>
+
+    <!-- USER LOGIN MODAL -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2>Connexion AINTERCOM</h2>
+            <form id="login-form">
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Mot de passe" required>
+                <button type="submit" class="btn-primary">Se connecter</button>
+            </form>
+            <p class="modal-footer">Version 1.0 • Préparation Supabase</p>
+        </div>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div id="notifications" class="notifications"></div>
+
+    <script src="js/core.js"></script>
+    <script src="js/lexique-data.js"></script>
+    <script src="js/modules.js"></script>
+</body>
+</html>
