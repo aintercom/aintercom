@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIGN-FLOW — AINTERCOM</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#06080b;
+  --surface:#0a0f14;
+  --surface2:#0f161e;
+  --border:#1e2d3d;
+  --border2:#253545;
+  --green:#00d97e;
+  --orange:#ff6600;
+  --text:#e8f0f8;
+  --muted:#7a9ab5;
+  --dim:#3d5568;
+  --sidebar:300px;
+  --header:52px;
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow:hidden;}
+
+/* ── HEADER ── */
+.hdr{height:var(--header);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:12px;flex-shrink:0;}
+.hdr-left{display:flex;align-items:center;gap:12px;}
+.logo-mark{width:28px;height:28px;background:var(--orange);clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%);display:flex;align-items:center;justify-content:center;font-family:'Share Tech Mono',monospace;font-size:7px;font-weight:700;color:#000;flex-shrink:0;}
+.hdr-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:var(--text);}
+.hdr-sep{color:var(--dim);}
+.hdr-module{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--orange);}
+.hdr-badge{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;padding:2px 8px;border:1px solid var(--orange);color:var(--orange);border-radius:2px;}
+.hdr-right{display:flex;align-items:center;gap:8px;}
+.hdr-btn{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;padding:6px 14px;border-radius:2px;border:1px solid var(--border2);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;}
+.hdr-btn:hover{color:var(--text);border-color:var(--muted);}
+.hdr-btn.green{background:var(--green);color:#000;border-color:#00a05c;}
+.hdr-btn.green:hover{filter:brightness(1.1);}
+.hdr-btn.orange{background:var(--orange);color:#000;border-color:#cc5200;}
+.hdr-btn.orange:hover{filter:brightness(1.1);}
+
+/* ── ECO TOGGLE ── */
+.eco-wrap{display:flex;align-items:center;gap:7px;}
+.eco-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);}
+.toggle{position:relative;width:36px;height:20px;cursor:pointer;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-track{position:absolute;inset:0;background:#1e2d3d;border-radius:10px;border:1px solid var(--border2);transition:.2s;}
+.toggle input:checked~.toggle-track{background:#e8f0f8;}
+.toggle-thumb{position:absolute;top:3px;left:3px;width:12px;height:12px;background:var(--dim);border-radius:50%;transition:.2s;}
+.toggle input:checked~.toggle-thumb{left:19px;background:#000;}
+
+/* ── LAYOUT ── */
+.layout{display:grid;grid-template-columns:var(--sidebar) 1fr;height:calc(100vh - var(--header));overflow:hidden;}
+
+/* ── SIDEBAR ── */
+.sidebar{background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-track{background:transparent;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+
+.sb-section{padding:14px 16px;border-bottom:1px solid var(--border);}
+.sb-title{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--dim);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.sb-title svg{width:12px;height:12px;opacity:.6;}
+
+/* Fields */
+.field{margin-bottom:10px;}
+.field label{display:block;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:1px;margin-bottom:4px;}
+.field input,.field textarea,.field select{width:100%;background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:13px;padding:7px 10px;border-radius:3px;outline:none;transition:border-color .15s;resize:none;}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--orange);}
+.field textarea{height:80px;line-height:1.5;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+
+/* Format pills */
+.pill-group{display:flex;gap:6px;flex-wrap:wrap;}
+.pill{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;padding:5px 10px;border:1px solid var(--border2);border-radius:2px;background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;}
+.pill:hover{border-color:var(--muted);color:var(--text);}
+.pill.active{background:var(--orange);color:#000;border-color:var(--orange);}
+
+/* Color swatches */
+.swatch-group{display:flex;gap:6px;}
+.swatch{width:28px;height:28px;border-radius:4px;cursor:pointer;border:2px solid transparent;transition:transform .1s,border-color .15s;flex-shrink:0;}
+.swatch:hover{transform:scale(1.1);}
+.swatch.active{border-color:#fff;}
+
+/* Arrow picker */
+.arrow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;width:108px;}
+.arrow-cell{width:32px;height:32px;border:1px solid var(--border2);border-radius:3px;background:var(--surface2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}
+.arrow-cell:hover{border-color:var(--muted);}
+.arrow-cell.active{background:var(--orange);border-color:var(--orange);}
+.arrow-cell.none-cell{font-family:'Share Tech Mono',monospace;font-size:7px;color:var(--dim);}
+.arrow-cell svg{width:16px;height:16px;fill:currentColor;}
+
+/* Picto picker */
+.picto-group{display:flex;gap:5px;flex-wrap:wrap;}
+.picto-btn{width:36px;height:36px;border:1px solid var(--border2);border-radius:3px;background:var(--surface2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;color:var(--muted);}
+.picto-btn:hover{border-color:var(--muted);color:var(--text);}
+.picto-btn.active{background:var(--orange);border-color:var(--orange);color:#000;}
+.picto-btn svg{width:18px;height:18px;}
+
+/* Logo upload */
+.logo-upload{width:100%;height:60px;border:2px dashed var(--border2);border-radius:4px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--dim);transition:all .15s;position:relative;overflow:hidden;}
+.logo-upload:hover{border-color:var(--muted);color:var(--muted);}
+.logo-upload img{max-height:48px;max-width:100%;object-fit:contain;}
+.logo-upload input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+
+/* Bulk textarea */
+.bulk-area{background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:'Share Tech Mono',monospace;font-size:10px;padding:8px;border-radius:3px;width:100%;height:100px;resize:none;line-height:1.6;outline:none;}
+.bulk-area:focus{border-color:var(--orange);}
+.bulk-hint{font-family:'Share Tech Mono',monospace;font-size:8px;color:var(--dim);margin-top:4px;line-height:1.5;}
+
+.sb-add-btn{width:100%;padding:10px;background:var(--orange);color:#000;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;border:none;border-radius:3px;cursor:pointer;transition:filter .15s;}
+.sb-add-btn:hover{filter:brightness(1.1);}
+.sb-add-btn.bulk{background:var(--surface2);color:var(--muted);border:1px solid var(--border2);margin-top:6px;font-size:11px;}
+.sb-add-btn.bulk:hover{color:var(--text);border-color:var(--muted);}
+
+/* Panel count */
+.panel-count{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--green);letter-spacing:2px;}
+
+/* ── MAIN CANVAS ── */
+.canvas{background:var(--bg);overflow-y:auto;padding:24px;}
+.canvas::-webkit-scrollbar{width:6px;}
+.canvas::-webkit-scrollbar-track{background:transparent;}
+.canvas::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+.canvas-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.canvas-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:var(--text);}
+.canvas-sub{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:2px;margin-top:2px;}
+.view-toggle{display:flex;gap:4px;}
+.view-btn{width:30px;height:28px;border:1px solid var(--border2);background:transparent;color:var(--muted);border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.view-btn:hover{color:var(--text);border-color:var(--muted);}
+.view-btn.active{background:var(--orange);border-color:var(--orange);color:#000;}
+.view-btn svg{width:14px;height:14px;}
+
+/* Bento grid */
+.bento{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+.bento.list-mode{grid-template-columns:1fr;}
+
+/* Empty state */
+.empty-state{text-align:center;padding:80px 40px;}
+.empty-icon{font-size:48px;margin-bottom:16px;opacity:.3;}
+.empty-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;color:var(--dim);margin-bottom:8px;}
+.empty-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:2px;line-height:1.7;}
+
+/* ── PANEL CARD (thumbnail) ── */
+.panel-card{position:relative;border-radius:6px;overflow:hidden;cursor:pointer;transition:transform .15s,box-shadow .15s;aspect-ratio:1/1.41;}
+.panel-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.5);}
+.panel-card.landscape{aspect-ratio:1.41/1;}
+.panel-card.a3{border:2px solid rgba(255,255,255,.1);}
+
+.pc-bg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;gap:6px;}
+.pc-logo{max-height:16px;max-width:60%;object-fit:contain;opacity:.8;}
+.pc-picto{width:28px;height:28px;flex-shrink:0;}
+.pc-arrow{width:32px;height:32px;flex-shrink:0;}
+.pc-text{font-family:'Bebas Neue',sans-serif;text-align:center;line-height:1.1;word-break:break-word;max-width:100%;}
+.pc-subtext{font-family:'Share Tech Mono',monospace;text-align:center;letter-spacing:1px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+.panel-card-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);opacity:0;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.panel-card:hover .panel-card-overlay{opacity:1;}
+.pc-action{width:30px;height:30px;border-radius:3px;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.pc-action:hover{background:rgba(255,255,255,.2);}
+.pc-action svg{width:13px;height:13px;}
+.pc-action.del:hover{background:rgba(255,59,59,.3);border-color:rgba(255,59,59,.5);}
+
+.panel-card-label{position:absolute;bottom:0;left:0;right:0;padding:4px 8px;background:rgba(0,0,0,.7);font-family:'Share Tech Mono',monospace;font-size:7px;letter-spacing:1px;color:rgba(255,255,255,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* Format badge on card */
+.panel-format-badge{position:absolute;top:6px;right:6px;font-family:'Share Tech Mono',monospace;font-size:6px;letter-spacing:1px;padding:2px 5px;background:rgba(0,0,0,.6);color:rgba(255,255,255,.5);border-radius:2px;}
+
+/* Selected state */
+.panel-card.selected{outline:2px solid var(--orange);outline-offset:2px;}
+
+/* ── LIST MODE ── */
+.list-mode .panel-card{aspect-ratio:unset;height:72px;display:flex;flex-direction:row;}
+.list-mode .pc-bg{flex-direction:row;justify-content:flex-start;padding:0 12px;gap:10px;}
+.list-mode .pc-text{font-size:18px!important;text-align:left;}
+.list-mode .pc-subtext{font-size:7px!important;text-align:left;}
+.list-mode .pc-arrow{width:20px;height:20px;}
+.list-mode .pc-picto{width:20px;height:20px;}
+.list-mode .panel-card-label{bottom:unset;top:0;left:72px;right:0;background:transparent;padding:4px 0;}
+.list-mode .panel-format-badge{right:unset;left:6px;top:6px;}
+
+/* ── EDIT MODAL ── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;}
+.modal-bg.hidden{display:none;}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:8px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;padding:24px;}
+.modal h2{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;margin-bottom:20px;}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);}
+.modal-btn{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;padding:8px 16px;border-radius:2px;border:1px solid var(--border2);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;}
+.modal-btn:hover{color:var(--text);border-color:var(--muted);}
+.modal-btn.save{background:var(--orange);color:#000;border-color:#cc5200;}
+.modal-btn.save:hover{filter:brightness(1.1);}
+
+/* ── PRINT/PDF RENDER ── */
+#pdf-render{position:fixed;left:-9999px;top:0;pointer-events:none;}
+.pdf-page{display:flex;align-items:center;justify-content:center;background:#000;}
+.pdf-page.eco-page{background:#fff!important;}
+.pdf-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;gap:0;padding:20px;position:relative;}
+.pdf-logo{max-height:40px;max-width:160px;object-fit:contain;position:absolute;top:16px;left:50%;transform:translateX(-50%);opacity:.7;}
+.pdf-picto{flex-shrink:0;}
+.pdf-arrow{flex-shrink:0;}
+.pdf-text{font-family:'Bebas Neue',sans-serif;text-align:center;line-height:1;word-break:break-word;max-width:90%;}
+.pdf-subtext{font-family:'Share Tech Mono',monospace;text-align:center;letter-spacing:3px;max-width:90%;}
+
+/* notification */
+.notif{position:fixed;bottom:24px;right:24px;background:var(--green);color:#000;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;padding:10px 18px;border-radius:3px;z-index:200;transform:translateY(80px);opacity:0;transition:all .3s;}
+.notif.show{transform:translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="logo-mark">AI</div>
+    <span class="hdr-brand">AINTERCOM</span>
+    <span class="hdr-sep">·</span>
+    <span class="hdr-module">SIGN-FLOW</span>
+    <span class="hdr-badge">MODULE 07</span>
+  </div>
+  <div class="hdr-right">
+    <div class="eco-wrap">
+      <span class="eco-label">ECO</span>
+      <label class="toggle">
+        <input type="checkbox" id="eco-toggle" onchange="toggleEco()">
+        <div class="toggle-track"></div>
+        <div class="toggle-thumb"></div>
+      </label>
+    </div>
+    <button class="hdr-btn" onclick="clearAll()">⊘ VIDER</button>
+    <button class="hdr-btn orange" onclick="exportPDF()">↓ EXPORT PDF</button>
+    <a class="hdr-btn" href="index.html">← ACCUEIL</a>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- New single panel -->
+    <div class="sb-section">
+      <div class="sb-title">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M8 5v6M5 8h6"/></svg>
+        NOUVEAU PANNEAU
+      </div>
+
+      <div class="field">
+        <label>TEXTE PRINCIPAL</label>
+        <input type="text" id="f-text" placeholder="ex: LOGE 1" maxlength="40">
+      </div>
+      <div class="field">
+        <label>SOUS-TEXTE</label>
+        <input type="text" id="f-sub" placeholder="ex: ENTRÉE NORD" maxlength="50">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>FORMAT</label>
+          <div class="pill-group" id="fmt-group">
+            <button class="pill active" onclick="setPill('fmt','A4',this)">A4</button>
+            <button class="pill" onclick="setPill('fmt','A3',this)">A3</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>ORIENT.</label>
+          <div class="pill-group" id="ori-group">
+            <button class="pill active" onclick="setPill('ori','portrait',this)">↕</button>
+            <button class="pill" onclick="setPill('ori','landscape',this)">↔</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>COULEUR DE FOND</label>
+        <div class="swatch-group" id="color-group">
+          <div class="swatch active" style="background:#000" data-color="#000000" onclick="setSwatch(this,'#000000')"></div>
+          <div class="swatch" style="background:#cc1111" data-color="#cc1111" onclick="setSwatch(this,'#cc1111')"></div>
+          <div class="swatch" style="background:#007a3d" data-color="#007a3d" onclick="setSwatch(this,'#007a3d')"></div>
+          <div class="swatch" style="background:#0047ab" data-color="#0047ab" onclick="setSwatch(this,'#0047ab')"></div>
+          <div class="swatch" style="background:#f0c000" data-color="#f0c000" onclick="setSwatch(this,'#f0c000')"></div>
+          <div class="swatch" style="background:#ff6600" data-color="#ff6600" onclick="setSwatch(this,'#ff6600')"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>FLÈCHE</label>
+        <div class="arrow-grid" id="arrow-grid">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <div class="field">
+        <label>PICTO</label>
+        <div class="picto-group" id="picto-group">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <button class="sb-add-btn" onclick="addPanel()">+ AJOUTER LE PANNEAU</button>
+    </div>
+
+    <!-- Bulk generation -->
+    <div class="sb-section">
+      <div class="sb-title">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h10"/></svg>
+        GÉNÉRATION PAR LOT
+      </div>
+      <textarea class="bulk-area" id="bulk-input" placeholder="Loge 1&#10;Loge 2&#10;Catering STAFF&#10;Entrée VIP&#10;Sortie de secours"></textarea>
+      <div class="bulk-hint">
+        Une ligne = un panneau · Applique format/couleur/flèche actifs<br>
+        Format optionnel: <b>TEXTE | sous-texte</b>
+      </div>
+      <button class="sb-add-btn bulk" onclick="bulkAdd()">⊞ GÉNÉRER TOUS LES PANNEAUX</button>
+    </div>
+
+    <!-- Global logo -->
+    <div class="sb-section">
+      <div class="sb-title">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="14" height="9" rx="1"/><path d="M5 4V3a1 1 0 011-1h4a1 1 0 011 1v1"/></svg>
+        LOGO DE L'ÉVÉNEMENT
+      </div>
+      <div class="logo-upload" id="logo-drop" onclick="document.getElementById('logo-input').click()">
+        <input type="file" id="logo-input" accept="image/*" style="display:none" onchange="loadLogo(event)">
+        <span id="logo-placeholder">+ IMPORTER LOGO</span>
+        <img id="logo-preview" src="" alt="" style="display:none">
+      </div>
+      <button class="sb-add-btn bulk" onclick="removeLogo()" style="margin-top:6px;font-size:9px;">⊘ RETIRER LE LOGO</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="sb-section">
+      <div class="sb-title">PANNEAUX</div>
+      <div class="panel-count" id="panel-count">0 PANNEAU(X)</div>
+    </div>
+
+  </div><!-- /sidebar -->
+
+  <!-- MAIN CANVAS -->
+  <div class="canvas">
+    <div class="canvas-header">
+      <div>
+        <div class="canvas-title">PLANCHE DE PRODUCTION</div>
+        <div class="canvas-sub" id="canvas-sub">AUCUN PANNEAU · COMMENCEZ PAR EN CRÉER UN</div>
+      </div>
+      <div class="view-toggle">
+        <button class="view-btn active" id="vbtn-grid" onclick="setView('grid',this)" title="Grille">
+          <svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+        </button>
+        <button class="view-btn" id="vbtn-list" onclick="setView('list',this)" title="Liste">
+          <svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="2" width="14" height="3" rx="1"/><rect x="1" y="7" width="14" height="3" rx="1"/><rect x="1" y="12" width="14" height="3" rx="1"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="bento" id="bento"></div>
+    <div class="empty-state" id="empty-state">
+      <div class="empty-icon">🪧</div>
+      <div class="empty-title">PLANCHE VIDE</div>
+      <div class="empty-sub">Créez votre premier panneau via la sidebar<br>ou utilisez la génération par lot.</div>
+    </div>
+  </div>
+
+</div><!-- /layout -->
+
+<!-- EDIT MODAL -->
+<div class="modal-bg hidden" id="modal-bg" onclick="closeModalBg(event)">
+  <div class="modal">
+    <h2>ÉDITER LE PANNEAU</h2>
+    <input type="hidden" id="m-id">
+    <div class="field">
+      <label>TEXTE PRINCIPAL</label>
+      <input type="text" id="m-text" maxlength="40">
+    </div>
+    <div class="field">
+      <label>SOUS-TEXTE</label>
+      <input type="text" id="m-sub" maxlength="50">
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>FORMAT</label>
+        <div class="pill-group" id="m-fmt-group">
+          <button class="pill active" onclick="setPill('m-fmt','A4',this)">A4</button>
+          <button class="pill" onclick="setPill('m-fmt','A3',this)">A3</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>ORIENT.</label>
+        <div class="pill-group" id="m-ori-group">
+          <button class="pill active" onclick="setPill('m-ori','portrait',this)">↕</button>
+          <button class="pill" onclick="setPill('m-ori','landscape',this)">↔</button>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>COULEUR DE FOND</label>
+      <div class="swatch-group" id="m-color-group">
+        <div class="swatch active" style="background:#000" data-color="#000000" onclick="setModalSwatch(this,'#000000')"></div>
+        <div class="swatch" style="background:#cc1111" data-color="#cc1111" onclick="setModalSwatch(this,'#cc1111')"></div>
+        <div class="swatch" style="background:#007a3d" data-color="#007a3d" onclick="setModalSwatch(this,'#007a3d')"></div>
+        <div class="swatch" style="background:#0047ab" data-color="#0047ab" onclick="setModalSwatch(this,'#0047ab')"></div>
+        <div class="swatch" style="background:#f0c000" data-color="#f0c000" onclick="setModalSwatch(this,'#f0c000')"></div>
+        <div class="swatch" style="background:#ff6600" data-color="#ff6600" onclick="setModalSwatch(this,'#ff6600')"></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>FLÈCHE</label>
+      <div class="arrow-grid" id="m-arrow-grid"></div>
+    </div>
+    <div class="field">
+      <label>PICTO</label>
+      <div class="picto-group" id="m-picto-group"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn" onclick="closeModal()">ANNULER</button>
+      <button class="modal-btn save" onclick="saveModal()">ENREGISTRER</button>
+    </div>
+  </div>
+</div>
+
+<!-- PDF render zone (hidden) -->
+<div id="pdf-render"></div>
+
+<!-- Notification -->
+<div class="notif" id="notif"></div>
+
+<script>
+// ─── STATE ──────────────────────────────────────────────────────────────────
+let panels = [];
+let nextId = 1;
+let ecoMode = false;
+let logoDataUrl = null;
+let viewMode = 'grid';
+
+// Current sidebar form state
+let fmtState = {fmt:'A4', ori:'portrait', color:'#000000', arrow:null, picto:null};
+let modalFmtState = {fmt:'A4', ori:'portrait', color:'#000000', arrow:null, picto:null};
+
+// ─── SVG ASSETS ─────────────────────────────────────────────────────────────
+const ARROW_SVG = (deg) => `<svg viewBox="0 0 24 24" fill="currentColor" style="transform:rotate(${deg}deg)"><path d="M12 3l8 10h-5v8H9v-8H4z"/></svg>`;
+
+const PICTOS = {
+  vip: {label:'VIP', svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>`},
+  wc:  {label:'WC',  svg:`<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="4" r="2"/><circle cx="15" cy="4" r="2"/><path d="M6 8h4v8l-1 4h2l-1-4V8h4v8l-1 4h2l-1-4V8c0-1-1-1-1-1H7C6 7 6 7 6 8v8z"/></svg>`},
+  danger:{label:'⚠',svg:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 20h20L12 2zm0 4l7 12H5l7-12zM11 11v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>`},
+  wifi: {label:'WiFi',svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.55a11 11 0 0114 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>`},
+  exit: {label:'EXIT',svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 16l4-4-4-4"/><path d="M18 12H6"/><path d="M4 6v12"/></svg>`},
+  parking:{label:'P',svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 010 6H9"/></svg>`},
+  nofoto:{label:'📷',svg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`},
+};
+
+// Arrow directions: [label, degrees, grid position]
+const ARROW_DIRS = [
+  {deg:315,pos:0},{deg:0,pos:1},{deg:45,pos:2},
+  {deg:270,pos:3},{none:true,pos:4},{deg:90,pos:5},
+  {deg:225,pos:6},{deg:180,pos:7},{deg:135,pos:8}
+];
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+function init(){
+  buildArrowGrid('arrow-grid', fmtState, false);
+  buildArrowGrid('m-arrow-grid', modalFmtState, true);
+  buildPictoGroup('picto-group', fmtState, false);
+  buildPictoGroup('m-picto-group', modalFmtState, true);
+  loadState();
+  render();
+}
+
+// ─── ARROW GRID ──────────────────────────────────────────────────────────────
+function buildArrowGrid(containerId, state, isModal){
+  const g = document.getElementById(containerId);
+  g.innerHTML = '';
+  ARROW_DIRS.forEach(d => {
+    const cell = document.createElement('div');
+    cell.className = 'arrow-cell' + (d.none ? ' none-cell' : '');
+    if(d.none){
+      cell.innerHTML='NONE';
+      cell.onclick = () => { state.arrow=null; highlightArrow(containerId, null); };
+    } else {
+      cell.innerHTML = ARROW_SVG(d.deg);
+      cell.dataset.deg = d.deg;
+      cell.onclick = () => { state.arrow=d.deg; highlightArrow(containerId, d.deg); };
+    }
+    g.appendChild(cell);
+  });
+}
+
+function highlightArrow(containerId, deg){
+  document.querySelectorAll('#'+containerId+' .arrow-cell').forEach(c=>{
+    c.classList.toggle('active',
+      deg===null ? c.classList.contains('none-cell') : String(c.dataset.deg)===String(deg)
+    );
+  });
+}
+
+// ─── PICTO GROUP ─────────────────────────────────────────────────────────────
+function buildPictoGroup(containerId, state, isModal){
+  const g = document.getElementById(containerId);
+  g.innerHTML = '';
+  // none btn
+  const nb = document.createElement('div');
+  nb.className = 'picto-btn active';
+  nb.title = 'Aucun';
+  nb.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>`;
+  nb.onclick = () => { state.picto=null; highlightPicto(containerId,null); };
+  g.appendChild(nb);
+
+  Object.entries(PICTOS).forEach(([key,p])=>{
+    const btn = document.createElement('div');
+    btn.className='picto-btn';
+    btn.title=p.label;
+    btn.dataset.key=key;
+    btn.innerHTML=p.svg;
+    btn.onclick=()=>{ state.picto=key; highlightPicto(containerId,key); };
+    g.appendChild(btn);
+  });
+}
+
+function highlightPicto(containerId, key){
+  document.querySelectorAll('#'+containerId+' .picto-btn').forEach(b=>{
+    b.classList.toggle('active', key===null ? !b.dataset.key : b.dataset.key===key);
+  });
+}
+
+// ─── PILL / SWATCH HELPERS ────────────────────────────────────────────────────
+function setPill(type, val, el){
+  if(type.startsWith('m-')){
+    if(type==='m-fmt') modalFmtState.fmt=val;
+    else modalFmtState.ori=val;
+    el.closest('.pill-group').querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  } else {
+    if(type==='fmt') fmtState.fmt=val;
+    else fmtState.ori=val;
+    el.closest('.pill-group').querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  }
+  el.classList.add('active');
+}
+
+function setSwatch(el, color){
+  fmtState.color=color;
+  document.querySelectorAll('#color-group .swatch').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function setModalSwatch(el, color){
+  modalFmtState.color=color;
+  document.querySelectorAll('#m-color-group .swatch').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ─── PANEL CRUD ───────────────────────────────────────────────────────────────
+function addPanel(){
+  const text = document.getElementById('f-text').value.trim().toUpperCase();
+  const sub = document.getElementById('f-sub').value.trim().toUpperCase();
+  if(!text){ notify('TEXTE REQUIS'); return; }
+  createPanel(text, sub, fmtState.fmt, fmtState.ori, fmtState.color, fmtState.arrow, fmtState.picto);
+  document.getElementById('f-text').value='';
+  document.getElementById('f-sub').value='';
+  notify('PANNEAU AJOUTÉ');
+}
+
+function createPanel(text, sub, fmt, ori, color, arrow, picto){
+  panels.push({id:nextId++, text, sub, fmt, ori, color, arrow, picto});
+  saveState();
+  render();
+}
+
+function deletePanel(id){
+  panels = panels.filter(p=>p.id!==id);
+  saveState();
+  render();
+}
+
+function bulkAdd(){
+  const lines = document.getElementById('bulk-input').value.split('\n').map(l=>l.trim()).filter(Boolean);
+  if(!lines.length){ notify('AUCUNE LIGNE'); return; }
+  lines.forEach(line=>{
+    const [textPart, subPart=''] = line.split('|').map(s=>s.trim().toUpperCase());
+    createPanel(textPart||'', subPart, fmtState.fmt, fmtState.ori, fmtState.color, fmtState.arrow, fmtState.picto);
+  });
+  document.getElementById('bulk-input').value='';
+  notify(`${lines.length} PANNEAUX CRÉÉS`);
+}
+
+// ─── LOGO ─────────────────────────────────────────────────────────────────────
+function loadLogo(e){
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    logoDataUrl = ev.target.result;
+    document.getElementById('logo-placeholder').style.display='none';
+    const img = document.getElementById('logo-preview');
+    img.src=logoDataUrl; img.style.display='block';
+    saveState(); render();
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeLogo(){
+  logoDataUrl=null;
+  document.getElementById('logo-placeholder').style.display='';
+  const img=document.getElementById('logo-preview');
+  img.src=''; img.style.display='none';
+  saveState(); render();
+}
+
+// ─── ECO ──────────────────────────────────────────────────────────────────────
+function toggleEco(){
+  ecoMode = document.getElementById('eco-toggle').checked;
+  saveState(); render();
+}
+
+// ─── VIEW ─────────────────────────────────────────────────────────────────────
+function setView(mode, el){
+  viewMode=mode;
+  document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  const bento = document.getElementById('bento');
+  bento.classList.toggle('list-mode', mode==='list');
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function render(){
+  const bento = document.getElementById('bento');
+  const empty = document.getElementById('empty-state');
+  const count = document.getElementById('panel-count');
+  const sub = document.getElementById('canvas-sub');
+
+  count.textContent = panels.length + ' PANNEAU(X)';
+  empty.style.display = panels.length===0 ? 'block':'none';
+  bento.style.display = panels.length===0 ? 'none':'grid';
+  sub.textContent = panels.length===0
+    ? 'AUCUN PANNEAU · COMMENCEZ PAR EN CRÉER UN'
+    : panels.length+' PANNEAU(X) · PRÊT POUR L\'EXPORT';
+
+  bento.innerHTML = '';
+  panels.forEach(p => bento.appendChild(buildCard(p)));
+}
+
+function buildCard(p){
+  const isEco = ecoMode;
+  const bgColor = isEco ? '#ffffff' : p.color;
+  const textColor = isEco ? '#000000' : getTextColor(p.color);
+  const isLandscape = p.ori==='landscape';
+  const textSize = p.text.length > 12 ? '14px' : p.text.length > 8 ? '18px' : '22px';
+
+  const card = document.createElement('div');
+  card.className = 'panel-card' + (isLandscape?' landscape':'') + (p.fmt==='A3'?' a3':'');
+  card.dataset.id = p.id;
+
+  let pictoHtml = '';
+  if(p.picto && PICTOS[p.picto]){
+    const pColor = isEco ? '#000' : textColor;
+    pictoHtml = `<div class="pc-picto" style="color:${pColor}">${PICTOS[p.picto].svg}</div>`;
+  }
+
+  let arrowHtml = '';
+  if(p.arrow !== null && p.arrow !== undefined){
+    const aColor = isEco ? '#000' : textColor;
+    arrowHtml = `<div class="pc-arrow" style="color:${aColor}">${ARROW_SVG(p.arrow)}</div>`;
+  }
+
+  let logoHtml = '';
+  if(logoDataUrl){
+    logoHtml = `<img class="pc-logo" src="${logoDataUrl}" alt="">`;
+  }
+
+  card.innerHTML = `
+    <div class="pc-bg" style="background:${bgColor}">
+      ${logoHtml}
+      ${pictoHtml}
+      ${arrowHtml}
+      <div class="pc-text" style="color:${textColor};font-size:${textSize}">${esc(p.text)}</div>
+      ${p.sub?`<div class="pc-subtext" style="color:${textColor};opacity:.7;font-size:7px">${esc(p.sub)}</div>`:''}
+    </div>
+    <div class="panel-format-badge">${p.fmt} ${p.ori==='portrait'?'↕':'↔'}</div>
+    <div class="panel-card-label">${esc(p.text)}${p.sub?' · '+esc(p.sub):''}</div>
+    <div class="panel-card-overlay">
+      <div class="pc-action" onclick="editPanel(${p.id},event)" title="Éditer">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11.5 2.5l2 2L5 13H3v-2L11.5 2.5z"/></svg>
+      </div>
+      <div class="pc-action" onclick="duplicatePanel(${p.id},event)" title="Dupliquer">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="9" height="9" rx="1"/><path d="M4 11H3a1 1 0 01-1-1V3a1 1 0 011-1h7a1 1 0 011 1v1"/></svg>
+      </div>
+      <div class="pc-action del" onclick="deletePanel(${p.id})" title="Supprimer">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h10M6 4V2h4v2M5 4v9h6V4"/></svg>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+function getTextColor(bg){
+  // Light backgrounds: dark text
+  const light = ['#f0c000'];
+  return light.includes(bg) ? '#000000' : '#ffffff';
+}
+
+function duplicatePanel(id, e){
+  e && e.stopPropagation();
+  const p = panels.find(x=>x.id===id);
+  if(!p) return;
+  panels.push({...p, id:nextId++});
+  saveState(); render();
+  notify('PANNEAU DUPLIQUÉ');
+}
+
+// ─── EDIT MODAL ───────────────────────────────────────────────────────────────
+function editPanel(id, e){
+  e && e.stopPropagation();
+  const p = panels.find(x=>x.id===id);
+  if(!p) return;
+
+  document.getElementById('m-id').value=p.id;
+  document.getElementById('m-text').value=p.text;
+  document.getElementById('m-sub').value=p.sub||'';
+
+  // fmt/ori pills
+  modalFmtState.fmt=p.fmt; modalFmtState.ori=p.ori;
+  modalFmtState.color=p.color; modalFmtState.arrow=p.arrow; modalFmtState.picto=p.picto;
+  document.querySelectorAll('#m-fmt-group .pill').forEach(b=>{ b.classList.toggle('active',b.textContent===p.fmt); });
+  document.querySelectorAll('#m-ori-group .pill').forEach(b=>{ b.classList.toggle('active',(b.textContent==='↕'?'portrait':'landscape')===p.ori); });
+  document.querySelectorAll('#m-color-group .swatch').forEach(s=>{ s.classList.toggle('active',s.dataset.color===p.color); });
+  highlightArrow('m-arrow-grid', p.arrow);
+  highlightPicto('m-picto-group', p.picto);
+
+  document.getElementById('modal-bg').classList.remove('hidden');
+}
+
+function saveModal(){
+  const id = parseInt(document.getElementById('m-id').value);
+  const p = panels.find(x=>x.id===id);
+  if(!p) return;
+  p.text = document.getElementById('m-text').value.trim().toUpperCase();
+  p.sub = document.getElementById('m-sub').value.trim().toUpperCase();
+  p.fmt = modalFmtState.fmt;
+  p.ori = modalFmtState.ori;
+  p.color = modalFmtState.color;
+  p.arrow = modalFmtState.arrow;
+  p.picto = modalFmtState.picto;
+  saveState(); render(); closeModal();
+  notify('PANNEAU MIS À JOUR');
+}
+
+function closeModal(){ document.getElementById('modal-bg').classList.add('hidden'); }
+function closeModalBg(e){ if(e.target===e.currentTarget) closeModal(); }
+
+// ─── CLEAR ────────────────────────────────────────────────────────────────────
+function clearAll(){
+  if(!confirm('Vider tous les panneaux ?')) return;
+  panels=[]; nextId=1; saveState(); render();
+  notify('PLANCHE VIDÉE');
+}
+
+// ─── PDF EXPORT ───────────────────────────────────────────────────────────────
+async function exportPDF(){
+  if(!panels.length){ notify('AUCUN PANNEAU À EXPORTER'); return; }
+  notify('GÉNÉRATION PDF…');
+
+  const container = document.getElementById('pdf-render');
+  container.innerHTML='';
+
+  // A4 portrait: 210×297mm → at 96dpi: ~794×1123px
+  // A4 landscape: 297×210mm → ~1123×794px
+  // A3 portrait: 297×420mm → ~1123×1587px
+  // A3 landscape: 420×297mm → ~1587×1123px
+  const DIM = {
+    'A4-portrait': {w:794,h:1123,pW:210,pH:297},
+    'A4-landscape':{w:1123,h:794,pW:297,pH:210},
+    'A3-portrait': {w:1123,h:1587,pW:297,pH:420},
+    'A3-landscape':{w:1587,h:1123,pW:420,pH:297},
+  };
+
+  const pages = [];
+  panels.forEach(p=>{
+    const key = p.fmt+'-'+p.ori;
+    const dim = DIM[key] || DIM['A4-portrait'];
+    const isEco = ecoMode;
+    const bgColor = isEco ? '#ffffff' : p.color;
+    const textColor = isEco ? '#000000' : getTextColor(p.color);
+    const textSize = p.text.length>12?'80px':p.text.length>8?'100px':'130px';
+
+    let pictoHtml='';
+    if(p.picto && PICTOS[p.picto]){
+      pictoHtml=`<div class="pdf-picto" style="width:80px;height:80px;color:${textColor}">${PICTOS[p.picto].svg}</div>`;
+    }
+    let arrowHtml='';
+    if(p.arrow!==null && p.arrow!==undefined){
+      arrowHtml=`<div class="pdf-arrow" style="width:100px;height:100px;color:${textColor}">${ARROW_SVG(p.arrow)}</div>`;
+    }
+    let logoHtml='';
+    if(logoDataUrl){
+      logoHtml=`<img class="pdf-logo" src="${logoDataUrl}" alt="" style="max-height:60px;max-width:240px;opacity:.8;position:absolute;top:24px;left:50%;transform:translateX(-50%)">`;
+    }
+
+    const page = document.createElement('div');
+    page.className='pdf-page'+(isEco?' eco-page':'');
+    page.style.cssText=`width:${dim.w}px;height:${dim.h}px;background:${bgColor};display:flex;align-items:center;justify-content:center;position:relative;flex-direction:column;gap:12px;padding:40px;page-break-after:always;`;
+    page.innerHTML=`
+      ${logoHtml}
+      ${pictoHtml}
+      ${arrowHtml}
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:${textSize};color:${textColor};text-align:center;line-height:1;word-break:break-word;max-width:90%">${esc(p.text)}</div>
+      ${p.sub?`<div style="font-family:'Share Tech Mono',monospace;font-size:28px;color:${textColor};opacity:.7;text-align:center;letter-spacing:4px;margin-top:8px">${esc(p.sub)}</div>`:''}
+    `;
+    container.appendChild(page);
+    pages.push({page, dim});
+  });
+
+  // We'll export all pages as one PDF with first page dimensions
+  // html2pdf handles page breaks via CSS
+  const first = pages[0].dim;
+
+  const opt = {
+    margin: 0,
+    filename: 'signflow-export.pdf',
+    image: { type:'jpeg', quality:.98 },
+    html2canvas: { scale:1, useCORS:true, logging:false },
+    jsPDF: { unit:'mm', format:[first.pW, first.pH], orientation: panels[0].ori }
+  };
+
+  try {
+    await html2pdf().set(opt).from(container).save();
+    notify('PDF EXPORTÉ ✓');
+  } catch(err){
+    console.error(err);
+    notify('ERREUR EXPORT');
+  }
+  setTimeout(()=>{ container.innerHTML=''; }, 3000);
+}
+
+// ─── PERSIST ─────────────────────────────────────────────────────────────────
+function saveState(){
+  try{
+    localStorage.setItem('ai_signflow', JSON.stringify({panels,nextId,ecoMode,logoDataUrl}));
+  }catch(e){}
+}
+
+function loadState(){
+  try{
+    const raw=localStorage.getItem('ai_signflow');
+    if(!raw) return;
+    const s=JSON.parse(raw);
+    panels=s.panels||[];
+    nextId=s.nextId||1;
+    ecoMode=s.ecoMode||false;
+    logoDataUrl=s.logoDataUrl||null;
+    document.getElementById('eco-toggle').checked=ecoMode;
+    if(logoDataUrl){
+      document.getElementById('logo-placeholder').style.display='none';
+      const img=document.getElementById('logo-preview');
+      img.src=logoDataUrl; img.style.display='block';
+    }
+  }catch(e){}
+}
+
+// ─── NOTIFY ──────────────────────────────────────────────────────────────────
+function notify(msg){
+  const n=document.getElementById('notif');
+  n.textContent=msg; n.classList.add('show');
+  clearTimeout(n._t);
+  n._t=setTimeout(()=>n.classList.remove('show'),2400);
+}
+
+const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+// ─── BOOT ────────────────────────────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
