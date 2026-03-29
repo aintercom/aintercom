@@ -845,10 +845,420 @@ const GLOSSARY = [
     def_en:'Physical console faders controlling the contribution level (intensity) of each active executor. Allow manual crossfading between different looks or effects in real time.'},
 
 /* ══════════════════════════════════════════════════════
-   ─── BATCH 03 : VIDÉO & MAPPING (151–250) ───
-   ─── BATCH 04 : STRUCTURE & RIGGING (251–350) ───
-   ─── BATCH 05 : PROD & LOGISTIQUE (351–450) ───
-   ─── BATCH 06–10 : ÉLECTRICITÉ, SCÉNOGRAPHIE, SÉCURITÉ, BOOKING, JURIDIQUE, DIGITAL ───
+   ─── BATCH 04 : STRUCTURE & RIGGING (151–250) ───
+══════════════════════════════════════════════════════ */
+
+  /* ─── Types de structures ─── */
+  {id:151,fr:'Pont carré (box truss)',en:'Box Truss / Square Truss',cat:'STRUCTURE',
+    def_fr:'Élément de structure aluminium à section carrée (ex. 290×290 mm, 400×400 mm) formé de quatre cordes et traverses diagonales. Résistance maximale en flexion et torsion. Standard des grandes productions.',
+    def_en:'Square-section aluminium truss (e.g. 290×290 mm, 400×400 mm) formed of four chords and diagonal bracing. Maximum resistance to bending and torsion. Standard for large productions.'},
+
+  {id:152,fr:'Pont triangulaire',en:'Triangle Truss',cat:'STRUCTURE',
+    def_fr:'Élément de structure aluminium à section triangulaire (2 ou 3 cordes). Léger, compact, adapté aux petites et moyennes productions. Moins résistant à la torsion que le pont carré.',
+    def_en:'Triangular-section aluminium truss (2 or 3 chords). Lightweight and compact, suited to small and medium productions. Less torsion-resistant than box truss.'},
+
+  {id:153,fr:'Pont plat / Échelle',en:'Flat Truss / Ladder Truss',cat:'STRUCTURE',
+    def_fr:'Structure aluminium bidimensionnelle (2 cordes + traverses). Utilisée pour des travées courtes, des grilles légères ou des points d\'éclairage à faible charge. Capacité limitée en comparaison du pont 3D.',
+    def_en:'Two-dimensional aluminium structure (2 chords + rungs). Used for short spans, lightweight grids or low-load lighting positions. Limited capacity compared to 3D box or triangle truss.'},
+
+  {id:154,fr:'Portique / Goal post',en:'Goal Post / Portal Frame',cat:'STRUCTURE',
+    def_fr:'Structure en U inversé formée de deux tours verticales reliées par un pont horizontal. Sert de point d\'accroche frontal, de délimitation de scène ou de support de signalétique.',
+    def_en:'Inverted U-shaped structure formed by two vertical towers connected by a horizontal truss. Used as a front hang point, stage framing or signage support.'},
+
+  {id:155,fr:'Grill de production',en:'Production Grid / Flying Grid',cat:'STRUCTURE',
+    def_fr:'Réseau de ponts aluminium suspendus formant une grille au-dessus de la scène ou de la salle, permettant l\'accrochage homogène de la lumière, du son et des décors sur toute la superficie.',
+    def_en:'Network of suspended aluminium trusses forming a grid above the stage or venue, enabling homogeneous rigging of lighting, audio and scenery across the full footprint.'},
+
+  {id:156,fr:'Grill permanent (house grid)',en:'House Grid / Permanent Grid',cat:'STRUCTURE',
+    def_fr:'Structure de rigging fixe installée en permanence dans une salle ou un bâtiment (théâtre, aréna). Conçue par un ingénieur structure, certifiée et entretenue par l\'exploitant du lieu.',
+    def_en:'Fixed rigging structure permanently installed in a venue or building (theatre, arena). Designed by a structural engineer, certified and maintained by the venue operator.'},
+
+  {id:157,fr:'Tour de structure',en:'Structural Tower',cat:'STRUCTURE',
+    def_fr:'Assemblage vertical de tronçons de pont (carré ou triangle) formant une colonne porteuse. Supporte les moteurs de levage ou les ponts horizontaux. Stabilisée par embase et contrefiches.',
+    def_en:'Vertical assembly of truss sections (square or triangle) forming a load-bearing column. Supports chain hoists or horizontal trusses. Stabilised by base plates and bracing.'},
+
+  {id:158,fr:'Tronçon de pont',en:'Truss Section / Truss Piece',cat:'STRUCTURE',
+    def_fr:'Module unitaire de pont aluminium de longueur standardisée (0,5 m / 1 m / 2 m / 3 m / 4 m). Les tronçons s\'assemblent par goupilles, boulons ou raccords coniques (Prolyte, Global Truss, Milos).',
+    def_en:'Standard-length aluminium truss module (0.5 m / 1 m / 2 m / 3 m / 4 m). Sections are assembled using pins, bolts or conical connectors (Prolyte, Global Truss, Milos).'},
+
+  {id:159,fr:'Coude de pont (corner)',en:'Truss Corner / Angle Section',cat:'STRUCTURE',
+    def_fr:'Tronçon coudé à 45° ou 90° permettant de changer la direction d\'un pont dans le plan horizontal ou vertical. Disponible en version fixe ou en angle variable (corner blocks).',
+    def_en:'Angled section (45° or 90°) allowing a change of truss direction in the horizontal or vertical plane. Available as fixed or variable-angle (corner blocks).'},
+
+  {id:160,fr:'Té de pont',en:'T-Junction Truss',cat:'STRUCTURE',
+    def_fr:'Raccord en T permettant l\'embranchement perpendiculaire d\'un tronçon sur un pont principal. Utilisé pour la construction de grilles en étoile ou en peigne.',
+    def_en:'T-shaped connector allowing perpendicular branching of a section onto a main truss. Used for star or comb-pattern grid construction.'},
+
+  {id:161,fr:'Croix de pont',en:'X-Junction / Cross Truss',cat:'STRUCTURE',
+    def_fr:'Raccord en croix permettant quatre embranchements perpendiculaires. Point nodal d\'une grille de production carrée. Soumis aux charges les plus importantes du système.',
+    def_en:'Cross-shaped connector allowing four perpendicular branches. Nodal point of a square production grid. Subject to the highest loads in the system.'},
+
+  {id:162,fr:'Contrefiche / Étrésillon',en:'Bracing / Spreader Bar',cat:'STRUCTURE',
+    def_fr:'Élément diagonal ou horizontal reliant deux tours ou deux membrures pour reprendre les efforts horizontaux (vent, poussée) et empêcher le flambement ou le basculement de la structure.',
+    def_en:'Diagonal or horizontal element connecting two towers or chords to take horizontal forces (wind, thrust) and prevent buckling or toppling of the structure.'},
+
+  {id:163,fr:'Croix de saint-André',en:'X-Bracing / Cross-Bracing',cat:'STRUCTURE',
+    def_fr:'Système de contreventement diagonal en X sur une face de tour ou de portique, transformant la structure en ensemble rigide (triangulation). Interdit le déversement latéral.',
+    def_en:'Diagonal X-shaped bracing on a tower face or portal, converting the structure into a rigid assembly (triangulation). Prevents lateral buckling.'},
+
+  {id:164,fr:'Out-rigger',en:'Outrigger',cat:'STRUCTURE',
+    def_fr:'Bras horizontal stabilisateur fixé en bas d\'une tour pour élargir l\'emprise au sol et augmenter la résistance au basculement. Peut être fixé à une embase lestée ou ancrée.',
+    def_en:'Horizontal stabilising arm fixed at the base of a tower to widen the ground footprint and increase tip-over resistance. Can be attached to a ballasted or anchored base plate.'},
+
+  {id:165,fr:'Toit de scène',en:'Stage Roof / Covered Stage',cat:'STRUCTURE',
+    def_fr:'Structure autoportante couvrant la scène (roof deck + parois latérales), supportant le rig lumière, son et vidéo, et protégeant les artistes des intempéries en extérieur. Classifiée par capacité de charge en kN/m².',
+    def_en:'Self-supporting structure covering the stage (roof deck + side walls), carrying the lighting, audio and video rig, and protecting performers from weather outdoors. Rated by load capacity in kN/m².'},
+
+  /* ─── Bases & supports ─── */
+  {id:166,fr:'Embase à plaque',en:'Base Plate (Flat)',cat:'STRUCTURE',
+    def_fr:'Platine métallique posée au sol recevant le pied d\'une tour de structure. Répartit la charge ponctuelle sur la surface portante. Peut être lestée ou fixée au sol.',
+    def_en:'Metal plate laid on the floor receiving the foot of a structural tower. Distributes the point load across the bearing surface. Can be ballasted or bolted to the floor.'},
+
+  {id:167,fr:'Embase à fourche',en:'Fork Base / Ground Support Base',cat:'STRUCTURE',
+    def_fr:'Embase en forme de fourche à deux ou quatre pieds écartés, offrant une plus grande stabilité latérale qu\'une embase plate. Standard des tours de structure de concert.',
+    def_en:'Two- or four-legged fork-shaped base providing greater lateral stability than a flat plate. Standard for concert structural towers.'},
+
+  {id:168,fr:'Embase lourde / Kentledge',en:'Heavy Base / Kentledge Weight',cat:'STRUCTURE',
+    def_fr:'Embase lestée avec des blocs de béton, de fonte ou des plaques d\'acier formant un contrepoids au pied d\'une tour. Calcul de lestage obligatoire selon la hauteur et la charge en tête.',
+    def_en:'Base ballasted with concrete, cast iron or steel plates forming a counterweight at the tower base. Ballast calculation is mandatory based on height and head load.'},
+
+  {id:169,fr:'Lestage / Ballast',en:'Ballast / Kentledge',cat:'STRUCTURE',
+    def_fr:'Masse ajoutée à la base d\'une structure pour abaisser son centre de gravité et s\'opposer aux moments de renversement dus au vent, à l\'excentricité des charges ou aux séismes.',
+    def_en:'Mass added to the base of a structure to lower its centre of gravity and resist overturning moments caused by wind, load eccentricity or seismic activity.'},
+
+  {id:170,fr:'Contrepoids',en:'Counterweight',cat:'STRUCTURE',
+    def_fr:'Masse opposée à une charge pour équilibrer un système de levage ou de vol (cintres, décors motorisés). En rigging extérieur : leste les embases des tours de structure.',
+    def_en:'Mass opposing a load to balance a lifting or flying system (fly bars, motorised scenery). In outdoor rigging: ballasts structural tower bases.'},
+
+  {id:171,fr:'Wind-up stand',en:'Wind-Up Lighting Stand',cat:'STRUCTURE',
+    def_fr:'Pied télescopique à manivelle ou à crémaillère permettant de monter verticalement une barre ou un projecteur jusqu\'à 6–8 m. Utilisé pour les petites productions et les éclairages de remplissage.',
+    def_en:'Telescopic stand raised by a hand crank or rack mechanism, used to lift a bar or fixture to 6–8 m. Used for small productions and fill lighting positions.'},
+
+  {id:172,fr:'Mât télescopique',en:'Telescopic Mast / Push-Up Mast',cat:'STRUCTURE',
+    def_fr:'Mât aluminium à sections coulissantes élevé par vérin pneumatique ou à la main. Plus léger et rapide à déployer qu\'une tour assemblée. Limité en charge (50–200 kg selon modèle).',
+    def_en:'Aluminium mast with sliding sections raised by pneumatic ram or by hand. Lighter and faster to deploy than an assembled tower. Load-limited (50–200 kg depending on model).'},
+
+  {id:173,fr:'Jambe de force',en:'Brace / Angled Leg',cat:'STRUCTURE',
+    def_fr:'Étai diagonal reliant un point haut d\'une structure à un point bas ancré au sol, reprenant les efforts horizontaux et empêchant le basculement. Longueur et angle calculés en fonction des charges.',
+    def_en:'Diagonal prop connecting a high point on a structure to a low anchor point on the ground, taking horizontal forces and preventing toppling. Length and angle calculated according to loads.'},
+
+  {id:174,fr:'Portique scénique',en:'Stage Portal / Proscenium Tower',cat:'STRUCTURE',
+    def_fr:'Portique aluminium ou acier encadrant l\'avant de scène, définissant l\'ouverture de scène et supportant les projecteurs de face, les écrans latéraux et la signalétique de l\'événement.',
+    def_en:'Aluminium or steel portal framing the front of the stage, defining the stage opening and supporting front-of-house fixtures, side screens and event signage.'},
+
+  {id:175,fr:'Chèvre / Trépied de levage',en:'Gin Pole / Lifting Tripod',cat:'STRUCTURE',
+    def_fr:'Dispositif de levage tripode léger utilisé pour soulever des charges ponctuelles en l\'absence de moyen de levage lourd. Capacité 250 kg–2 t. Utilisé pour le chargement des moteurs en tête de tour.',
+    def_en:'Lightweight tripod lifting device used to hoist point loads where heavy lifting equipment is unavailable. Capacity 250 kg–2 t. Used for loading hoists onto tower heads.'},
+
+  /* ─── Élingues & attaches ─── */
+  {id:176,fr:'Élingue acier (câble)',en:'Wire Rope Sling',cat:'STRUCTURE',
+    def_fr:'Élingue de levage constituée d\'un câble acier toronné (ex. 6×19, 7×19), terminée par des boucles sertissant des cosses cœur. Résistante à l\'abrasion, rigide, inadaptée aux arêtes vives sans protection.',
+    def_en:'Lifting sling made from a stranded steel wire rope (e.g. 6×19, 7×19), terminated with eyes around wire rope thimbles. Abrasion-resistant and rigid; requires edge protection on sharp corners.'},
+
+  {id:177,fr:'Élingue textile ronde (roundsling)',en:'Round Sling / Textile Roundsling',cat:'STRUCTURE',
+    def_fr:'Élingue annulaire constituée de fibres synthétiques (polyester) dans une gaine protectrice. Douce pour les surfaces fragiles, légère, codifiée par couleur selon la CMU. Sensible aux UV et produits chimiques.',
+    def_en:'Endless sling made of synthetic fibres (polyester) inside a protective sleeve. Gentle on delicate surfaces, lightweight, colour-coded by WLL. Sensitive to UV and chemical exposure.'},
+
+  {id:178,fr:'Élingue chaîne',en:'Chain Sling',cat:'STRUCTURE',
+    def_fr:'Élingue de levage en chaîne grade 8 ou 10, terminée par des crochets ou manilles. Résistante aux températures extrêmes et aux abrasions. Standard pour le rigging permanent et les levages répétitifs.',
+    def_en:'Lifting sling in grade 8 or grade 10 chain, terminated with hooks or shackles. Resistant to extreme temperatures and abrasion. Standard for permanent rigging and repetitive lifting.'},
+
+  {id:179,fr:'Élingue plate (sangles)',en:'Webbing Sling / Flat Sling',cat:'STRUCTURE',
+    def_fr:'Élingue en sangle polyester plate de largeur variable (25–300 mm). Très douce pour les charges fragiles, légère. CMU identifiée par couleur. Protéger impérativement contre les arêtes vives.',
+    def_en:'Flat polyester webbing sling of variable width (25–300 mm). Very gentle on delicate loads, lightweight. WLL identified by colour. Must be protected against sharp edges.'},
+
+  {id:180,fr:'Facteur d\'angle (élingue)',en:'Sling Angle Factor',cat:'STRUCTURE',
+    def_fr:'Réduction de la CMU d\'une élingue due à son angle par rapport à la verticale. À 30° d\'inclinaison : facteur 0,50 (CMU divisée par 2). À 45° : 0,71. À 60° : 0,87. Critique pour les bridas.',
+    def_en:'Reduction in WLL of a sling due to its angle from vertical. At 30° inclination: factor 0.50 (WLL halved). At 45°: 0.71. At 60°: 0.87. Critical for bridle calculations.'},
+
+  {id:181,fr:'Règle des 60°',en:'60° Rigging Rule',cat:'STRUCTURE',
+    def_fr:'Recommandation pratique stipulant que les élingues d\'une bride ne doivent jamais former un angle inférieur à 60° entre elles (soit 30° par rapport à la verticale) pour éviter une surcharge critique.',
+    def_en:'Practical recommendation stating that bridle slings should never form an angle less than 60° between them (i.e. 30° from vertical) to avoid critical overloading of the slings.'},
+
+  {id:182,fr:'Manille à vis (à étrier)',en:'Screw Pin Shackle / Bow Shackle',cat:'STRUCTURE',
+    def_fr:'Manille de levage à goupille vissée, disponible en forme droite (D-shackle) ou en arceau (bow shackle). La pin doit être moussée au fil de sécurité pour les suspensions au-dessus du public.',
+    def_en:'Screw pin lifting shackle, available in straight (D-shackle) or bow (omega) form. Pin must be moused with safety wire for overhead public rigging applications.'},
+
+  {id:183,fr:'Manille de sécurité (à boulon)',en:'Safety Shackle / Bolt-Type Shackle',cat:'STRUCTURE',
+    def_fr:'Manille avec goupille à boulon, écrou et goupille fendues de sécurité. Préférable aux manilles à vis dans les applications critiques car le boulon ne peut pas se dévisser sous vibrations.',
+    def_en:'Shackle with bolt pin, nut and cotter pin. Preferable to screw-pin shackles in critical applications as the bolt cannot unscrew under vibration.'},
+
+  {id:184,fr:'Griffe de pont / Demi-coupleur',en:'Half Coupler / Truss Clamp',cat:'STRUCTURE',
+    def_fr:'Pince de serrage en aluminium ou acier permettant d\'accrocher un accessoire (projecteur, enceinte, câble) sur un pont ou une barre circulaire Ø 50 mm. CMU standard : 100–150 kg.',
+    def_en:'Aluminium or steel clamp for attaching an accessory (fixture, speaker, cable) to a truss or circular bar Ø 50 mm. Standard WLL: 100–150 kg.'},
+
+  {id:185,fr:'Coupleur pivotant (swivel)',en:'Swivel Coupler',cat:'STRUCTURE',
+    def_fr:'Coupleur permettant une rotation entre deux tubes perpendiculaires ou parallèles, utilisé pour les assemblages d\'échafaudage et de structure légère nécessitant un ajustement angulaire libre.',
+    def_en:'Coupler allowing rotation between two perpendicular or parallel tubes, used for scaffold and lightweight structure assemblies requiring free angular adjustment.'},
+
+  {id:186,fr:'Cosse cœur',en:'Wire Rope Thimble',cat:'STRUCTURE',
+    def_fr:'Pièce métallique en forme de goutte profilée insérée dans la boucle d\'extrémité d\'un câble acier pour protéger les fils contre l\'écrasement par la manille et préserver la géométrie de la boucle.',
+    def_en:'Drop-shaped metal fitting inserted into the eye of a wire rope to protect the strands from crushing by the shackle pin and maintain the eye geometry.'},
+
+  {id:187,fr:'Serre-câble / Bulldog grip',en:'Wire Rope Clip / Bulldog Grip',cat:'STRUCTURE',
+    def_fr:'Dispositif de fixation d\'extrémité de câble acier par pression mécanique. Règle d\'utilisation : "Never saddle a dead horse" (la selle sur le brin porteur, en U sur le brin mort). Minimum 3 serre-câbles par boucle.',
+    def_en:'Wire rope end-fitting device secured by mechanical clamping. Usage rule: "Never saddle a dead horse" (saddle on live end, U-bolt on dead end). Minimum 3 clips per eye.'},
+
+  {id:188,fr:'Ridoir / Tendeur',en:'Turnbuckle / Rigging Screw',cat:'STRUCTURE',
+    def_fr:'Dispositif fileté permettant de régler la tension d\'un câble ou d\'une élingue. Corps à œillets, crochets ou fourches avec filetages opposés (gauche/droite). Sécuriser avec contre-écrou ou fil de sécurité.',
+    def_en:'Threaded device for adjusting the tension of a cable or sling. Body with eye, hook or fork ends and opposing threads (left/right hand). Must be secured with lock-nut or safety wire.'},
+
+  {id:189,fr:'Câble de sécurité (lifeline)',en:'Safety Cable / Secondary Safety Line',cat:'STRUCTURE',
+    def_fr:'Câble acier ou sangle secondaire installé en redondance sur tout équipement suspendu au-dessus du public (projecteur, enceinte, écran). Obligatoire selon EN 60598-2-17 et codes de sécurité spectacle.',
+    def_en:'Secondary steel cable or sling installed redundantly on every item suspended above the public (fixture, speaker, screen). Mandatory per EN 60598-2-17 and entertainment safety codes.'},
+
+  {id:190,fr:'Double assurance (secondary)',en:'Secondary Attachment / Double Safety',cat:'STRUCTURE',
+    def_fr:'Principe de sécurité imposant qu\'aucun élément suspendu ne dépende d\'un unique point de fixation. Chaque charge au-dessus du public doit être maintenue par au moins deux attaches indépendantes.',
+    def_en:'Safety principle requiring that no suspended element relies on a single fixing point. Every overhead load above the public must be held by at least two independent attachments.'},
+
+  /* ─── Motorisation & contrôle ─── */
+  {id:191,fr:'Contrôleur de palans',en:'Hoist Controller / Motor Controller',cat:'STRUCTURE',
+    def_fr:'Unité électronique pilotant un ou plusieurs palans électriques : gestion de la vitesse, de la synchronisation, de la détection de surcharge et de l\'arrêt d\'urgence. Ex : Liftket Safemaster, CM Lodestar controller.',
+    def_en:'Electronic unit controlling one or more electric chain hoists: speed management, synchronisation, overload detection and emergency stop. Examples: Liftket Safemaster, CM Lodestar controller.'},
+
+  {id:192,fr:'Palan à chaîne manuelle',en:'Manual Chain Hoist / Chain Block',cat:'STRUCTURE',
+    def_fr:'Appareil de levage mécanique actionné manuellement par chaîne de tirage. Sans électricité, silencieux. Utilisé pour des ajustements fins, des levages de secours ou des zones sans alimentation.',
+    def_en:'Mechanical lifting device operated manually by a hand chain. No power required, silent. Used for fine adjustments, emergency hoisting or areas without power supply.'},
+
+  {id:193,fr:'Palan à câble (wire rope hoist)',en:'Wire Rope Hoist',cat:'STRUCTURE',
+    def_fr:'Palan électrique utilisant un câble acier enroulé sur un tambour plutôt qu\'une chaîne. Course illimitée, vitesse variable, silencieux. Utilisé en automation de vol et en fly systems de théâtre.',
+    def_en:'Electric hoist using a wire rope wound on a drum rather than a chain. Unlimited travel, variable speed, quiet. Used in fly automation systems and theatre fly systems.'},
+
+  {id:194,fr:'Distribution moteurs',en:'Motor Distribution / Hoist Power Distribution',cat:'STRUCTURE',
+    def_fr:'Coffret de distribution électrique dédié aux palans, avec disjoncteurs différentiels par circuit, prises industrielles (CEE 32 A ou 63 A), câblage torsadé pour limiter les parasites électromagnétiques.',
+    def_en:'Electrical distribution board dedicated to hoists, with RCD breakers per circuit, industrial sockets (CEE 32 A or 63 A), and twisted cable runs to limit electromagnetic interference.'},
+
+  {id:195,fr:'Levage synchronisé',en:'Synchronised Lifting / Tandem Hoisting',cat:'STRUCTURE',
+    def_fr:'Technique pilotant plusieurs palans simultanément à la même vitesse via un contrôleur centralisé, pour soulever ou descendre un élément de pont ou de décor sans créer de contraintes de torsion.',
+    def_en:'Technique driving multiple hoists simultaneously at the same speed via a centralised controller, for lifting or lowering a truss or scenery element without inducing torsional stress.'},
+
+  {id:196,fr:'Système anti-chute (overload)',en:'Overload Protection / Anti-Drop System',cat:'STRUCTURE',
+    def_fr:'Dispositif intégré aux palans électriques coupant l\'alimentation en cas de dépassement de la charge nominale (surcharge) ou lors d\'un effort anormal (choc, coincement). Obligatoire dans les systèmes de levage spectacle.',
+    def_en:'Device integrated in electric hoists cutting power when the rated load is exceeded (overload) or when an abnormal force is detected (shock, jamming). Mandatory in entertainment lifting systems.'},
+
+  {id:197,fr:'Limiteur de charge (load cell)',en:'Load Cell / Load Monitor',cat:'STRUCTURE',
+    def_fr:'Capteur de force électronique installé entre le palan et la structure, mesurant en temps réel la charge suspendue. Alerte ou arrêt automatique si la CMU est approchée ou dépassée.',
+    def_en:'Electronic force sensor installed between the hoist and structure, measuring the suspended load in real time. Triggers alert or automatic stop when WLL is approached or exceeded.'},
+
+  {id:198,fr:'Encodeur / Compte-tours',en:'Encoder / Position Counter',cat:'STRUCTURE',
+    def_fr:'Capteur rotatif mesurant la position et la vitesse d\'un palan, permettant le contrôle de position précis, la synchronisation multi-moteurs et le retour de position dans les systèmes d\'automation de vol.',
+    def_en:'Rotary sensor measuring a hoist\'s position and speed, enabling precise position control, multi-motor synchronisation and position feedback in fly automation systems.'},
+
+  {id:199,fr:'Automation de vol',en:'Fly Automation',cat:'STRUCTURE',
+    def_fr:'Système de pilotage motorisé permettant des mouvements de décors, de ponts ou d\'artistes (vols) programmés et synchronisés sur le timecode du show. Exige ingénierie spécialisée et certification.',
+    def_en:'Motorised control system enabling programmed and timecode-synchronised movements of scenery, trusses or performers (flying). Requires specialised engineering and certification.'},
+
+  {id:200,fr:'Pré-rigging',en:'Pre-Rigging / Pre-Load',cat:'STRUCTURE',
+    def_fr:'Phase de préparation du rig en amont du montage sur site : pré-assemblage des ponts, câblage partiel des projecteurs, confection des briides et des élingues, vérification des palans au sol.',
+    def_en:'Rig preparation phase prior to on-site assembly: pre-building trusses, partial fixture cabling, fabricating bridles and slings, and testing hoists at ground level.'},
+
+  /* ─── Calcul de structure ─── */
+  {id:201,fr:'Descente de charge',en:'Load Path / Load Takedown',cat:'STRUCTURE',
+    def_fr:'Analyse et documentation du cheminement des charges depuis les équipements suspendus jusqu\'aux points d\'accroche dans la charpente. Détermine la réaction en chaque point d\'appui de la structure.',
+    def_en:'Analysis and documentation of load paths from suspended equipment through to the attachment points in the building structure. Determines the reaction force at each structural support point.'},
+
+  {id:202,fr:'Charge ponctuelle',en:'Point Load',cat:'STRUCTURE',
+    def_fr:'Force concentrée appliquée en un seul point d\'une structure (ex. : palan, projecteur lourd). S\'oppose à la charge répartie. Génère un moment fléchissant maximal au centre du pont.',
+    def_en:'Concentrated force applied at a single point on a structure (e.g. hoist, heavy fixture). Contrasts with distributed load. Generates maximum bending moment at the truss mid-span.'},
+
+  {id:203,fr:'Charge répartie (UDL)',en:'Uniformly Distributed Load (UDL)',cat:'STRUCTURE',
+    def_fr:'Charge distribuée uniformément sur toute la longueur d\'un pont (câblage, petits projecteurs). Exprimée en kg/m ou kN/m. Génère un moment fléchissant inférieur à une charge ponctuelle équivalente.',
+    def_en:'Load distributed uniformly along the full length of a truss (cabling, small fixtures). Expressed in kg/m or kN/m. Generates a lower bending moment than an equivalent point load.'},
+
+  {id:204,fr:'Charge statique',en:'Static Load',cat:'STRUCTURE',
+    def_fr:'Charge appliquée de façon permanente et sans mouvement (poids propre de la structure + équipements suspendus à l\'arrêt). S\'oppose à la charge dynamique introduite par les mouvements et les vibrations.',
+    def_en:'Load applied permanently and without movement (self-weight of structure + stationary suspended equipment). Contrasts with dynamic load introduced by motion and vibration.'},
+
+  {id:205,fr:'Charge dynamique',en:'Dynamic Load',cat:'STRUCTURE',
+    def_fr:'Charge variable dans le temps due aux mouvements (palans en marche, artistes en vol, vibrations musicales). Généralement pondérée par un coefficient dynamique (dynamic factor) de 1,2 à 2,0 selon la norme.',
+    def_en:'Time-varying load due to motion (hoists running, flying performers, musical vibrations). Typically multiplied by a dynamic factor of 1.2 to 2.0 depending on the applicable standard.'},
+
+  {id:206,fr:'Coefficient de sécurité (SF)',en:'Safety Factor (SF)',cat:'STRUCTURE',
+    def_fr:'Rapport entre la charge de rupture d\'un composant et sa CMU (SF = MBL / WLL). En rigging spectacle : SF minimum de 7:1 pour les élingues et palans au-dessus du public. Peut atteindre 10:1 pour les vols d\'artiste.',
+    def_en:'Ratio of a component\'s breaking load to its WLL (SF = MBL / WLL). In entertainment rigging: minimum SF of 7:1 for slings and hoists above the public. Up to 10:1 for performer flying.'},
+
+  {id:207,fr:'Charge de rupture (MBL)',en:'Minimum Breaking Load (MBL)',cat:'STRUCTURE',
+    def_fr:'Force minimale garantie par le fabricant à laquelle un composant se rompt lors d\'un essai statique. Distincte de la CMU (WLL) : MBL = WLL × SF. Toujours nettement supérieure à la charge de travail.',
+    def_en:'Minimum force guaranteed by the manufacturer at which a component fails in a static test. Distinct from WLL: MBL = WLL × SF. Always significantly higher than the working load.'},
+
+  {id:208,fr:'Taux d\'utilisation',en:'Utilisation Rate',cat:'STRUCTURE',
+    def_fr:'Rapport entre la charge réelle appliquée et la CMU du composant, exprimé en pourcentage. Un taux de 80 % est généralement considéré comme la limite opérationnelle prudente pour les équipements de rigging.',
+    def_en:'Ratio of the actual applied load to the component\'s WLL, expressed as a percentage. A utilisation rate of 80% is generally considered the prudent operational limit for rigging equipment.'},
+
+  {id:209,fr:'Déflexion / Flèche',en:'Deflection / Sag',cat:'STRUCTURE',
+    def_fr:'Déformation verticale d\'un pont sous charge, mesurée en son centre. Critère de rigidité (flèche admissible L/400) distinct du critère de résistance (contrainte admissible). Affecte l\'esthétique et la géométrie du rig.',
+    def_en:'Vertical deformation of a truss under load, measured at its centre. Stiffness criterion (allowable deflection L/400) distinct from strength criterion (allowable stress). Affects rig aesthetics and geometry.'},
+
+  {id:210,fr:'Moment fléchissant',en:'Bending Moment',cat:'STRUCTURE',
+    def_fr:'Sollicitation interne tendant à courber un élément de structure sous l\'effet d\'une charge transversale. Exprimé en N·m ou kN·m. Le moment maximal d\'une travée simplement appuyée avec charge centrale = F × L / 4.',
+    def_en:'Internal force tending to bend a structural member under a transverse load. Expressed in N·m or kN·m. Maximum moment for a simply supported span with central load = F × L / 4.'},
+
+  {id:211,fr:'Cisaillement',en:'Shear Force',cat:'STRUCTURE',
+    def_fr:'Effort interne tendant à faire glisser deux sections adjacentes d\'un élément l\'une par rapport à l\'autre. Maximum aux appuis d\'une travée. Dimensionnant pour les assemblages boulonnés et les nœuds de pont.',
+    def_en:'Internal force tending to slide two adjacent sections of a member relative to each other. Maximum at the supports of a span. Governing factor for bolted connections and truss nodes.'},
+
+  {id:212,fr:'Portée libre (span)',en:'Clear Span',cat:'STRUCTURE',
+    def_fr:'Distance libre entre deux points d\'appui d\'un pont, sans support intermédiaire. La portée est le paramètre le plus influent sur la déflexion et le moment fléchissant (proportionnel à L³ pour la flèche).',
+    def_en:'Clear distance between two support points of a truss, without intermediate support. Span is the most influential parameter for deflection and bending moment (proportional to L³ for deflection).'},
+
+  {id:213,fr:'Flèche admissible L/400',en:'Allowable Deflection L/400',cat:'STRUCTURE',
+    def_fr:'Critère de déformabilité courant pour les ponts de spectacle : la flèche maximale ne doit pas dépasser la portée divisée par 400 (ex. : 10 m de portée → flèche max. 25 mm).',
+    def_en:'Common serviceability criterion for entertainment trusses: maximum deflection must not exceed span divided by 400 (e.g., 10 m span → max deflection 25 mm).'},
+
+  {id:214,fr:'Analyse par éléments finis (FEM)',en:'Finite Element Analysis (FEA)',cat:'STRUCTURE',
+    def_fr:'Méthode numérique divisant une structure complexe en milliers d\'éléments discrets pour calculer les contraintes, les déplacements et les modes propres. Utilisée pour les toits de scène et les rigs non standards.',
+    def_en:'Numerical method dividing a complex structure into thousands of discrete elements to calculate stresses, displacements and natural frequencies. Used for stage roofs and non-standard rigs.'},
+
+  {id:215,fr:'Rapport de calcul structure',en:'Structural Calculation Report',cat:'STRUCTURE',
+    def_fr:'Document technique établi par un ingénieur structure justifiant la tenue mécanique d\'un rig ou d\'un toit de scène. Requis par les préfectures pour les ERP et les jauges > 5 000 personnes.',
+    def_en:'Technical document produced by a structural engineer justifying the mechanical integrity of a rig or stage roof. Required by authorities for public venues and capacities above 5 000 persons.'},
+
+  /* ─── Matériaux & normes ─── */
+  {id:216,fr:'Alliage aluminium 6082 T6',en:'6082 T6 Aluminium Alloy',cat:'STRUCTURE',
+    def_fr:'Alliage aluminium-silicium-manganèse traité thermiquement (T6 = trempe + vieillissement artificiel). Résistance à la traction : 310 MPa. Standard de l\'industrie du pont de spectacle pour le rapport résistance/poids.',
+    def_en:'Aluminium-silicon-manganese alloy heat-treated (T6 = quench + artificial ageing). Tensile strength: 310 MPa. Entertainment truss industry standard for its strength-to-weight ratio.'},
+
+  {id:217,fr:'Chaîne grade 8 / Grade 10',en:'Grade 8 / Grade 10 Chain',cat:'STRUCTURE',
+    def_fr:'Grade 8 (nuance 8/80) : chaîne acier haute résistance, standard élingues spectacle. Grade 10 (10/100) : résistance supérieure de 25 %, permet des élingues plus légères à CMU équivalente.',
+    def_en:'Grade 8 (designation 8/80): high-strength steel chain, standard for entertainment slings. Grade 10 (10/100): 25% higher strength, allowing lighter slings at equivalent WLL.'},
+
+  {id:218,fr:'Câble acier 7×19',en:'7×19 Wire Rope',cat:'STRUCTURE',
+    def_fr:'Câble constitué de 7 torons de 19 fils chacun (133 fils au total). Plus souple que le 7×7, idéal pour le rigging nécessitant des courbures et des terminaisons fréquentes. Standard pour les briides de pont.',
+    def_en:'Wire rope consisting of 7 strands of 19 wires each (133 wires total). More flexible than 7×7, ideal for rigging requiring frequent bending and termination. Standard for truss bridles.'},
+
+  {id:219,fr:'Manchon de sertissage (swage)',en:'Swage Fitting / Ferrule',cat:'STRUCTURE',
+    def_fr:'Terminaison de câble acier obtenue par déformation plastique (sertissage hydraulique) d\'un manchon aluminium ou acier autour du câble. Plus fiable que les serre-câbles. Résistance : 100 % de la MBL du câble.',
+    def_en:'Wire rope termination achieved by plastic deformation (hydraulic swaging) of an aluminium or steel sleeve around the wire rope. More reliable than rope clips. Strength: 100% of rope MBL.'},
+
+  {id:220,fr:'Marquage CE',en:'CE Marking',cat:'STRUCTURE',
+    def_fr:'Marquage obligatoire attestant la conformité d\'un équipement de levage aux directives européennes (Directive Machines 2006/42/CE). Accompagné de la déclaration de conformité et de la notice d\'utilisation.',
+    def_en:'Mandatory marking attesting a lifting device\'s compliance with European directives (Machinery Directive 2006/42/EC). Accompanied by declaration of conformity and instruction manual.'},
+
+  {id:221,fr:'EN 17206 (structures spectacle)',en:'EN 17206 — Entertainment Structures',cat:'STRUCTURE',
+    def_fr:'Norme européenne spécifiant les exigences de conception, de fabrication et d\'utilisation des structures temporaires pour spectacle (ponts, tours, toits de scène). Remplace les normes nationales fragmentées.',
+    def_en:'European standard specifying design, manufacture and use requirements for temporary entertainment structures (trusses, towers, stage roofs). Replaces fragmented national standards.'},
+
+  {id:222,fr:'EN 14043 / EN 14044 (ponts)',en:'EN 14043 / EN 14044 — Trusses',cat:'STRUCTURE',
+    def_fr:'EN 14043 : exigences pour ponts et structures de spectacle à usage temporaire. EN 14044 : exigences pour systèmes de levage à usage temporaire dans les arts du spectacle. Base des fiches techniques fabricants.',
+    def_en:'EN 14043: requirements for trusses and structures for temporary use in the entertainment industry. EN 14044: requirements for lifting systems for temporary use in the entertainment industry.'},
+
+  {id:223,fr:'Essai de charge (épreuve)',en:'Load Test / Proof Load',cat:'STRUCTURE',
+    def_fr:'Test consistant à appliquer une charge supérieure à la CMU (généralement 1,25 × CMU pour épreuve statique) sur un équipement pour vérifier son intégrité structurale sans déformation permanente.',
+    def_en:'Test applying a load exceeding the WLL (typically 1.25 × WLL for static proof load) to equipment to verify structural integrity without permanent deformation.'},
+
+  {id:224,fr:'Contrôle non destructif (CND)',en:'Non-Destructive Testing (NDT)',cat:'STRUCTURE',
+    def_fr:'Ensemble de méthodes (ressuage, magnétoscopie, ultrasons, radiographie) permettant de détecter des défauts internes ou de surface sans endommager le composant. Obligatoire pour les éléments critiques de rigging.',
+    def_en:'Set of methods (dye penetrant, magnetic particle, ultrasound, radiography) for detecting internal or surface defects without damaging the component. Mandatory for critical rigging components.'},
+
+  {id:225,fr:'Contrôle visuel périodique',en:'Periodic Visual Inspection',cat:'STRUCTURE',
+    def_fr:'Examen visuel systématique de chaque composant de rigging avant utilisation : déformation, corrosion, fissure, usure excessive, marquage CMU illisible. Premier niveau de contrôle, effectué par l\'opérateur.',
+    def_en:'Systematic visual examination of each rigging component before use: deformation, corrosion, cracks, excessive wear, illegible WLL marking. First level of inspection, performed by the operator.'},
+
+  {id:226,fr:'Carnet de maintenance',en:'Maintenance Record / Inspection Log',cat:'STRUCTURE',
+    def_fr:'Document retraçant l\'historique complet d\'un équipement de levage : dates d\'utilisation, inspections, réparations, incidents. Obligatoire pour les palans électriques et les élingues certifiées.',
+    def_en:'Document tracking the complete history of lifting equipment: usage dates, inspections, repairs, incidents. Mandatory for electric chain hoists and certified slings.'},
+
+  {id:227,fr:'Réforme / Mise au rebut',en:'Discard / Decommission',cat:'STRUCTURE',
+    def_fr:'Décision de retirer définitivement un composant du service après détection d\'un défaut, dépassement de la durée de vie ou impossibilité de vérification. La pièce doit être détruite ou marquée inutilisable.',
+    def_en:'Decision to permanently remove a component from service after detecting a defect, exceeding service life or inability to verify. The item must be destroyed or marked unserviceable.'},
+
+  {id:228,fr:'Traçabilité',en:'Traceability',cat:'STRUCTURE',
+    def_fr:'Capacité à retrouver l\'historique complet d\'un composant : fabricant, numéro de lot, date de fabrication, certifications, contrôles effectués. Exigée par la Directive Machines et les normes EN pour les élingues et palans.',
+    def_en:'Ability to retrieve a component\'s complete history: manufacturer, batch number, manufacture date, certifications, completed inspections. Required by the Machinery Directive and EN standards for slings and hoists.'},
+
+  /* ─── Sécurité & habilitations ─── */
+  {id:229,fr:'Plan de rigging',en:'Rigging Plot / Rigging Plan',cat:'STRUCTURE',
+    def_fr:'Dessin technique vue de dessus indiquant la position de chaque point d\'accroche, les charges prévues, les types d\'élingues, les numéros de palans et les capacités requises. Document de travail central du rigger en chef.',
+    def_en:'Technical top-view drawing showing the position of each rigging point, planned loads, sling types, hoist numbers and required capacities. Central working document for the head rigger.'},
+
+  {id:230,fr:'Rigger en chef',en:'Head Rigger / Chief Rigger',cat:'STRUCTURE',
+    def_fr:'Professionnel responsable de la conception et de la supervision de l\'ensemble du rig. Vérifie les calculs, valide les points d\'accroche avec le gestionnaire du lieu, supervise les équipes de rigging.',
+    def_en:'Professional responsible for designing and supervising the entire rig. Verifies calculations, validates rigging points with the venue manager, and supervises rigging crews.'},
+
+  {id:231,fr:'ETCP (certification)',en:'ETCP — Entertainment Technician Certification Program',cat:'STRUCTURE',
+    def_fr:'Programme nord-américain de certification pour les riggers et électriciens spectacle (ETCP Certified Rigger – Theatre/Arena). Évalue les compétences en rigging, calcul de charge et sécurité. Référence mondiale.',
+    def_en:'North American certification programme for entertainment riggers and electricians (ETCP Certified Rigger – Theatre/Arena). Assesses competencies in rigging, load calculation and safety. Global reference standard.'},
+
+  {id:232,fr:'Formation travail en hauteur',en:'Working at Height Training',cat:'STRUCTURE',
+    def_fr:'Formation obligatoire (UE : directive 2001/45/CE) pour tout travailleur intervenant à plus de 1 m de hauteur avec risque de chute. Couvre l\'utilisation des EPI, des PEMP et des techniques d\'arrêt de chute.',
+    def_en:'Mandatory training (EU: Directive 2001/45/EC) for any worker operating at more than 1 m height with fall risk. Covers use of PPE, MEWPs and fall arrest techniques.'},
+
+  {id:233,fr:'Harnais anti-chute',en:'Fall Arrest Harness',cat:'STRUCTURE',
+    def_fr:'EPI de classe III (EN 361) maintenant le corps en position verticale lors d\'un arrêt de chute. Obligatoire dès que la chute est possible > 3 m. Doit être associé à un point d\'ancrage certifié (12 kN).',
+    def_en:'Class III PPE (EN 361) maintaining the body in an upright position during a fall arrest. Mandatory when fall risk exists above 3 m. Must be used with a certified anchor point (12 kN).'},
+
+  {id:234,fr:'Nacelle élévatrice / PEMP',en:'MEWP — Mobile Elevating Work Platform',cat:'STRUCTURE',
+    def_fr:'Engin de levage de personnel (bras articulé, bras télescopique, ciseaux) permettant l\'intervention en hauteur sans échafaudage. Nécessite le CACES R486 (anciennement R386) pour les opérateurs.',
+    def_en:'Personnel lifting machine (articulated boom, telescopic boom, scissors) enabling work at height without scaffolding. Requires CACES R486 (formerly R386) certification for operators.'},
+
+  {id:235,fr:'Zone d\'exclusion',en:'Exclusion Zone',cat:'STRUCTURE',
+    def_fr:'Périmètre de sécurité délimité sous et autour d\'une zone de levage, interdisant la présence de personnes non autorisées pendant les opérations de montage, démontage ou de levage de charges.',
+    def_en:'Safety perimeter marked below and around a rigging area, prohibiting the presence of unauthorised persons during assembly, disassembly or load-lifting operations.'},
+
+  {id:236,fr:'Signalétique de charge',en:'Load Capacity Signage',cat:'STRUCTURE',
+    def_fr:'Affichage obligatoire de la CMU sur tout point d\'accroche, pont ou structure d\'un lieu fixe. Permet au rigger de vérifier immédiatement si la charge prévue est compatible avec la structure existante.',
+    def_en:'Mandatory display of WLL on every rigging point, truss and structure in a permanent venue. Allows the rigger to immediately verify whether the planned load is compatible with the existing structure.'},
+
+  {id:237,fr:'Ancrage (point d\'ancrage)',en:'Anchor Point',cat:'STRUCTURE',
+    def_fr:'Point fixe certifié résistant à la force d\'arrêt de chute (min. 12 kN statique selon EN 795). Peut être un anneau noyé dans le béton, une barre de structure ou un kit d\'ancrage mobile.',
+    def_en:'Certified fixed point withstanding fall arrest force (min. 12 kN static per EN 795). Can be a cast-in ring, structural member or mobile anchor kit.'},
+
+  {id:238,fr:'Permis de travail en hauteur',en:'Working at Height Permit',cat:'STRUCTURE',
+    def_fr:'Document administratif autorisant une intervention spécifique en hauteur sur un site, définissant les mesures de sécurité, les EPI requis, la durée de l\'intervention et les responsables désignés.',
+    def_en:'Administrative document authorising a specific working-at-height task on a site, defining safety measures, required PPE, intervention duration and named responsible persons.'},
+
+  {id:239,fr:'Levage (opération de)',en:'Lifting Operation',cat:'STRUCTURE',
+    def_fr:'Toute opération déplaçant une charge à l\'aide d\'un équipement de levage. Doit faire l\'objet d\'un plan de levage (pour les levages > 1 t ou complexes) définissant les moyens, les procédures et les mesures de sécurité.',
+    def_en:'Any operation moving a load using lifting equipment. Must be subject to a lifting plan (for lifts > 1 t or complex lifts) defining the means, procedures and safety measures.'},
+
+  {id:240,fr:'Plan de levage',en:'Lifting Plan',cat:'STRUCTURE',
+    def_fr:'Document préparatoire à une opération de levage complexe : description de la charge, choix des élingues et palans, vérification des capacités, étapes de levage, zones de danger, responsable désigné.',
+    def_en:'Preparatory document for a complex lifting operation: load description, sling and hoist selection, capacity verification, lifting sequence, danger zones and named responsible person.'},
+
+  {id:241,fr:'Moment de renversement',en:'Overturning Moment',cat:'STRUCTURE',
+    def_fr:'Moment tendant à basculer une structure vers l\'avant sous l\'effet du vent ou d\'une charge excentrée. Le moment stabilisant (poids propre × bras de levier) doit impérativement être supérieur, avec un coefficient de sécurité ≥ 1,5.',
+    def_en:'Moment tending to topple a structure forward under wind or eccentric load. The stabilising moment (self-weight × lever arm) must exceed it by a safety coefficient ≥ 1.5.'},
+
+  {id:242,fr:'Pression dynamique du vent',en:'Dynamic Wind Pressure',cat:'STRUCTURE',
+    def_fr:'Pression exercée par le vent sur une surface, calculée selon q = ½ × ρ × V². Les toits de scène extérieurs sont dimensionnés pour des vitesses de vent ≥ 160 km/h selon la zone géographique et la norme EN 13782.',
+    def_en:'Pressure exerted by wind on a surface, calculated using q = ½ × ρ × V². Outdoor stage roofs are designed for wind speeds ≥ 160 km/h depending on geographic zone and EN 13782 standard.'},
+
+  {id:243,fr:'EN 13782 (structures temporaires)',en:'EN 13782 — Temporary Structures',cat:'STRUCTURE',
+    def_fr:'Norme européenne couvrant les structures temporaires (chapiteaux, tentes, tribunes). Définit les exigences de calcul de charge, de stabilité au vent, de résistance à la neige et de procédures d\'inspection.',
+    def_en:'European standard covering temporary structures (marquees, tents, stands). Defines requirements for load calculation, wind stability, snow resistance and inspection procedures.'},
+
+  {id:244,fr:'Tribunes / Gradins',en:'Grandstand / Bleachers',cat:'STRUCTURE',
+    def_fr:'Structures temporaires accueillant le public en position assise ou debout, soumises à des charges dynamiques importantes (mouvements de foule). Réglementées par EN 13200 et la réglementation ERP française.',
+    def_en:'Temporary structures accommodating standing or seated audiences, subject to significant dynamic loads (crowd movement). Regulated by EN 13200 and French ERP regulations.'},
+
+  {id:245,fr:'Palonnier de levage',en:'Lifting Beam / Spreader Bar',cat:'STRUCTURE',
+    def_fr:'Dispositif horizontal rigide distribué sous une charge à plusieurs points d\'élingage, permettant de soulever des charges longues ou fragiles sans les soumettre aux efforts latéraux d\'une bride classique.',
+    def_en:'Rigid horizontal device distributing lifting force to multiple attachment points under a load, allowing long or delicate loads to be lifted without the lateral forces of a conventional bridle.'},
+
+  {id:246,fr:'Portée admissible (truss)',en:'Safe Working Span',cat:'STRUCTURE',
+    def_fr:'Portée maximale libre qu\'un tronçon de pont peut franchir pour une charge donnée, sans dépasser la flèche admissible ni la contrainte limite du matériau. Fournie par les tableaux de charge fabricant.',
+    def_en:'Maximum clear span a truss section can bridge for a given load without exceeding allowable deflection or material stress limit. Provided in manufacturer load tables.'},
+
+  {id:247,fr:'Tableau de charges fabricant',en:'Load Capacity Table',cat:'STRUCTURE',
+    def_fr:'Document technique établi par le fabricant de ponts indiquant pour chaque modèle les charges maximales admissibles selon la portée, la configuration d\'appui et le type de charge (ponctuelle ou répartie).',
+    def_en:'Technical document from the truss manufacturer stating maximum allowable loads for each model based on span, support configuration and load type (point or distributed).'},
+
+  {id:248,fr:'Travée (bay)',en:'Bay / Panel',cat:'STRUCTURE',
+    def_fr:'Unité répétitive d\'une structure définie entre deux nœuds consécutifs ou deux supports. La travée est l\'unité de calcul élémentaire des structures en treillis.',
+    def_en:'Repeating unit of a structure defined between two consecutive nodes or two supports. The bay is the fundamental calculation unit for lattice structures.'},
+
+  {id:249,fr:'Longeron (boom)',en:'Boom / Longitudinal Member',cat:'STRUCTURE',
+    def_fr:'Barre horizontale ou verticale constituant l\'ossature principale d\'une structure de pont ou d\'échafaudage. En éclairage scénique, "boom" désigne une barre verticale portant des projecteurs en coulisse.',
+    def_en:'Horizontal or vertical bar forming the main skeleton of a truss or scaffold structure. In stage lighting, "boom" refers to a vertical bar carrying fixtures in the wings.'},
+
+  {id:250,fr:'Montage / Démontage (build/strike)',en:'Build / Strike',cat:'STRUCTURE',
+    def_fr:'Build : phase d\'assemblage et d\'installation de la totalité du rig et des équipements techniques sur le site de l\'événement. Strike : phase de démontage et de retour en stock. Deux phases critiques en termes de sécurité.',
+    def_en:'Build: the assembly and installation phase of the complete rig and technical equipment on the event site. Strike: the dismantling and return-to-stock phase. Both are critical phases in terms of safety.'},
+
+/* ══════════════════════════════════════════════════════
+   ─── BATCH 05 : VIDÉO & MAPPING (251–350) ───
+   ─── BATCH 06 : PROD & LOGISTIQUE (351–450) ───
+   ─── BATCH 07–10 : ÉLECTRICITÉ, SÉCURITÉ ERP, BOOKING, JURIDIQUE, DIGITAL ───
 ══════════════════════════════════════════════════════ */
 
 /* ── FIN DU GLOSSAIRE ── */
