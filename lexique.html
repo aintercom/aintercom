@@ -434,10 +434,421 @@ const GLOSSARY = [
     def_en:'Rigid wheeled transport case reinforced with interior foam, designed to protect delicate equipment during touring and transport.'},
 
 /* ══════════════════════════════════════════════════════
-   ─── BATCH 02 : ajoutez vos 100 termes ici ───
-   Copiez ce bloc et remplissez :
-   {id:51, fr:'...', en:'...', cat:'...', def_fr:'...', def_en:'...'},
-   ↑↑↑ Continuez jusqu'à l'id:150, puis BATCH 03, etc. ↑↑↑
+   ─── BATCH 02 : AUDIO (51–100) & LUMIÈRE (101–150) ───
+══════════════════════════════════════════════════════ */
+
+  /* ─── AUDIO — Protocoles numériques & réseau ─── */
+  {id:51,fr:'Dante',en:'Dante (Audinate)',cat:'AUDIO',
+    def_fr:'Protocole de transport audio sur IP développé par Audinate. Achemine jusqu\'à 512 canaux bidirectionnels sur un réseau Ethernet Gigabit standard avec synchronisation ultra-précise (< 1 µs).',
+    def_en:'IP audio transport protocol developed by Audinate. Routes up to 512 bidirectional channels over standard Gigabit Ethernet with ultra-precise synchronisation (< 1 µs).'},
+
+  {id:52,fr:'MADI (AES10)',en:'MADI — Multichannel Audio Digital Interface',cat:'AUDIO',
+    def_fr:'Interface numérique multicanal (AES10) transportant jusqu\'à 64 canaux audio à 48 kHz sur un seul câble coaxial 75 Ω ou fibre optique. Standard de référence en broadcast et live.',
+    def_en:'Multichannel digital interface (AES10) carrying up to 64 audio channels at 48 kHz over a single 75 Ω coaxial cable or optical fibre. Reference standard in broadcast and live production.'},
+
+  {id:53,fr:'AES3 / AES-EBU',en:'AES3 / AES/EBU',cat:'AUDIO',
+    def_fr:'Standard numérique professionnel (AES3) transportant 2 canaux audio sur câble symétrique XLR 110 Ω ou coaxial 75 Ω. Fréquences d\'échantillonnage jusqu\'à 192 kHz.',
+    def_en:'Professional digital standard (AES3) carrying 2 audio channels over balanced 110 Ω XLR or 75 Ω coaxial cable. Sample rates up to 192 kHz.'},
+
+  {id:54,fr:'AES67',en:'AES67 — IP Audio Interoperability',cat:'AUDIO',
+    def_fr:'Standard d\'interopérabilité audio sur IP (IEEE 1588 PTP) permettant l\'échange entre systèmes hétérogènes : Dante, Ravenna, AVB/Milan. Couche transport commune de l\'écosystème AoIP.',
+    def_en:'IP audio interoperability standard (IEEE 1588 PTP) enabling exchange between heterogeneous systems: Dante, Ravenna, AVB/Milan. Common transport layer of the AoIP ecosystem.'},
+
+  {id:55,fr:'AVB / Milan',en:'AVB / Milan (Audio Video Bridging)',cat:'AUDIO',
+    def_fr:'Standard IEEE 802.1 garantissant latence bornée et bande passante réservée sur réseau Ethernet. Milan est le profil d\'interopérabilité strict d\'AVB adopté par L-Acoustics, Meyer Sound, etc.',
+    def_en:'IEEE 802.1 standard guaranteeing bounded latency and reserved bandwidth over Ethernet. Milan is the strict AVB interoperability profile adopted by L-Acoustics, Meyer Sound, etc.'},
+
+  {id:56,fr:'Ravenna',en:'Ravenna (ALC NetworX)',cat:'AUDIO',
+    def_fr:'Protocole audio sur IP développé par ALC NetworX, compatible AES67. Utilisé par Lawo, Merging Technologies, Stagetec. Supporte audio haute résolution jusqu\'à 384 kHz / 32 bits.',
+    def_en:'IP audio protocol developed by ALC NetworX, AES67-compliant. Used by Lawo, Merging Technologies, Stagetec. Supports high-resolution audio up to 384 kHz / 32-bit.'},
+
+  {id:57,fr:'Wordclock',en:'Word Clock',cat:'AUDIO',
+    def_fr:'Signal d\'horloge de référence (75 Ω, BNC) synchronisant tous les convertisseurs numériques d\'une chaîne audio pour éviter le jitter et les claquements liés à la désynchronisation.',
+    def_en:'Reference clock signal (75 Ω, BNC) synchronising all digital converters in an audio chain to prevent jitter and clicks caused by clock mismatch.'},
+
+  {id:58,fr:'Jitter',en:'Jitter (Clock Jitter)',cat:'AUDIO',
+    def_fr:'Variation temporelle parasite du signal d\'horloge numérique causant distorsion, bruit de modulation et dégradation du plancher de bruit. Mesuré en picosecondes (ps).',
+    def_en:'Unwanted timing variation in the digital clock signal causing distortion, modulation noise and degraded noise floor. Measured in picoseconds (ps).'},
+
+  {id:59,fr:'Fréquence d\'échantillonnage',en:'Sample Rate',cat:'AUDIO',
+    def_fr:'Nombre d\'échantillons prélevés par seconde lors de la conversion analogique-numérique. Standards live : 48 kHz (broadcast), 96 kHz (haute résolution). Règle de Nyquist : fs > 2 × f_max.',
+    def_en:'Number of samples taken per second during analogue-to-digital conversion. Live standards: 48 kHz (broadcast), 96 kHz (high resolution). Nyquist rule: fs > 2 × f_max.'},
+
+  {id:60,fr:'Résolution (bit depth)',en:'Bit Depth',cat:'AUDIO',
+    def_fr:'Nombre de bits définissant l\'amplitude de chaque échantillon audio. 24 bits = plage dynamique théorique de 144 dB. Standard actuel en live et studio.',
+    def_en:'Number of bits defining the amplitude of each audio sample. 24-bit = theoretical dynamic range of 144 dB. Current standard in live and studio production.'},
+
+  {id:61,fr:'Latence numérique',en:'Digital Latency',cat:'AUDIO',
+    def_fr:'Retard introduit par la conversion AN/NA, le traitement DSP et le transport réseau. Critique en live : une latence > 10 ms devient audible en retour de scène. Mesurée en millisecondes.',
+    def_en:'Delay introduced by A/D-D/A conversion, DSP processing and network transport. Critical in live: latency > 10 ms becomes audible as stage monitoring. Measured in milliseconds.'},
+
+  {id:62,fr:'Conversion AN/NA',en:'A/D and D/A Conversion',cat:'AUDIO',
+    def_fr:'Transformation du signal analogique continu en données numériques (AN) ou inversement (NA). La qualité du convertisseur détermine le plancher de bruit, la distorsion (THD) et la dynamique du système.',
+    def_en:'Conversion of a continuous analogue signal to digital data (A/D) or the reverse (D/A). Converter quality determines noise floor, distortion (THD) and system dynamic range.'},
+
+  /* ─── AUDIO — Mixage & routage ─── */
+  {id:63,fr:'Bus (console)',en:'Bus / Summing Bus',cat:'AUDIO',
+    def_fr:'Circuit de sommation interne à la console permettant de regrouper plusieurs canaux vers une destination commune (bus stéréo master, bus groupe, bus aux, bus matrix).',
+    def_en:'Internal summing circuit in a console grouping multiple channels to a common destination (master stereo bus, group bus, aux bus, matrix bus).'},
+
+  {id:64,fr:'VCA (Voltage Controlled Amplifier)',en:'VCA Group',cat:'AUDIO',
+    def_fr:'Groupe de contrôle de gain permettant de modifier simultanément le niveau de plusieurs canaux sans altérer leur routage individuel. Le fader VCA contrôle les offsets de gain des canaux liés.',
+    def_en:'Gain control group allowing simultaneous level adjustment of multiple channels without altering their individual routing. The VCA fader controls the gain offsets of linked channels.'},
+
+  {id:65,fr:'DCA (Digitally Controlled Amplifier)',en:'DCA Group',cat:'AUDIO',
+    def_fr:'Équivalent numérique du VCA dans les consoles digitales. Regroupe virtuellement des canaux pour un contrôle centralisé du gain, du mute et des solos sans routage physique.',
+    def_en:'Digital equivalent of VCA in digital consoles. Virtually groups channels for centralised gain, mute and solo control without physical routing.'},
+
+  {id:66,fr:'Matrix (console)',en:'Matrix / Output Matrix',cat:'AUDIO',
+    def_fr:'Étage de routage post-groupe permettant d\'envoyer n\'importe quel bus de la console vers des sorties physiques spécifiques avec gains indépendants. Utilisé pour délestages, broadcast, infills.',
+    def_en:'Post-group routing stage allowing any console bus to be sent to specific physical outputs with independent gains. Used for outfills, broadcast feeds, infills.'},
+
+  {id:67,fr:'Départ auxiliaire (Aux)',en:'Aux Send (Pre/Post Fader)',cat:'AUDIO',
+    def_fr:'Envoi d\'une portion du signal d\'un canal vers un bus auxiliaire, soit avant fader (pre-fader, niveau fixe) soit après fader (post-fader, niveau variable). Base de la gestion des mix moniteurs.',
+    def_en:'Sending a portion of a channel signal to an auxiliary bus, either pre-fader (fixed level) or post-fader (level varies with fader). Foundation of monitor mix management.'},
+
+  {id:68,fr:'Mixage LCR',en:'LCR (Left–Centre–Right) Mixing',cat:'AUDIO',
+    def_fr:'Technique de mixage utilisant un troisième bus central (C) en plus du stéréo classique L-R, offrant une meilleure localisation et une plus grande clarté sur les grands systèmes de diffusion.',
+    def_en:'Mixing technique using a third centre bus (C) in addition to classic L-R stereo, providing better localisation and greater clarity on large sound systems.'},
+
+  {id:69,fr:'Side-chain',en:'Sidechain / Key Input',cat:'AUDIO',
+    def_fr:'Signal de contrôle externe alimentant le circuit de détection d\'un compresseur ou d\'un gate pour déclencher le traitement dynamique sur la base d\'une autre source (ex. : kick sur basse).',
+    def_en:'External control signal feeding the detection circuit of a compressor or gate to trigger dynamic processing based on another source (e.g., kick drum controlling bass compressor).'},
+
+  {id:70,fr:'De-esser',en:'De-esser',cat:'AUDIO',
+    def_fr:'Compresseur à bande étroite agissant spécifiquement sur les sibilances (4–10 kHz) des voix. Réduit les consonnes sifflantes sans altérer le timbre général de la voix.',
+    def_en:'Narrow-band compressor acting specifically on vocal sibilance frequencies (4–10 kHz). Reduces sibilant consonants without altering the overall vocal timbre.'},
+
+  {id:71,fr:'Limiteur (hard)',en:'Limiter / Brick-Wall Limiter',cat:'AUDIO',
+    def_fr:'Compresseur à ratio infini (∞:1) empêchant le signal de dépasser un seuil défini. Utilisé en protection d\'amplificateurs et d\'enceintes. Le limiteur brick-wall garantit un plafond absolu.',
+    def_en:'Infinite ratio (∞:1) compressor preventing the signal from exceeding a defined threshold. Used for amplifier and loudspeaker protection. Brick-wall limiter guarantees an absolute ceiling.'},
+
+  {id:72,fr:'Compresseur multiband',en:'Multiband Compressor',cat:'AUDIO',
+    def_fr:'Processeur dynamique divisant le spectre audio en plusieurs bandes fréquentielles traitées indépendamment par compression. Permet un contrôle chirurgical de la dynamique spectrales.',
+    def_en:'Dynamic processor dividing the audio spectrum into multiple frequency bands, each processed independently by compression. Enables surgical control of spectral dynamics.'},
+
+  {id:73,fr:'Façonneur de transitoires',en:'Transient Shaper',cat:'AUDIO',
+    def_fr:'Processeur agissant sur l\'attaque (onset) et la sustain des signaux percussifs indépendamment du niveau global, sans courbe de seuil traditionnelle. Idéal pour batterie et percussions.',
+    def_en:'Processor acting on the attack (onset) and sustain of percussive signals independently of overall level, without a traditional threshold curve. Ideal for drums and percussion.'},
+
+  {id:74,fr:'Réverbe à convolution',en:'Convolution Reverb',cat:'AUDIO',
+    def_fr:'Réverbération synthétisée à partir d\'une réponse impulsionnelle (IR) réelle d\'un espace acoustique. Offre un réalisme acoustique impossible à atteindre par synthèse algorithmique.',
+    def_en:'Reverberation synthesised from a real impulse response (IR) of an acoustic space. Delivers acoustic realism unachievable through algorithmic synthesis.'},
+
+  {id:75,fr:'Insert (console)',en:'Insert Point',cat:'AUDIO',
+    def_fr:'Point d\'interruption du signal d\'un canal ou d\'un bus permettant d\'insérer un processeur externe (compresseur hardware, EQ) en boucle série dans la chaîne de signal.',
+    def_en:'Signal interruption point on a channel or bus allowing insertion of an external processor (hardware compressor, EQ) in series within the signal chain.'},
+
+  /* ─── AUDIO — Acoustique & système ─── */
+  {id:76,fr:'Phase (cohérence)',en:'Phase Coherence',cat:'AUDIO',
+    def_fr:'Relation temporelle entre deux signaux audio. Une inversion de phase (180°) d\'un sub par rapport au système principal crée des annulations en basses fréquences. Vérification critique lors de l\'alignement système.',
+    def_en:'Temporal relationship between two audio signals. A 180° phase inversion of a sub relative to the main system creates low-frequency cancellations. Critical check during system alignment.'},
+
+  {id:77,fr:'Alignement temporel',en:'Time Alignment / Delay Compensation',cat:'AUDIO',
+    def_fr:'Correction des décalages temporels entre sources sonores physiquement séparées (sub/tops, main/delay towers) par l\'ajout de délai électronique pour assurer cohérence de phase et de somme.',
+    def_en:'Correction of time offsets between physically separated sound sources (subs/tops, mains/delays) by adding electronic delay to ensure phase coherence and proper summation.'},
+
+  {id:78,fr:'SPL (Sound Pressure Level)',en:'SPL — Sound Pressure Level',cat:'AUDIO',
+    def_fr:'Mesure de la pression acoustique exprimée en décibels (dB SPL) relative à la référence 20 µPa. Niveau de conversation : ~60 dB SPL. Concert de rock : 100–115 dB SPL. Seuil de danger : 120 dB SPL.',
+    def_en:'Acoustic pressure measurement expressed in decibels (dB SPL) relative to the 20 µPa reference. Conversation: ~60 dB SPL. Rock concert: 100–115 dB SPL. Danger threshold: 120 dB SPL.'},
+
+  {id:79,fr:'Pondération A (dB-A)',en:'A-Weighting (dB-A)',cat:'AUDIO',
+    def_fr:'Courbe de pondération fréquentielle imitant la sensibilité de l\'oreille humaine. Atténue les basses et très hautes fréquences. Obligatoire pour les mesures de nuisance sonore (arrêté du 9 août 2017).',
+    def_en:'Frequency weighting curve mimicking human ear sensitivity. Attenuates low and very high frequencies. Mandatory for noise pollution measurements and live event regulations.'},
+
+  {id:80,fr:'LUFS (Loudness)',en:'LUFS — Loudness Units Full Scale',cat:'AUDIO',
+    def_fr:'Unité de mesure de la sonie intégrée (EBU R128, ITU-R BS.1770). Standard de livraison pour streaming (-14 LUFS) et broadcast (-23 LUFS). Remplace le VU-mètre classique.',
+    def_en:'Integrated loudness measurement unit (EBU R128, ITU-R BS.1770). Delivery standard for streaming (-14 LUFS) and broadcast (-23 LUFS). Replaces the classic VU-meter.'},
+
+  {id:81,fr:'RT60 (Temps de réverbération)',en:'RT60 — Reverberation Time',cat:'AUDIO',
+    def_fr:'Durée en secondes nécessaire à la décroissance de 60 dB du niveau sonore après l\'arrêt de la source. Paramètre acoustique clé d\'une salle : < 1 s (parole), 1–2 s (musique amplifée), > 2 s (classique).',
+    def_en:'Time in seconds for sound level to decay by 60 dB after the source stops. Key acoustic parameter of a room: < 1 s (speech), 1–2 s (amplified music), > 2 s (classical music).'},
+
+  {id:82,fr:'Distance critique',en:'Critical Distance',cat:'AUDIO',
+    def_fr:'Distance à partir de laquelle le champ réverbéré égale le champ direct. Au-delà, l\'intelligibilité chute et le renfort de gain avant retour diminue. Dépend du RT60 et de la directivité du système.',
+    def_en:'Distance at which the reverberant field equals the direct field. Beyond this, intelligibility drops and gain before feedback decreases. Depends on RT60 and system directivity.'},
+
+  {id:83,fr:'Réseau de subs cardioïde',en:'Cardioid Subwoofer Array',cat:'AUDIO',
+    def_fr:'Configuration de plusieurs caissons de basses disposés en arc avec délais calculés pour créer un rayonnement directionnel (cardioïde) : énergie maximale vers le public, annulation vers la scène.',
+    def_en:'Configuration of multiple subwoofers arranged with calculated delays to create directional (cardioid) radiation: maximum energy toward the audience, cancellation toward the stage.'},
+
+  {id:84,fr:'Tour de délai (delay tower)',en:'Delay Tower / Delay Cluster',cat:'AUDIO',
+    def_fr:'Colonne ou cluster d\'enceintes suspendu ou aérien placé en milieu de salle pour renforcer la couverture sonore dans les zones éloignées du système principal, avec délai électronique de recalage.',
+    def_en:'Column or cluster of loudspeakers placed mid-venue to reinforce coverage in areas distant from the main system, with electronic delay alignment to the mains.'},
+
+  {id:85,fr:'Angle de couverture',en:'Coverage Angle / Dispersion Angle',cat:'AUDIO',
+    def_fr:'Angle de dispersion d\'une enceinte défini aux points –6 dB (horizontal et vertical). Paramètre clé pour le design système : garantit un SPL homogène sur la zone d\'écoute.',
+    def_en:'Loudspeaker dispersion angle defined at the –6 dB points (horizontal and vertical). Key system design parameter: ensures homogeneous SPL across the listening area.'},
+
+  {id:86,fr:'Drive rack / Processeur de système',en:'Drive Rack / System Processor',cat:'AUDIO',
+    def_fr:'Unité de traitement DSP centralisée gérant le crossover actif, l\'EQ de système, les délais d\'alignement et la protection des enceintes. Ex : Lake LM26, XTA DP448, Dolby Lake.',
+    def_en:'Centralised DSP processing unit managing active crossover, system EQ, alignment delays and loudspeaker protection. Examples: Lake LM26, XTA DP448, Dolby Lake.'},
+
+  {id:87,fr:'Filtre FIR',en:'FIR Filter (Finite Impulse Response)',cat:'AUDIO',
+    def_fr:'Filtre numérique à réponse impulsionnelle finie offrant une réponse en phase linéaire (zéro déphasage de groupe). Utilisé dans les processeurs de système pour l\'alignement précis des enceintes.',
+    def_en:'Digital filter with finite impulse response offering linear phase response (zero group delay). Used in system processors for precise loudspeaker alignment.'},
+
+  {id:88,fr:'Effet Haas (précédence)',en:'Haas Effect / Precedence Effect',cat:'AUDIO',
+    def_fr:'Phénomène psychoacoustique : lorsque deux sons identiques arrivent à < 35 ms d\'intervalle, le cerveau localise la source en direction du son arrivant en premier, même si le second est plus fort.',
+    def_en:'Psychoacoustic phenomenon: when two identical sounds arrive within < 35 ms of each other, the brain localises the source toward the first arrival, even if the second is louder.'},
+
+  {id:89,fr:'Larsen / Feedback acoustique',en:'Acoustic Feedback / Larsen Effect',cat:'AUDIO',
+    def_fr:'Boucle d\'amplification auto-entretenue entre un microphone et une enceinte. Génère un sifflement à la fréquence de résonance du système. Combattu par EQ notch, réduction de gain et positionnement.',
+    def_en:'Self-sustaining amplification loop between a microphone and a loudspeaker. Generates a whistle at the system\'s resonant frequency. Countered by notch EQ, gain reduction and positioning.'},
+
+  {id:90,fr:'Gain avant retour (GAR)',en:'Gain Before Feedback (GBF)',cat:'AUDIO',
+    def_fr:'Marge de gain disponible avant déclenchement du Larsen. Augmenté par l\'EQ de suppression de fréquences critiques, l\'utilisation de micros directifs et l\'éloignement micro/enceinte.',
+    def_en:'Gain margin available before acoustic feedback occurs. Increased by EQ suppression of critical frequencies, use of directional microphones and mic/loudspeaker separation.'},
+
+  {id:91,fr:'Rejet de retour',en:'Feedback Rejection / Notch Filter',cat:'AUDIO',
+    def_fr:'Technique ou filtre coupe-bande très étroit (Q élevé) atténuant spécifiquement une fréquence de résonance pour supprimer le feedback sans dégradation audible du signal global.',
+    def_en:'Technique or very narrow band-reject filter (high Q) specifically attenuating a resonant frequency to suppress feedback without audible degradation of the overall signal.'},
+
+  {id:92,fr:'Patch / Routage',en:'Signal Routing / Patching',cat:'AUDIO',
+    def_fr:'Architecture complète du chemin du signal d\'une production : entrées physiques → gains → traitements → bus → sorties → amplification → enceintes. Documenté dans le patch list.',
+    def_en:'Complete signal path architecture of a production: physical inputs → gains → processing → buses → outputs → amplification → loudspeakers. Documented in the patch list.'},
+
+  {id:93,fr:'Gain de cohérence (sommation)',en:'Coherent Summation / Array Gain',cat:'AUDIO',
+    def_fr:'Principe physique : deux sources cohérentes en phase sommées produisent +6 dB (voltage doubling). Sources incohérentes : +3 dB (power doubling). Base du calcul d\'array de line arrays.',
+    def_en:'Physical principle: two coherent in-phase sources summed produce +6 dB (voltage doubling). Incoherent sources: +3 dB (power doubling). Basis of line array cluster calculation.'},
+
+  {id:94,fr:'Crossover actif',en:'Active Crossover',cat:'AUDIO',
+    def_fr:'Division électronique du spectre audio en bandes fréquentielles (graves, médiums, aigus) avant les amplificateurs de puissance. Plus précis et flexible que le crossover passif câblé.',
+    def_en:'Electronic division of the audio spectrum into frequency bands (low, mid, high) prior to power amplifiers. More precise and flexible than wired passive crossover.'},
+
+  {id:95,fr:'Stem mixing',en:'Stem Mixing',cat:'AUDIO',
+    def_fr:'Organisation du mixage en sous-groupes thématiques (stems) : drums, bass, keys, guitars, vocals. Facilite le mixage live complexe et la livraison multitrack pour broadcast ou enregistrement.',
+    def_en:'Organisation of the mix into thematic subgroups (stems): drums, bass, keys, guitars, vocals. Facilitates complex live mixing and multitrack delivery for broadcast or recording.'},
+
+  {id:96,fr:'Dithering',en:'Dithering',cat:'AUDIO',
+    def_fr:'Ajout contrôlé de bruit de faible amplitude lors de la réduction de la résolution (ex. : 24 bits → 16 bits) pour masquer la distorsion de quantification et préserver la qualité perçue.',
+    def_en:'Controlled addition of low-amplitude noise during bit depth reduction (e.g., 24-bit to 16-bit) to mask quantisation distortion and preserve perceived quality.'},
+
+  {id:97,fr:'Excitateur harmonique',en:'Harmonic Exciter / Aural Exciter',cat:'AUDIO',
+    def_fr:'Processeur générant des harmoniques synthétiques (2e, 3e ordre) à partir du signal source pour lui donner présence, éclat et brillance, particulièrement en live où les hautes fréquences sont atténuées par la distance.',
+    def_en:'Processor generating synthetic harmonics (2nd, 3rd order) from the source signal to add presence, clarity and brilliance, particularly in live settings where high frequencies are attenuated by distance.'},
+
+  {id:98,fr:'Expandeur / Gate',en:'Expander / Noise Gate',cat:'AUDIO',
+    def_fr:'Processeur dynamique réduisant (expandeur) ou coupant (gate) le signal en dessous d\'un seuil défini. Utilisé pour éliminer le bruit de fond entre les notes ou la diaphonie entre micros de scène.',
+    def_en:'Dynamic processor reducing (expander) or cutting (gate) the signal below a defined threshold. Used to eliminate background noise between notes or crosstalk between stage microphones.'},
+
+  {id:99,fr:'Réverbe algorithmique',en:'Algorithmic Reverb',cat:'AUDIO',
+    def_fr:'Réverbération synthétisée par modélisation mathématique de réseaux de lignes à retard et filtres imitant la diffusion acoustique. Paramétrique et flexible : room size, pre-delay, diffusion, decay.',
+    def_en:'Reverberation synthesised through mathematical modelling of delay line networks and filters mimicking acoustic diffusion. Parametric and flexible: room size, pre-delay, diffusion, decay.'},
+
+  {id:100,fr:'Delay (retard ligne)',en:'Signal Delay (ms)',cat:'AUDIO',
+    def_fr:'Retard électronique appliqué à un signal, exprimé en millisecondes ou en mètres (1 ms ≈ 34 cm). Utilisé pour l\'alignement temporel, la compensation de distance et la création d\'effets de profondeur.',
+    def_en:'Electronic delay applied to a signal, expressed in milliseconds or metres (1 ms ≈ 34 cm). Used for time alignment, distance compensation and creating depth effects.'},
+
+  /* ─── LUMIÈRE — Optique & photométrie ─── */
+  {id:101,fr:'Température de couleur (CCT)',en:'Correlated Colour Temperature (CCT)',cat:'LUMIÈRE',
+    def_fr:'Mesure en Kelvin (K) de la teinte de la lumière émise : 2 700 K (blanc chaud, tungstène), 4 200 K (neutre), 6 500 K (blanc daylight). Paramètre fondamental en scénographie lumière.',
+    def_en:'Kelvin (K) measurement of the tint of emitted light: 2 700 K (warm white, tungsten), 4 200 K (neutral), 6 500 K (daylight white). Fundamental parameter in stage lighting design.'},
+
+  {id:102,fr:'IRC / CRI (Indice de Rendu des Couleurs)',en:'CRI — Colour Rendering Index',cat:'LUMIÈRE',
+    def_fr:'Indice de 0 à 100 mesurant la fidélité de restitution des couleurs d\'une source lumineuse par rapport à une source de référence. CRI > 90 : excellent. LED spectacle : 80–95.',
+    def_en:'Index from 0 to 100 measuring a light source\'s colour fidelity relative to a reference source. CRI > 90: excellent. Entertainment LED: 80–95.'},
+
+  {id:103,fr:'Flux lumineux (lumens)',en:'Luminous Flux (Lumens)',cat:'LUMIÈRE',
+    def_fr:'Quantité totale de lumière visible émise par une source dans toutes les directions, exprimée en lumens (lm). Indicateur brut de la puissance lumineuse d\'un projecteur.',
+    def_en:'Total quantity of visible light emitted by a source in all directions, expressed in lumens (lm). Raw indicator of a fixture\'s light output power.'},
+
+  {id:104,fr:'Éclairement (lux)',en:'Illuminance (Lux)',cat:'LUMIÈRE',
+    def_fr:'Flux lumineux reçu par unité de surface (lm/m²). Mesure l\'intensité lumineuse effective à une distance donnée. Lux = Lumens / m². Paramètre clé pour la caméra et la vidéo.',
+    def_en:'Luminous flux received per unit area (lm/m²). Measures effective light intensity at a given distance. Lux = Lumens / m². Key parameter for camera and video operations.'},
+
+  {id:105,fr:'Luminance (cd/m²)',en:'Luminance (cd/m²)',cat:'LUMIÈRE',
+    def_fr:'Mesure de la densité lumineuse émise ou réfléchie par une surface vers l\'observateur. Exprimée en candelas par mètre carré. Détermine la perception de brillance d\'une surface éclairée.',
+    def_en:'Measurement of luminous density emitted or reflected by a surface towards the observer. Expressed in candelas per square metre. Determines the perceived brightness of a lit surface.'},
+
+  {id:106,fr:'Angle de faisceau (beam angle)',en:'Beam Angle',cat:'LUMIÈRE',
+    def_fr:'Angle délimitant la zone où l\'intensité lumineuse est supérieure à 50 % du maximum. Définit la "tache" centrale et concentrée du projecteur. Distinct de l\'angle de champ (field angle à 10 %).',
+    def_en:'Angle delimiting the zone where light intensity exceeds 50% of maximum. Defines the fixture\'s central, concentrated "hot spot". Distinct from field angle (defined at 10%).'},
+
+  {id:107,fr:'Distance de tir / Rapport de tir',en:'Throw Distance / Throw Ratio',cat:'LUMIÈRE',
+    def_fr:'Distance entre le projecteur et la surface éclairée. Le rapport de tir (T/D) est la distance divisée par le diamètre de la tache. Paramètre clé pour sélectionner gobos et objectifs adaptés.',
+    def_en:'Distance between the fixture and the lit surface. Throw ratio (T/D) is distance divided by spot diameter. Key parameter for selecting appropriate gobos and lenses.'},
+
+  {id:108,fr:'Couteaux (Framing)',en:'Framing Shutters / Blades',cat:'LUMIÈRE',
+    def_fr:'Système de 4 lames motorisées à l\'intérieur d\'un projecteur lyre permettant de découper précisément le faisceau lumineux, d\'aligner les bords sur une surface ou d\'éviter l\'éblouissement du public.',
+    def_en:'System of 4 motorised blades inside a moving head fixture for precisely cutting the light beam, aligning edges on a surface or preventing audience glare.'},
+
+  {id:109,fr:'Iris motorisé',en:'Motorised Iris',cat:'LUMIÈRE',
+    def_fr:'Diaphragme circulaire motorisé réduisant le diamètre du faisceau sans modifier la mise au point. Contrôlé via DMX pour des effets de zoom rapide ou de restriction d\'ouverture.',
+    def_en:'Motorised circular diaphragm reducing beam diameter without affecting focus. DMX-controlled for fast zoom effects or aperture restriction.'},
+
+  {id:110,fr:'Prisme (optique)',en:'Prism Effect',cat:'LUMIÈRE',
+    def_fr:'Élément optique rotatif divisant le faisceau en 3, 5 ou 8 copies identiques réparties circulairement. Crée des effets de multiplication et de rotation caractéristiques.',
+    def_en:'Rotating optical element splitting the beam into 3, 5 or 8 identical copies distributed circularly. Creates characteristic multiplication and rotation effects.'},
+
+  /* ─── LUMIÈRE — Colorimétrie & mixage couleur ─── */
+  {id:111,fr:'CMY (mélange soustractif)',en:'CMY — Subtractive Colour Mixing',cat:'LUMIÈRE',
+    def_fr:'Système de filtres Cyan, Magenta, Jaune se superposant pour soustraire des longueurs d\'onde d\'une source blanche. Standard des lyres professionnelles (Clay Paky, Robe, Martin). Plage continue de teintes.',
+    def_en:'Cyan, Magenta, Yellow filter system overlapping to subtract wavelengths from a white source. Standard in professional moving heads (Clay Paky, Robe, Martin). Continuous colour range.'},
+
+  {id:112,fr:'RGBW / RGBA (mélange additif)',en:'RGBW / RGBA — Additive Colour Mixing',cat:'LUMIÈRE',
+    def_fr:'Mélange additif par LEDs Rouge, Vert, Bleu et Blanc (ou Ambre). Économique en énergie. Rendu spectral moins continu que le CMY mais idéal pour les wash LED et les cycloramas.',
+    def_en:'Additive mixing via Red, Green, Blue and White (or Amber) LEDs. Energy-efficient. Less continuous spectral rendering than CMY but ideal for LED wash fixtures and cycloramas.'},
+
+  {id:113,fr:'Gélatine / Gel',en:'Gel / Colour Filter',cat:'LUMIÈRE',
+    def_fr:'Film plastique coloré (Lee, Rosco, GAM) inséré devant la lentille d\'un projecteur pour colorer le faisceau. Identification par numéro de référence (ex. : Lee 201 Full CT Blue).',
+    def_en:'Coloured plastic film (Lee, Rosco, GAM) inserted in front of a fixture\'s lens to colour the beam. Identified by reference number (e.g., Lee 201 Full CT Blue).'},
+
+  {id:114,fr:'CTO / CTB (correction couleur)',en:'CTO / CTB — Colour Temperature Conversion',cat:'LUMIÈRE',
+    def_fr:'CTO (Orange) : abaisse la température de couleur (daylight → tungstène). CTB (Blue) : élève la température. Existent en 1/8, 1/4, 1/2 et full. Utilisés pour mixer sources de températures différentes.',
+    def_en:'CTO (Orange): lowers colour temperature (daylight to tungsten). CTB (Blue): raises colour temperature. Available in 1/8, 1/4, 1/2 and full strengths. Used to match mixed light sources.'},
+
+  {id:115,fr:'Delta E (ΔE)',en:'Delta E (ΔE) — Colour Difference',cat:'LUMIÈRE',
+    def_fr:'Mesure quantitative de la différence entre deux couleurs dans l\'espace colorimétrique CIE Lab. ΔE < 1 : imperceptible. ΔE > 3 : visible à l\'œil nu. Standard de contrôle qualité des LEDs spectacle.',
+    def_en:'Quantitative measure of the difference between two colours in CIE Lab colour space. ΔE < 1: imperceptible. ΔE > 3: visible to the naked eye. Quality control standard for entertainment LEDs.'},
+
+  {id:116,fr:'Roue à gobos',en:'Gobo Wheel',cat:'LUMIÈRE',
+    def_fr:'Disque motorisé portant plusieurs gobos (4 à 9) pouvant être indexés un à un ou mis en rotation continue. La plupart des lyres Pro disposent de 2 roues à gobos indépendantes.',
+    def_en:'Motorised disc carrying several gobos (4 to 9) that can be indexed one by one or spun continuously. Most professional moving heads feature 2 independent gobo wheels.'},
+
+  {id:117,fr:'Roue d\'animation',en:'Animation Wheel',cat:'LUMIÈRE',
+    def_fr:'Élément optique spécial à motif aléatoire ou ondulé créant des effets d\'eau, de flamme ou de nuages en rotation continue dans le faisceau lumineux. Exclusif à certains modèles pro.',
+    def_en:'Special optical element with random or undulating pattern creating water, flame or cloud effects when continuously rotating in the light beam. Exclusive to certain professional models.'},
+
+  /* ─── LUMIÈRE — Protocoles réseau ─── */
+  {id:118,fr:'Art-Net',en:'Art-Net',cat:'LUMIÈRE',
+    def_fr:'Protocole de transport DMX sur UDP/IP développé par Artistic Licence. Supporte 256 univers (Art-Net 4 : 32 768). Très répandu dans l\'industrie du spectacle pour sa simplicité et son support universel.',
+    def_en:'DMX transport protocol over UDP/IP developed by Artistic Licence. Supports 256 universes (Art-Net 4: 32 768). Widely used in entertainment for its simplicity and universal support.'},
+
+  {id:119,fr:'sACN / E1.31',en:'sACN — Streaming ACN (E1.31)',cat:'LUMIÈRE',
+    def_fr:'Protocole de transport DMX sur multicast IP standardisé par l\'ESTA (E1.31). Plus efficace qu\'Art-Net pour les grands réseaux grâce au multicast. Supporte 63 999 univers. Standard ETC, grandMA3.',
+    def_en:'Multicast IP DMX transport protocol standardised by ESTA (E1.31). More efficient than Art-Net for large networks via multicast. Supports 63 999 universes. Standard for ETC, grandMA3.'},
+
+  {id:120,fr:'RDM (E1.20)',en:'RDM — Remote Device Management (E1.20)',cat:'LUMIÈRE',
+    def_fr:'Extension bidirectionnelle du protocole DMX permettant à une console d\'identifier, configurer et diagnostiquer des appareils à distance sur le câble DMX sans déconnexion physique.',
+    def_en:'Bidirectional extension of the DMX protocol allowing a console to identify, configure and diagnose devices remotely over the DMX cable without physical disconnection.'},
+
+  {id:121,fr:'Nœud DMX / Art-Net Node',en:'DMX Node / Art-Net Node',cat:'LUMIÈRE',
+    def_fr:'Convertisseur réseau-DMX transformant les données Art-Net ou sACN reçues sur Ethernet en sorties DMX 512 physiques. Permet de distribuer le contrôle sur de grandes distances sans dégradation.',
+    def_en:'Network-to-DMX converter transforming Art-Net or sACN data received on Ethernet into physical DMX 512 outputs. Enables control distribution over large distances without degradation.'},
+
+  {id:122,fr:'MA-Net',en:'MA-Net (grandMA Proprietary)',cat:'LUMIÈRE',
+    def_fr:'Protocole réseau propriétaire des consoles grandMA (MA Lighting) pour la communication interne entre consoles, ailes de commande (wings), NPU (Node Processing Unit) et grandMA 3D.',
+    def_en:'Proprietary network protocol for grandMA consoles (MA Lighting) for internal communication between consoles, wings, NPU (Node Processing Unit) and grandMA 3D.'},
+
+  {id:123,fr:'PosiStageNet (PSN)',en:'PSN — PosiStageNet',cat:'LUMIÈRE',
+    def_fr:'Protocole réseau ouvert diffusant en temps réel la position 3D d\'objets scéniques (artistes, décors motorisés) vers les consoles lumière et serveurs média pour le suivi automatique.',
+    def_en:'Open network protocol broadcasting real-time 3D positions of stage objects (performers, motorised set) to lighting consoles and media servers for automated tracking.'},
+
+  {id:124,fr:'CITP',en:'CITP — Controller Interface Transport Protocol',cat:'LUMIÈRE',
+    def_fr:'Protocole réseau permettant l\'échange de miniatures et de métadonnées entre serveurs média et consoles lumière. Affiche les contenus vidéo directement dans la bibliothèque de la console.',
+    def_en:'Network protocol enabling thumbnail and metadata exchange between media servers and lighting consoles. Displays video content directly in the console\'s media library.'},
+
+  {id:125,fr:'Univers DMX',en:'DMX Universe',cat:'LUMIÈRE',
+    def_fr:'Bloc de 512 canaux DMX constituant l\'unité de base du contrôle lumière. Un projecteur moving head haut de gamme peut occuper 50 à 100 canaux. Un grand show utilise 64 à 256+ univers.',
+    def_en:'Block of 512 DMX channels forming the basic unit of lighting control. A high-end moving head may use 50 to 100 channels. A large show uses 64 to 256+ universes.'},
+
+  /* ─── LUMIÈRE — Programmation console ─── */
+  {id:126,fr:'Bibliothèque de projecteurs (GDTF)',en:'Fixture Library / GDTF',cat:'LUMIÈRE',
+    def_fr:'Base de données des profils de projecteurs contenant leurs modes de canaux DMX. GDTF (General Device Type Format) est le standard ouvert (DIN SPEC 15800) issu de la collaboration grandMA / Robe / Vectorworks.',
+    def_en:'Database of fixture profiles containing their DMX channel modes. GDTF (General Device Type Format) is the open standard (DIN SPEC 15800) developed by grandMA / Robe / Vectorworks.'},
+
+  {id:127,fr:'MVR (My Virtual Rig)',en:'MVR — My Virtual Rig',cat:'LUMIÈRE',
+    def_fr:'Format de fichier ouvert (basé sur GDTF) permettant l\'échange de données complètes de rig entre consoles, logiciels de visualisation (wysiwyg, Depence) et outils de dessin (Vectorworks).',
+    def_en:'Open file format (based on GDTF) enabling complete rig data exchange between consoles, visualisation software (wysiwyg, Depence) and drawing tools (Vectorworks).'},
+
+  {id:128,fr:'Tracking (console)',en:'Tracking / Cue Tracking',cat:'LUMIÈRE',
+    def_fr:'Mode de programmation où les paramètres non modifiés d\'une cue conservent leur valeur de la cue précédente ("tracke"). S\'oppose au mode "cue only" où chaque cue est complète et indépendante.',
+    def_en:'Programming mode where unmodified parameters in a cue retain their value from the previous cue ("track"). Contrasts with "cue only" mode where every cue is complete and independent.'},
+
+  {id:129,fr:'Blocking cue',en:'Blocking Cue',cat:'LUMIÈRE',
+    def_fr:'Cue forçant tous les paramètres à des valeurs définies, interrompant le tracking. Utilisée comme "snapshot" de sécurité pour garantir un état connu à un point donné du show.',
+    def_en:'Cue forcing all parameters to defined values, breaking tracking. Used as a safety snapshot to guarantee a known state at a defined point in the show.'},
+
+  {id:130,fr:'Preset (couleur / position)',en:'Preset — Colour / Position / Beam',cat:'LUMIÈRE',
+    def_fr:'Valeur de référence stockée pour un paramètre (couleur, position, beam) pouvant être rappelée dans plusieurs cues. Modification du preset se répercute automatiquement sur toutes les cues liées.',
+    def_en:'Reference value stored for a parameter (colour, position, beam) that can be recalled in multiple cues. Modifying the preset automatically updates all linked cues.'},
+
+  {id:131,fr:'Chase / Effet',en:'Chase / Effect',cat:'LUMIÈRE',
+    def_fr:'Séquence de cues défilant en boucle automatique à un tempo défini (BPM ou rythme Manuel). Crée des effets de poursuite, de remplissage ou de clignotement sur des groupes de projecteurs.',
+    def_en:'Sequence of cues cycling in an automatic loop at a defined tempo (BPM or manual trigger). Creates chasing, filling or strobing effects on groups of fixtures.'},
+
+  {id:132,fr:'Pixel mapping',en:'Pixel Mapping',cat:'LUMIÈRE',
+    def_fr:'Technique de mappage d\'un contenu vidéo ou d\'un effet 2D/3D sur une grille de projecteurs définie dans l\'espace. Transforme un réseau de LEDs ou de lyres en écran géant de faibles résolution.',
+    def_en:'Technique mapping video content or a 2D/3D effect onto a defined grid of fixtures in space. Transforms a network of LEDs or moving heads into a low-resolution large-scale screen.'},
+
+  {id:133,fr:'Timecode (lumière)',en:'Timecode Sync (Lighting)',cat:'LUMIÈRE',
+    def_fr:'Synchronisation des cues lumière sur un signal SMPTE LTC ou MIDI MTC. Permet un déclenchement sample-accurate des séquences sur une musique enregistrée ou un click track.',
+    def_en:'Synchronisation of lighting cues to a SMPTE LTC or MIDI MTC signal. Enables sample-accurate triggering of sequences against recorded music or a click track.'},
+
+  {id:134,fr:'Grand Master',en:'Grand Master',cat:'LUMIÈRE',
+    def_fr:'Fader physique ou virtuel sur console lumière contrôlant l\'intensité globale de toutes les sorties DMX simultanément. Permet un fade-out général du show en cas d\'urgence.',
+    def_en:'Physical or virtual fader on the lighting console controlling the overall intensity of all DMX outputs simultaneously. Allows a full show fade-out in an emergency.'},
+
+  {id:135,fr:'Blind mode',en:'Blind Mode',cat:'LUMIÈRE',
+    def_fr:'Mode de programmation console permettant d\'éditer des cues sans affecter la sortie DMX live. La scène reste figée pendant que le programmeur prépare les modifications.',
+    def_en:'Console programming mode allowing cue editing without affecting the live DMX output. The stage scene remains frozen while the programmer prepares modifications.'},
+
+  {id:136,fr:'Highlight / Solo fixture',en:'Highlight / Fixture Solo',cat:'LUMIÈRE',
+    def_fr:'Fonction de console isolant un projecteur sélectionné en affichant sa position et sa couleur à plein, en atténuant les autres. Accélère la programmation et l\'identification des appareils sur scène.',
+    def_en:'Console function isolating a selected fixture by displaying it at full position and colour, dimming others. Speeds up programming and fixture identification on stage.'},
+
+  {id:137,fr:'Exécuteur (playback)',en:'Executor / Playback',cat:'LUMIÈRE',
+    def_fr:'Fader ou bouton affecté à une cuelist, un preset ou un effet sur la console lumière. Plusieurs exécuteurs peuvent tourner simultanément avec des priorités de HTP/LTP définies.',
+    def_en:'Fader or button assigned to a cuelist, preset or effect on the lighting console. Multiple executors can run simultaneously with defined HTP/LTP priorities.'},
+
+  {id:138,fr:'HTP / LTP (priorité DMX)',en:'HTP / LTP — Highest Takes Precedence / Latest Takes Precedence',cat:'LUMIÈRE',
+    def_fr:'HTP : en cas de conflit entre deux sources DMX, la valeur la plus haute l\'emporte (standard pour l\'intensité). LTP : la dernière valeur reçue l\'emporte (standard pour couleur, position).',
+    def_en:'HTP: when two DMX sources conflict, the highest value wins (standard for intensity). LTP: the most recently received value wins (standard for colour, position).'},
+
+  {id:139,fr:'OSC (Open Sound Control)',en:'OSC — Open Sound Control',cat:'LUMIÈRE',
+    def_fr:'Protocole de communication réseau (UDP ou TCP) flexible permettant d\'envoyer des commandes entre consoles, systèmes de contrôle (QLab, TouchOSC) et équipements hétérogènes.',
+    def_en:'Flexible network communication protocol (UDP or TCP) enabling commands to be sent between consoles, control systems (QLab, TouchOSC) and heterogeneous equipment.'},
+
+  {id:140,fr:'Moteur d\'effets (console)',en:'Effects Engine',cat:'LUMIÈRE',
+    def_fr:'Module intégré dans la console lumière générant algorithmiquement des mouvements, cycles de couleurs et effets de dimmer paramétrables sur des groupes de projecteurs sans programmation cue par cue.',
+    def_en:'Module integrated in the lighting console algorithmically generating movements, colour cycles and dimmer effects parametrically across groups of fixtures, without cue-by-cue programming.'},
+
+  {id:141,fr:'Zoom motorisé',en:'Motorised Zoom',cat:'LUMIÈRE',
+    def_fr:'Système optique motorisé modifiant l\'angle du faisceau (ex. : 5°–55°) via DMX, sans intervention physique. Permet des transitions de spot étroit à wash large pendant le show.',
+    def_en:'Motorised optical system modifying beam angle (e.g., 5°–55°) via DMX, without physical intervention. Enables transitions from narrow spot to wide wash during the show.'},
+
+  {id:142,fr:'Pan / Tilt (axes)',en:'Pan / Tilt',cat:'LUMIÈRE',
+    def_fr:'Deux axes de rotation d\'une lyre : Pan (horizontal, typiquement 540°) et Tilt (vertical, typiquement 255°). Les valeurs sont contrôlées en DMX sur 8 ou 16 bits (fine).',
+    def_en:'Two rotation axes of a moving head: Pan (horizontal, typically 540°) and Tilt (vertical, typically 255°). Values are controlled in DMX over 8 or 16-bit (fine resolution).'},
+
+  {id:143,fr:'Fin de course (moving head)',en:'Home Position / Reset',cat:'LUMIÈRE',
+    def_fr:'Procédure de calibration d\'une lyre remettant pan, tilt, roues et iris à leur position de référence (0). Déclenchée au démarrage ou manuellement via DMX (commande reset).',
+    def_en:'Calibration procedure for a moving head returning pan, tilt, wheels and iris to their reference (home) position. Triggered at startup or manually via DMX (reset command).'},
+
+  {id:144,fr:'Personnalité (mode canal)',en:'Fixture Personality / Channel Mode',cat:'LUMIÈRE',
+    def_fr:'Configuration de canaux DMX sélectionnée sur un projecteur pour définir le nombre de canaux utilisés et les fonctions assignées. Ex. : mode Standard (26 ch) vs Extended (42 ch).',
+    def_en:'DMX channel configuration selected on a fixture defining the number of channels used and their assigned functions. Example: Standard mode (26 ch) vs Extended mode (42 ch).'},
+
+  {id:145,fr:'Virtual dimmer (LED)',en:'Virtual Dimmer',cat:'LUMIÈRE',
+    def_fr:'Contrôle d\'intensité logiciel sur les sources LED qui n\'ont pas de dimmer physique. Obtenu en réduisant proportionnellement toutes les valeurs RGB/CMY. Peut altérer le rendu colorimétrique à bas niveau.',
+    def_en:'Software intensity control for LED sources that have no physical dimmer. Achieved by proportionally reducing all RGB/CMY values. May alter colour rendering at low levels.'},
+
+  {id:146,fr:'Stroboscope (paramètre)',en:'Strobe / Shutter Effect',cat:'LUMIÈRE',
+    def_fr:'Clignotement rapide d\'une source lumineuse (1 Hz à > 20 Hz) créant l\'effet stroboscopique. Interdit ou réglementé pour le public épileptique. Souvent paramétrable via un canal DMX dédié.',
+    def_en:'Rapid flashing of a light source (1 Hz to > 20 Hz) creating the strobe effect. Prohibited or regulated for audiences susceptible to epilepsy. Often parametrically controlled via a dedicated DMX channel.'},
+
+  {id:147,fr:'CueSets / Cuelist (séquenceur)',en:'Cue List / Cue Stack',cat:'LUMIÈRE',
+    def_fr:'Liste séquentielle de mémoires lumière stockée dans un exécuteur. Chaque cue possède un numéro, un temps de Fade In/Out, un délai de déclenchement (Wait) et un mode de déclenchement (Go/Auto/Time).',
+    def_en:'Sequential list of lighting memories stored in an executor. Each cue has a number, Fade In/Out time, trigger delay (Wait) and trigger mode (Go/Auto/Time).'},
+
+  {id:148,fr:'Fade (in / out)',en:'Fade In / Fade Out',cat:'LUMIÈRE',
+    def_fr:'Transition progressive des valeurs DMX entre deux cues. Le Fade In définit le temps pour atteindre les nouvelles valeurs ; le Fade Out le temps pour quitter les anciennes. Indépendants par paramètre.',
+    def_en:'Progressive transition of DMX values between two cues. Fade In defines the time to reach new values; Fade Out defines the time to leave the old ones. Independent per parameter.'},
+
+  {id:149,fr:'Autopatch (console)',en:'Autopatch',cat:'LUMIÈRE',
+    def_fr:'Fonction de console attribuant automatiquement les adresses DMX aux appareils dans l\'ordre de leur ajout au rig, en respectant les modes de canaux définis. Gain de temps lors du patch initial.',
+    def_en:'Console function automatically assigning DMX addresses to fixtures in the order they are added to the rig, respecting defined channel modes. Time-saving during initial patching.'},
+
+  {id:150,fr:'Submasters / Faders de playback',en:'Submasters / Playback Faders',cat:'LUMIÈRE',
+    def_fr:'Faders physiques de la console contrôlant le niveau de contribution (intensité) de chaque exécuteur actif. Permettent de fondre manuellement entre différents looks ou effets en temps réel.',
+    def_en:'Physical console faders controlling the contribution level (intensity) of each active executor. Allow manual crossfading between different looks or effects in real time.'},
+
+/* ══════════════════════════════════════════════════════
+   ─── BATCH 03 : VIDÉO & MAPPING (151–250) ───
+   ─── BATCH 04 : STRUCTURE & RIGGING (251–350) ───
+   ─── BATCH 05 : PROD & LOGISTIQUE (351–450) ───
+   ─── BATCH 06–10 : ÉLECTRICITÉ, SCÉNOGRAPHIE, SÉCURITÉ, BOOKING, JURIDIQUE, DIGITAL ───
 ══════════════════════════════════════════════════════ */
 
 /* ── FIN DU GLOSSAIRE ── */
