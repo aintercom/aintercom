@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RIDER — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06080b;--surface:#0c1118;--panel:#101820;--panel2:#141f2a;
+  --border:#1e2d3d;--border2:#253545;--border3:#2e4055;
+  --green:#00d97e;--green-dim:#00a05c;--green-glow:rgba(0,217,126,.12);
+  --amber:#ffb300;--red:#ff3b3b;--blue:#2d9cff;--purple:#9b59f5;
+  --t1:#e8f0f8;--t2:#7a9ab5;--t3:#3d5568;--t4:#243040;
+  --f-display:'Oswald',sans-serif;--f-ui:'Rajdhani',sans-serif;--f-mono:'Share Tech Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--t1);font-family:var(--f-ui);height:100vh;display:grid;grid-template-rows:auto 1fr;overflow:hidden;}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+
+/* TOPBAR */
+#topbar{background:var(--surface);border-bottom:2px solid var(--border);padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0;}
+.tb-left{display:flex;align-items:center;gap:10px;}
+.logo-mark{width:32px;height:32px;background:var(--green);clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:8px;font-weight:700;color:#000;flex-shrink:0;}
+.tb-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:4px;}
+.tb-sub{font-family:var(--f-mono);font-size:8px;letter-spacing:2px;color:var(--t3);margin-top:1px;}
+.count-badge{font-family:var(--f-mono);font-size:9px;letter-spacing:2px;color:var(--green);background:rgba(0,217,126,.08);border:1px solid rgba(0,217,126,.2);padding:4px 10px;border-radius:2px;}
+.tb-right{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.tbtn{font-family:var(--f-display);font-size:11px;font-weight:600;letter-spacing:1px;padding:7px 13px;border-radius:3px;border:1px solid var(--border2);background:var(--panel2);color:var(--t2);cursor:pointer;transition:all .15s;text-decoration:none;white-space:nowrap;}
+.tbtn:hover{color:var(--t1);border-color:var(--border3);}
+.tbtn.green{background:var(--green);color:#000;border-color:var(--green-dim);}
+.tbtn.green:hover{filter:brightness(1.1);}
+
+/* BODY LAYOUT */
+#body{display:grid;grid-template-columns:220px 1fr;overflow:hidden;}
+
+/* SIDEBAR */
+#sidebar{background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;padding:12px 10px;}
+.sb-title{font-family:var(--f-mono);font-size:8px;letter-spacing:3px;color:var(--t4);padding:4px 6px;margin-bottom:8px;}
+
+.stat-card{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--border2);border-radius:4px;padding:9px 12px;margin-bottom:5px;cursor:pointer;transition:all .15s;}
+.stat-card:hover,.stat-card.active{background:var(--panel);}
+.stat-card.active{border-left-color:var(--green);}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--t1);line-height:1;}
+.stat-lbl{font-family:var(--f-mono);font-size:8px;letter-spacing:2px;color:var(--t3);margin-top:1px;}
+.stat-card.s-recu .stat-num{color:var(--amber);}
+.stat-card.s-valide .stat-num{color:var(--green);}
+.stat-card.s-incomplet .stat-num{color:var(--red);}
+
+.filter-btn{width:100%;text-align:left;padding:6px 10px;border:none;background:transparent;color:var(--t3);cursor:pointer;font-family:var(--f-mono);font-size:9px;letter-spacing:1px;border-radius:3px;transition:all .15s;display:flex;align-items:center;gap:6px;margin-bottom:2px;}
+.filter-btn:hover{color:var(--t2);background:var(--panel2);}
+.filter-btn.active{color:var(--green);background:rgba(0,217,126,.06);}
+
+.new-rider-section{margin-top:auto;padding-top:12px;border-top:1px solid var(--border);}
+.new-rider-lbl{font-family:var(--f-mono);font-size:8px;letter-spacing:2px;color:var(--t3);margin-bottom:6px;}
+.new-rider-input{width:100%;background:var(--panel2);border:1px solid var(--border2);color:var(--t1);border-radius:3px;padding:7px 9px;font-family:var(--f-ui);font-size:12px;outline:none;margin-bottom:5px;}
+.new-rider-input:focus{border-color:var(--green);}
+.new-rider-btn{width:100%;padding:8px;border-radius:3px;border:none;background:var(--green);color:#000;cursor:pointer;font-family:var(--f-display);font-size:12px;font-weight:700;letter-spacing:2px;transition:filter .15s;}
+.new-rider-btn:hover{filter:brightness(1.1);}
+
+/* MAIN */
+#main{display:flex;flex-direction:column;overflow:hidden;}
+.search-bar{padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center;}
+.search-input{flex:1;background:var(--panel2);border:1px solid var(--border2);color:var(--t1);border-radius:3px;padding:8px 12px;font-family:var(--f-ui);font-size:13px;outline:none;transition:border-color .15s;}
+.search-input:focus{border-color:var(--green);}
+.search-input::placeholder{color:var(--t4);}
+
+#cards-wrap{overflow-y:auto;flex:1;padding:14px;}
+.riders-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;}
+
+/* Rider card */
+.rider-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;transition:all .15s;}
+.rider-card:hover{border-color:var(--border2);transform:translateY(-1px);}
+.rc-top{padding:14px 16px 10px;border-left:4px solid var(--border2);}
+.rider-card.recu .rc-top{border-left-color:var(--amber);}
+.rider-card.valide .rc-top{border-left-color:var(--green);}
+.rider-card.incomplet .rc-top{border-left-color:var(--red);}
+.rider-card.en_attente .rc-top{border-left-color:var(--blue);}
+.rc-ref{font-family:var(--f-mono);font-size:8px;letter-spacing:2px;color:var(--t4);margin-bottom:4px;}
+.rc-artist{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--t1);margin-bottom:2px;}
+.rc-contact{font-size:11px;color:var(--t3);font-family:var(--f-mono);margin-bottom:8px;}
+.rc-sections{display:flex;gap:3px;flex-wrap:wrap;}
+.section-chip{font-family:var(--f-mono);font-size:7px;letter-spacing:1px;padding:2px 6px;border-radius:2px;border:1px solid;white-space:nowrap;}
+.section-chip.filled{border-color:rgba(0,217,126,.3);color:var(--green);background:rgba(0,217,126,.08);}
+.section-chip.empty{border-color:var(--border2);color:var(--t4);}
+.rc-bottom{padding:7px 16px;background:var(--panel2);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.rc-date{font-family:var(--f-mono);font-size:8px;color:var(--t4);}
+.rc-status{font-family:var(--f-mono);font-size:9px;letter-spacing:1px;padding:2px 8px;border-radius:2px;}
+.rc-status.recu{color:var(--amber);background:rgba(255,179,0,.08);border:1px solid rgba(255,179,0,.2);}
+.rc-status.valide{color:var(--green);background:rgba(0,217,126,.08);border:1px solid rgba(0,217,126,.2);}
+.rc-status.incomplet{color:var(--red);background:rgba(255,59,59,.08);border:1px solid rgba(255,59,59,.2);}
+.rc-status.en_attente{color:var(--blue);background:rgba(45,156,255,.08);border:1px solid rgba(45,156,255,.2);}
+
+/* Empty */
+.empty-state{padding:60px;text-align:center;}
+.empty-icon{font-size:40px;margin-bottom:14px;}
+.empty-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--t3);margin-bottom:6px;}
+.empty-sub{font-family:var(--f-mono);font-size:10px;color:var(--t4);letter-spacing:1px;line-height:1.7;}
+
+/* MODALE DÉTAIL RIDER */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;z-index:9999;backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .2s;}
+.modal-overlay.visible{opacity:1;pointer-events:all;}
+.modal{background:var(--panel);border:1px solid var(--border2);border-top:3px solid var(--green);border-radius:6px;padding:26px;width:680px;max-width:96vw;max-height:90vh;overflow-y:auto;transform:translateY(14px);transition:transform .2s;position:relative;}
+.modal-overlay.visible .modal{transform:translateY(0);}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--t3);cursor:pointer;font-size:17px;}
+.modal-close:hover{color:var(--t1);}
+.modal-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:12px;}
+.modal-artist{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--t1);}
+.modal-ref{font-family:var(--f-mono);font-size:9px;color:var(--t3);letter-spacing:2px;margin-top:2px;}
+.modal-statut-sel{background:var(--panel2);border:1px solid var(--border2);color:var(--t1);border-radius:3px;padding:7px 12px;font-family:var(--f-mono);font-size:10px;outline:none;cursor:pointer;}
+.modal-statut-sel:focus{border-color:var(--green);}
+
+.rider-section{margin-bottom:18px;background:var(--surface);border:1px solid var(--border);border-radius:5px;overflow:hidden;}
+.rs-header{padding:10px 14px;background:var(--panel2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.rs-icon{font-size:16px;}
+.rs-title{font-family:var(--f-display);font-size:13px;font-weight:700;letter-spacing:3px;color:var(--t1);}
+.rs-body{padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.rs-field{}
+.rs-key{font-family:var(--f-mono);font-size:8px;letter-spacing:2px;color:var(--t3);margin-bottom:2px;}
+.rs-val{font-size:13px;font-weight:500;color:var(--t1);}
+.rs-val.empty{color:var(--t4);font-style:italic;}
+.rs-val.full{grid-column:1/-1;}
+.rs-note{padding:8px 14px 12px;font-size:12px;color:var(--t2);font-style:italic;line-height:1.6;grid-column:1/-1;}
+
+.modal-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;}
+.modal-btn{font-family:var(--f-display);font-size:12px;font-weight:600;letter-spacing:2px;padding:9px 18px;border-radius:3px;border:none;cursor:pointer;transition:all .15s;}
+.modal-btn.ok{background:var(--green);color:#000;}
+.modal-btn.cancel{background:var(--panel2);color:var(--t2);border:1px solid var(--border2);}
+.modal-btn.danger{background:var(--red);color:#fff;}
+.modal-btn.blue{background:var(--blue);color:#fff;}
+
+/* Lien formulaire */
+.link-box{background:var(--panel2);border:1px solid var(--border2);border-radius:4px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.link-url{font-family:var(--f-mono);font-size:10px;color:var(--blue);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.link-copy{font-family:var(--f-mono);font-size:9px;padding:5px 10px;border-radius:3px;border:1px solid var(--border2);background:transparent;color:var(--t3);cursor:pointer;transition:all .15s;white-space:nowrap;}
+.link-copy:hover{color:var(--t1);}
+.link-copy.copied{color:var(--green);border-color:var(--green);}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <div class="tb-left">
+    <div class="logo-mark">AI</div>
+    <div>
+      <div class="tb-title">RIDER TECHNIQUE</div>
+      <div class="tb-sub">THIS IS IT EVENT</div>
+    </div>
+    <div class="count-badge" id="total-badge">0 RIDER(S)</div>
+  </div>
+  <div class="tb-right">
+    <button class="tbtn" onclick="exportAllCSV()">⤓ EXPORT CSV</button>
+    <button class="tbtn" onclick="printAllRiders()">⊞ IMPR. TOUS</button>
+    <a class="tbtn" href="../index.html">⊞ ACCUEIL</a>
+  </div>
+</div>
+
+<div id="body">
+  <div id="sidebar">
+    <div class="sb-title">STATUT</div>
+    <div class="stat-card active" onclick="filterSt('')" id="sc-all"><div class="stat-num" id="sn-all">0</div><div class="stat-lbl">TOUS</div></div>
+    <div class="stat-card s-recu" onclick="filterSt('recu')" id="sc-recu"><div class="stat-num" id="sn-recu">0</div><div class="stat-lbl">REÇUS</div></div>
+    <div class="stat-card" onclick="filterSt('en_attente')" id="sc-en_attente"><div class="stat-num" id="sn-en_attente" style="color:var(--blue)">0</div><div class="stat-lbl">EN ATTENTE</div></div>
+    <div class="stat-card s-valide" onclick="filterSt('valide')" id="sc-valide"><div class="stat-num" id="sn-valide">0</div><div class="stat-lbl">VALIDÉS</div></div>
+    <div class="stat-card s-incomplet" onclick="filterSt('incomplet')" id="sc-incomplet"><div class="stat-num" id="sn-incomplet">0</div><div class="stat-lbl">INCOMPLETS</div></div>
+
+    <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);">
+      <div class="sb-title">FILTRER PAR SECTION</div>
+      <button class="filter-btn active" onclick="filterSec('')" id="fs-all">TOUTES LES SECTIONS</button>
+      <button class="filter-btn" onclick="filterSec('son')" id="fs-son">🔊 SON</button>
+      <button class="filter-btn" onclick="filterSec('lumieres')" id="fs-lumieres">💡 LUMIÈRES</button>
+      <button class="filter-btn" onclick="filterSec('backline')" id="fs-backline">🎸 BACKLINE</button>
+      <button class="filter-btn" onclick="filterSec('loge')" id="fs-loge">🛋 LOGE</button>
+      <button class="filter-btn" onclick="filterSec('transport')" id="fs-transport">🚐 TRANSPORT</button>
+    </div>
+
+    <div class="new-rider-section">
+      <div class="new-rider-lbl">NOUVEAU RIDER</div>
+      <input class="new-rider-input" type="text" id="new-artist-name" placeholder="Nom de l'artiste…">
+      <input class="new-rider-input" type="text" id="new-contact" placeholder="Contact management…">
+      <button class="new-rider-btn" onclick="createRider()">+ CRÉER RIDER</button>
+    </div>
+  </div>
+
+  <div id="main">
+    <div class="search-bar">
+      <input class="search-input" type="text" id="search-input" placeholder="Rechercher artiste, contact…" oninput="renderCards()">
+    </div>
+    <div id="cards-wrap">
+      <div class="riders-grid" id="riders-grid"></div>
+      <div id="empty-state" class="empty-state" style="display:none;">
+        <div class="empty-icon">📋</div>
+        <div class="empty-title">AUCUN RIDER</div>
+        <div class="empty-sub">Créez un rider pour un artiste<br>et envoyez-lui le lien de formulaire.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALE DÉTAIL -->
+<div class="modal-overlay" id="modal-rider" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header">
+      <div>
+        <div class="modal-artist" id="md-artist">—</div>
+        <div class="modal-ref" id="md-ref">—</div>
+      </div>
+      <select class="modal-statut-sel" id="md-statut" onchange="updateStatut(this.value)">
+        <option value="en_attente">EN ATTENTE</option>
+        <option value="recu">REÇU</option>
+        <option value="valide">VALIDÉ</option>
+        <option value="incomplet">INCOMPLET</option>
+      </select>
+    </div>
+
+    <div class="link-box">
+      <div class="link-url" id="md-link">—</div>
+      <button class="link-copy" id="copy-btn" onclick="copyLink()">COPIER LIEN</button>
+      <a class="link-copy" id="open-form-btn" href="#" target="_blank" style="text-decoration:none">OUVRIR ↗</a>
+    </div>
+
+    <div id="md-sections"></div>
+
+    <div class="modal-actions">
+      <button class="modal-btn ok" onclick="saveNotes()">✓ ENREGISTRER NOTES</button>
+      <button class="modal-btn blue" onclick="printRider()">⊞ IMPRIMER RIDER</button>
+      <button class="modal-btn cancel" onclick="closeModal()">FERMER</button>
+      <button class="modal-btn danger" onclick="deleteRider()">SUPPRIMER</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SECTIONS_META = [
+  {key:'son',     icon:'🔊', label:'SON / P.A.'},
+  {key:'lumieres',icon:'💡', label:'LUMIÈRES'},
+  {key:'backline',icon:'🎸', label:'BACKLINE'},
+  {key:'loge',    icon:'🛋', label:'LOGES & CATERING'},
+  {key:'transport',icon:'🚐',label:'TRANSPORT & LOGISTIQUE'},
+];
+
+let db = [];
+let filterStat = '';
+let filterSect = '';
+let currentId  = null;
+
+function loadDB(){ db = JSON.parse(localStorage.getItem('tiie_riders')||'[]'); }
+function saveDB(){ localStorage.setItem('tiie_riders', JSON.stringify(db)); }
+const uid = () => 'RDR-'+Date.now().toString(36).toUpperCase();
+
+/* ── FILTRES ── */
+function filterSt(v){
+  filterStat=v;
+  document.querySelectorAll('[id^="sc-"]').forEach(el=>el.classList.remove('active'));
+  document.getElementById('sc-'+(v||'all')).classList.add('active');
+  renderCards();
+}
+function filterSec(v){
+  filterSect=v;
+  document.querySelectorAll('[id^="fs-"]').forEach(el=>el.classList.remove('active'));
+  document.getElementById('fs-'+(v||'all')).classList.add('active');
+  renderCards();
+}
+
+function filteredData(){
+  const q=document.getElementById('search-input').value.trim().toLowerCase();
+  return db.filter(r=>{
+    const ms=!filterStat||r.statut===filterStat;
+    const mq=!q||(r.artist||'').toLowerCase().includes(q)||(r.contact||'').toLowerCase().includes(q);
+    const msec=!filterSect||(r[filterSect]&&Object.values(r[filterSect]).some(v=>v&&v.trim&&v.trim()));
+    return ms&&mq&&(filterSect?msec:true);
+  });
+}
+
+/* ── RENDER ── */
+function renderStats(){
+  const stats={en_attente:0,recu:0,valide:0,incomplet:0};
+  db.forEach(r=>{ if(stats[r.statut]!==undefined) stats[r.statut]++; });
+  document.getElementById('sn-all').textContent=db.length;
+  document.getElementById('total-badge').textContent=db.length+' RIDER(S)';
+  Object.entries(stats).forEach(([k,v])=>{
+    const el=document.getElementById('sn-'+k); if(el) el.textContent=v;
+  });
+}
+
+function sectionFilled(r,key){
+  const s=r[key];
+  if(!s) return false;
+  return Object.values(s).some(v=>v&&String(v).trim());
+}
+
+function renderCards(){
+  renderStats();
+  const data=filteredData();
+  const grid=document.getElementById('riders-grid');
+  const empty=document.getElementById('empty-state');
+  if(!data.length){grid.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  const STATUS_LABELS={en_attente:'EN ATTENTE',recu:'REÇU',valide:'VALIDÉ ✓',incomplet:'INCOMPLET'};
+  grid.innerHTML=data.map(r=>`
+    <div class="rider-card ${r.statut}" onclick="openRider('${r.id}')">
+      <div class="rc-top">
+        <div class="rc-ref">${r.id}</div>
+        <div class="rc-artist">${esc(r.artist)}</div>
+        <div class="rc-contact">${esc(r.contact||'—')}</div>
+        <div class="rc-sections">
+          ${SECTIONS_META.map(s=>`<span class="section-chip ${sectionFilled(r,s.key)?'filled':'empty'}">${s.icon} ${s.label.split(' ')[0]}</span>`).join('')}
+        </div>
+      </div>
+      <div class="rc-bottom">
+        <div class="rc-date">${new Date(r.createdAt).toLocaleDateString('fr-FR')}</div>
+        <div class="rc-status ${r.statut}">${STATUS_LABELS[r.statut]||r.statut}</div>
+      </div>
+    </div>`).join('');
+}
+
+/* ── CRÉER RIDER ── */
+function createRider(){
+  const artist=document.getElementById('new-artist-name').value.trim();
+  if(!artist){alert('Nom de l\'artiste requis');return;}
+  const id=uid();
+  db.push({
+    id, artist, contact:document.getElementById('new-contact').value.trim(),
+    createdAt:new Date().toISOString(), statut:'en_attente',
+    son:{},lumieres:{},backline:{},loge:{},transport:{},notes:''
+  });
+  document.getElementById('new-artist-name').value='';
+  document.getElementById('new-contact').value='';
+  saveDB();renderCards();
+  openRider(id);
+}
+
+/* ── OUVRIR RIDER ── */
+function openRider(id){
+  currentId=id;
+  const r=db.find(x=>x.id===id);if(!r)return;
+  document.getElementById('md-artist').textContent=r.artist;
+  document.getElementById('md-ref').textContent=r.id+' · '+new Date(r.createdAt).toLocaleString('fr-FR');
+  document.getElementById('md-statut').value=r.statut;
+
+  const formUrl=window.location.origin+window.location.pathname.replace('admin.html','form.html')+'?id='+r.id;
+  document.getElementById('md-link').textContent=formUrl;
+  document.getElementById('open-form-btn').href=formUrl;
+
+  // Sections
+  const FIELDS={
+    son:[
+      ['pa_demande','Système PA demandé'],['console','Console préférée'],
+      ['canaux','Nb canaux scène'],['moniteurs','Moniteurs (type/nb)'],
+      ['di_boxes','DI Boxes'],['micro_chant','Micro chant'],
+      ['retours_iem','IEM / Retours in-ear'],['note','Notes son'],
+    ],
+    lumieres:[
+      ['rig','Rig lumières'],['lyres','Lyres / Moving heads'],
+      ['led','Barres LED / PAR'],['strobos','Stroboscopes'],
+      ['couleurs_interdites','Couleurs interdites'],['hazer','Hazer / Machine à fumée'],
+      ['note','Notes lumières'],
+    ],
+    backline:[
+      ['batterie','Batterie (fournie/apportée)'],['ampli_guitare','Ampli guitare'],
+      ['ampli_basse','Ampli basse'],['clavier_stand','Clavier / Stand'],
+      ['nb_musiciens','Nb musiciens'],['note','Notes backline'],
+    ],
+    loge:[
+      ['nb_personnes','Nb personnes en loge'],['nourriture','Nourriture (chaud/froid)'],
+      ['boissons','Boissons'],['allergies','Allergies / régimes'],
+      ['serviettes','Serviettes'],['wifi','WiFi requis'],
+      ['note','Autres demandes loges'],
+    ],
+    transport:[
+      ['heure_arrivee','Heure d\'arrivée souhaitée'],['heure_soundcheck','Soundcheck'],
+      ['nb_personnes_transport','Nb personnes (transport)'],['vehicules','Véhicules / Bus'],
+      ['parking_requis','Parking requis'],['hotel','Hébergement hôtel'],
+      ['note','Notes logistique'],
+    ],
+  };
+
+  const container=document.getElementById('md-sections');
+  container.innerHTML=SECTIONS_META.map(sm=>{
+    const fields=FIELDS[sm.key]||[];
+    const sData=r[sm.key]||{};
+    const filled=sectionFilled(r,sm.key);
+    return `<div class="rider-section">
+      <div class="rs-header">
+        <div class="rs-icon">${sm.icon}</div>
+        <div class="rs-title">${sm.label}</div>
+        ${filled?'<span style="margin-left:auto;font-family:var(--f-mono);font-size:8px;color:var(--green);letter-spacing:2px">✓ REMPLI</span>':'<span style="margin-left:auto;font-family:var(--f-mono);font-size:8px;color:var(--t4);letter-spacing:2px">EN ATTENTE</span>'}
+      </div>
+      <div class="rs-body">
+        ${fields.map(([k,lbl])=>{
+          const v=sData[k]||'';
+          return `<div class="rs-field">
+            <div class="rs-key">${lbl.toUpperCase()}</div>
+            <div class="rs-val${!v?' empty':''}">${v||'Non renseigné'}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('modal-rider').classList.add('visible');
+}
+
+function updateStatut(v){
+  const r=db.find(x=>x.id===currentId);
+  if(r){r.statut=v;saveDB();renderCards();}
+}
+function saveNotes(){ saveDB();renderCards();closeModal(); }
+function deleteRider(){
+  if(!confirm('Supprimer ce rider ?')) return;
+  db=db.filter(x=>x.id!==currentId);
+  saveDB();renderCards();closeModal();
+}
+function closeModal(){ document.getElementById('modal-rider').classList.remove('visible'); }
+document.addEventListener('keydown',e=>{ if(e.code==='Escape') closeModal(); });
+
+function copyLink(){
+  const url=document.getElementById('md-link').textContent;
+  navigator.clipboard.writeText(url).then(()=>{
+    const btn=document.getElementById('copy-btn');
+    btn.textContent='✓ COPIÉ';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='COPIER LIEN';btn.classList.remove('copied');},2000);
+  });
+}
+
+function printRider(){
+  const r=db.find(x=>x.id===currentId);if(!r)return;
+  window.open('form.html?id='+r.id+'&print=1','_blank');
+}
+
+function exportAllCSV(){
+  if(!db.length){alert('Aucun rider.');return;}
+  let csv='ID,Artiste,Contact,Statut,Date\n';
+  db.forEach(r=>{ csv+=`"${r.id}","${r.artist}","${r.contact||''}","${r.statut}","${new Date(r.createdAt).toLocaleDateString('fr-FR')}"\n`; });
+  const b=new Blob([csv],{type:'text/csv'});
+  const u=URL.createObjectURL(b);
+  const a=document.createElement('a');a.href=u;a.download='riders_tiie.csv';a.click();
+  URL.revokeObjectURL(u);
+}
+
+function printAllRiders(){
+  alert('Fonctionnalité : ouvrir chaque rider en impression.\n(À connecter avec form.html?print=1)');
+}
+
+const esc=s=>(s||'').replace(/</g,'&lt;');
+
+loadDB();
+renderCards();
+window.addEventListener('focus',()=>{loadDB();renderCards();});
+</script>
+</body>
+</html>

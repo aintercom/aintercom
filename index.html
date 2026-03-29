@@ -81,6 +81,25 @@ header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,
 .spec{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:9px;color:var(--t3);letter-spacing:1px;}
 .spec::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--orange);opacity:.6;flex-shrink:0;}
 
+/* ══════ ECOSYSTEM ══════ */
+#ecosystem{padding:100px 48px;max-width:1200px;margin:0 auto;}
+.eco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:0;}
+.eco-card{background:var(--surface);border:1px solid var(--border);padding:28px 24px;position:relative;overflow:hidden;transition:all .22s;text-decoration:none;display:block;}
+.eco-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .25s;}
+.eco-card:hover{background:var(--panel);border-color:var(--border2);transform:translateY(-2px);}
+.eco-card:hover::before{transform:scaleX(1);}
+.eco-num{font-family:var(--f-mono);font-size:9px;color:var(--t3);letter-spacing:3px;margin-bottom:14px;}
+.eco-icon{font-size:26px;margin-bottom:12px;display:block;}
+.eco-name{font-family:var(--f-display);font-size:17px;font-weight:700;letter-spacing:3px;color:var(--t1);margin-bottom:6px;}
+.eco-tagline{font-family:var(--f-mono);font-size:9px;letter-spacing:2px;color:var(--orange);margin-bottom:10px;}
+.eco-desc{font-family:var(--f-ui);font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:16px;}
+.eco-link{font-family:var(--f-mono);font-size:9px;letter-spacing:2px;color:var(--orange);display:flex;align-items:center;gap:6px;}
+.eco-link::after{content:'→';}
+.eco-card.soon .eco-link{color:var(--t3);}
+.eco-card.soon .eco-name{color:var(--t3);}
+.eco-card.soon::before{background:var(--t3);}
+.eco-badge-soon{font-family:var(--f-mono);font-size:7px;letter-spacing:2px;color:var(--t3);background:var(--panel);border:1px solid var(--border);padding:2px 7px;border-radius:2px;position:absolute;top:12px;right:12px;}
+
 /* ══════ CTA BAND ══════ */
 #cta-band{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 48px;text-align:center;}
 .cta-band-title{font-family:var(--f-hero);font-size:clamp(28px,4vw,52px);letter-spacing:3px;color:var(--t1);margin-bottom:12px;}
@@ -101,8 +120,13 @@ footer{padding:28px 48px;border-top:1px solid var(--border);display:flex;align-i
   #hero{padding:100px 24px 60px;}
   #services{padding:60px 24px;}
   .services-grid{grid-template-columns:1fr;}
+  #ecosystem{padding:60px 24px;}
+  .eco-grid{grid-template-columns:1fr 1fr;}
   #cta-band{padding:60px 24px;}
   footer{padding:20px 24px;flex-direction:column;text-align:center;}
+}
+@media(max-width:480px){
+  .eco-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -119,6 +143,7 @@ footer{padding:28px 48px;border-top:1px solid var(--border);display:flex;align-i
   </a>
   <nav class="header-nav">
     <a class="nav-link" href="#services">SERVICES</a>
+    <a class="nav-link" href="#ecosystem">MODULES</a>
     <a class="nav-link" href="mentions-legales.html" target="_blank">MENTIONS LÉGALES</a>
     <a class="btn-access" href="app.html">ACCÈS RÉGIE</a>
   </nav>
@@ -208,6 +233,97 @@ footer{padding:28px 48px;border-top:1px solid var(--border);display:flex;align-i
   </div>
 </section>
 
+<!-- ══════ ECOSYSTEM ══════ -->
+<section id="ecosystem">
+  <div class="section-label">MODULES</div>
+  <h2 class="section-title">L'ÉCOSYSTÈME COMPLET</h2>
+  <p class="section-sub">Chaque module couvre un métier de l'événementiel live.</p>
+  <div class="eco-grid">
+
+    <!-- RÉGIE -->
+    <a class="eco-card" href="app.html">
+      <div class="eco-num">01 /</div>
+      <span class="eco-icon">🎛</span>
+      <div class="eco-name">AINTERCOM OS</div>
+      <div class="eco-tagline">RÉGIE & CONDUCTEUR</div>
+      <p class="eco-desc">Conducteur de show multi-scènes, chronomètre, gestion parc radio et intercom, export CSV / impression.</p>
+      <div class="eco-link">ACCÉDER À LA RÉGIE</div>
+    </a>
+
+    <!-- BÉNÉVOLAT -->
+    <a class="eco-card" href="benevolat/index.html">
+      <div class="eco-num">02 /</div>
+      <span class="eco-icon">🙋</span>
+      <div class="eco-name">BÉNÉVOLAT</div>
+      <div class="eco-tagline">GESTION BÉNÉVOLES</div>
+      <p class="eco-desc">Formulaire d'inscription multi-étapes, gestion des disponibilités et postes, export vers ACCRED.</p>
+      <div class="eco-link">FORMULAIRE D'INSCRIPTION</div>
+    </a>
+
+    <!-- ACCRED -->
+    <a class="eco-card" href="accred/index.html">
+      <div class="eco-num">03 /</div>
+      <span class="eco-icon">🎫</span>
+      <div class="eco-name">ACCRED</div>
+      <div class="eco-tagline">ACCRÉDITATIONS QR</div>
+      <p class="eco-desc">Gestion des accréditations par type et zone, badge QR numérique, scanner terrain mobile.</p>
+      <div class="eco-link">ADMIN ACCRED</div>
+    </a>
+
+    <!-- RIDER -->
+    <a class="eco-card" href="rider/admin.html">
+      <div class="eco-num">04 /</div>
+      <span class="eco-icon">📋</span>
+      <div class="eco-name">RIDER</div>
+      <div class="eco-tagline">RIDER TECHNIQUE</div>
+      <p class="eco-desc">Collecte des riders artiste (son, lumières, backline, loge, transport) via formulaire lien dédié.</p>
+      <div class="eco-link">ADMIN RIDER</div>
+    </a>
+
+    <!-- CALLSHEET — BIENTÔT -->
+    <a class="eco-card soon" href="#ecosystem" onclick="return false;" style="cursor:default;">
+      <div class="eco-badge-soon">BIENTÔT</div>
+      <div class="eco-num">05 /</div>
+      <span class="eco-icon">📅</span>
+      <div class="eco-name">CALLSHEET</div>
+      <div class="eco-tagline">PLANNING ÉQUIPE</div>
+      <p class="eco-desc">Feuille de route journalière, assignation des équipes, notifications et export PDF.</p>
+      <div class="eco-link">EN DÉVELOPPEMENT</div>
+    </a>
+
+    <!-- SCANNER — ACCÈS DIRECT -->
+    <a class="eco-card" href="accred/scan.html">
+      <div class="eco-num">06 /</div>
+      <span class="eco-icon">📷</span>
+      <div class="eco-name">SCANNER</div>
+      <div class="eco-tagline">CONTRÔLE ACCÈS</div>
+      <p class="eco-desc">Scanner QR mobile pour contrôle d'accès terrain. Vérification par zone, log en temps réel, vibration.</p>
+      <div class="eco-link">OUVRIR LE SCANNER</div>
+    </a>
+
+    <!-- ADMIN BÉNÉVOLAT -->
+    <a class="eco-card" href="benevolat/admin.html">
+      <div class="eco-num">07 /</div>
+      <span class="eco-icon">⚙</span>
+      <div class="eco-name">BÉNÉVOLAT ADMIN</div>
+      <div class="eco-tagline">BACK-OFFICE</div>
+      <p class="eco-desc">Tableau de bord bénévoles, gestion des statuts, missions, export CSV et transfert vers ACCRED.</p>
+      <div class="eco-link">ADMIN BÉNÉVOLES</div>
+    </a>
+
+    <!-- BADGE -->
+    <a class="eco-card" href="accred/badge.html">
+      <div class="eco-num">08 /</div>
+      <span class="eco-icon">🪪</span>
+      <div class="eco-name">BADGE NUMÉRIQUE</div>
+      <div class="eco-tagline">AFFICHAGE MOBILE</div>
+      <p class="eco-desc">Badge accréditation mobile avec QR code, zones autorisées, statut et informations complètes.</p>
+      <div class="eco-link">VOIR UN BADGE</div>
+    </a>
+
+  </div>
+</section>
+
 <!-- ══════ CTA BAND ══════ -->
 <section id="cta-band">
   <div class="cta-band-title">PRÊT POUR LE SHOW ?</div>
@@ -220,6 +336,9 @@ footer{padding:28px 48px;border-top:1px solid var(--border);display:flex;align-i
   <div class="footer-brand">© THIS IS IT EVENT — AINTERCOM OS V9</div>
   <div class="footer-links">
     <a class="footer-link" href="app.html">RÉGIE</a>
+    <a class="footer-link" href="benevolat/index.html">BÉNÉVOLAT</a>
+    <a class="footer-link" href="accred/index.html">ACCRED</a>
+    <a class="footer-link" href="rider/admin.html">RIDER</a>
     <a class="footer-link" href="mentions-legales.html" target="_blank">MENTIONS LÉGALES</a>
   </div>
 </footer>
