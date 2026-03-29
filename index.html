@@ -3,345 +3,614 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AINTERCOM OS — This Is It Event</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<title>This Is It Event — Plateforme de production événementielle</title>
+<meta name="description" content="La plateforme opérationnelle conçue pour les concerts en arena et stade. Régie, accréditations, rider technique, bénévoles — tout connecté.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#0a0a0a;
-  --surface:#111111;
-  --panel:#161616;
-  --border:#222222;
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root{
+  --bg:#080808;
+  --bg2:#0e0e0e;
+  --surface:#121212;
+  --panel:#181818;
+  --border:#1f1f1f;
   --border2:#2a2a2a;
+  --border3:#333;
   --orange:#ff6600;
   --orange-dim:#cc5200;
-  --orange-glow:rgba(255,102,0,0.15);
-  --t1:#ffffff;
-  --t2:#a0a0a0;
-  --t3:#555555;
+  --orange-glow:rgba(255,102,0,.18);
+  --orange-subtle:rgba(255,102,0,.06);
+  --t1:#f5f5f5;
+  --t2:#999;
+  --t3:#555;
+  --t4:#333;
   --f-display:'Oswald',sans-serif;
-  --f-ui:'Rajdhani',sans-serif;
-  --f-mono:'Share Tech Mono',monospace;
+  --f-body:'Inter',sans-serif;
   --f-hero:'Bebas Neue',sans-serif;
+  --f-mono:'Share Tech Mono',monospace;
+  --max:1160px;
+  --px:clamp(20px,5vw,64px);
 }
+
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--t1);font-family:var(--f-ui);min-height:100vh;overflow-x:hidden;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{background:var(--bg);color:var(--t1);font-family:var(--f-body);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:var(--border3);border-radius:2px;}
 
-/* ══════ HEADER ══════ */
-header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,.85);border-bottom:1px solid var(--border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;}
-.header-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.logo-mark{width:36px;height:36px;background:var(--orange);clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:9px;font-weight:700;color:#fff;letter-spacing:-1px;flex-shrink:0;}
-.logo-name{font-family:var(--f-display);font-size:17px;font-weight:700;letter-spacing:5px;color:var(--t1);}
-.logo-sub{font-family:var(--f-mono);font-size:8px;letter-spacing:3px;color:var(--t3);margin-top:2px;}
-.header-nav{display:flex;align-items:center;gap:12px;}
-.nav-link{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--t3);text-decoration:none;transition:color .15s;padding:4px 0;}
-.nav-link:hover{color:var(--t2);}
-.btn-access{font-family:var(--f-display);font-size:13px;font-weight:700;letter-spacing:3px;padding:10px 24px;border-radius:3px;border:none;background:var(--orange);color:#fff;cursor:pointer;text-decoration:none;transition:all .18s;box-shadow:0 0 20px var(--orange-glow);}
-.btn-access:hover{background:var(--orange-dim);box-shadow:0 0 32px rgba(255,102,0,.3);transform:translateY(-1px);}
-
-/* ══════ HERO ══════ */
-#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px;position:relative;overflow:hidden;}
-#hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(255,102,0,.07) 0%,transparent 65%);pointer-events:none;}
-#hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(transparent 49%,rgba(255,102,0,.02) 50%);background-size:100% 3px;pointer-events:none;}
-.hero-eyebrow{font-family:var(--f-mono);font-size:10px;letter-spacing:5px;color:var(--orange);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
-.hero-eyebrow::before,.hero-eyebrow::after{content:'';flex:1;max-width:48px;height:1px;background:var(--orange);opacity:.4;}
-.hero-title{font-family:var(--f-hero);font-size:clamp(44px,8vw,104px);line-height:.92;letter-spacing:3px;color:var(--t1);margin-bottom:28px;max-width:900px;}
-.hero-title span{color:var(--orange);}
-.hero-subtitle{font-family:var(--f-ui);font-size:clamp(14px,2vw,20px);font-weight:400;color:var(--t2);max-width:540px;line-height:1.6;letter-spacing:.5px;margin-bottom:48px;}
-.hero-cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;}
-.btn-primary{font-family:var(--f-display);font-size:14px;font-weight:700;letter-spacing:3px;padding:14px 36px;border-radius:3px;border:none;background:var(--orange);color:#fff;cursor:pointer;text-decoration:none;transition:all .18s;box-shadow:0 4px 0 var(--orange-dim),0 0 32px var(--orange-glow);}
-.btn-primary:hover{filter:brightness(1.1);transform:translateY(-2px);box-shadow:0 6px 0 var(--orange-dim),0 0 48px rgba(255,102,0,.25);}
-.btn-secondary{font-family:var(--f-display);font-size:14px;font-weight:600;letter-spacing:3px;padding:14px 28px;border-radius:3px;border:1px solid var(--border2);background:transparent;color:var(--t2);cursor:pointer;text-decoration:none;transition:all .18s;}
-.btn-secondary:hover{border-color:var(--orange);color:var(--orange);}
-.hero-stats{display:flex;gap:40px;margin-top:64px;padding-top:40px;border-top:1px solid var(--border);flex-wrap:wrap;justify-content:center;}
-.stat{text-align:center;}
-.stat-num{font-family:var(--f-hero);font-size:36px;color:var(--orange);line-height:1;}
-.stat-label{font-family:var(--f-mono);font-size:9px;letter-spacing:3px;color:var(--t3);margin-top:4px;}
-
-/* ══════ SERVICES ══════ */
-#services{padding:100px 48px;max-width:1200px;margin:0 auto;}
-.section-label{font-family:var(--f-mono);font-size:9px;letter-spacing:5px;color:var(--orange);text-align:center;margin-bottom:14px;}
-.section-title{font-family:var(--f-hero);font-size:clamp(32px,5vw,58px);letter-spacing:3px;color:var(--t1);text-align:center;margin-bottom:12px;}
-.section-sub{font-family:var(--f-ui);font-size:15px;color:var(--t2);text-align:center;margin-bottom:56px;letter-spacing:.5px;}
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
-.service-card{background:var(--surface);border:1px solid var(--border);padding:36px 32px;position:relative;overflow:hidden;transition:all .22s;cursor:default;}
-.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .25s;}
-.service-card:hover{background:var(--panel);border-color:var(--border2);}
-.service-card:hover::before{transform:scaleX(1);}
-.service-num{font-family:var(--f-mono);font-size:9px;color:var(--t3);letter-spacing:3px;margin-bottom:20px;}
-.service-icon{font-size:28px;margin-bottom:16px;display:block;}
-.service-name{font-family:var(--f-display);font-size:20px;font-weight:700;letter-spacing:3px;color:var(--t1);margin-bottom:8px;}
-.service-tagline{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--orange);margin-bottom:14px;}
-.service-desc{font-family:var(--f-ui);font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:20px;}
-.service-specs{display:flex;flex-direction:column;gap:5px;}
-.spec{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:9px;color:var(--t3);letter-spacing:1px;}
-.spec::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--orange);opacity:.6;flex-shrink:0;}
-
-/* ══════ ECOSYSTEM ══════ */
-#ecosystem{padding:100px 48px;max-width:1200px;margin:0 auto;}
-.eco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:0;}
-.eco-card{background:var(--surface);border:1px solid var(--border);padding:28px 24px;position:relative;overflow:hidden;transition:all .22s;text-decoration:none;display:block;}
-.eco-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .25s;}
-.eco-card:hover{background:var(--panel);border-color:var(--border2);transform:translateY(-2px);}
-.eco-card:hover::before{transform:scaleX(1);}
-.eco-num{font-family:var(--f-mono);font-size:9px;color:var(--t3);letter-spacing:3px;margin-bottom:14px;}
-.eco-icon{font-size:26px;margin-bottom:12px;display:block;}
-.eco-name{font-family:var(--f-display);font-size:17px;font-weight:700;letter-spacing:3px;color:var(--t1);margin-bottom:6px;}
-.eco-tagline{font-family:var(--f-mono);font-size:9px;letter-spacing:2px;color:var(--orange);margin-bottom:10px;}
-.eco-desc{font-family:var(--f-ui);font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:16px;}
-.eco-link{font-family:var(--f-mono);font-size:9px;letter-spacing:2px;color:var(--orange);display:flex;align-items:center;gap:6px;}
-.eco-link::after{content:'→';}
-.eco-card.soon .eco-link{color:var(--t3);}
-.eco-card.soon .eco-name{color:var(--t3);}
-.eco-card.soon::before{background:var(--t3);}
-.eco-badge-soon{font-family:var(--f-mono);font-size:7px;letter-spacing:2px;color:var(--t3);background:var(--panel);border:1px solid var(--border);padding:2px 7px;border-radius:2px;position:absolute;top:12px;right:12px;}
-
-/* ══════ CTA BAND ══════ */
-#cta-band{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 48px;text-align:center;}
-.cta-band-title{font-family:var(--f-hero);font-size:clamp(28px,4vw,52px);letter-spacing:3px;color:var(--t1);margin-bottom:12px;}
-.cta-band-sub{font-family:var(--f-ui);font-size:15px;color:var(--t2);margin-bottom:36px;letter-spacing:.5px;}
-
-/* ══════ FOOTER ══════ */
-footer{padding:28px 48px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-.footer-brand{font-family:var(--f-mono);font-size:9px;letter-spacing:3px;color:var(--t3);}
-.footer-links{display:flex;gap:20px;}
-.footer-link{font-family:var(--f-mono);font-size:9px;letter-spacing:2px;color:var(--t3);text-decoration:none;transition:color .15s;}
-.footer-link:hover{color:var(--t2);}
-
-/* ══════ RESPONSIVE ══════ */
-@media(max-width:768px){
-  header{padding:0 20px;}
-  .logo-sub{display:none;}
-  .nav-link{display:none;}
-  #hero{padding:100px 24px 60px;}
-  #services{padding:60px 24px;}
-  .services-grid{grid-template-columns:1fr;}
-  #ecosystem{padding:60px 24px;}
-  .eco-grid{grid-template-columns:1fr 1fr;}
-  #cta-band{padding:60px 24px;}
-  footer{padding:20px 24px;flex-direction:column;text-align:center;}
+/* ═══════════════════════════════════════
+   HEADER
+═══════════════════════════════════════ */
+#header{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:68px;
+  background:rgba(8,8,8,.88);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--px);
+  gap:16px;
 }
-@media(max-width:480px){
-  .eco-grid{grid-template-columns:1fr;}
+.h-logo{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.logo-mark{
+  width:38px;height:38px;
+  background:var(--orange);
+  clip-path:polygon(0 0,100% 0,100% 68%,68% 100%,0 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-mono);font-size:9px;font-weight:700;color:#fff;
+  letter-spacing:-1px;flex-shrink:0;
+}
+.h-brand-name{font-family:var(--f-display);font-size:18px;font-weight:700;letter-spacing:5px;color:var(--t1);line-height:1;}
+.h-brand-sub{font-family:var(--f-mono);font-size:10px;letter-spacing:3px;color:var(--t3);margin-top:2px;}
+.h-nav{display:flex;align-items:center;gap:8px;}
+.h-link{font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--t3);padding:6px 10px;border-radius:3px;transition:color .15s;white-space:nowrap;}
+.h-link:hover{color:var(--t1);}
+.h-cta{
+  font-family:var(--f-display);font-size:14px;font-weight:700;letter-spacing:3px;
+  padding:10px 22px;border-radius:3px;border:none;
+  background:var(--orange);color:#fff;
+  cursor:pointer;transition:all .18s;
+  box-shadow:0 0 24px var(--orange-glow);
+  white-space:nowrap;
+}
+.h-cta:hover{background:var(--orange-dim);transform:translateY(-1px);}
+
+/* Hamburger */
+.h-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:none;}
+.h-burger span{display:block;width:22px;height:2px;background:var(--t2);border-radius:1px;transition:all .2s;}
+.h-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.h-burger.open span:nth-child(2){opacity:0;}
+.h-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* Mobile nav drawer */
+.h-drawer{
+  display:none;position:fixed;top:68px;left:0;right:0;
+  background:var(--surface);border-bottom:1px solid var(--border2);
+  padding:20px var(--px);z-index:199;
+  flex-direction:column;gap:4px;
+}
+.h-drawer.open{display:flex;}
+.drawer-link{font-family:var(--f-mono);font-size:13px;letter-spacing:2px;color:var(--t2);padding:14px 0;border-bottom:1px solid var(--border);transition:color .15s;}
+.drawer-link:last-child{border-bottom:none;}
+.drawer-link:hover{color:var(--orange);}
+.drawer-cta{margin-top:12px;text-align:center;font-family:var(--f-display);font-size:16px;font-weight:700;letter-spacing:3px;padding:16px;border-radius:3px;background:var(--orange);color:#fff;}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+#hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:calc(68px + 60px) var(--px) 80px;
+  position:relative;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-55%);
+  width:min(800px,120vw);height:min(800px,120vw);
+  background:radial-gradient(circle,rgba(255,102,0,.09) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hero-scanlines{
+  position:absolute;inset:0;
+  background-image:linear-gradient(transparent 49%,rgba(255,102,0,.018) 50%);
+  background-size:100% 4px;
+  pointer-events:none;opacity:.7;
+}
+.hero-eyebrow{
+  font-family:var(--f-mono);font-size:12px;letter-spacing:6px;
+  color:var(--orange);margin-bottom:28px;
+  display:flex;align-items:center;gap:14px;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';flex:1;max-width:52px;height:1px;background:var(--orange);opacity:.4;}
+.hero-title{
+  font-family:var(--f-hero);
+  font-size:clamp(52px,9.5vw,120px);
+  line-height:.9;letter-spacing:2px;
+  color:var(--t1);
+  margin-bottom:28px;
+  max-width:980px;
+}
+.hero-title em{color:var(--orange);font-style:normal;}
+.hero-sub{
+  font-family:var(--f-body);
+  font-size:clamp(17px,2.2vw,22px);
+  font-weight:300;color:var(--t2);
+  max-width:560px;line-height:1.65;
+  margin-bottom:52px;
+}
+.hero-sub strong{color:var(--t1);font-weight:500;}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;}
+.btn-primary{
+  font-family:var(--f-display);font-size:16px;font-weight:700;letter-spacing:3px;
+  padding:18px 40px;border-radius:3px;border:none;
+  background:var(--orange);color:#fff;cursor:pointer;
+  transition:all .2s;
+  box-shadow:0 4px 0 var(--orange-dim),0 0 40px var(--orange-glow);
+  min-height:56px;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{filter:brightness(1.08);transform:translateY(-2px);box-shadow:0 6px 0 var(--orange-dim),0 0 56px rgba(255,102,0,.28);}
+.btn-ghost{
+  font-family:var(--f-display);font-size:16px;font-weight:600;letter-spacing:3px;
+  padding:18px 32px;border-radius:3px;
+  border:1px solid var(--border3);background:transparent;
+  color:var(--t2);cursor:pointer;transition:all .2s;
+  min-height:56px;display:inline-flex;align-items:center;
+}
+.btn-ghost:hover{border-color:var(--orange);color:var(--orange);}
+.hero-metrics{
+  display:flex;gap:clamp(24px,4vw,56px);
+  margin-top:72px;padding-top:48px;
+  border-top:1px solid var(--border2);
+  flex-wrap:wrap;justify-content:center;
+}
+.metric{text-align:center;}
+.metric-num{font-family:var(--f-hero);font-size:clamp(38px,5vw,52px);color:var(--orange);line-height:1;}
+.metric-label{font-family:var(--f-mono);font-size:11px;letter-spacing:3px;color:var(--t3);margin-top:6px;}
+
+/* ═══════════════════════════════════════
+   SECTION SHARED
+═══════════════════════════════════════ */
+.section{padding:clamp(80px,10vw,130px) var(--px);}
+.section-inner{max-width:var(--max);margin:0 auto;}
+.s-label{font-family:var(--f-mono);font-size:11px;letter-spacing:5px;color:var(--orange);text-align:center;margin-bottom:16px;}
+.s-title{font-family:var(--f-hero);font-size:clamp(36px,5.5vw,66px);letter-spacing:2px;color:var(--t1);text-align:center;margin-bottom:16px;line-height:.95;}
+.s-sub{font-family:var(--f-body);font-size:clamp(16px,2vw,19px);font-weight:300;color:var(--t2);text-align:center;max-width:580px;margin:0 auto 64px;line-height:1.6;}
+
+/* ═══════════════════════════════════════
+   MODULES — 5 CARDS
+═══════════════════════════════════════ */
+#modules{background:var(--bg);}
+
+.modules-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto auto;
+  gap:2px;
+}
+/* 5th card (Callsheet) spans from col 2 to 3 on bottom row */
+.mod-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:clamp(28px,3.5vw,44px) clamp(24px,3vw,40px);
+  position:relative;overflow:hidden;
+  transition:background .2s,border-color .2s,transform .2s;
+  text-decoration:none;display:flex;flex-direction:column;
+}
+.mod-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--orange);
+  transform:scaleX(0);transform-origin:left;transition:transform .28s;
+}
+.mod-card:hover{background:var(--panel);border-color:var(--border2);transform:translateY(-3px);}
+.mod-card:hover::after{transform:scaleX(1);}
+.mod-card.soon{cursor:default;}
+.mod-card.soon:hover{transform:none;background:var(--surface);}
+.mod-card.soon::after{background:var(--t4);}
+
+.mod-badge-soon{
+  position:absolute;top:16px;right:16px;
+  font-family:var(--f-mono);font-size:10px;letter-spacing:2px;
+  color:var(--t3);background:var(--panel);
+  border:1px solid var(--border2);padding:3px 10px;border-radius:2px;
+}
+.mod-num{font-family:var(--f-mono);font-size:11px;letter-spacing:3px;color:var(--t4);margin-bottom:20px;}
+.mod-icon{font-size:32px;margin-bottom:16px;line-height:1;}
+.mod-name{font-family:var(--f-display);font-size:clamp(20px,2.2vw,26px);font-weight:700;letter-spacing:3px;color:var(--t1);margin-bottom:6px;}
+.mod-card.soon .mod-name{color:var(--t3);}
+.mod-sub{font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--orange);margin-bottom:16px;}
+.mod-card.soon .mod-sub{color:var(--t4);}
+.mod-desc{
+  font-family:var(--f-body);
+  font-size:clamp(14px,1.5vw,16px);
+  font-weight:300;color:var(--t2);
+  line-height:1.7;flex:1;margin-bottom:24px;
+}
+.mod-cta{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:2px;
+  color:var(--orange);display:flex;align-items:center;gap:8px;
+  margin-top:auto;
+}
+.mod-cta::after{content:'→';transition:transform .2s;}
+.mod-card:hover .mod-cta::after{transform:translateX(4px);}
+.mod-card.soon .mod-cta{color:var(--t4);}
+
+/* ═══════════════════════════════════════
+   WORKFLOW
+═══════════════════════════════════════ */
+#workflow{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.wf-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;position:relative;
+}
+.wf-grid::before{
+  content:'';position:absolute;
+  top:36px;left:12.5%;right:12.5%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border3) 20%,var(--border3) 80%,transparent);
+  pointer-events:none;
+}
+.wf-step{
+  padding:clamp(28px,3vw,44px) 20px;
+  text-align:center;position:relative;
+}
+.wf-num{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-display);font-size:18px;font-weight:700;
+  color:var(--orange);margin:0 auto 20px;
+  position:relative;z-index:1;
+}
+.wf-title{font-family:var(--f-display);font-size:clamp(16px,1.8vw,20px);font-weight:700;letter-spacing:2px;color:var(--t1);margin-bottom:10px;}
+.wf-desc{font-family:var(--f-body);font-size:clamp(13px,1.4vw,15px);font-weight:300;color:var(--t2);line-height:1.6;}
+
+/* ═══════════════════════════════════════
+   EQUIPEMENT
+═══════════════════════════════════════ */
+#equipement{background:var(--bg);}
+.eq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.eq-card{
+  background:var(--surface);border:1px solid var(--border);
+  padding:clamp(28px,3vw,44px) clamp(24px,3vw,40px);
+}
+.eq-icon{font-size:36px;margin-bottom:20px;}
+.eq-name{font-family:var(--f-display);font-size:clamp(20px,2vw,24px);font-weight:700;letter-spacing:3px;color:var(--t1);margin-bottom:6px;}
+.eq-tagline{font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--orange);margin-bottom:16px;}
+.eq-desc{font-family:var(--f-body);font-size:clamp(14px,1.5vw,16px);font-weight:300;color:var(--t2);line-height:1.7;margin-bottom:24px;}
+.eq-specs{display:flex;flex-direction:column;gap:8px;}
+.eq-spec{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--f-mono);font-size:11px;letter-spacing:1px;color:var(--t3);
+}
+.eq-spec::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--orange);opacity:.5;flex-shrink:0;}
+
+/* ═══════════════════════════════════════
+   CTA FINAL
+═══════════════════════════════════════ */
+#cta-final{
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:clamp(80px,10vw,130px) var(--px);
+  text-align:center;position:relative;overflow:hidden;
+}
+#cta-final::before{
+  content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:600px;height:300px;
+  background:radial-gradient(ellipse,rgba(255,102,0,.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+.cta-title{font-family:var(--f-hero);font-size:clamp(36px,5.5vw,72px);letter-spacing:2px;color:var(--t1);margin-bottom:16px;line-height:.95;}
+.cta-sub{font-family:var(--f-body);font-size:clamp(16px,2vw,20px);font-weight:300;color:var(--t2);margin-bottom:44px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6;}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+#footer{
+  padding:clamp(28px,4vw,44px) var(--px);
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:20px;
+}
+.footer-brand{font-family:var(--f-mono);font-size:11px;letter-spacing:3px;color:var(--t3);}
+.footer-links{display:flex;flex-wrap:wrap;gap:clamp(12px,2vw,28px);}
+.footer-link{font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--t3);transition:color .15s;}
+.footer-link:hover{color:var(--t1);}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — TABLET
+═══════════════════════════════════════ */
+@media(max-width:900px){
+  .h-nav{display:none;}
+  .h-cta{display:none;}
+  .h-burger{display:flex;}
+
+  .modules-grid{grid-template-columns:1fr 1fr;}
+  .wf-grid{grid-template-columns:1fr 1fr;gap:2px;}
+  .wf-grid::before{display:none;}
+  .eq-grid{grid-template-columns:1fr 1fr;}
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — MOBILE
+═══════════════════════════════════════ */
+@media(max-width:580px){
+  .hero-eyebrow{font-size:10px;letter-spacing:4px;}
+  .hero-metrics{gap:28px;margin-top:48px;padding-top:32px;}
+  .metric-label{font-size:10px;letter-spacing:2px;}
+
+  .modules-grid{grid-template-columns:1fr;}
+  .mod-card.soon{order:99;}
+
+  .wf-grid{grid-template-columns:1fr;}
+  .wf-step{padding:24px 20px;text-align:left;display:flex;align-items:flex-start;gap:20px;}
+  .wf-num{flex-shrink:0;margin:0;}
+  .wf-step-content{flex:1;}
+
+  .eq-grid{grid-template-columns:1fr;}
+
+  #footer{flex-direction:column;text-align:center;}
+  .footer-links{justify-content:center;}
 }
 </style>
 </head>
 <body>
 
-<!-- ══════ HEADER ══════ -->
-<header>
-  <a class="header-logo" href="index.html">
+<!-- ═══════════ HEADER ═══════════ -->
+<header id="header">
+  <a class="h-logo" href="index.html">
     <div class="logo-mark">AI</div>
     <div>
-      <div class="logo-name">AINTERCOM OS</div>
-      <div class="logo-sub">THIS IS IT EVENT</div>
+      <div class="h-brand-name">AINTERCOM OS</div>
+      <div class="h-brand-sub">THIS IS IT EVENT</div>
     </div>
   </a>
-  <nav class="header-nav">
-    <a class="nav-link" href="#services">SERVICES</a>
-    <a class="nav-link" href="#ecosystem">MODULES</a>
-    <a class="nav-link" href="mentions-legales.html" target="_blank">MENTIONS LÉGALES</a>
-    <a class="btn-access" href="app.html">ACCÈS RÉGIE</a>
+  <nav class="h-nav">
+    <a class="h-link" href="#modules">Modules</a>
+    <a class="h-link" href="#workflow">Comment ça marche</a>
+    <a class="h-link" href="#equipement">Équipement</a>
+    <a class="h-link" href="mentions-legales.html" target="_blank">Mentions légales</a>
   </nav>
+  <a class="h-cta" href="app.html">ACCÈS RÉGIE</a>
+  <button class="h-burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
-<!-- ══════ HERO ══════ -->
+<!-- Mobile drawer -->
+<div class="h-drawer" id="drawer">
+  <a class="drawer-link" href="#modules" onclick="closeDrawer()">Modules</a>
+  <a class="drawer-link" href="#workflow" onclick="closeDrawer()">Comment ça marche</a>
+  <a class="drawer-link" href="#equipement" onclick="closeDrawer()">Équipement</a>
+  <a class="drawer-link" href="mentions-legales.html" target="_blank" onclick="closeDrawer()">Mentions légales</a>
+  <a class="drawer-cta" href="app.html">ACCÈS RÉGIE →</a>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
 <section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-scanlines"></div>
   <div class="hero-eyebrow">THIS IS IT EVENT</div>
-  <h1 class="hero-title">PILOTAGE ÉVÉNEMENTIEL<br><span>DE HAUTE PRÉCISION</span></h1>
-  <p class="hero-subtitle">L'outil métier conçu par des régisseurs, pour des régisseurs. Conducteurs, communications radio et gestion de parc en temps réel.</p>
-  <div class="hero-cta">
+  <h1 class="hero-title">LA PLATEFORME QUI<br><em>PILOTE VOS SHOWS</em></h1>
+  <p class="hero-sub">
+    Un seul outil pour gérer vos concerts en arena et stade —
+    de la <strong>régie technique</strong> aux <strong>accréditations</strong>,
+    du <strong>rider artiste</strong> aux <strong>bénévoles</strong>.
+  </p>
+  <div class="hero-actions">
     <a class="btn-primary" href="app.html">▶ ACCÈS RÉGIE</a>
-    <a class="btn-secondary" href="#services">DÉCOUVRIR</a>
+    <a class="btn-ghost" href="#modules">VOIR LES MODULES</a>
   </div>
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">12×</div>
-      <div class="stat-label">TALKIES MOTOROLA</div>
+  <div class="hero-metrics">
+    <div class="metric">
+      <div class="metric-num">5</div>
+      <div class="metric-label">MODULES OPÉRATIONNELS</div>
     </div>
-    <div class="stat">
-      <div class="stat-num">6×</div>
-      <div class="stat-label">POSTES INTERCOM</div>
+    <div class="metric">
+      <div class="metric-num">12×</div>
+      <div class="metric-label">TALKIES MOTOROLA</div>
     </div>
-    <div class="stat">
-      <div class="stat-num">0ms</div>
-      <div class="stat-label">LATENCE INTERCOM</div>
+    <div class="metric">
+      <div class="metric-num">6×</div>
+      <div class="metric-label">POSTES INTERCOM</div>
     </div>
-    <div class="stat">
-      <div class="stat-num">V9</div>
-      <div class="stat-label">VERSION STABLE</div>
+    <div class="metric">
+      <div class="metric-num">0ms</div>
+      <div class="metric-label">LATENCE INTERCOM</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ MODULES ═══════════ -->
+<section id="modules" class="section">
+  <div class="section-inner">
+    <div class="s-label">LA PLATEFORME</div>
+    <h2 class="s-title">5 MODULES, 1 ÉCOSYSTÈME</h2>
+    <p class="s-sub">Chaque module couvre un métier. Tous sont connectés entre eux.</p>
+    <div class="modules-grid">
+
+      <a class="mod-card" href="app.html">
+        <div class="mod-num">01 /</div>
+        <div class="mod-icon">🎛</div>
+        <div class="mod-name">AINTERCOM OS</div>
+        <div class="mod-sub">RÉGIE & CONDUCTEUR</div>
+        <p class="mod-desc">Le cerveau de votre show. Conducteur multi-scènes, chronomètre de précision, gestion du parc radio et intercom. Export CSV et impression.</p>
+        <div class="mod-cta">OUVRIR LA RÉGIE</div>
+      </a>
+
+      <a class="mod-card" href="benevolat/index.html">
+        <div class="mod-num">02 /</div>
+        <div class="mod-icon">🙋</div>
+        <div class="mod-name">BÉNÉVOLAT</div>
+        <div class="mod-sub">INSCRIPTIONS & GESTION</div>
+        <p class="mod-desc">Formulaire d'inscription en 4 étapes, disponibilités, choix de postes. Back-office complet avec export CSV et transfert automatique vers ACCRED.</p>
+        <div class="mod-cta">FORMULAIRE INSCRIPTION</div>
+      </a>
+
+      <a class="mod-card" href="accred/index.html">
+        <div class="mod-num">03 /</div>
+        <div class="mod-icon">🎫</div>
+        <div class="mod-name">ACCRED</div>
+        <div class="mod-sub">ACCRÉDITATIONS QR</div>
+        <p class="mod-desc">Gestion des accréditations par type (artiste, crew, staff, VIP…) et par zone. Badge QR numérique, scanner terrain mobile, log en temps réel.</p>
+        <div class="mod-cta">ADMIN ACCRED</div>
+      </a>
+
+      <a class="mod-card" href="rider/admin.html">
+        <div class="mod-num">04 /</div>
+        <div class="mod-icon">📋</div>
+        <div class="mod-name">RIDER TECHNIQUE</div>
+        <div class="mod-sub">COLLECTE ARTISTE</div>
+        <p class="mod-desc">Envoyez un lien unique à chaque artiste. Collecte structurée en 5 sections : son, lumières, backline, loge et transport.</p>
+        <div class="mod-cta">ADMIN RIDER</div>
+      </a>
+
+      <a class="mod-card soon">
+        <div class="mod-badge-soon">BIENTÔT</div>
+        <div class="mod-num">05 /</div>
+        <div class="mod-icon">📅</div>
+        <div class="mod-name">CALLSHEET</div>
+        <div class="mod-sub">PLANNING JOURNÉE</div>
+        <p class="mod-desc">Feuille de route journalière, assignation des équipes par créneau, export PDF et partage en un clic.</p>
+        <div class="mod-cta">EN DÉVELOPPEMENT</div>
+      </a>
+
     </div>
   </div>
 </section>
 
-<!-- ══════ SERVICES ══════ -->
-<section id="services">
-  <div class="section-label">NOS SERVICES</div>
-  <h2 class="section-title">L'ARSENAL DU RÉGISSEUR</h2>
-  <p class="section-sub">Trois piliers techniques pour des événements sans faille.</p>
-  <div class="services-grid">
-
-    <!-- 1. Régie Technique -->
-    <div class="service-card">
-      <div class="service-num">01 /</div>
-      <span class="service-icon">🎛</span>
-      <div class="service-name">RÉGIE TECHNIQUE</div>
-      <div class="service-tagline">PRODUCTION DIGITALE</div>
-      <p class="service-desc">Conducteur de show en temps réel, gestion des séquences minutées, chronomètre de précision, export CSV et impression.</p>
-      <div class="service-specs">
-        <div class="spec">CONDUCTEUR MULTI-SCÈNES</div>
-        <div class="spec">CHRONO TEMPS RÉEL</div>
-        <div class="spec">EXPORT CSV / IMPRESSION</div>
-        <div class="spec">MULTI-PROFILS AVEC PIN</div>
+<!-- ═══════════ WORKFLOW ═══════════ -->
+<section id="workflow" class="section">
+  <div class="section-inner">
+    <div class="s-label">COMMENT ÇA S'ARTICULE</div>
+    <h2 class="s-title">CONNECTÉ DE BOUT EN BOUT</h2>
+    <p class="s-sub">Les modules se parlent. Les données circulent sans friction.</p>
+    <div class="wf-grid">
+      <div class="wf-step">
+        <div class="wf-num">1</div>
+        <div class="wf-step-content">
+          <div class="wf-title">INSCRIPTIONS</div>
+          <p class="wf-desc">Les bénévoles remplissent le formulaire en ligne. Les données arrivent directement dans votre back-office.</p>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">2</div>
+        <div class="wf-step-content">
+          <div class="wf-title">ACCRÉDITATIONS</div>
+          <p class="wf-desc">En un clic, les bénévoles confirmés sont exportés vers ACCRED. Badges QR générés automatiquement.</p>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">3</div>
+        <div class="wf-step-content">
+          <div class="wf-title">RIDERS ARTISTES</div>
+          <p class="wf-desc">Chaque artiste reçoit un lien personnel pour remplir son rider. Toutes les données centralisées avant le jour J.</p>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">4</div>
+        <div class="wf-step-content">
+          <div class="wf-title">JOUR DU SHOW</div>
+          <p class="wf-desc">La régie pilote le conducteur en temps réel. Le scanner vérifie les accès. Tout sous contrôle.</p>
+        </div>
       </div>
     </div>
-
-    <!-- 2. Com Radio -->
-    <div class="service-card">
-      <div class="service-num">02 /</div>
-      <span class="service-icon">📻</span>
-      <div class="service-name">COM RADIO</div>
-      <div class="service-tagline">PARC DE 12× MOTOROLA</div>
-      <p class="service-desc">Gestion complète du parc talkie-walkie Motorola XT420 PMR446. Assignation par équipe, canal et responsable, fiche terrain imprimable.</p>
-      <div class="service-specs">
-        <div class="spec">12× MOTOROLA XT420</div>
-        <div class="spec">PMR446 — IP55 — 20H</div>
-        <div class="spec">ASSIGNATION PAR CANAL</div>
-        <div class="spec">FICHE TERRAIN PDF</div>
-      </div>
-    </div>
-
-    <!-- 3. Intercom -->
-    <div class="service-card">
-      <div class="service-num">03 /</div>
-      <span class="service-icon">🎧</span>
-      <div class="service-name">INTERCOM</div>
-      <div class="service-tagline">6× POSTES FULL-DUPLEX</div>
-      <p class="service-desc">Système intercom professionnel Hollyland Solidcom SE Pro. Full duplex, zéro latence, portée 400m. Un poste Master, cinq remotes assignables.</p>
-      <div class="service-specs">
-        <div class="spec">HOLLYLAND SOLIDCOM SE PRO</div>
-        <div class="spec">DECT 1.9GHz — 400M</div>
-        <div class="spec">ZÉRO LATENCE</div>
-        <div class="spec">1 MASTER + 5 REMOTES</div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- ══════ ECOSYSTEM ══════ -->
-<section id="ecosystem">
-  <div class="section-label">MODULES</div>
-  <h2 class="section-title">L'ÉCOSYSTÈME COMPLET</h2>
-  <p class="section-sub">Chaque module couvre un métier de l'événementiel live.</p>
-  <div class="eco-grid">
+<!-- ═══════════ ÉQUIPEMENT ═══════════ -->
+<section id="equipement" class="section">
+  <div class="section-inner">
+    <div class="s-label">L'INFRASTRUCTURE</div>
+    <h2 class="s-title">L'ARSENAL DU RÉGISSEUR</h2>
+    <p class="s-sub">Un parc d'équipement professionnel, géré depuis la plateforme.</p>
+    <div class="eq-grid">
 
-    <!-- RÉGIE -->
-    <a class="eco-card" href="app.html">
-      <div class="eco-num">01 /</div>
-      <span class="eco-icon">🎛</span>
-      <div class="eco-name">AINTERCOM OS</div>
-      <div class="eco-tagline">RÉGIE & CONDUCTEUR</div>
-      <p class="eco-desc">Conducteur de show multi-scènes, chronomètre, gestion parc radio et intercom, export CSV / impression.</p>
-      <div class="eco-link">ACCÉDER À LA RÉGIE</div>
-    </a>
+      <div class="eq-card">
+        <div class="eq-icon">🎛</div>
+        <div class="eq-name">RÉGIE TECHNIQUE</div>
+        <div class="eq-tagline">PRODUCTION DIGITALE</div>
+        <p class="eq-desc">Conducteur de show en temps réel avec séquences minutées, chronomètre de précision, multi-profils avec PIN et export complet.</p>
+        <div class="eq-specs">
+          <div class="eq-spec">Conducteur multi-scènes</div>
+          <div class="eq-spec">Chrono temps réel</div>
+          <div class="eq-spec">Export CSV / impression</div>
+          <div class="eq-spec">Multi-profils avec PIN</div>
+        </div>
+      </div>
 
-    <!-- BÉNÉVOLAT -->
-    <a class="eco-card" href="benevolat/index.html">
-      <div class="eco-num">02 /</div>
-      <span class="eco-icon">🙋</span>
-      <div class="eco-name">BÉNÉVOLAT</div>
-      <div class="eco-tagline">GESTION BÉNÉVOLES</div>
-      <p class="eco-desc">Formulaire d'inscription multi-étapes, gestion des disponibilités et postes, export vers ACCRED.</p>
-      <div class="eco-link">FORMULAIRE D'INSCRIPTION</div>
-    </a>
+      <div class="eq-card">
+        <div class="eq-icon">📻</div>
+        <div class="eq-name">COM RADIO</div>
+        <div class="eq-tagline">PARC 12× MOTOROLA</div>
+        <p class="eq-desc">Gestion complète du parc talkie-walkie Motorola XT420 PMR446. Assignation par équipe, canal et responsable, fiche terrain imprimable.</p>
+        <div class="eq-specs">
+          <div class="eq-spec">12× Motorola XT420</div>
+          <div class="eq-spec">PMR446 — IP55 — 20h batterie</div>
+          <div class="eq-spec">Assignation par canal</div>
+          <div class="eq-spec">Fiche terrain PDF</div>
+        </div>
+      </div>
 
-    <!-- ACCRED -->
-    <a class="eco-card" href="accred/index.html">
-      <div class="eco-num">03 /</div>
-      <span class="eco-icon">🎫</span>
-      <div class="eco-name">ACCRED</div>
-      <div class="eco-tagline">ACCRÉDITATIONS QR</div>
-      <p class="eco-desc">Gestion des accréditations par type et zone, badge QR numérique, scanner terrain mobile.</p>
-      <div class="eco-link">ADMIN ACCRED</div>
-    </a>
+      <div class="eq-card">
+        <div class="eq-icon">🎧</div>
+        <div class="eq-name">INTERCOM</div>
+        <div class="eq-tagline">6× POSTES FULL-DUPLEX</div>
+        <p class="eq-desc">Système intercom professionnel Hollyland Solidcom SE Pro. Full duplex, zéro latence, portée 400m. Un poste Master, cinq remotes assignables.</p>
+        <div class="eq-specs">
+          <div class="eq-spec">Hollyland Solidcom SE Pro</div>
+          <div class="eq-spec">DECT 1.9GHz — 400m de portée</div>
+          <div class="eq-spec">Zéro latence</div>
+          <div class="eq-spec">1 Master + 5 remotes</div>
+        </div>
+      </div>
 
-    <!-- RIDER -->
-    <a class="eco-card" href="rider/admin.html">
-      <div class="eco-num">04 /</div>
-      <span class="eco-icon">📋</span>
-      <div class="eco-name">RIDER</div>
-      <div class="eco-tagline">RIDER TECHNIQUE</div>
-      <p class="eco-desc">Collecte des riders artiste (son, lumières, backline, loge, transport) via formulaire lien dédié.</p>
-      <div class="eco-link">ADMIN RIDER</div>
-    </a>
-
-    <!-- CALLSHEET — BIENTÔT -->
-    <a class="eco-card soon" href="#ecosystem" onclick="return false;" style="cursor:default;">
-      <div class="eco-badge-soon">BIENTÔT</div>
-      <div class="eco-num">05 /</div>
-      <span class="eco-icon">📅</span>
-      <div class="eco-name">CALLSHEET</div>
-      <div class="eco-tagline">PLANNING ÉQUIPE</div>
-      <p class="eco-desc">Feuille de route journalière, assignation des équipes, notifications et export PDF.</p>
-      <div class="eco-link">EN DÉVELOPPEMENT</div>
-    </a>
-
-    <!-- SCANNER — ACCÈS DIRECT -->
-    <a class="eco-card" href="accred/scan.html">
-      <div class="eco-num">06 /</div>
-      <span class="eco-icon">📷</span>
-      <div class="eco-name">SCANNER</div>
-      <div class="eco-tagline">CONTRÔLE ACCÈS</div>
-      <p class="eco-desc">Scanner QR mobile pour contrôle d'accès terrain. Vérification par zone, log en temps réel, vibration.</p>
-      <div class="eco-link">OUVRIR LE SCANNER</div>
-    </a>
-
-    <!-- ADMIN BÉNÉVOLAT -->
-    <a class="eco-card" href="benevolat/admin.html">
-      <div class="eco-num">07 /</div>
-      <span class="eco-icon">⚙</span>
-      <div class="eco-name">BÉNÉVOLAT ADMIN</div>
-      <div class="eco-tagline">BACK-OFFICE</div>
-      <p class="eco-desc">Tableau de bord bénévoles, gestion des statuts, missions, export CSV et transfert vers ACCRED.</p>
-      <div class="eco-link">ADMIN BÉNÉVOLES</div>
-    </a>
-
-    <!-- BADGE -->
-    <a class="eco-card" href="accred/badge.html">
-      <div class="eco-num">08 /</div>
-      <span class="eco-icon">🪪</span>
-      <div class="eco-name">BADGE NUMÉRIQUE</div>
-      <div class="eco-tagline">AFFICHAGE MOBILE</div>
-      <p class="eco-desc">Badge accréditation mobile avec QR code, zones autorisées, statut et informations complètes.</p>
-      <div class="eco-link">VOIR UN BADGE</div>
-    </a>
-
+    </div>
   </div>
 </section>
 
-<!-- ══════ CTA BAND ══════ -->
-<section id="cta-band">
-  <div class="cta-band-title">PRÊT POUR LE SHOW ?</div>
-  <p class="cta-band-sub">Accédez à la régie et prenez le contrôle de votre événement.</p>
+<!-- ═══════════ CTA FINAL ═══════════ -->
+<section id="cta-final">
+  <h2 class="cta-title">PRÊT POUR LE SHOW ?</h2>
+  <p class="cta-sub">Accédez à la régie et prenez le contrôle de votre événement dès maintenant.</p>
   <a class="btn-primary" href="app.html">▶ ACCÈS RÉGIE</a>
 </section>
 
-<!-- ══════ FOOTER ══════ -->
-<footer>
-  <div class="footer-brand">© THIS IS IT EVENT — AINTERCOM OS V9</div>
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer id="footer">
+  <div class="footer-brand">© 2024 THIS IS IT EVENT — AINTERCOM OS V9</div>
   <div class="footer-links">
-    <a class="footer-link" href="app.html">RÉGIE</a>
-    <a class="footer-link" href="benevolat/index.html">BÉNÉVOLAT</a>
+    <a class="footer-link" href="app.html">Régie</a>
+    <a class="footer-link" href="benevolat/index.html">Bénévolat</a>
     <a class="footer-link" href="accred/index.html">ACCRED</a>
-    <a class="footer-link" href="rider/admin.html">RIDER</a>
-    <a class="footer-link" href="mentions-legales.html" target="_blank">MENTIONS LÉGALES</a>
+    <a class="footer-link" href="rider/admin.html">Rider</a>
+    <a class="footer-link" href="mentions-legales.html" target="_blank">Mentions légales</a>
   </div>
 </footer>
 
+<script>
+const burger = document.getElementById('burger');
+const drawer = document.getElementById('drawer');
+burger.addEventListener('click',()=>{
+  burger.classList.toggle('open');
+  drawer.classList.toggle('open');
+});
+function closeDrawer(){
+  burger.classList.remove('open');
+  drawer.classList.remove('open');
+}
+// Close drawer on outside click
+document.addEventListener('click',e=>{
+  if(!burger.contains(e.target)&&!drawer.contains(e.target)) closeDrawer();
+});
+</script>
 </body>
 </html>
