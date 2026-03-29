@@ -10,8 +10,8 @@
 
 // Configuration Supabase (remplacer par vos valeurs)
 const SUPABASE_CONFIG = {
-  url: localStorage.getItem('supabase_url') || 'https://your-project.supabase.co',
-  key: localStorage.getItem('supabase_key') || 'your-anon-key'
+  url: 'https://wmbyccbyhtjzvsxxrsbe.supabase.co',
+  key: 'sb_publishable_EpUIqIUw_xcbF_M74ht-dg_eUg66XrS'
 };
 
 // Ou utiliser des variables d'environnement si disponibles
