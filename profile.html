@@ -328,10 +328,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/config.js"></script>
+    <script src="js/env.js"></script>
 
     <script>
-        // Configuration Supabase
-        const supabase = window.supabaseClient || supabaseInitClient();
+        // Initialiser Supabase avec les variables d'environnement
+        let supabase = null;
+        
+        function initSupabase() {
+            if (window.supabase && window.__ENV__) {
+                const supabaseUrl = window.__ENV__.VITE_SUPABASE_URL || 'https://wmbyccbyhtjzvsxxrsbe.supabase.co';
+                const supabaseKey = window.__ENV__.VITE_SUPABASE_KEY || 'sb_publishable_EpUIqIUw_xcbF_M74ht-dg_eUg66XrS';
+                supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+                console.log('✅ Supabase initialisé pour le profil');
+            } else {
+                console.warn('⚠️ Supabase ou variables d\'environnement non disponibles');
+            }
+        }
 
         // Éléments du DOM
         const profileForm = document.getElementById('profileForm');
@@ -491,8 +503,11 @@
             updateAvatarPreview(avatarUrlInput.value);
         });
 
-        // Charger le profil au démarrage
-        document.addEventListener('DOMContentLoaded', loadProfile);
+        // Initialiser et charger le profil au démarrage
+        document.addEventListener('DOMContentLoaded', () => {
+            initSupabase();
+            loadProfile();
+        });
     </script>
 </body>
 </html>

@@ -1,0 +1,346 @@
+<!-- AINTERCOM Header Component -->
+<header id="aintercom-header" class="aintercom-header">
+    <div class="header-container">
+        <!-- Logo -->
+        <div class="header-logo">
+            <a href="/">
+                <span class="logo-icon">🎙️</span>
+                <span class="logo-text">AINTERCOM</span>
+            </a>
+        </div>
+
+        <!-- Navigation Center -->
+        <nav class="header-nav">
+            <a href="/dashboard.html" class="nav-link">
+                <i class="fas fa-th"></i> Dashboard
+            </a>
+            <a href="/modules/lexique.html" class="nav-link">
+                <i class="fas fa-book"></i> Lexique
+            </a>
+        </nav>
+
+        <!-- User Section -->
+        <div class="header-user">
+            <!-- Authenticated User -->
+            <div class="user-authenticated" id="user-authenticated" style="display: none;">
+                <button class="user-profile-btn" id="user-profile-btn">
+                    <img id="user-avatar-header" class="user-avatar" src="" alt="Profil">
+                    <span id="user-name-header" class="user-name"></span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div class="user-menu" id="user-menu">
+                    <a href="/profile.html" class="menu-item">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Mon Profil</span>
+                    </a>
+                    <a href="/dashboard.html" class="menu-item">
+                        <i class="fas fa-th"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <div class="menu-divider"></div>
+                    <button class="menu-item logout-item" id="logout-btn-header">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Déconnexion</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Unauthenticated User -->
+            <div class="user-unauthenticated" id="user-unauthenticated">
+                <a href="/login.html" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Connexion
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="menu-toggle" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</header>
+
+<style>
+    .aintercom-header {
+        background: var(--surface, #1a1a1a);
+        border-bottom: 2px solid var(--gold, #d4af37);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 24px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+    }
+
+    /* ─────────────────────────────────────
+       LOGO
+    ───────────────────────────────────────── */
+    .header-logo a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: var(--gold, #d4af37);
+        font-weight: 700;
+        font-family: 'Bebas Neue', sans-serif;
+        letter-spacing: 2px;
+        font-size: 18px;
+        transition: all 0.2s;
+    }
+
+    .header-logo a:hover {
+        transform: translateY(-2px);
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+
+    .logo-icon {
+        font-size: 24px;
+    }
+
+    /* ─────────────────────────────────────
+       NAVIGATION
+    ───────────────────────────────────────── */
+    .header-nav {
+        display: flex;
+        gap: 8px;
+        flex: 1;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        color: var(--text-secondary, #b0b0b0);
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+    .nav-link:hover {
+        background: rgba(212, 175, 55, 0.1);
+        color: var(--gold, #d4af37);
+    }
+
+    .nav-link.active {
+        background: rgba(212, 175, 55, 0.15);
+        color: var(--gold, #d4af37);
+    }
+
+    /* ─────────────────────────────────────
+       USER SECTION
+    ───────────────────────────────────────── */
+    .header-user {
+        position: relative;
+    }
+
+    /* Authenticated User */
+    .user-authenticated {
+        position: relative;
+    }
+
+    .user-profile-btn {
+        all: unset;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        cursor: pointer;
+        border-radius: 24px;
+        background: rgba(212, 175, 55, 0.08);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        transition: all 0.2s;
+    }
+
+    .user-profile-btn:hover {
+        background: rgba(212, 175, 55, 0.15);
+        border-color: var(--gold, #d4af37);
+    }
+
+    .user-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--gold, #d4af37);
+    }
+
+    .user-name {
+        color: var(--text, #f5f5f5);
+        font-weight: 500;
+        font-size: 13px;
+    }
+
+    .user-profile-btn i {
+        color: var(--text-secondary, #b0b0b0);
+        font-size: 12px;
+    }
+
+    /* Dropdown Menu */
+    .user-menu {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        background: var(--surface, #1a1a1a);
+        border: 1px solid var(--border, #2a2a2a);
+        border-radius: 8px;
+        padding: 8px;
+        min-width: 220px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        display: none;
+        animation: slideDown 0.2s ease-out;
+    }
+
+    .user-menu.active {
+        display: block;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 14px;
+        background: none;
+        border: none;
+        color: var(--text, #f5f5f5);
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 6px;
+        font-size: 13px;
+        transition: all 0.2s;
+        text-align: left;
+    }
+
+    .menu-item:hover {
+        background: rgba(212, 175, 55, 0.1);
+        color: var(--gold, #d4af37);
+    }
+
+    .menu-item i {
+        width: 18px;
+        font-size: 14px;
+    }
+
+    .logout-item {
+        color: var(--error, #ff3b3b);
+    }
+
+    .logout-item:hover {
+        background: rgba(255, 59, 59, 0.1);
+        color: var(--error, #ff3b3b);
+    }
+
+    .menu-divider {
+        height: 1px;
+        background: var(--border, #2a2a2a);
+        margin: 4px 0;
+    }
+
+    /* Unauthenticated User */
+    .btn-login {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 20px;
+        background: var(--gold, #d4af37);
+        color: var(--bg, #0a0a0a);
+        text-decoration: none;
+        border-radius: 24px;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.2s;
+    }
+
+    .btn-login:hover {
+        background: var(--gold-dim, #b8941e);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-login:active {
+        transform: translateY(0);
+    }
+
+    /* ─────────────────────────────────────
+       MOBILE MENU TOGGLE
+    ───────────────────────────────────────── */
+    .menu-toggle {
+        all: unset;
+        display: none;
+        cursor: pointer;
+        padding: 8px;
+        color: var(--gold, #d4af37);
+        font-size: 20px;
+    }
+
+    /* ─────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 768px) {
+        .header-container {
+            gap: 16px;
+            padding: 0 16px;
+        }
+
+        .header-nav {
+            display: none;
+        }
+
+        .menu-toggle {
+            display: block;
+        }
+
+        .user-name {
+            display: none;
+        }
+
+        .header-logo a span:last-child {
+            display: none;
+        }
+
+        .user-profile-btn {
+            padding: 6px 8px;
+        }
+
+        .user-menu {
+            right: -8px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .header-container {
+            padding: 0 12px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+        }
+    }
+</style>

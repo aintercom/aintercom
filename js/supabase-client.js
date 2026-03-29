@@ -8,17 +8,11 @@
  * 3. Configurer URL de redirection: https://yourdomain.com/auth/callback
  */
 
-// Configuration Supabase (remplacer par vos valeurs)
+// Configuration Supabase - Utilise les variables d'environnement
 const SUPABASE_CONFIG = {
-  url: 'https://wmbyccbyhtjzvsxxrsbe.supabase.co',
-  key: 'sb_publishable_EpUIqIUw_xcbF_M74ht-dg_eUg66XrS'
+  url: window.__ENV__?.VITE_SUPABASE_URL || 'https://wmbyccbyhtjzvsxxrsbe.supabase.co',
+  key: window.__ENV__?.VITE_SUPABASE_KEY || 'sb_publishable_EpUIqIUw_xcbF_M74ht-dg_eUg66XrS'
 };
-
-// Ou utiliser des variables d'environnement si disponibles
-if (window.__ENV__ && window.__ENV__.SUPABASE_URL) {
-  SUPABASE_CONFIG.url = window.__ENV__.SUPABASE_URL;
-  SUPABASE_CONFIG.key = window.__ENV__.SUPABASE_KEY;
-}
 
 // Initialiser Supabase client
 let supabaseClient = null;
@@ -102,6 +96,103 @@ async function signInWithEmail(email, password) {
     return { success: true, data };
   } catch (error) {
     console.error('❌ Erreur Email Sign-In:', error.message);
+    return { success: false, error: error.message };
+  }
+}
+
+/**
+ * Inscription par Email/Password
+ */
+async function signUpWithEmail(email, password, fullName = null) {
+  try {
+    if (!supabaseClient) {
+      // Mode démo - créer un compte demo
+      const demoUser = {
+        id: 'signup_' + Date.now(),
+        email,
+        name: fullName || email.split('@')[0],
+        provider: 'email'
+      };
+      saveSession(demoUser);
+      return { success: true, data: { user: demoUser } };
+    }
+
+    const { data, error } = await supabaseClient.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          name: fullName || email.split('@')[0]
+        }
+      }
+    });
+
+    if (error) {
+      throw error;
+    }
+
+    console.log('✅ Inscription réussie. Vérifiez votre email.');
+    return { success: true, data, message: 'Inscription réussie. Vérifiez votre email pour confirmer.' };
+  } catch (error) {
+    console.error('❌ Erreur Sign-Up:', error.message);
+    return { success: false, error: error.message };
+  }
+}
+
+/**
+ * Mot de passe oublié - Envoyer email de réinitialisation
+ */
+async function resetPassword(email) {
+  try {
+    if (!supabaseClient) {
+      return { success: true, message: 'Email de réinitialisation envoyé (mode démo)' };
+    }
+
+    const redirectUrl = window.AINTERCOM_CONFIG ?
+      window.AINTERCOM_CONFIG.getFullUrl('/reset-password.html') :
+      window.location.origin + '/reset-password.html';
+
+    const { data, error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+      redirectTo: redirectUrl
+    });
+
+    if (error) {
+      throw error;
+    }
+
+    console.log('✅ Email de réinitialisation envoyé à:', email);
+    return { 
+      success: true, 
+      message: 'Email de réinitialisation envoyé. Vérifiez votre boîte de réception.',
+      data 
+    };
+  } catch (error) {
+    console.error('❌ Erreur Reset Password:', error.message);
+    return { success: false, error: error.message };
+  }
+}
+
+/**
+ * Confirmer la nouvelle réinitialisation de mot de passe
+ */
+async function confirmResetPassword(newPassword) {
+  try {
+    if (!supabaseClient) {
+      return { success: true, message: 'Mot de passe réinitialisé (mode démo)' };
+    }
+
+    const { data, error } = await supabaseClient.auth.updateUser({
+      password: newPassword
+    });
+
+    if (error) {
+      throw error;
+    }
+
+    console.log('✅ Mot de passe réinitialisé');
+    return { success: true, message: 'Mot de passe réinitialisé avec succès', data };
+  } catch (error) {
+    console.error('❌ Erreur Confirm Reset:', error.message);
     return { success: false, error: error.message };
   }
 }
@@ -490,6 +581,9 @@ if (typeof module !== 'undefined' && module.exports) {
     initSupabaseClient,
     signInWithGoogle,
     signInWithEmail,
+    signUpWithEmail,
+    resetPassword,
+    confirmResetPassword,
     saveSession,
     getSession,
     signOut,
