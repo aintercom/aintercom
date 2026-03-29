@@ -17,13 +17,15 @@ let supabase = null;
  */
 async function initSupabase() {
   try {
-    if (typeof supabase === 'undefined') {
+    if (typeof window.supabase === 'undefined') {
       console.warn('⚠️ Supabase SDK non chargée. Mode DÉMO activé.');
       return false;
     }
     
-    supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
-    console.log('✅ Supabase initialisé');
+    if (!supabase) {
+      supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
+      console.log('✅ Supabase initialisé');
+    }
     return true;
   } catch (error) {
     console.error('❌ Erreur initiation Supabase:', error);
