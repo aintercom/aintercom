@@ -103,7 +103,6 @@ class DashboardController {
         this.settingsToggle.addEventListener('click', () => this.toggleDrawer('settings'));
         this.closeLexique.addEventListener('click', () => this.toggleDrawer('lexique'));
         this.closeSettings.addEventListener('click', () => this.toggleDrawer('settings'));
-        this.userBtn.addEventListener('click', () => this.openLoginModal());
 
         // Formulaires
         this.crewForm.addEventListener('submit', (e) => this.handleCrewSubmit(e));

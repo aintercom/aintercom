@@ -508,14 +508,20 @@
                 if (result.success) {
                     showSuccess('✓ Connexion Google réussie! Redirection...');
                     setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 1000);
+                        const dashboardUrl = window.AINTERCOM_CONFIG ? 
+                          window.AINTERCOM_CONFIG.getFullPath('/dashboard.html') :
+                          'dashboard.html';
+                        window.location.href = dashboardUrl;
+                    }, 500);
                 } else {
                     // Mode démo si Supabase non configuré
                     showSuccess('✓ Mode DÉMO - Connexion réussie! Redirection...');
                     setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 1000);
+                        const dashboardUrl = window.AINTERCOM_CONFIG ? 
+                          window.AINTERCOM_CONFIG.getFullPath('/dashboard.html') :
+                          'dashboard.html';
+                        window.location.href = dashboardUrl;
+                    }, 500);
                 }
             } catch (error) {
                 showError('Erreur connexion Google: ' + error.message);

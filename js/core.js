@@ -270,6 +270,9 @@ class AIStore {
 // Instance globale du store
 const store = new AIStore();
 
+// Exposer globalement pour accès depuis d'autres scripts
+window.AIStore = store;
+
 /**
  * NOTIFICATION SYSTEM
  */
