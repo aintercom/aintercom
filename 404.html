@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AINTERCOM - Redirection</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            max-width: 500px;
+        }
+        h1 { font-size: 48px; margin-bottom: 20px; color: #d4af37; }
+        p { font-size: 18px; margin-bottom: 30px; color: #b0b0b0; }
+        .spinner {
+            border: 4px solid #2a2a2a;
+            border-top: 4px solid #d4af37;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 30px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        a {
+            color: #d4af37;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        a:hover { color: #e0c547; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎙️ AINTERCOM</h1>
+        <p>Redirection en cours...</p>
+        <div class="spinner"></div>
+        <p id="status">Tentative d'accès à la page...</p>
+        <a href="/">← Retour à l'accueil</a>
+    </div>
+
+    <script>
+        // Redirection intelligente pour GitHub Pages
+        // Récupère le chemin demandé et le redirige correctement
+        
+        // Stocker le chemin original dans sessionStorage
+        const currentPath = window.location.pathname;
+        const hostname = window.location.hostname;
+        const protocol = window.location.protocol;
+        
+        // Détecter si on est sur GitHub Pages (aintercom.github.io)
+        const isGitHubPages = hostname.includes('.github.io');
+        
+        if (isGitHubPages) {
+            // URL format: https://aintercom.github.io/aintercom/...
+            // Extraire le chemin après le repo name
+            let targetPath = currentPath;
+            
+            // Si le chemin ne contient pas '/aintercom/', c'est une 404
+            if (!currentPath.includes('/aintercom/')) {
+                // Rediriger vers /aintercom/index.html
+                targetPath = '/aintercom/index.html';
+            } else if (currentPath.endsWith('/')) {
+                // Si c'est un dossier, aller au index.html
+                targetPath = currentPath + 'index.html';
+            }
+            
+            // Afficher le statut
+            document.getElementById('status').textContent = `Redirection vers: ${targetPath}`;
+            
+            // Rediriger après 500ms
+            setTimeout(() => {
+                window.location.href = targetPath;
+            }, 500);
+        } else {
+            // Pour domaine custom, rediriger simplement vers index.html
+            document.getElementById('status').textContent = 'Redirection vers l\'accueil...';
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 500);
+        }
+    </script>
+</body>
+</html>

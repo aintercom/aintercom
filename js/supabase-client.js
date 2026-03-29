@@ -54,10 +54,15 @@ async function signInWithGoogle() {
       return signInDemo('google');
     }
 
+    // Utiliser la config globale pour les redirects
+    const dashboardUrl = window.AINTERCOM_CONFIG ? 
+      window.AINTERCOM_CONFIG.getFullUrl('/dashboard.html') :
+      window.location.origin + '/dashboard.html';
+
     const { data, error } = await supabaseClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/dashboard.html`
+        redirectTo: dashboardUrl
       }
     });
 
