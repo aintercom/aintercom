@@ -14,7 +14,7 @@ Erreur 404 lors de la redirection Supabase OAuth vers `dashboard.html` sur GitHu
 ```javascript
 window.AINTERCOM_CONFIG = {
   basePath: '/aintercom',  // Détecté automatiquement
-  rootUrl: 'https://aintercom.github.io/aintercom',
+  rootUrl: 'https://live.aintercom.fr/aintercom',
   getFullUrl: (path) => { /* ... */ }
 }
 ```
@@ -80,7 +80,7 @@ const dashboardUrl = window.AINTERCOM_CONFIG.getFullUrl('/dashboard.html');
 3. **URL Correcte?**
    ```javascript
    window.AINTERCOM_CONFIG.getFullUrl('/dashboard.html')
-   // Doit afficher: "https://aintercom.github.io/aintercom/dashboard.html" ✓
+   // Doit afficher: "https://live.aintercom.fr/aintercom/dashboard.html" ✓
    ```
 
 ---
@@ -90,19 +90,19 @@ const dashboardUrl = window.AINTERCOM_CONFIG.getFullUrl('/dashboard.html');
 ### Avant Deploy
 ```bash
 # Vérifier que config.js est accessible
-curl https://aintercom.github.io/aintercom/js/config.js
+curl https://live.aintercom.fr/aintercom/js/config.js
 
 # Vérifier que dashboard.html existe
-curl https://aintercom.github.io/aintercom/dashboard.html
+curl https://live.aintercom.fr/aintercom/dashboard.html
 
 # Vérifier que 404.html existe
-curl https://aintercom.github.io/404.html
+curl https://live.aintercom.fr/404.html
 
 # Vérifier que 404.html redirige (retour 404 devrait être capturé)
 ```
 
 ### Après Deploy
-1. Aller sur https://aintercom.github.io/aintercom/login.html
+1. Aller sur https://live.aintercom.fr/aintercom/login.html
 2. Cliquer Google Sign-In
 3. Autoriser permissions
 4. URL ne devrait pas avoir d'erreur 404
@@ -112,7 +112,7 @@ curl https://aintercom.github.io/404.html
 
 ## 🎯 Cas de Redirection
 
-### GitHub Pages (https://aintercom.github.io/aintercom/)
+### GitHub Pages (https://live.aintercom.fr/aintercom/)
 
 | URL Demandée | Résultat |
 |--------------|----------|
@@ -171,8 +171,8 @@ curl https://aintercom.github.io/404.html
 
 2. **Vérifier Supabase configuration**
    - Aller à: Supabase → Auth → URL Configuration
-   - Ajouter: `https://aintercom.github.io/aintercom/`
-   - Ajouter: `https://aintercom.github.io/aintercom/dashboard.html`
+   - Ajouter: `https://live.aintercom.fr/aintercom/`
+   - Ajouter: `https://live.aintercom.fr/aintercom/dashboard.html`
 
 ---
 
@@ -208,7 +208,7 @@ git push
 ```
 User clique Google
   ↓
-OAuth demande: redirectTo = https://aintercom.github.io/dashboard.html
+OAuth demande: redirectTo = https://live.aintercom.fr/dashboard.html
   ↓
 GitHub Pages cherche: /dashboard.html (au root!)
   ↓
@@ -221,7 +221,7 @@ User clique Google
   ↓
 config.js détecte: basePath = "/aintercom"
   ↓
-OAuth demande: redirectTo = https://aintercom.github.io/aintercom/dashboard.html
+OAuth demande: redirectTo = https://live.aintercom.fr/aintercom/dashboard.html
   ↓
 GitHub Pages cherche: /aintercom/dashboard.html (✓ correct!)
   ↓

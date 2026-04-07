@@ -11,7 +11,12 @@
         const hostname = window.location.hostname;
         
         // GitHub Pages: https://aintercom.github.io/aintercom/...
-        if (hostname.includes('.github.io')) {
+        // Domaine live: https://live.aintercom.fr/
+        if (hostname.includes('.github.io') || hostname.includes('live.aintercom.fr')) {
+            // Pour le domaine live, pas de base path supplémentaire
+            if (hostname.includes('live.aintercom.fr')) {
+                return '';
+            }
             // Extraire le repo name (ex: /aintercom/)
             const match = pathname.match(/\/([^/]+)\//) || pathname.match(/\/(aintercom)\//);
             if (match && match[1]) {

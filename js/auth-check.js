@@ -94,6 +94,7 @@ async function checkUserSession() {
 function redirectToLogin() {
     console.log('🔒 Redirection vers la page de connexion...');
     // Utiliser le chemin absolu avec /aintercom/ pour GitHub Pages
+    // Pour le domaine live: https://live.aintercom.fr/index.html
     const loginUrl = window.location.origin.includes('github.io') 
         ? '/aintercom/index.html'
         : '/index.html';

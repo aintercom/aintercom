@@ -1165,7 +1165,8 @@ async function signInWithGoogleForInterface() {
     // Créer le client Supabase
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     
-    // URL de redirection vers interface.html (avec chemin /aintercom/ pour GitHub Pages)
+    // URL de redirection vers interface.html
+    // Pour le domaine live: https://live.aintercom.fr/interface.html
     const redirectUrl = window.location.origin.includes('github.io') 
         ? window.location.origin + '/aintercom/interface.html'
         : window.location.origin + '/interface.html';
