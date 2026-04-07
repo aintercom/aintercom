@@ -344,6 +344,56 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .burger{display:flex}
   .sticky-cta{display:block}
   .pricing-top{flex-direction:column;align-items:flex-start}
+  .hero-pills{gap:6px;justify-content:flex-start;overflow-x:auto;padding-bottom:8px;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+  .hero-pill{white-space:nowrap;font-size:0.7rem;padding:5px 12px}
+  .hero-ctas{flex-direction:column;align-items:stretch}
+  .hero-cta-primary,.hero-cta-secondary{justify-content:center;width:100%}
+  .hero-sub{font-size:0.95rem}
+  .section-h{font-size:1.7rem}
+  .section-p{font-size:0.95rem}
+  .genese-photo-badge p{font-size:1.5rem}
+  .genese-text h2{font-size:1.8rem}
+  .genese-quote{font-size:1rem;padding-left:16px}
+  .ct-cell{padding:12px 16px;font-size:0.8rem}
+  .pc-val{font-size:2.2rem}
+  .pc-cur{font-size:0.9rem}
+  .zone-tabs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px}
+  .ztab{white-space:nowrap}
+  .fqi-q{font-size:0.85rem;padding:16px 18px}
+  .fqi-a-inner{font-size:0.82rem;padding:0 18px 16px}
+  .form-2{grid-template-columns:1fr}
+  input,select,textarea{font-size:0.9rem}
+  .footer-grid{gap:32px}
+}
+@media(max-width:480px){
+  .container{padding:0 14px}
+  .section{padding:60px 0}
+  .hero{min-height:500px}
+  .hero h1{font-size:2rem}
+  .hero-sub{font-size:0.9rem;margin-bottom:20px}
+  .hero-pills{gap:4px}
+  .hero-pill{font-size:0.65rem;padding:4px 10px}
+  .stats-strip .container{grid-template-columns:1fr}
+  .stat-cell{border-right:none;border-bottom:1px solid var(--border);padding:20px}
+  .stat-cell:last-child{border-bottom:none}
+  .stat-val{font-size:1.8rem}
+  .proc-track{grid-template-columns:1fr;gap:20px}
+  .ps-num{width:44px;height:44px;font-size:0.7rem}
+  .pc{padding:20px 16px}
+  .pc-val{font-size:1.8rem}
+  .pc-desc{font-size:0.8rem}
+  .pnote{font-size:0.75rem;padding:12px 14px}
+  .zone-map-box{aspect-ratio:4/5}
+  .contact-grid{grid-template-columns:1fr;gap:32px}
+  .footer-grid{grid-template-columns:1fr;gap:24px}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:12px}
+  .sticky-cta{font-size:0.8rem;padding:12px 24px;bottom:16px;width:calc(100% - 32px);text-align:center}
+}
+@media(max-width:360px){
+  .hero h1{font-size:1.8rem}
+  .hero-badge{font-size:0.65rem}
+  .pc-val{font-size:1.6rem}
+  .btn-devis,.btn-live{font-size:0.75rem;padding:7px 14px}
 }
 </style>
 </head>
@@ -913,6 +963,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       </div>
       <div class="fcol">
         <h5 data-i18n="fc.legal">Mentions légales</h5>
+        <a href="legal.html">Consulter les mentions légales complètes</a>
         <p>This Is It Event</p>
         <p data-i18n="fc.asso">Association loi 1901</p>
         <p>SIRET 88926603700023</p>
