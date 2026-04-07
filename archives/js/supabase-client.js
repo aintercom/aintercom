@@ -50,8 +50,8 @@ async function signInWithGoogle() {
 
     // Utiliser la config globale pour les redirects
     const dashboardUrl = window.AINTERCOM_CONFIG ? 
-      window.AINTERCOM_CONFIG.getFullUrl('/dashboard.html') :
-      window.location.origin + '/dashboard.html';
+      window.AINTERCOM_CONFIG.getFullUrl('/interface.html') :
+      'https://live.aintercom.fr/interface.html';
 
     const { data, error } = await supabaseClient.auth.signInWithOAuth({
       provider: 'google',

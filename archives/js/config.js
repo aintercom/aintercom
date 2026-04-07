@@ -29,7 +29,7 @@
         const parts = pathname.split('/').filter(p => p);
         
         // Si on a un chemin type /app/something, c'est le basePath
-        if (parts.length > 1 && parts[0] !== 'index.html' && parts[0] !== 'login.html' && parts[0] !== 'dashboard.html') {
+        if (parts.length > 1 && parts[0] !== 'index.html' && parts[0] !== 'login.html' && parts[0] !== 'interface.html') {
             return '/' + parts[0];
         }
         

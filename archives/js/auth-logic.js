@@ -76,7 +76,7 @@ window.AintercomAuth.signInWithGoogle = async function signInWithGoogle() {
       await window.AintercomAuth.initSupabase();
     }
 
-    const redirectUrl = window.location.origin + '/dashboard.html';
+    const redirectUrl = 'https://live.aintercom.fr/interface.html';
     
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',

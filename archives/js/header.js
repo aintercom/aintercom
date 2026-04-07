@@ -171,7 +171,7 @@ class HeaderManager {
             const href = link.getAttribute('href');
             
             if (currentPath.includes(href) || 
-                (href === '/dashboard.html' && currentPath === '/') ||
+                (href === '/interface.html' && currentPath === '/') ||
                 (href === '/' && currentPath === '/')) {
                 link.classList.add('active');
             } else {

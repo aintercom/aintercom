@@ -90,7 +90,7 @@ function getRedirectParam() {
 /**
  * Rediriger vers la page d'origine après connexion
  */
-function redirectAfterLogin(defaultRedirect = '/dashboard.html') {
+function redirectAfterLogin(defaultRedirect = '/interface.html') {
   const redirectTo = getRedirectParam() || defaultRedirect;
   
   // Vérifier que la redirection est valide (pas vers login)

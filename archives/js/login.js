@@ -79,8 +79,8 @@ class AuthFormManager {
         const session = getSession();
         if (session) {
             window.location.href = window.AINTERCOM_CONFIG ? 
-                window.AINTERCOM_CONFIG.getFullPath('/dashboard.html') :
-                '/dashboard.html';
+                window.AINTERCOM_CONFIG.getFullPath('/interface.html') :
+                '/interface.html';
         }
     }
 
@@ -135,8 +135,8 @@ class AuthFormManager {
                 this.showSuccess('✓ Connexion réussie ! Redirection en cours...');
                 setTimeout(() => {
                     const dashboardUrl = window.AINTERCOM_CONFIG ? 
-                        window.AINTERCOM_CONFIG.getFullPath('/dashboard.html') :
-                        'dashboard.html';
+                        window.AINTERCOM_CONFIG.getFullPath('/interface.html') :
+                        'interface.html';
                     window.location.href = dashboardUrl;
                 }, 1000);
             } else {
