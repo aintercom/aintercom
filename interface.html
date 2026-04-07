@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AINTERCOM CONTROL OS // ULTIMATE RESTORED</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { darkBg: '#020202', darkCard: '#0d0d0d', darkBorder: '#1f1f1f', facebook: '#1877F2', danger: '#FF3B30', success: '#34C759', warning: '#FF9500' }
+                }
+            }
+        }
+    </script>
+    <style>
+        .tab-content { display: none; height: calc(100vh - 70px); overflow-y: auto; padding: 2rem; }
+        .tab-content.active { display: block; }
+        .active-tab { border-left: 4px solid #1877F2; background: rgba(24, 119, 242, 0.1); color: #1877F2 !important; }
+        .line-live { background: rgba(24, 119, 242, 0.08) !important; border-left: 6px solid #1877F2 !important; box-shadow: inset 10px 0 20px -10px #1877F2; }
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
+        input, select { background: #000 !important; border: 1px solid #222 !important; color: white !important; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-darkBg text-slate-100 min-h-screen flex flex-col overflow-hidden">
+
+    <header class="h-[70px] bg-darkCard border-b border-darkBorder flex items-center justify-between px-8 z-50">
+        <div class="flex items-center gap-8">
+            <div class="flex flex-col">
+                <h1 class="text-2xl font-black italic tracking-tighter text-facebook">AINTERCOM <span class="text-white">PRO</span></h1>
+                <span class="text-[8px] font-bold text-slate-500 uppercase tracking-[0.3em]">Hardware & Software Control OS</span>
+            </div>
+            <div class="h-10 w-px bg-darkBorder"></div>
+            <div class="flex flex-col">
+                <span id="live-clock" class="text-3xl font-black tabular-nums tracking-tighter">00:00:00</span>
+                <span id="live-date" class="text-[9px] font-bold text-facebook uppercase tracking-widest">-- --- 2026</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-6">
+            <div id="active-cue-display" class="bg-black px-6 py-2 rounded-2xl border border-darkBorder flex items-center gap-4">
+                <div class="w-2 h-2 rounded-full bg-success animate-pulse"></div>
+                <div class="flex flex-col">
+                    <span class="text-[8px] font-black text-slate-500 uppercase">Current Cue</span>
+                    <span id="header-seq-name" class="text-xs font-black uppercase italic">Standby</span>
+                </div>
+            </div>
+            <button onclick="nextTop()" class="bg-facebook hover:bg-blue-600 text-white px-8 py-3 rounded-xl font-black uppercase text-xs italic tracking-widest transition-all shadow-lg shadow-facebook/20">Next Top ⏭️</button>
+        </div>
+    </header>
+
+    <div class="flex flex-grow overflow-hidden">
+        
+        <nav class="w-72 bg-darkCard border-r border-darkBorder flex flex-col p-4 gap-1 overflow-y-auto shrink-0">
+            <button onclick="switchTab(event, 'dash')" class="tab-btn active-tab w-full text-left p-4 rounded-xl text-xs font-black uppercase flex items-center gap-4 transition-all">
+                <i class="fas fa-th-large w-5"></i> 1. Dashboard
+            </button>
+            <button onclick="switchTab(event, 'conducteur')" class="tab-btn w-full text-left p-4 rounded-xl text-xs font-black uppercase text-slate-500 flex items-center gap-4 transition-all">
+                <i class="fas fa-stopwatch w-5"></i> 2. Conducteur
+            </button>
+            <button onclick="switchTab(event, 'cues')" class="tab-btn w-full text-left p-4 rounded-xl text-xs font-black uppercase text-slate-500 flex items-center gap-4 transition-all">
+                <i class="fas fa-bolt w-5"></i> 3. Cues Tech
+            </button>
+            <button onclick="switchTab(event, 'matos')" class="tab-btn w-full text-left p-4 rounded-xl text-xs font-black uppercase text-slate-500 flex items-center gap-4 transition-all">
+                <i class="fas fa-box w-5"></i> 4. Parc Matos
+            </button>
+            <button onclick="switchTab(event, 'crew')" class="tab-btn w-full text-left p-4 rounded-xl text-xs font-black uppercase text-slate-500 flex items-center gap-4 transition-all">
+                <i class="fas fa-users w-5"></i> 5. Crew & Staff
+            </button>
+            <button onclick="switchTab(event, 'incidents')" class="tab-btn w-full text-left p-4 rounded-xl text-xs font-black uppercase text-slate-500 flex items-center gap-4 transition-all">
+                <i class="fas fa-biohazard w-5 text-danger"></i> 6. Incidents
+            </button>
+            <button onclick="switchTab(event, 'plan')" class="tab-btn w-full text-left p-4 rounded-xl text-xs font-black uppercase text-slate-500 flex items-center gap-4 transition-all">
+                <i class="fas fa-map-marked-alt w-5"></i> 7. Plan / Zones
+            </button>
+            <button onclick="switchTab(event, 'signaletique')" class="tab-btn w-full text-left p-4 rounded-xl text-xs font-black uppercase text-slate-500 flex items-center gap-4 transition-all">
+                <i class="fas fa-sign w-5"></i> 8. Signalétique
+            </button>
+            <button onclick="switchTab(event, 'accreds')" class="tab-btn w-full text-left p-4 rounded-xl text-xs font-black uppercase text-slate-500 flex items-center gap-4 transition-all">
+                <i class="fas fa-id-card w-5"></i> 9. Accréditations
+            </button>
+            <button onclick="switchTab(event, 'checklists')" class="tab-btn w-full text-left p-4 rounded-xl text-xs font-black uppercase text-slate-500 flex items-center gap-4 transition-all">
+                <i class="fas fa-check-double w-5"></i> 10. Checklists
+            </button>
+            <button onclick="switchTab(event, 'speaker')" class="tab-btn w-full text-left p-4 rounded-xl text-xs font-black uppercase text-slate-500 flex items-center gap-4 transition-all">
+                <i class="fas fa-microphone w-5"></i> 11. Speaker / Script
+            </button>
+            <button onclick="switchTab(event, 'guide')" class="tab-btn w-full text-left p-4 rounded-xl text-xs font-black uppercase text-warning flex items-center gap-4 transition-all">
+                <i class="fas fa-shield-alt w-5"></i> 12. Guide & Sécu
+            </button>
+        </nav>
+
+        <main class="flex-grow bg-darkBg overflow-hidden">
+
+            <section id="dash" class="tab-content active">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 bg-darkCard p-12 rounded-[3rem] border border-darkBorder flex flex-col justify-between h-[450px]">
+                        <div>
+                            <span class="text-xs font-black text-facebook uppercase italic tracking-widest">LIVE MASTER TIMER</span>
+                            <h2 id="dash-active-title" class="text-6xl font-black uppercase italic tracking-tighter mt-4 text-white">READY FOR START</h2>
+                            <div id="dash-chrono" class="text-[11rem] font-black tabular-nums leading-none tracking-tighter text-white mt-4">00:00</div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-darkCard p-8 rounded-[2.5rem] border border-darkBorder">
+                            <span class="text-[10px] font-black text-slate-500 uppercase italic">Power Load (Total)</span>
+                            <div class="text-5xl font-black mt-4 text-success tabular-nums" id="dash-elec">0W</div>
+                            <div class="w-full bg-black h-2 mt-4 rounded-full overflow-hidden"><div id="elec-progress" class="h-full bg-success" style="width: 0%"></div></div>
+                        </div>
+                        <div class="bg-danger/10 p-8 rounded-[2.5rem] border border-danger/20">
+                            <span class="text-[10px] font-black text-danger uppercase italic">Incidents actifs</span>
+                            <div class="text-6xl font-black mt-4 text-danger tabular-nums" id="dash-inc-count">0</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="conducteur" class="tab-content">
+                <div class="bg-darkCard rounded-[2.5rem] border border-darkBorder overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-black/60 text-[10px] font-black uppercase text-slate-500 italic">
+                            <tr>
+                                <th class="p-6 w-20 text-center">LIVE</th>
+                                <th class="p-6 w-24">HEURE</th>
+                                <th class="p-6 w-20">DURÉE</th>
+                                <th class="p-6">SÉQUENCE</th>
+                                <th class="p-6">RESP.</th>
+                                <th class="p-6">TECH CUES</th>
+                                <th class="p-6 w-32 text-facebook">CHRONO</th>
+                                <th class="p-6 w-20">STATUS</th>
+                                <th class="p-6 w-10"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="rundown-body" class="divide-y divide-darkBorder"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="cues" class="tab-content">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-darkCard p-8 rounded-[2.5rem] border border-darkBorder">
+                        <h3 class="text-xl font-black uppercase text-facebook italic mb-6">Light Cues</h3>
+                        <div id="light-list" class="space-y-4">
+                            <div class="p-4 bg-black rounded-2xl border border-darkBorder text-xs font-bold uppercase flex justify-between"><span>Blackout Global</span> <span class="text-slate-500">CUE 01</span></div>
+                            <div class="p-4 bg-black rounded-2xl border border-darkBorder text-xs font-bold uppercase flex justify-between"><span>Full Face White</span> <span class="text-slate-500">CUE 02</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-darkCard p-8 rounded-[2.5rem] border border-darkBorder">
+                        <h3 class="text-xl font-black uppercase text-facebook italic mb-6">Sound Cues</h3>
+                        <div id="sound-list" class="space-y-4">
+                            <div class="p-4 bg-black rounded-2xl border border-darkBorder text-xs font-bold uppercase flex justify-between"><span>Lancement Jingle</span> <span class="text-success">READY</span></div>
+                            <div class="p-4 bg-black rounded-2xl border border-darkBorder text-xs font-bold uppercase flex justify-between"><span>Mute Micro 4</span> <span class="text-slate-500">WAIT</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-darkCard p-8 rounded-[2.5rem] border border-darkBorder">
+                        <h3 class="text-xl font-black uppercase text-facebook italic mb-6">Video / Pyro</h3>
+                        <div id="video-list" class="space-y-4">
+                            <div class="p-4 bg-black rounded-2xl border border-darkBorder text-xs font-bold uppercase flex justify-between"><span>Boucle LED Fond</span> <span class="text-success">LOOP</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="matos" class="tab-content">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-black uppercase italic tracking-tighter">Inventaire & Assignation</h2>
+                    <button onclick="addMatos()" class="bg-facebook text-white px-6 py-2 rounded-xl text-[10px] font-black uppercase">+ Ajouter Matériel</button>
+                </div>
+                <div id="matos-grid" class="grid-layout"></div>
+            </section>
+
+            <section id="crew" class="tab-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10" id="crew-container">
+                    <div class="bg-darkCard p-8 rounded-[3rem] border border-darkBorder">
+                        <h3 class="text-xl font-black uppercase italic mb-8">Staff List</h3>
+                        <div id="crew-list" class="space-y-4"></div>
+                    </div>
+                    <div class="bg-darkCard p-8 rounded-[3rem] border border-darkBorder">
+                        <h3 class="text-xl font-black uppercase italic mb-8">Assignation Intercom</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-black rounded-2xl border border-darkBorder flex justify-between uppercase font-black text-xs"><span>Canal 01: Régie</span> <span class="text-success">Actif</span></div>
+                            <div class="p-4 bg-black rounded-2xl border border-darkBorder flex justify-between uppercase font-black text-xs"><span>Canal 02: Plateau</span> <span class="text-success">Actif</span></div>
+                            <div class="p-4 bg-black rounded-2xl border border-darkBorder flex justify-between uppercase font-black text-xs"><span>Canal 03: Sécu</span> <span class="text-danger italic">Priority</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="incidents" class="tab-content">
+                <div class="bg-danger/5 border-2 border-danger/20 rounded-[3rem] p-12 min-h-full">
+                    <div class="flex justify-between items-center mb-10">
+                        <h2 class="text-4xl font-black text-danger uppercase italic tracking-tighter">Crisis Center</h2>
+                        <button onclick="triggerIncident('Alerte Manuelle Régie')" class="bg-danger text-white px-10 py-4 rounded-2xl font-black uppercase text-xs shadow-xl shadow-danger/20">🚨 Déclarer Incident</button>
+                    </div>
+                    <div id="incident-log" class="space-y-4"></div>
+                </div>
+            </section>
+
+            <section id="plan" class="tab-content">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="md:col-span-3 bg-slate-900 border-4 border-dashed border-darkBorder rounded-[3rem] h-[650px] relative overflow-hidden flex items-center justify-center italic text-slate-700">
+                        <div class="text-center">
+                            <i class="fas fa-map-marked-alt text-8xl mb-6"></i>
+                            <p class="text-2xl font-black uppercase tracking-widest">Plan Interactif v4</p>
+                            <p class="text-xs mt-2 uppercase">Cliquez pour placer des balises crew en temps réel</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="font-black uppercase italic text-facebook">Zones de contrôle</h3>
+                        <div id="zone-list" class="space-y-2">
+                            <div class="p-4 bg-darkCard border border-darkBorder rounded-2xl text-[10px] font-black uppercase flex justify-between"><span>Zone A: Accueil</span> <span class="text-success">Clear</span></div>
+                            <div class="p-4 bg-darkCard border border-darkBorder rounded-2xl text-[10px] font-black uppercase flex justify-between"><span>Zone B: Scène</span> <span class="text-warning">En Place</span></div>
+                            <div class="p-4 bg-darkCard border border-darkBorder rounded-2xl text-[10px] font-black uppercase flex justify-between"><span>Zone C: Loges</span> <span class="text-facebook">VIP IN</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="signaletique" class="tab-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="bg-darkCard p-10 rounded-[3rem] border border-darkBorder space-y-6">
+                        <h3 class="text-2xl font-black uppercase italic text-facebook">Générateur de Signalétique</h3>
+                        <div><label class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Message</label><input id="sig-input" type="text" value="SALLE DE PRESSE" class="w-full p-5 mt-2 rounded-2xl text-2xl font-black uppercase italic"></div>
+                        <div><label class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Direction</label>
+                            <select id="sig-dir" class="w-full p-5 mt-2 rounded-2xl text-2xl font-black uppercase">
+                                <option value="↑">Tout Droit ↑</option><option value="→">Droite →</option><option value="←">Gauche ←</option><option value="↓">Derrière ↓</option>
+                            </select>
+                        </div>
+                        <button onclick="updateSignPreview()" class="w-full bg-facebook py-6 rounded-2xl font-black uppercase italic tracking-[0.2em] shadow-xl">Générer le visuel ⚡</button>
+                    </div>
+                    <div class="bg-white text-black rounded-[3rem] p-12 flex flex-col items-center justify-center text-center border-[20px] border-black shadow-2xl">
+                        <span id="res-dir" class="text-[15rem] font-black leading-none">↑</span>
+                        <h2 id="res-text" class="text-7xl font-black uppercase italic tracking-tighter">SALLE DE PRESSE</h2>
+                    </div>
+                </div>
+            </section>
+
+            <section id="accreds" class="tab-content">
+                <div class="bg-darkCard rounded-[2.5rem] border border-darkBorder overflow-hidden">
+                    <table class="w-full text-left">
+                        <thead class="bg-black/60 text-[10px] font-black uppercase text-slate-500">
+                            <tr><th class="p-6">Détenteur</th><th class="p-6">Catégorie</th><th class="p-6">Zones Autorisées</th><th class="p-6">Statut Scan</th></tr>
+                        </thead>
+                        <tbody id="accreds-list" class="divide-y divide-darkBorder text-xs font-bold uppercase"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="checklists" class="tab-content">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="checklist-grid"></div>
+            </section>
+
+            <section id="speaker" class="tab-content">
+                <div class="max-w-5xl mx-auto">
+                    <div class="bg-black border-4 border-facebook rounded-[4rem] p-20 text-center shadow-[0_0_80px_rgba(24,119,242,0.15)]">
+                        <span id="prompt-seq-id" class="text-facebook font-black uppercase tracking-[0.4em] text-xs mb-10 block italic">Séquence 01 // Introduction</span>
+                        <div id="prompt-text" class="text-7xl font-black leading-[1.1] uppercase italic text-white tracking-tighter">
+                            Veuillez vous installer, le spectacle commence dans un instant...
+                        </div>
+                    </div>
+                    <div class="mt-10 grid grid-cols-3 gap-6">
+                        <div class="bg-darkCard p-6 rounded-2xl border border-darkBorder"><span class="text-[10px] font-black text-slate-500 uppercase">Speaker</span><p class="font-black uppercase">Marc Antoine</p></div>
+                        <div class="bg-darkCard p-6 rounded-2xl border border-darkBorder"><span class="text-[10px] font-black text-slate-500 uppercase">Langue</span><p class="font-black uppercase text-facebook">Français / EN</p></div>
+                        <div class="bg-darkCard p-6 rounded-2xl border border-darkBorder"><span class="text-[10px] font-black text-slate-500 uppercase">Timer Speaker</span><p id="prompt-timer" class="font-black text-2xl tabular-nums">00:00</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="guide" class="tab-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="bg-darkCard p-10 rounded-[3.5rem] border border-darkBorder">
+                        <h3 class="text-3xl font-black uppercase text-warning italic mb-8 tracking-tighter"><i class="fas fa-bolt"></i> Calculateur Électrique Phase</h3>
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-end border-b border-darkBorder pb-4"><span class="text-xs font-black uppercase text-slate-500">Puissance Cumulée</span><span id="elec-total" class="text-5xl font-black tabular-nums">0W</span></div>
+                            <div class="flex justify-between items-end border-b border-darkBorder pb-4"><span class="text-xs font-black uppercase text-slate-500">Ampérage (Mono 230V)</span><span id="elec-amp" class="text-5xl font-black text-facebook tabular-nums">0A</span></div>
+                            <div class="grid grid-cols-2 gap-4 pt-6">
+                                <button onclick="addPower(1000)" class="bg-black p-5 rounded-2xl border border-darkBorder font-black text-[10px] uppercase hover:bg-warning hover:text-black transition">+ 1000W (Lumière)</button>
+                                <button onclick="addPower(500)" class="bg-black p-5 rounded-2xl border border-darkBorder font-black text-[10px] uppercase hover:bg-warning hover:text-black transition">+ 500W (Audio)</button>
+                                <button onclick="resetPower()" class="col-span-2 text-[10px] font-black text-slate-500 uppercase mt-4 hover:text-danger">Reset Charge</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-danger/5 border-2 border-danger/20 p-10 rounded-[3.5rem] space-y-6">
+                        <h3 class="text-3xl font-black text-danger uppercase italic mb-4 tracking-tighter">Protocoles de Crise</h3>
+                        <div class="p-6 bg-black rounded-3xl border border-darkBorder">
+                            <p class="text-xs font-black text-danger uppercase mb-2">🚨 Évacuation Incendie</p>
+                            <p class="text-[10px] text-slate-400 font-bold leading-relaxed uppercase">1. Stop Musique / 2. Lumière Salle ON / 3. Message Micro 1 / 4. PC Sécu</p>
+                        </div>
+                        <div class="p-6 bg-black rounded-3xl border border-darkBorder">
+                            <p class="text-xs font-black text-facebook uppercase mb-2">🏥 Urgence Médicale</p>
+                            <p class="text-[10px] text-slate-400 font-bold leading-relaxed uppercase">1. Balisage Zone / 2. Canal 03 / 3. Ne pas déplacer / 4. Accueil Pompiers</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // --- CORE DATA SYSTEM ---
+        let state = {
+            elec: 0,
+            incidents: [],
+            crew: [{nom: "Marc G.", role: "Régisseur Général", zones: "A, B, C"}, {nom: "Julie L.", role: "Stage Manager", zones: "B, C"}],
+            matos: Array.from({length: 8}, (_, i) => ({ id: i+1, type: "Talkie", user: "", bat: 100 })),
+            sequences: [
+                { id: 1, time: "20:00", dur: "05:00", title: "Ouverture / Vidéo Intro", resp: "Marc G.", tech: "Cue 01 L, Cue 01 V", script: "Mesdames, Messieurs, bienvenue à la soirée Aintercom 2026. Préparez-vous.", active: false, elapsed: 0 },
+                { id: 2, time: "20:05", dur: "10:00", title: "Entrée Speaker", resp: "Julie L.", tech: "Cue 02 L, Mic 1 ON", script: "Veuillez accueillir notre président sous vos applaudissements !", active: false, elapsed: 0 }
+            ],
+            checklists: {
+                "Montage": ["Patch Lumière", "Soundcheck HF", "Sync Vidéo LED"],
+                "Exploitation": ["Portes Ouvertes", "VIP Check", "Intercoms Test"],
+                "Démontage": ["Backup Data", "Rangement Flight", "Inventaire HF"]
+            }
+        };
+
+        // --- TICKER SYSTEM ---
+        function init() {
+            renderAll();
+            setInterval(() => {
+                const now = new Date();
+                document.getElementById('live-clock').textContent = now.toLocaleTimeString('fr-FR');
+                document.getElementById('live-date').textContent = now.toLocaleDateString('fr-FR', {day:'2-digit', month:'short', year:'numeric'}).toUpperCase();
+                
+                state.sequences.forEach(s => {
+                    if(s.active) {
+                        s.elapsed++;
+                        document.getElementById('dash-chrono').textContent = formatSec(s.elapsed);
+                        document.getElementById('prompt-timer').textContent = formatSec(s.elapsed);
+                        renderConducteur();
+                    }
+                });
+            }, 1000);
+        }
+
+        // --- RENDER ENGINE ---
+        function renderAll() {
+            renderConducteur();
+            renderMatos();
+            renderCrew();
+            renderChecklists();
+            renderAccreds();
+            updateElecUI();
+            updateStats();
+        }
+
+        function renderConducteur() {
+            const body = document.getElementById('rundown-body');
+            body.innerHTML = state.sequences.map((s, i) => `
+                <tr class="${s.active ? 'line-live' : ''} border-b border-darkBorder group">
+                    <td class="p-6 text-center">
+                        <button onclick="toggleLive(${i})" class="w-12 h-12 rounded-2xl ${s.active ? 'bg-danger animate-pulse' : 'bg-facebook'} text-white flex items-center justify-center shadow-lg transition-all">
+                            <i class="fas ${s.active ? 'fa-stop' : 'fa-play ml-1'}"></i>
+                        </button>
+                    </td>
+                    <td class="p-6 font-black text-facebook text-xl tabular-nums">${s.time}</td>
+                    <td class="p-6 font-bold text-slate-500">${s.dur}</td>
+                    <td class="p-6 font-black uppercase text-slate-200">${s.title}</td>
+                    <td class="p-6 text-[10px] font-black text-slate-500 uppercase italic">${s.resp}</td>
+                    <td class="p-6 text-[10px] italic font-bold text-slate-600">${s.tech}</td>
+                    <td class="p-6 font-mono text-3xl font-black text-white tabular-nums">${formatSec(s.elapsed)}</td>
+                    <td class="p-6"><span class="text-[9px] font-black px-2 py-1 rounded border ${s.active ? 'border-facebook text-facebook' : 'border-darkBorder text-slate-800'}">${s.active ? 'LIVE' : 'WAIT'}</span></td>
+                    <td class="p-6"><button onclick="triggerIncident('${s.title}')" class="text-danger opacity-0 group-hover:opacity-100 transition"><i class="fas fa-exclamation-triangle"></i></button></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderMatos() {
+            const grid = document.getElementById('matos-grid');
+            grid.innerHTML = state.matos.map((m, i) => `
+                <div class="bg-darkCard p-6 rounded-[2rem] border border-darkBorder hover:border-facebook transition group">
+                    <div class="flex justify-between text-[9px] font-black text-slate-600 uppercase mb-4"><span>ID #${m.id}</span> <i class="fas fa-battery-full ${m.bat < 20 ? 'text-danger' : 'text-success'}"></i></div>
+                    <select onchange="state.matos[${i}].user=this.value" class="w-full bg-black border-none text-[10px] font-black p-3 rounded-xl cursor-pointer uppercase italic">
+                        <option value="">Libre</option>
+                        ${state.crew.map(c => `<option ${m.user==c.nom?'selected':''}>${c.nom}</option>`).join('')}
+                    </select>
+                </div>`).join('');
+        }
+
+        function renderCrew() {
+            const list = document.getElementById('crew-list');
+            list.innerHTML = state.crew.map(c => `
+                <div class="p-5 bg-black rounded-[1.5rem] border border-darkBorder flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-facebook flex items-center justify-center font-black">${c.nom[0]}</div>
+                        <span class="font-black text-sm uppercase italic">${c.nom}</span>
+                    </div>
+                    <span class="text-[10px] font-black text-facebook uppercase">${c.role}</span>
+                </div>`).join('');
+        }
+
+        function renderChecklists() {
+            const grid = document.getElementById('checklist-grid');
+            grid.innerHTML = Object.keys(state.checklists).map(cat => `
+                <div class="bg-darkCard p-8 rounded-[2.5rem] border border-darkBorder">
+                    <h3 class="text-xs font-black uppercase text-facebook italic mb-6">${cat}</h3>
+                    <div class="space-y-3">
+                        ${state.checklists[cat].map(item => `
+                            <label class="flex items-center gap-3 p-4 bg-black rounded-2xl text-[10px] font-black uppercase cursor-pointer hover:bg-darkBorder transition">
+                                <input type="checkbox" class="w-5 h-5 rounded border-darkBorder text-facebook"> ${item}
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>`).join('');
+        }
+
+        function renderAccreds() {
+            const body = document.getElementById('accreds-list');
+            body.innerHTML = state.crew.map(c => `
+                <tr class="border-b border-darkBorder hover:bg-white/5 transition">
+                    <td class="p-6">${c.nom}</td><td class="p-6 text-slate-500">${c.role}</td>
+                    <td class="p-6"><span class="bg-facebook/20 text-facebook px-3 py-1 rounded-full text-[9px]">ZONES ${c.zones}</span></td>
+                    <td class="p-6 text-success font-black text-[10px] animate-pulse">VALIDE</td>
+                </tr>`).join('');
+        }
+
+        // --- ACTIONS ---
+        function toggleLive(idx) {
+            const was = state.sequences[idx].active;
+            state.sequences.forEach(s => s.active = false);
+            state.sequences[idx].active = !was;
+            if(state.sequences[idx].active) {
+                document.getElementById('dash-active-title').textContent = state.sequences[idx].title;
+                document.getElementById('header-seq-name').textContent = state.sequences[idx].title;
+                document.getElementById('prompt-text').textContent = state.sequences[idx].script;
+                document.getElementById('prompt-seq-id').textContent = `Séquence 0${idx+1} // ${state.sequences[idx].title}`;
+            }
+            renderAll();
+        }
+
+        function nextTop() {
+            const cur = state.sequences.findIndex(s => s.active);
+            if(cur < state.sequences.length - 1) toggleLive(cur + 1);
+        }
+
+        function addPower(w) { state.elec += w; updateElecUI(); }
+        function resetPower() { state.elec = 0; updateElecUI(); }
+        
+        function updateElecUI() {
+            document.getElementById('elec-total').textContent = state.elec + "W";
+            document.getElementById('elec-amp').textContent = (state.elec/230).toFixed(1) + "A";
+            document.getElementById('dash-elec').textContent = state.elec + "W";
+            const p = Math.min((state.elec/6000)*100, 100);
+            document.getElementById('elec-progress').style.width = p + "%";
+            document.getElementById('elec-progress').className = `h-full ${p > 90 ? 'bg-danger animate-pulse' : 'bg-success'}`;
+        }
+
+        function triggerIncident(msg) {
+            state.incidents.push({ time: new Date().toLocaleTimeString(), msg });
+            const log = document.getElementById('incident-log');
+            const alert = document.createElement('div');
+            alert.className = "p-6 bg-danger text-white rounded-[2rem] font-black text-sm flex justify-between items-center animate-bounce";
+            alert.innerHTML = `<span>[${new Date().toLocaleTimeString()}] ALERTE : ${msg}</span> <button onclick="this.parentElement.remove();state.incidents.pop();updateStats();" class="bg-black/20 px-6 py-2 rounded-xl text-xs">RÉSOLU</button>`;
+            log.prepend(alert);
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('dash-inc-count').textContent = state.incidents.length;
+        }
+
+        function updateSignPreview() {
+            document.getElementById('res-text').textContent = document.getElementById('sig-input').value;
+            document.getElementById('res-dir').textContent = document.getElementById('sig-dir').value;
+        }
+
+        function formatSec(s) {
+            const m = Math.floor(s/60).toString().padStart(2,'0');
+            const sc = (s%60).toString().padStart(2,'0');
+            return `${m}:${sc}`;
+        }
+
+        function switchTab(e, id) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
+            document.getElementById(id).classList.add('active');
+            if(e) e.currentTarget.classList.add('active-tab');
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
