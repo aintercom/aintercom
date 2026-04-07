@@ -98,7 +98,7 @@ loginForm.addEventListener('submit', async (e) => {
       } else {
         // Fallback redirection
         setTimeout(() => {
-          window.location.href = 'interface.html';
+          window.location.href = 'https://live.aintercom.fr/interface.html';
         }, 1500);
       }
     } else {
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
       window.AintercomGateway.redirectAfterLogin();
     } else {
       setTimeout(() => {
-        window.location.href = 'interface.html';
+        window.location.href = 'https://live.aintercom.fr/interface.html';
       }, 2000);
     }
   }
