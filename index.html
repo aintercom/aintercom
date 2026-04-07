@@ -12,8 +12,6 @@
 <meta property="og:locale" content="fr_FR">
 <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-  <!-- SDK Supabase pour l'authentification Google -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LocalBusiness","name":"AINTERCOM","description":"Location de kits radio et intercom professionnels pour l'événementiel","address":{"@type":"PostalAddress","streetAddress":"Meximieux","addressLocality":"Meximieux","postalCode":"01800","addressCountry":"FR"},"telephone":"+33744980015","email":"thisisit-event@outlook.com","areaServed":"Ain, Isère Nord, Rhône Est"}
 </script>
@@ -423,7 +421,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-right">
-      <a href="#" class="btn-live" onclick="signInWithGoogleForInterface(); return false;">
+      <a href="https://live.aintercom.fr" class="btn-live" target="_blank" rel="noopener">
         <span class="live-dot"></span>
         <span data-i18n="nav.live">Interface Live</span>
       </a>
@@ -448,7 +446,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   <a href="#genese" onclick="toggleMenu()" data-i18n="nav.story">Notre histoire</a>
   <a href="#zone" onclick="toggleMenu()" data-i18n="nav.zone">Zone</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
-  <a href="#" onclick="signInWithGoogleForInterface(); toggleMenu(); return false;" class="mobile-menu-live">
+  <a href="https://live.aintercom.fr" onclick="toggleMenu()" class="mobile-menu-live" target="_blank" rel="noopener">
     <span class="live-dot"></span>
     <span data-i18n="nav.live">Interface Live</span>
   </a>
@@ -1148,54 +1146,6 @@ function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
 
-/* ── AUTHENTIFICATION GOOGLE POUR INTERFACE LIVE ── */
-async function signInWithGoogleForInterface() {
-  try {
-    // Configuration Supabase (mêmes clés que dans archives/js/auth-logic.js)
-    const SUPABASE_URL = 'https://wmbyccbyhtjzvsxxrsbe.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_EpUIqIUw_xcbF_M74ht-dg_eUg66XrS';
-    
-    // Vérifier que le SDK Supabase est chargé
-    if (typeof window.supabase === 'undefined') {
-      console.error('❌ SDK Supabase non chargé');
-      alert('Erreur: SDK Supabase non chargé. Veuillez rafraîchir la page.');
-      return;
-    }
-    
-    // Créer le client Supabase
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    
-    // URL de redirection vers interface.html
-    // Pour le domaine live: https://live.aintercom.fr/interface.html
-    const redirectUrl = window.location.origin.includes('github.io') 
-        ? window.location.origin + '/aintercom/interface.html'
-        : window.location.origin + '/interface.html';
-    
-    console.log('🔐 Lancement de l\'authentification Google...');
-    console.log('↪️ Redirection vers:', redirectUrl);
-    
-    // Lancer l'authentification OAuth Google
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: redirectUrl
-      }
-    });
-    
-    if (error) {
-      console.error('❌ Erreur Google Sign-In:', error.message);
-      alert('Erreur lors de la connexion Google: ' + error.message);
-      throw error;
-    }
-    
-    console.log('✅ Connexion Google initiée avec succès');
-    // La redirection est gérée automatiquement par Supabase
-    
-  } catch (error) {
-    console.error('❌ Erreur dans signInWithGoogleForInterface:', error);
-    alert('Une erreur est survenue lors de la connexion. Veuillez réessayer.');
-  }
-}
 
 /* ── INIT ── */
 applyDark(dark);
