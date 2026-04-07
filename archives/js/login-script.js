@@ -3,6 +3,18 @@
  * Gère les formulaires de connexion et d'inscription
  */
 
+// Vérifier que window.AintercomAuth est disponible
+if (typeof window.AintercomAuth === 'undefined') {
+  console.error('❌ window.AintercomAuth est undefined. Vérifiez l\'ordre des imports dans login.html');
+  window.AintercomAuth = {
+    signInWithEmail: () => Promise.resolve({ success: false, error: 'Auth non initialisé' }),
+    signUpWithEmail: () => Promise.resolve({ success: false, error: 'Auth non initialisé' }),
+    signInWithGoogle: () => Promise.resolve({ success: false, error: 'Auth non initialisé' }),
+    getSession: () => null,
+    demoSignIn: () => ({ success: false, error: 'Mode démo non disponible' })
+  };
+}
+
 // DOM Elements
 const loginForm = document.getElementById('login-form');
 const signupForm = document.getElementById('signup-form');

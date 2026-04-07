@@ -4,18 +4,52 @@
  * Version moderne et simplifiée
  */
 
+// Définir l'objet global immédiatement
+window.AintercomAuth = {};
+
+// Attendre que window.__ENV__ soit disponible
+function waitForEnv() {
+  return new Promise((resolve) => {
+    if (window.__ENV__) {
+      resolve(window.__ENV__);
+    } else {
+      const checkInterval = setInterval(() => {
+        if (window.__ENV__) {
+          clearInterval(checkInterval);
+          resolve(window.__ENV__);
+        }
+      }, 50);
+      
+      // Timeout après 2 secondes
+      setTimeout(() => {
+        clearInterval(checkInterval);
+        console.warn('⚠️ window.__ENV__ non trouvé après 2 secondes, utilisation des valeurs par défaut');
+        resolve(null);
+      }, 2000);
+    }
+  });
+}
+
 // Configuration Supabase - Utilise les variables d'environnement
-const SUPABASE_CONFIG = {
-  url: window.__ENV__?.VITE_SUPABASE_URL || 'https://wmbyccbyhtjzvsxxrsbe.supabase.co',
-  key: window.__ENV__?.VITE_SUPABASE_KEY || 'sb_publishable_EpUIqIUw_xcbF_M74ht-dg_eUg66XrS'
-};
+let SUPABASE_CONFIG = null;
+
+async function getSupabaseConfig() {
+  if (!SUPABASE_CONFIG) {
+    const env = await waitForEnv();
+    SUPABASE_CONFIG = {
+      url: env?.VITE_SUPABASE_URL || 'https://wmbyccbyhtjzvsxxrsbe.supabase.co',
+      key: env?.VITE_SUPABASE_KEY || 'sb_publishable_EpUIqIUw_xcbF_M74ht-dg_eUg66XrS'
+    };
+  }
+  return SUPABASE_CONFIG;
+}
 
 let supabase = null;
 
 /**
  * Initialiser Supabase
  */
-async function initSupabase() {
+window.AintercomAuth.initSupabase = async function initSupabase() {
   try {
     if (typeof window.supabase === 'undefined') {
       console.warn('⚠️ Supabase SDK non chargée. Mode DÉMO activé.');
@@ -36,10 +70,10 @@ async function initSupabase() {
 /**
  * Connexion avec Google OAuth
  */
-async function signInWithGoogle() {
+window.AintercomAuth.signInWithGoogle = async function signInWithGoogle() {
   try {
     if (!supabase) {
-      await initSupabase();
+      await window.AintercomAuth.initSupabase();
     }
 
     const redirectUrl = window.location.origin + '/dashboard.html';
@@ -64,10 +98,10 @@ async function signInWithGoogle() {
 /**
  * Connexion avec Email/Mot de passe
  */
-async function signInWithEmail(email, password) {
+window.AintercomAuth.signInWithEmail = async function signInWithEmail(email, password) {
   try {
     if (!supabase) {
-      await initSupabase();
+      await window.AintercomAuth.initSupabase();
     }
 
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -78,7 +112,7 @@ async function signInWithEmail(email, password) {
     if (error) throw error;
     
     // Sauvegarder la session
-    saveSession(data.user);
+    window.AintercomAuth.saveSession(data.user);
     console.log('✅ Connexion réussie:', email);
     return { success: true, data };
   } catch (error) {
@@ -90,10 +124,10 @@ async function signInWithEmail(email, password) {
 /**
  * Inscription avec Email/Mot de passe
  */
-async function signUpWithEmail(email, password, fullName = null) {
+window.AintercomAuth.signUpWithEmail = async function signUpWithEmail(email, password, fullName = null) {
   try {
     if (!supabase) {
-      await initSupabase();
+      await window.AintercomAuth.initSupabase();
     }
 
     const { data, error } = await supabase.auth.signUp({
@@ -124,7 +158,7 @@ async function signUpWithEmail(email, password, fullName = null) {
 /**
  * Déconnexion
  */
-async function signOut() {
+window.AintercomAuth.signOut = async function signOut() {
   try {
     if (supabase) {
       await supabase.auth.signOut();
@@ -153,7 +187,7 @@ async function signOut() {
 /**
  * Sauvegarder la session utilisateur
  */
-function saveSession(user) {
+window.AintercomAuth.saveSession = function saveSession(user) {
   const session = {
     id: user.id,
     email: user.email,
@@ -180,7 +214,7 @@ function saveSession(user) {
 /**
  * Récupérer la session actuelle
  */
-function getSession() {
+window.AintercomAuth.getSession = function getSession() {
   const sessionStr = localStorage.getItem('aintercom_session');
   if (!sessionStr) return null;
 
@@ -202,15 +236,15 @@ function getSession() {
 /**
  * Vérifier si l'utilisateur est connecté
  */
-function isAuthenticated() {
-  return getSession() !== null;
+window.AintercomAuth.isAuthenticated = function isAuthenticated() {
+  return window.AintercomAuth.getSession() !== null;
 }
 
 /**
  * Rediriger vers la page de connexion si non authentifié
  */
-function requireAuth(redirectTo = '/login.html') {
-  if (!isAuthenticated()) {
+window.AintercomAuth.requireAuth = function requireAuth(redirectTo = '/login.html') {
+  if (!window.AintercomAuth.isAuthenticated()) {
     window.location.href = redirectTo;
     return false;
   }
@@ -220,7 +254,7 @@ function requireAuth(redirectTo = '/login.html') {
 /**
  * Mode DÉMO pour développement
  */
-function demoSignIn(email = 'demo@aintercom.com', password = 'demo123') {
+window.AintercomAuth.demoSignIn = function demoSignIn(email = 'demo@aintercom.com', password = 'demo123') {
   const demoUser = {
     id: 'demo_' + Date.now(),
     email: email,
@@ -228,18 +262,18 @@ function demoSignIn(email = 'demo@aintercom.com', password = 'demo123') {
     provider: 'demo'
   };
   
-  saveSession(demoUser);
+  window.AintercomAuth.saveSession(demoUser);
   return { success: true, data: { user: demoUser } };
 }
 
 /**
  * Initialiser l'authentification au chargement
  */
-async function initAuth() {
-  await initSupabase();
+window.AintercomAuth.initAuth = async function initAuth() {
+  await window.AintercomAuth.initSupabase();
   
   // Restaurer la session existante
-  const session = getSession();
+  const session = window.AintercomAuth.getSession();
   if (session) {
     console.log('✅ Session restaurée:', session.email);
   }
@@ -250,7 +284,7 @@ async function initAuth() {
       console.log('🔐 Événement auth:', event);
       
       if (event === 'SIGNED_IN' && session?.user) {
-        saveSession(session.user);
+        window.AintercomAuth.saveSession(session.user);
       } else if (event === 'SIGNED_OUT') {
         localStorage.removeItem('aintercom_session');
         if (window.AIStore) {
@@ -266,19 +300,7 @@ async function initAuth() {
 }
 
 // Initialiser au chargement
-document.addEventListener('DOMContentLoaded', initAuth);
+document.addEventListener('DOMContentLoaded', window.AintercomAuth.initAuth);
 
-// Exporter les fonctions
-window.AintercomAuth = {
-  initSupabase,
-  signInWithGoogle,
-  signInWithEmail,
-  signUpWithEmail,
-  signOut,
-  saveSession,
-  getSession,
-  isAuthenticated,
-  requireAuth,
-  demoSignIn,
-  initAuth
-};
+// Log de vérification
+console.log('✅ AintercomAuth chargé', window.AintercomAuth);
