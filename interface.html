@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AINTERCOM CONTROL OS // ULTIMATE RESTORED</title>
+    <title>AINTERCOM COCKPIT // Interface Live</title>
+    <!-- SDK Supabase pour l'authentification -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- CSS Cockpit Aintercom -->
+    <link href="css/cockpit.css" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -96,15 +100,30 @@
 
         <main class="flex-grow bg-darkBg overflow-hidden">
 
-            <section id="dash" class="tab-content active">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="md:col-span-2 bg-darkCard p-12 rounded-[3rem] border border-darkBorder flex flex-col justify-between h-[450px]">
-                        <div>
-                            <span class="text-xs font-black text-facebook uppercase italic tracking-widest">LIVE MASTER TIMER</span>
-                            <h2 id="dash-active-title" class="text-6xl font-black uppercase italic tracking-tighter mt-4 text-white">READY FOR START</h2>
-                            <div id="dash-chrono" class="text-[11rem] font-black tabular-nums leading-none tracking-tighter text-white mt-4">00:00</div>
+    <section id="dash" class="tab-content active">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-2 bg-darkCard p-12 rounded-[3rem] border border-darkBorder flex flex-col justify-between h-[450px]">
+                <div>
+                    <span class="text-xs font-black text-facebook uppercase italic tracking-widest">LIVE MASTER TIMER</span>
+                    <h2 id="dash-active-title" class="text-6xl font-black uppercase italic tracking-tighter mt-4 text-white">READY FOR START</h2>
+                    <!-- Widget Timer Cockpit -->
+                    <div class="cockpit-timer-widget">
+                        <div class="cockpit-timer-label">TIMER 15:00</div>
+                        <div id="cockpit-timer-display" class="cockpit-timer-display">15:00</div>
+                        <div class="cockpit-timer-buttons">
+                            <button id="cockpit-timer-start" class="cockpit-btn cockpit-btn-primary">
+                                <i class="fas fa-play"></i> START
+                            </button>
+                            <button id="cockpit-timer-pause" class="cockpit-btn cockpit-btn-secondary" disabled>
+                                <i class="fas fa-pause"></i> PAUSE
+                            </button>
+                            <button id="cockpit-timer-reset" class="cockpit-btn cockpit-btn-danger">
+                                <i class="fas fa-redo"></i> RESET
+                            </button>
                         </div>
                     </div>
+                </div>
+            </div>
                     <div class="space-y-6">
                         <div class="bg-darkCard p-8 rounded-[2.5rem] border border-darkBorder">
                             <span class="text-[10px] font-black text-slate-500 uppercase italic">Power Load (Total)</span>
@@ -300,6 +319,12 @@
         </main>
     </div>
 
+    <!-- Script de vérification d'authentification -->
+    <script src="js/auth-check.js"></script>
+    
+    <!-- Widget Timer Cockpit -->
+    <script src="js/timer-widget.js"></script>
+    
     <script>
         // --- CORE DATA SYSTEM ---
         let state = {
@@ -319,22 +344,36 @@
         };
 
         // --- TICKER SYSTEM ---
-        function init() {
-            renderAll();
-            setInterval(() => {
-                const now = new Date();
-                document.getElementById('live-clock').textContent = now.toLocaleTimeString('fr-FR');
-                document.getElementById('live-date').textContent = now.toLocaleDateString('fr-FR', {day:'2-digit', month:'short', year:'numeric'}).toUpperCase();
+        async function init() {
+            // Vérifier l'authentification avant d'initialiser l'interface
+            try {
+                const user = await initAuth();
+                if (!user) {
+                    console.error('❌ Initialisation annulée: utilisateur non authentifié');
+                    return;
+                }
                 
-                state.sequences.forEach(s => {
-                    if(s.active) {
-                        s.elapsed++;
-                        document.getElementById('dash-chrono').textContent = formatSec(s.elapsed);
-                        document.getElementById('prompt-timer').textContent = formatSec(s.elapsed);
-                        renderConducteur();
-                    }
-                });
-            }, 1000);
+                console.log('✅ Interface initialisée pour:', user.email);
+                
+                // Initialiser le reste de l'interface
+                renderAll();
+                setInterval(() => {
+                    const now = new Date();
+                    document.getElementById('live-clock').textContent = now.toLocaleTimeString('fr-FR');
+                    document.getElementById('live-date').textContent = now.toLocaleDateString('fr-FR', {day:'2-digit', month:'short', year:'numeric'}).toUpperCase();
+                    
+                    state.sequences.forEach(s => {
+                        if(s.active) {
+                            s.elapsed++;
+                            document.getElementById('prompt-timer').textContent = formatSec(s.elapsed);
+                            renderConducteur();
+                        }
+                    });
+                }, 1000);
+                
+            } catch (error) {
+                console.error('❌ Erreur initialisation interface:', error);
+            }
         }
 
         // --- RENDER ENGINE ---
