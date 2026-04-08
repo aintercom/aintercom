@@ -108,6 +108,8 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 /* ── HERO ── */
 .hero{position:relative;height:100vh;min-height:600px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg-video{position:absolute;inset:0;overflow:hidden}
+.hero-bg-video video{width:100%;height:100%;object-fit:cover;opacity:0.6}
 .hero-bg img{width:100%;height:100%;object-fit:cover}
 .hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(4,4,18,0.82) 0%,rgba(4,4,18,0.55) 50%,rgba(10,20,60,0.45) 100%)}
 .hero-content{position:relative;z-index:2;text-align:center;color:#fff;padding:0 24px}
@@ -185,7 +187,15 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .svc-model strong{color:var(--dark);font-weight:600}
 
 /* ── COMPARATIF ── */
-.ct{margin-top:48px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border)}
+.ct-wrapper {
+  margin-top: 48px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.ct{margin-top:0;border-radius:0;border:none;min-width:680px}
 .ct-head{display:grid;grid-template-columns:1.8fr 1.15fr 1fr 1fr;background:var(--dark)}
 .ct-head>div{padding:16px 22px;font-family:'Sora',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,0.38)}
 .ct-head .ct-us-h{color:#fff;display:flex;align-items:center;gap:7px}
@@ -350,7 +360,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .stats-strip .container{grid-template-columns:repeat(2,1fr)}
   .stat-cell:nth-child(2){border-right:none}
   .proc-track{grid-template-columns:repeat(2,1fr);gap:24px}
-  .hero h1{font-size:2.4rem}
+  .hero h1{font-size:1.8rem}
   .nav-center{display:none}
   .btn-live,.nav-controls{display:none}
   .burger{display:flex}
@@ -463,17 +473,23 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
     <span class="live-dot"></span>
     <span data-i18n="nav.live">Interface Live</span>
   </a>
+  <div class="mobile-menu-controls" style="display: flex; gap: 8px; padding: 14px 16px; border-bottom: 1px solid var(--border);">
+    <div class="ctrl-btn" onclick="toggleDark(); toggleMenu()" title="Mode sombre" style="flex: 1; justify-content: center;">
+      <svg viewBox="0 0 24 24" id="dark-icon-mobile"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </div>
+    <div class="ctrl-btn" onclick="toggleLang(); toggleMenu()" title="Language" id="lang-btn-mobile" style="flex: 1; justify-content: center; font-family:'Sora',sans-serif;font-size:0.72rem;font-weight:700">FR</div>
+  </div>
   <a href="#contact" onclick="toggleMenu()" data-i18n="nav.devis">Demander un devis</a>
 </div>
 
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg">
-<div class="hero-bg" style="background-color: #000;">
-  <video src="assets/videos/background1.mp4" autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
-    Événement festival foule
-  </video>
-</div>
+    <div class="hero-bg-video">
+      <video src="assets/videos/background1.mp4" autoplay muted loop playsinline>
+        Événement festival foule
+      </video>
+    </div>
     <div class="hero-bg-overlay"></div>
   </div>
   <div class="hero-content">
@@ -640,48 +656,50 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <h2 class="section-h" data-i18n="cmp.title">Ni bricolage.<br>Ni budget hors de portée.</h2>
       <p class="section-p" data-i18n="cmp.sub">AINTERCOM occupe un espace unique : la communication professionnelle accessible à toutes les structures, quelle que soit leur taille.</p>
     </div>
-    <div class="ct rev">
-      <div class="ct-head">
-        <div data-i18n="cmp.col0">Critère</div>
-        <div class="ct-us-h">AINTERCOM <span class="ct-badge" data-i18n="cmp.rec">Recommandé</span></div>
-        <div data-i18n="cmp.col2">Solution basique</div>
-        <div data-i18n="cmp.col3">Prestataire spécialisé</div>
-      </div>
-      <div class="ct-row">
-        <div class="ct-cell" data-i18n="cmp.r1">Communication mains libres</div>
-        <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Full-duplex 6 postes</div>
-        <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Non disponible</div>
-        <div class="ct-cell"><div class="cti cti-p"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>Selon formule</div>
-      </div>
-      <div class="ct-row">
-        <div class="ct-cell" data-i18n="cmp.r2">Accessible petites structures</div>
-        <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Dès 79€ TTC / weekend</div>
-        <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Oui</div>
-        <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Budget 2 000€+</div>
-      </div>
-      <div class="ct-row">
-        <div class="ct-cell" data-i18n="cmp.r3">Canaux sécurisés anti-interférence</div>
-        <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>219 codes confidentiels</div>
-        <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Non</div>
-        <div class="ct-cell"><div class="cti cti-p"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>Selon matériel</div>
-      </div>
-      <div class="ct-row">
-        <div class="ct-cell" data-i18n="cmp.r4">Qualité certifiée professionnelle</div>
-        <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>IP55 + MIL-STD 810</div>
-        <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Qualité grand public</div>
-        <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Oui</div>
-      </div>
-      <div class="ct-row">
-        <div class="ct-cell" data-i18n="cmp.r5">Sans technicien imposé</div>
-        <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Plug &amp; Play</div>
-        <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Oui</div>
-        <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Inclus/obligatoire</div>
-      </div>
-      <div class="ct-row">
-        <div class="ct-cell" data-i18n="cmp.r6">Livraison légère sur site</div>
-        <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>1 valise, 1 coffre</div>
-        <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Oui</div>
-        <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Camion requis</div>
+    <div class="ct-wrapper rev">
+      <div class="ct">
+        <div class="ct-head">
+          <div data-i18n="cmp.col0">Critère</div>
+          <div class="ct-us-h">AINTERCOM <span class="ct-badge" data-i18n="cmp.rec">Recommandé</span></div>
+          <div data-i18n="cmp.col2">Solution basique</div>
+          <div data-i18n="cmp.col3">Prestataire spécialisé</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell" data-i18n="cmp.r1">Communication mains libres</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Full-duplex 6 postes</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Non disponible</div>
+          <div class="ct-cell"><div class="cti cti-p"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>Selon formule</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell" data-i18n="cmp.r2">Accessible petites structures</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Dès 79€ TTC / weekend</div>
+          <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Oui</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Budget 2 000€+</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell" data-i18n="cmp.r3">Canaux sécurisés anti-interférence</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>219 codes confidentiels</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Non</div>
+          <div class="ct-cell"><div class="cti cti-p"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>Selon matériel</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell" data-i18n="cmp.r4">Qualité certifiée professionnelle</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>IP55 + MIL-STD 810</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Qualité grand public</div>
+          <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Oui</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell" data-i18n="cmp.r5">Sans technicien imposé</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Plug & Play</div>
+          <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Oui</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Inclus/obligatoire</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell" data-i18n="cmp.r6">Livraison légère sur site</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>1 valise, 1 coffre</div>
+          <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Oui</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Camion requis</div>
+        </div>
       </div>
     </div>
   </div>
