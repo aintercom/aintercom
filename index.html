@@ -74,6 +74,13 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .nav-inner{display:flex;justify-content:space-between;align-items:center;width:100%}
 .logo{font-family:'Sora',sans-serif;font-weight:800;font-size:1.18rem;letter-spacing:-0.05em;color:var(--dark);display:flex;align-items:center;gap:0}
 .logo em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal}
+/* Logo image avec changement automatique pour dark mode */
+.logo-img{display:inline-block;width:auto;height:90px;background-image:url('assets/logos/logo-color.png');background-repeat:no-repeat;background-position:center;background-size:contain;transition:background-image 0.3s ease}
+[data-theme="dark"] .logo-img{background-image:url('assets/logos/logo-blanc.png')}
+/* Support pour la détection automatique du système */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .logo-img{background-image:url('assets/logos/logo-blanc.png')}
+}
 .nav-center{display:flex;align-items:center;gap:2px}
 .nav-center a{font-size:0.83rem;font-weight:500;color:var(--muted);padding:8px 14px;border-radius:8px;transition:.2s;white-space:nowrap}
 .nav-center a:hover{color:var(--dark);background:var(--bg)}
@@ -140,6 +147,7 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 
 /* ── GENÈSE ── */
 .genese{padding:96px 0;background:var(--dark);color:#fff;position:relative;overflow:hidden}
+[data-theme="dark"] .genese{background:var(--bg2)}
 .genese::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(26,111,255,0.15) 0%,transparent 70%)}
 .genese::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(86,180,255,0.08) 0%,transparent 70%)}
 .genese-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;position:relative;z-index:1}
@@ -295,6 +303,7 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 
 /* ── FOOTER ── */
 footer{background:var(--dark);color:#fff;padding:72px 0 0;position:relative;overflow:hidden}
+[data-theme="dark"] footer{background:var(--bg2)}
 footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--grad-90)}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:52px;border-bottom:1px solid rgba(255,255,255,0.07)}
 .footer-logo{font-family:'Sora',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-0.05em;margin-bottom:14px}
@@ -414,7 +423,9 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 <!-- NAV -->
 <nav>
   <div class="container nav-inner">
-    <a href="#" class="logo">AIN<em>TERCOM</em></a>
+  <a href="#" class="logo">
+    <span class="logo-img" aria-label="AINTERCOM"></span>
+  </a>
     <div class="nav-center">
       <a href="#services" data-i18n="nav.solutions">Solutions</a>
       <a href="#tarifs" data-i18n="nav.tarifs">Tarifs</a>
@@ -458,7 +469,9 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=2400" alt="Événement festival foule">
+  <video src="assets/videos/background2.webm" autoplay muted loop playsinline>
+  Événement festival foule
+</video>
     <div class="hero-bg-overlay"></div>
   </div>
   <div class="hero-content">
@@ -521,7 +534,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   <div class="container">
     <div class="genese-grid">
       <div class="genese-photo rev">
-        <img src="https://images.unsplash.com/photo-1508997449629-303059a045c0?auto=format&fit=crop&q=80&w=900" alt="Événement scène coordination">
+        <img src="assets/images/histoire.svg" alt="Événement scène coordination">
         <div class="genese-photo-badge">
           <p>12</p>
           <span data-i18n="genese.years">ans sur le terrain</span>
@@ -555,7 +568,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
     <div class="svc-grid">
       <div class="svc-card rev">
         <div class="svc-img">
-          <img src="https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?auto=format&fit=crop&q=80&w=800" alt="Radio talkie-walkie professionnel terrain">
+          <img src="assets/images/talkie.svg" alt="Radio talkie-walkie professionnel terrain">
           <div class="svc-img-badge">Radio PMR446 · Sans licence</div>
         </div>
         <div class="svc-body">
@@ -575,7 +588,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       </div>
       <div class="svc-card rev">
         <div class="svc-img">
-          <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=800" alt="Intercom régie scène Full-Duplex">
+          <img src="assets/images/casque.svg" alt="Intercom régie scène Full-Duplex">
           <div class="svc-img-badge">Intercom Full-Duplex · DECT 1.9GHz</div>
         </div>
         <div class="svc-body">
@@ -595,7 +608,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       </div>
       <div class="svc-card rev">
         <div class="svc-img">
-          <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&q=80&w=800" alt="Mégaphone sono portable événement">
+          <img src="assets/images/megaphone.svg" alt="Mégaphone sono portable événement">
           <div class="svc-img-badge">Mégaphone 65W · 2 batteries Li-Ion</div>
         </div>
         <div class="svc-body">
