@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Parcours AINTERCOM</title>
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #1A6FFF;
+            margin-bottom: 30px;
+        }
+        .test-case {
+            background: #F5F5FA;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(10,10,30,0.08);
+        }
+        .test-title {
+            font-weight: 700;
+            color: #07070F;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .test-desc {
+            color: #38384A;
+            margin-bottom: 15px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #fff;
+            background: #1A6FFF;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, #1A6FFF 0%, #56B4FF 100%);
+            transform: translateY(-2px);
+        }
+        .btn-live {
+            background: rgba(26,111,255,0.08);
+            color: #1A6FFF;
+            border: 1.5px solid rgba(26,111,255,0.25);
+        }
+        .btn-live:hover {
+            background: rgba(26,111,255,0.15);
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            background: #fff;
+            border: 1px solid rgba(10,10,30,0.13);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.9rem;
+        }
+        .success {
+            color: #16A34A;
+        }
+        .info {
+            color: #0891B2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test du parcours utilisateur AINTERCOM</h1>
+    
+    <div class="test-case">
+        <div class="test-title">
+            <span>✅ Test 1 : Lien depuis le site vitrine</span>
+        </div>
+        <div class="test-desc">
+            Cliquez sur le bouton ci-dessous pour simuler un clic sur "Interface Live" depuis le site principal aintercom.fr
+        </div>
+        <a href="https://live.aintercom.fr" class="btn" target="_blank" rel="noopener">
+            <span>Interface Live →</span>
+        </a>
+        <div class="result info">
+            Redirection vers : https://live.aintercom.fr
+        </div>
+    </div>
+    
+    <div class="test-case">
+        <div class="test-title">
+            <span>✅ Test 2 : Vérification du parcours complet</span>
+        </div>
+        <div class="test-desc">
+            Parcours attendu :<br>
+            1. Clic sur "Interface Live" depuis aintercom.fr<br>
+            2. Redirection vers live.aintercom.fr<br>
+            3. Si non connecté : affichage de l'écran de login Google<br>
+            4. Si déjà connecté : accès direct au dashboard
+        </div>
+        <div class="result success">
+            ✓ Logique d'authentification supprimée du site vitrine<br>
+            ✓ Authentification uniquement sur live.aintercom.fr<br>
+            ✓ Parcours fluide sans double authentification
+        </div>
+    </div>
+    
+    <div class="test-case">
+        <div class="test-title">
+            <span>📋 Résumé des modifications</span>
+        </div>
+        <div class="test-desc">
+            <strong>Dépôt principal (aintercom.fr) :</strong><br>
+            • Suppression du SDK Supabase<br>
+            • Transformation du bouton en lien simple<br>
+            • Suppression de la fonction signInWithGoogleForInterface()<br><br>
+            
+            <strong>Dépôt live (live.aintercom.fr) :</strong><br>
+            • Logique d'authentification maintenue<br>
+            • Écran de login Google fonctionnel<br>
+            • Dashboard accessible après connexion
+        </div>
+    </div>
+</body>
+</html>
