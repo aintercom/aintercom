@@ -12,8 +12,10 @@
 <meta property="og:locale" content="fr_FR">
 <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script>(function(){var d=localStorage.getItem('aic-dark');document.documentElement.setAttribute('data-theme',d==='1'?'dark':'light');})();</script>
   <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LocalBusiness","name":"AINTERCOM","description":"Location de kits radio et intercom professionnels pour l'événementiel","address":{"@type":"PostalAddress","streetAddress":"Meximieux","addressLocality":"Meximieux","postalCode":"01800","addressCountry":"FR"},"telephone":"+33744980015","email":"thisisit-event@outlook.com","areaServed":"Ain, Isère Nord, Rhône Est"}
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"AINTERCOM","description":"Location de kits radio et intercom professionnels pour l'événementiel","address":{"@type":"PostalAddress","streetAddress":"Meximieux","addressLocality":"Meximieux","postalCode":"01800","addressCountry":"FR"},"telephone":"+33744980015","email":"contact@aintercom.fr","areaServed":"Ain, Isère Nord, Rhône Est"}
 </script>
 <style>
 /* ── VARIABLES ── */
@@ -343,7 +345,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .nav-center{display:none}
   .btn-live,.nav-controls{display:none}
   .burger{display:flex}
-  .sticky-cta{display:block}
+  .sticky-cta{display:none}
   .pricing-top{flex-direction:column;align-items:flex-start}
   .hero-pills{gap:6px;justify-content:flex-start;overflow-x:auto;padding-bottom:8px;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
   .hero-pill{white-space:nowrap;font-size:0.7rem;padding:5px 12px}
@@ -757,69 +759,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <p class="section-p" data-i18n="zone.sub">Point de retrait à Meximieux. Livraison possible dans tout le département et zones limitrophes.</p>
     </div>
     <div class="zone-wrap">
-      <div class="zone-map-box rev">
-        <svg viewBox="0 0 440 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-          <defs>
-            <radialGradient id="glow-main" cx="50%" cy="62%" r="30%">
-              <stop offset="0%" stop-color="#1A6FFF" stop-opacity="0.5"/>
-              <stop offset="100%" stop-color="#1A6FFF" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="glow-ext" cx="50%" cy="62%" r="50%">
-              <stop offset="0%" stop-color="#56B4FF" stop-opacity="0.12"/>
-              <stop offset="100%" stop-color="#56B4FF" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="blur-soft"><feGaussianBlur stdDeviation="2"/></filter>
-          </defs>
-          <rect width="440" height="500" fill="#07070F"/>
-          <!-- Grid -->
-          <line x1="0" y1="125" x2="440" y2="125" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-          <line x1="0" y1="250" x2="440" y2="250" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-          <line x1="0" y1="375" x2="440" y2="375" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-          <line x1="110" y1="0" x2="110" y2="500" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-          <line x1="220" y1="0" x2="220" y2="500" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-          <line x1="330" y1="0" x2="330" y2="500" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-          <!-- Ain shape -->
-          <path d="M90,55 L130,38 L195,48 L258,42 L315,68 L345,108 L358,158 L338,225 L348,285 L325,345 L290,398 L250,440 L208,455 L165,445 L133,412 L102,372 L82,318 L72,258 L92,198 L74,138 Z"
-            fill="rgba(26,111,255,0.08)" stroke="rgba(26,111,255,0.28)" stroke-width="1.5"/>
-          <!-- Extended zone ~60km -->
-          <circle id="zone-ext-ring" cx="200" cy="310" r="145" fill="rgba(86,180,255,0.05)" stroke="rgba(86,180,255,0.25)" stroke-width="1.5" stroke-dasharray="6,4" opacity="1">
-            <animate attributeName="stroke-dashoffset" from="0" to="40" dur="8s" repeatCount="indefinite"/>
-          </circle>
-          <!-- Main zone ~30km -->
-          <circle id="zone-main-ring" cx="200" cy="310" r="82" fill="rgba(26,111,255,0.13)" stroke="rgba(26,111,255,0.6)" stroke-width="1.5" opacity="1"/>
-          <!-- Glow -->
-          <circle cx="200" cy="310" r="80" fill="url(#glow-main)" filter="url(#blur-soft)"/>
-          <circle cx="200" cy="310" r="140" fill="url(#glow-ext)" filter="url(#blur-soft)"/>
-          <!-- Cities -->
-          <circle cx="142" cy="195" r="2.5" fill="rgba(255,255,255,0.22)"/>
-          <text x="150" y="199" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Sora,sans-serif">Bourg-en-Bresse</text>
-          <circle cx="248" cy="162" r="2" fill="rgba(255,255,255,0.16)"/>
-          <text x="255" y="166" fill="rgba(255,255,255,0.28)" font-size="8.5" font-family="Sora,sans-serif">Oyonnax</text>
-          <circle cx="280" cy="356" r="2" fill="rgba(255,255,255,0.16)"/>
-          <text x="287" y="360" fill="rgba(255,255,255,0.28)" font-size="8.5" font-family="Sora,sans-serif">Ambérieu</text>
-          <circle cx="108" cy="370" r="2" fill="rgba(255,255,255,0.16)"/>
-          <text x="114" y="374" fill="rgba(255,255,255,0.28)" font-size="8.5" font-family="Sora,sans-serif">Trévoux</text>
-          <circle cx="175" cy="418" r="2" fill="rgba(255,255,255,0.16)"/>
-          <text x="182" y="422" fill="rgba(255,255,255,0.28)" font-size="8.5" font-family="Sora,sans-serif">Miribel</text>
-          <!-- Meximieux pulse animation -->
-          <circle cx="200" cy="310" r="9" fill="#1A6FFF"/>
-          <circle cx="200" cy="310" r="9" fill="none" stroke="#1A6FFF" stroke-width="2" opacity="0.6">
-            <animate attributeName="r" from="9" to="24" dur="2.5s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" from="0.6" to="0" dur="2.5s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="200" cy="310" r="9" fill="none" stroke="#56B4FF" stroke-width="1.5" opacity="0.4">
-            <animate attributeName="r" from="9" to="36" dur="2.5s" begin="0.8s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" from="0.4" to="0" dur="2.5s" begin="0.8s" repeatCount="indefinite"/>
-          </circle>
-          <text x="215" y="306" fill="#fff" font-size="11" font-family="Sora,sans-serif" font-weight="700">Meximieux</text>
-          <text x="215" y="321" fill="rgba(255,255,255,0.45)" font-size="8.5" font-family="Sora,sans-serif">Point de retrait</text>
-          <!-- Legend -->
-          <rect x="14" y="456" width="10" height="10" rx="5" fill="rgba(26,111,255,0.5)" stroke="#1A6FFF" stroke-width="1"/>
-          <text x="29" y="465" fill="rgba(255,255,255,0.32)" font-size="8.5" font-family="Sora,sans-serif">Zone principale ~30 km</text>
-          <rect x="14" y="474" width="10" height="10" rx="5" fill="rgba(86,180,255,0.1)" stroke="#56B4FF" stroke-width="1" stroke-dasharray="3,2"/>
-          <text x="29" y="483" fill="rgba(255,255,255,0.22)" font-size="8.5" font-family="Sora,sans-serif">Zone étendue ~60 km</text>
-        </svg>
-      </div>
+      <div class="zone-map-box rev"><div id="leaflet-map" style="width:100%;height:100%;min-height:460px;border-radius:20px;overflow:hidden"></div></div>
       <div class="rev">
         <div class="zone-tabs">
           <div class="ztab active" onclick="zoneTab(this,'z1')" data-i18n="zt.main">Zone principale</div>
@@ -854,7 +794,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <span class="stag" data-i18n="faq.tag">FAQ</span>
         <h2 class="section-h" data-i18n="faq.title">Tout savoir avant<br>de réserver.</h2>
         <p class="section-p" style="margin-bottom:28px" data-i18n="faq.sub">Une question sans réponse ? Contactez-nous — réponse sous 24h.</p>
-        <a href="mailto:thisisit-event@outlook.com" style="display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem;color:var(--dark);background:transparent;border:1.5px solid var(--border-md);padding:13px 22px;border-radius:var(--r-sm);transition:.2s" onmouseover="this.style.borderColor='var(--dark)'" onmouseout="this.style.borderColor='var(--border-md)'" data-i18n="faq.cta">Poser une question →</a>
+        <a href="mailto:contact@aintercom.fr" style="display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem;color:var(--dark);background:transparent;border:1.5px solid var(--border-md);padding:13px 22px;border-radius:var(--r-sm);transition:.2s" onmouseover="this.style.borderColor='var(--dark)'" onmouseout="this.style.borderColor='var(--border-md)'" data-i18n="faq.cta">Poser une question →</a>
       </div>
       <div class="faq-list rev">
         <div class="fqi open">
@@ -895,7 +835,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <p class="section-p" data-i18n="cta.sub">Réponse et devis complet sous 24h. Zéro engagement à ce stade.</p>
     </div>
     <div class="contact-grid">
-      <form action="mailto:thisisit-event@outlook.com" method="post" enctype="text/plain" class="rev">
+      <form action="mailto:contact@aintercom.fr" method="post" enctype="text/plain" class="rev">
         <div class="form-2">
           <div class="fg"><label data-i18n="f.nom">Nom</label><input type="text" name="nom" placeholder="Votre nom"></div>
           <div class="fg"><label data-i18n="f.prenom">Prénom</label><input type="text" name="prenom" placeholder="Votre prénom"></div>
@@ -929,7 +869,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <h3 data-i18n="cc.title">Informations pratiques</h3>
           <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="ci-lbl" data-i18n="cc.pickup">Point de retrait</div><div class="ci-val">Meximieux (01) — sur RDV</div></div></div>
           <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.43 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div class="ci-lbl" data-i18n="cc.phone">Téléphone</div><div class="ci-val">07 44 98 00 15</div></div></div>
-          <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ci-lbl">Email</div><div class="ci-val">thisisit-event@outlook.com</div></div></div>
+          <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ci-lbl">Email</div><div class="ci-val">contact@aintercom.fr</div></div></div>
           <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="ci-lbl" data-i18n="cc.reply">Réponse garantie</div><div class="ci-val" data-i18n="cc.replyval">Sous 24h ouvrées</div></div></div>
         </div>
         <div class="hcard">
@@ -953,7 +893,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <p class="footer-tagline" data-i18n="ft.tagline">Communication événementielle professionnelle, clé en main. Pour toutes les structures. Un service This Is It Event.</p>
         <div class="footer-contacts">
           <a href="tel:0744980015" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.43 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>07 44 98 00 15</a>
-          <a href="mailto:thisisit-event@outlook.com" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>thisisit-event@outlook.com</a>
+          <a href="mailto:contact@aintercom.fr" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>contact@aintercom.fr</a>
           <a href="#zone" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>Meximieux — Ain (01)</a>
         </div>
       </div>
@@ -1150,6 +1090,42 @@ function toggleMenu() {
 /* ── INIT ── */
 applyDark(dark);
 applyLang(lang);
+
+/* ── LEAFLET MAP ── */
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('leaflet-map')) {
+    const map = L.map('leaflet-map').setView([45.905, 5.195], 10);
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 18
+    }).addTo(map);
+    
+    // Marqueur sur Meximieux
+    L.marker([45.905, 5.195])
+      .addTo(map)
+      .bindPopup('<b>Meximieux</b><br>Point de retrait AINTERCOM')
+      .openPopup();
+    
+    // Cercle bleu plein rayon 30km
+    L.circle([45.905, 5.195], {
+      color: '#1A6FFF',
+      fillColor: '#1A6FFF',
+      fillOpacity: 0.1,
+      radius: 30000
+    }).addTo(map);
+    
+    // Cercle bleu pointillé rayon 60km
+    L.circle([45.905, 5.195], {
+      color: '#56B4FF',
+      fillColor: '#56B4FF',
+      fillOpacity: 0.05,
+      radius: 60000,
+      dashArray: '10, 10'
+    }).addTo(map);
+  }
+});
 </script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 </html>
