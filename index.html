@@ -213,8 +213,8 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .svc-detail-row:last-child{border-bottom:none}
 .svc-detail-lbl{color:var(--muted)}
 .svc-detail-val{font-family:'Sora',sans-serif;font-weight:700;color:var(--dark);text-align:right}
-.svc-detail-img{background:var(--bg2);border-radius:var(--r-sm);margin-bottom:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:16px;height:90px}
-.svc-detail-img img{max-height:60px;width:auto;object-fit:contain;opacity:.85}
+.svc-detail-img{background:var(--bg2);border-radius:var(--r-sm);margin-bottom:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:20px;aspect-ratio:1/1}
+.svc-detail-img img{max-height:80%;max-width:80%;object-fit:contain;opacity:.9}
 .ct-wrapper {
   margin-top: 48px;
   border-radius: var(--r-lg);
@@ -273,7 +273,7 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 
 /* ── SIMULATEUR DÉPLIABLE ── */
 .sim-wrap{margin-top:64px;padding-top:64px;border-top:1px solid var(--border)}
-.sim-teaser{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.sim-teaser{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;max-width:100%}
 .sim-teaser-text{flex:1;min-width:240px}
 .sim-title{font-size:clamp(1.5rem,2.2vw,2rem);font-weight:800;color:var(--dark);margin-bottom:10px;letter-spacing:-0.03em;line-height:1.1}
 .sim-title em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal}
@@ -285,7 +285,7 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .sim-open-btn:hover{background:var(--grad);box-shadow:0 8px 24px rgba(26,111,255,0.35)}
 .sim-drawer{display:none;margin-top:36px}
 .sim-drawer.open{display:block}
-.sim-card{background:var(--white);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:36px;max-width:720px}
+.sim-card{background:var(--white);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:36px;max-width:100%}
 [data-theme="dark"] .sim-card{background:var(--bg2)}
 .sim-label{font-family:'Sora',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
 .sim-pack-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:10px}
@@ -348,7 +348,14 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .zone-sim-result{margin-top:14px}
 .zone-sim-row-r{display:flex;justify-content:space-between;align-items:center;font-size:0.84rem;color:var(--mid);padding:4px 0}
 
-/* ── PROCESS ── */
+/* ── PROCESS STEP ANIMATION ── */
+.ps{text-align:center;padding:0 8px;opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+.ps.step-on{opacity:1;transform:translateY(0)}
+/* ── NAV COMPACT ON SCROLL ── */
+nav.nav-compact{height:52px;background:rgba(255,255,255,0.97)}
+[data-theme="dark"] nav.nav-compact{background:rgba(14,14,26,0.98)}
+nav.nav-compact .logo-img{width:120px;height:52px}
+nav.nav-compact .btn-devis{padding:7px 16px;font-size:0.78rem}
 .proc-track{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative;margin-top:52px}
 .proc-track::before{content:'';position:absolute;top:26px;left:calc(8.33% - 2px);right:calc(8.33% - 2px);height:1px;background:linear-gradient(90deg,rgba(26,111,255,0.3),rgba(86,180,255,0.5),rgba(26,111,255,0.3))}
 .ps{text-align:center;padding:0 8px}
@@ -470,7 +477,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .stats-strip .container{grid-template-columns:repeat(2,1fr)}
   .stat-cell:nth-child(2){border-right:none}
   .proc-track{grid-template-columns:repeat(2,1fr);gap:24px}
-  .hero h1{font-size:1.8rem}
+  .hero h1{font-size:1.6rem}
   .nav-center{display:none}
   .btn-live,.nav-controls{display:none}
   .burger{display:flex}
@@ -529,7 +536,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .burger span{width:18px;height:2px}
 }
 @media(max-width:360px){
-  .hero h1{font-size:1.8rem}
+  .hero h1{font-size:1.6rem}
   .hero-badge{font-size:0.65rem}
   .pc-val{font-size:1.6rem}
   .btn-devis,.btn-live{font-size:0.75rem;padding:7px 14px}
@@ -591,7 +598,19 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           </a>
         </div>
       </div>
-      <a href="#tarifs">Tarifs</a>
+      <div class="nav-item">
+        <a href="#tarifs">Tarifs <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="nav-drop">
+          <a href="#tarifs">
+            <div class="nav-drop-icon"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+            <div><div class="nav-drop-title">Grille tarifaire</div><div class="nav-drop-sub">5 packs · Asso &amp; Pro</div></div>
+          </a>
+          <a href="#tarifs" onclick="setTimeout(()=>simToggleOpen(document.getElementById('sim-open-btn')),400)">
+            <div class="nav-drop-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div><div class="nav-drop-title">Simulateur tarifaire</div><div class="nav-drop-sub">Calculez votre prix en 30 sec</div></div>
+          </a>
+        </div>
+      </div>
       <a href="#contact">Contact</a>
     </div>
     <div class="nav-right">
@@ -604,7 +623,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <svg viewBox="0 0 24 24" id="dark-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </div>
       </div>
-      <a href="#contact" class="btn-devis" data-i18n="nav.devis">Demander un devis →</a>
+      <a href="#contact" class="btn-devis">Réserver un kit →</a>
       <div class="burger" onclick="toggleMenu()">
         <span></span><span></span><span></span>
       </div>
@@ -628,14 +647,14 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <svg viewBox="0 0 24 24" id="dark-icon-mobile"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </div>
   </div>
-  <a href="#contact" onclick="toggleMenu()">Demander un devis</a>
+  <a href="#contact" onclick="toggleMenu()">Réserver un kit</a>
 </div>
 
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg">
     <div class="hero-bg-video">
-      <video src="assets/videos/background1.mp4" autoplay muted loop playsinline>
+      <video src="assets/videos/background1.mp4" autoplay muted loop playsinline webkit-playsinline x5-playsinline>
         Événement festival foule
       </video>
     </div>
@@ -647,7 +666,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <span data-i18n="hero.badge">Communication événementielle · Ain (01)</span>
     </div>
 <h1 data-i18n="hero.title" style="font-size: 3.2rem; line-height: 1.1; font-weight: 700;">
-  Chaque équipe connectée.<br><em>Chaque événement maîtrisé.</em>
+  Chaque équipe <em>connectée.</em>
 </h1>
     <p class="hero-sub" data-i18n="hero.sub">Un service de communication professionnel, clé en main, accessible à toutes les structures, de l'association de quartier au festival régional.</p>
     <div class="hero-pills">
@@ -670,7 +689,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <a href="#services" class="hero-cta-secondary" data-i18n="hero.cta2">Découvrir les solutions →</a>
     </div>
   </div>
-  <div class="hero-scroll">
+  <div class="hero-scroll" onclick="document.getElementById('home').nextElementSibling.scrollIntoView({behavior:'smooth'})" style="cursor:pointer">
     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
     <span data-i18n="hero.scroll">Défiler</span>
   </div>
@@ -680,20 +699,20 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 <div class="stats-strip grain-overlay">
   <div class="container">
     <div class="stat-cell rev">
+      <div class="stat-val">Clé en main</div>
+      <div class="stat-lbl">Prêt à l'emploi en 5 minutes</div>
+    </div>
+    <div class="stat-cell rev">
       <div class="stat-val" data-count="12" data-suffix="">0</div>
-      <div class="stat-lbl">Secteurs coordonnés simultanément</div>
+      <div class="stat-lbl">Équipes coordonnées en simultané</div>
     </div>
     <div class="stat-cell rev">
-      <div class="stat-val">Plug &amp;<br>Play</div>
-      <div class="stat-lbl">Opérationnel en moins de 5 minutes</div>
+      <div class="stat-val">Prix fixe</div>
+      <div class="stat-lbl">Devis immédiat, zéro surprise</div>
     </div>
     <div class="stat-cell rev">
-      <div class="stat-val">TVA 0%</div>
-      <div class="stat-lbl">Prix nets, sans surprise, tout inclus</div>
-    </div>
-    <div class="stat-cell rev">
-      <div class="stat-val">📞</div>
-      <div class="stat-lbl">Morgan joignable pendant tout l'événement</div>
+      <div class="stat-val">7j/7</div>
+      <div class="stat-lbl">Joignable pendant tout votre événement</div>
     </div>
   </div>
 </div>
@@ -1071,14 +1090,37 @@ function simToggleOpen(btn) {
   }
 }
 
-/* ── PRODUITS — TOGGLE DÉTAIL ── */
+/* ── PRODUITS — TOGGLE DÉTAIL (one at a time) ── */
 function svcToggle(btn) {
   const detail = btn.nextElementSibling;
   const isOpen = detail.classList.contains('open');
-  detail.classList.toggle('open', !isOpen);
-  btn.classList.toggle('open', !isOpen);
-  btn.querySelector('span') && (btn.querySelector('span').textContent = isOpen ? 'Voir les spécifications complètes' : 'Masquer les spécifications');
+  // Close all others first
+  document.querySelectorAll('.svc-detail.open').forEach(d => {
+    d.classList.remove('open');
+    d.previousElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    detail.classList.add('open');
+    btn.classList.add('open');
+  }
 }
+
+/* ── NAV COMPACT ON SCROLL ── */
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').classList.toggle('nav-compact', window.scrollY > 80);
+}, {passive:true});
+
+/* ── PROCESS SEQUENTIAL ANIMATION ── */
+const procObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const steps = e.target.querySelectorAll('.ps');
+      steps.forEach((s, i) => setTimeout(() => s.classList.add('step-on'), i * 150));
+      procObs.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.15});
+document.querySelectorAll('.proc-track').forEach(el => procObs.observe(el));
 
 /* ── SIMULATEUR INLINE ── */
 const SIM_TARIFS = {
@@ -1239,7 +1281,7 @@ simUpdate();
         <span class="stag">FAQ</span>
         <h2 class="section-h">Les vraies questions<br>que vous vous posez.</h2>
         <p class="section-p" style="margin-bottom:28px">Toutes les réponses avant de nous contacter. Une question non listée ? On répond sous 24h.</p>
-        <a href="mailto:contact@aintercom.fr" style="display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem;color:var(--dark);background:transparent;border:1.5px solid var(--border-md);padding:13px 22px;border-radius:var(--r-sm);transition:.2s" onmouseover="this.style.borderColor='var(--dark)'" onmouseout="this.style.borderColor='var(--border-md)'">Poser une question →</a>
+        <a href="/cdn-cgi/l/email-protection#81e2eeeff5e0e2f5c1e0e8eff5e4f3e2eeecafe7f3" style="display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem;color:var(--dark);background:transparent;border:1.5px solid var(--border-md);padding:13px 22px;border-radius:var(--r-sm);transition:.2s" onmouseover="this.style.borderColor='var(--dark)'" onmouseout="this.style.borderColor='var(--border-md)'">Poser une question →</a>
       </div>
       <div class="faq-list rev">
         <div class="fqi open">
@@ -1340,7 +1382,7 @@ simUpdate();
           <h3 data-i18n="cc.title">Informations pratiques</h3>
           <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="ci-lbl" data-i18n="cc.pickup">Point de retrait</div><div class="ci-val">Meximieux (01) · sur RDV</div></div></div>
           <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.43 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div class="ci-lbl" data-i18n="cc.phone">Téléphone</div><div class="ci-val">07 44 98 00 15</div></div></div>
-          <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ci-lbl">Email</div><div class="ci-val">contact@aintercom.fr</div></div></div>
+          <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ci-lbl">Email</div><div class="ci-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aac9c5c4decbc9deeacbc3c4decfd8c9c5c784ccd8">[email&#160;protected]</a></div></div></div>
           <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="ci-lbl" data-i18n="cc.reply">Réponse garantie</div><div class="ci-val" data-i18n="cc.replyval">Sous 24h ouvrées</div></div></div>
         </div>
         <div class="hcard">
@@ -1364,7 +1406,7 @@ simUpdate();
         <p class="footer-tagline">Location de kits radio &amp; intercom professionnels pour l'événementiel dans l'Ain. Plug &amp; Play, sans technicien.</p>
         <div class="footer-contacts">
           <a href="tel:0744980015" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.43 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>07 44 98 00 15</a>
-          <a href="mailto:contact@aintercom.fr" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>contact@aintercom.fr</a>
+          <a href="/cdn-cgi/l/email-protection#22414d4c5643415662434b4c564750414d4f0c4450" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><span class="__cf_email__" data-cfemail="86e5e9e8f2e7e5f2c6e7efe8f2e3f4e5e9eba8e0f4">[email&#160;protected]</span></a>
           <a href="#zone" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>Meximieux · Ain (01)</a>
         </div>
         <div class="footer-social">
@@ -1417,7 +1459,7 @@ simUpdate();
 <!-- STICKY MOBILE CTA -->
 <a href="#contact" class="sticky-cta" data-i18n="mob.cta">Demander un devis →</a>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── TRANSLATIONS ── */
 const i18n = {
   fr: {
@@ -1536,11 +1578,11 @@ function zoneTab(btn, id, type) {
     if (type === 'main') {
       window.aicMap.flyTo([45.905, 5.195], 10, {duration: 0.8});
       window.aicCircle30 && window.aicCircle30.setStyle({opacity:1, fillOpacity:0.12});
-      window.aicCircle60 && window.aicCircle60.setStyle({opacity:0.3, fillOpacity:0.03});
+      window.aicCircle60 && window.aicCircle60.setStyle({opacity:0.3, fillOpacity:0.03, weight:1.5});
     } else if (type === 'ext') {
       window.aicMap.flyTo([45.905, 5.195], 8, {duration: 0.8});
       window.aicCircle30 && window.aicCircle30.setStyle({opacity:0.5, fillOpacity:0.06});
-      window.aicCircle60 && window.aicCircle60.setStyle({opacity:1, fillOpacity:0.08});
+      window.aicCircle60 && window.aicCircle60.setStyle({opacity:1, fillOpacity:0.15, color:'#56B4FF', weight:2.5});
     } else if (type === 'pickup') {
       window.aicMap.flyTo([45.905, 5.195], 13, {duration: 0.8});
       window.aicCircle30 && window.aicCircle30.setStyle({opacity:0.2, fillOpacity:0.03});
@@ -1581,7 +1623,7 @@ applyDark(dark);
 /* ── LEAFLET MAP ── */
 document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('leaflet-map')) {
-    const map = L.map('leaflet-map', {zoomControl: true, scrollWheelZoom: false}).setView([45.905, 5.195], 10);
+    const map = L.map('leaflet-map', {zoomControl: true, scrollWheelZoom: false, dragging: !L.Browser.mobile, tap: false}).setView([45.905, 5.195], 10);
     window.aicMap = map;
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors', maxZoom: 18

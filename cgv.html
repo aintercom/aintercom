@@ -44,7 +44,7 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .art strong{color:var(--dark);font-weight:600}
 .tbl-wrap{overflow-x:auto;margin:16px 0;border-radius:var(--r-sm);border:1px solid var(--border-md)}
 table{width:100%;border-collapse:collapse;font-size:0.84rem}
-thead tr{background:var(--dark)}
+thead tr{background:linear-gradient(135deg,#1A3A8F 0%,#1A6FFF 100%)}
 thead th{font-family:'Sora',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:11px 16px;text-align:left}
 tbody tr{border-top:1px solid var(--border)}
 tbody tr:nth-child(even){background:var(--bg)}
@@ -86,7 +86,7 @@ footer-mini{display:block;border-top:1px solid var(--border);padding:24px 0;text
 
     <div class="art">
       <h2>Art. 1 <span>Parties</span></h2>
-      <p><strong>Le Loueur :</strong> THIS IS IT EVENT — Association loi 1901 — SIRET 88926603700023 — 7 Rue Pierre Bernin, 01800 Meximieux — Représentée par Morgan Spirli — 07 44 98 00 15 — contact@aintercom.fr</p>
+      <p><strong>Le Loueur :</strong> THIS IS IT EVENT — Association loi 1901 — SIRET 88926603700023 — 7 Rue Pierre Bernin, 01800 Meximieux — Représentée par Morgan Spirli — 07 44 98 00 15 — <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2d1dddcc6d3d1c6f2d3dbdcc6d7c0d1dddf9cd4c0">[email&#160;protected]</a></p>
       <p><strong>Le Locataire :</strong> Toute personne physique ou morale ayant conclu un contrat de location de matériel événementiel avec le Loueur. Le Locataire reconnaît avoir pris connaissance des présentes conditions avant signature.</p>
     </div>
 
@@ -195,7 +195,7 @@ footer-mini{display:block;border-top:1px solid var(--border);padding:24px 0;text
     <div class="art">
       <h2>Art. 10 <span>Protection des données (RGPD)</span></h2>
       <p>Les informations collectées dans le cadre du contrat de location (coordonnées du Locataire, détails de l'événement) sont utilisées exclusivement pour la gestion commerciale et la facturation. Elles ne sont ni cédées ni vendues à des tiers.</p>
-      <p>Droit d'accès, de rectification et de suppression : <strong>contact@aintercom.fr</strong></p>
+      <p>Droit d'accès, de rectification et de suppression : <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cba8a4a5bfaaa8bf8baaa2a5bfaeb9a8a4a6e5adb9">[email&#160;protected]</a></strong></p>
     </div>
 
     <div class="art">
@@ -215,18 +215,11 @@ footer-mini{display:block;border-top:1px solid var(--border);padding:24px 0;text
   </div>
 </footer-mini>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 let dark = localStorage.getItem('aic-dark') === '1';
 function applyDark(d) {
   dark = d;
   document.documentElement.setAttribute('data-theme', d ? 'dark' : 'light');
   localStorage.setItem('aic-dark', d ? '1' : '0');
   const icon = document.getElementById('dark-icon');
-  if (d) icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
-  else icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-}
-function toggleDark() { applyDark(!dark); }
-applyDark(dark);
-</script>
-</body>
-</html>
+  if (d) icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/
