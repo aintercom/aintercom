@@ -10,6 +10,7 @@
 <meta property="og:description" content="Kits radio & intercom pros pour vos événements dans l'Ain. Plug & Play, sans licence, sans technicien.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
+<link rel="icon" href="assets/logos/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -81,9 +82,24 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .logo-img{background-image:url('assets/logos/logo-blanc.png')}
 }
+/* ── NAV DROPDOWNS ── */
+.nav-item{position:relative;display:inline-flex;align-items:center}
+.nav-item>a{display:flex;align-items:center;gap:5px}
+.nav-item>a svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;transition:transform .2s}
+.nav-item:hover>a svg{transform:rotate(180deg)}
+.nav-drop{position:absolute;top:calc(100% + 10px);left:0;background:var(--white);border:1px solid var(--border-md);border-radius:var(--r-md);padding:8px;min-width:220px;box-shadow:0 16px 40px rgba(0,0,0,0.1);opacity:0;visibility:hidden;transform:translateY(-6px);transition:.2s;z-index:600}
+[data-theme="dark"] .nav-drop{background:var(--bg2)}
+.nav-item:hover .nav-drop,.nav-drop:hover{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-drop a{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:var(--r-sm);transition:.15s;color:var(--dark);text-decoration:none}
+.nav-drop a:hover{background:var(--bg)}
+.nav-drop-icon{width:32px;height:32px;border-radius:8px;background:rgba(26,111,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-drop-icon svg{width:15px;height:15px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round}
+.nav-drop-title{font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:700;color:var(--dark);margin-bottom:1px}
+.nav-drop-sub{font-size:0.7rem;color:var(--muted)}
+.nav-drop-sep{height:1px;background:var(--border);margin:6px 4px}
 .nav-center{display:flex;align-items:center;gap:2px}
-.nav-center a{font-size:0.83rem;font-weight:500;color:var(--muted);padding:8px 14px;border-radius:8px;transition:.2s;white-space:nowrap}
-.nav-center a:hover{color:var(--dark);background:var(--bg)}
+.nav-center>a,.nav-item>a{font-size:0.83rem;font-weight:500;color:var(--muted);padding:8px 14px;border-radius:8px;transition:.2s;white-space:nowrap;text-decoration:none}
+.nav-center>a:hover,.nav-item>a:hover{color:var(--dark);background:var(--bg)}
 .nav-right{display:flex;align-items:center;gap:8px}
 .btn-live{display:flex;align-items:center;gap:7px;font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:700;color:var(--blue);background:rgba(26,111,255,0.08);border:1.5px solid rgba(26,111,255,0.25);padding:8px 16px;border-radius:8px;transition:.2s;cursor:pointer}
 .btn-live:hover{background:rgba(26,111,255,0.15)}
@@ -109,7 +125,7 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .hero{position:relative;height:100vh;min-height:600px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .hero-bg{position:absolute;inset:0;z-index:0}
 .hero-bg-video{position:absolute;inset:0;overflow:hidden}
-.hero-bg-video video{width:100%;height:100%;object-fit:cover;opacity:0.6}
+.hero-bg-video video{width:100%;height:100%;object-fit:cover;opacity:0.85}
 .hero-bg img{width:100%;height:100%;object-fit:cover}
 .hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(4,4,18,0.82) 0%,rgba(4,4,18,0.55) 50%,rgba(10,20,60,0.45) 100%)}
 .hero-content{position:relative;z-index:2;text-align:center;color:#fff;padding:0 24px}
@@ -154,7 +170,7 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .genese::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(86,180,255,0.08) 0%,transparent 70%)}
 .genese-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;position:relative;z-index:1}
 .genese-photo{border-radius:var(--r-xl);overflow:hidden;aspect-ratio:4/5;position:relative}
-.genese-photo img{width:100%;height:100%;object-fit:cover;opacity:.7}
+.genese-photo img{width:100%;height:100%;object-fit:cover;opacity:1}
 .genese-photo-badge{position:absolute;bottom:24px;left:24px;right:24px;background:var(--bg);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--r-md);padding:20px;text-align:center}
 .genese-photo-badge p{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px}
 .genese-photo-badge span{font-size:0.78rem;color:var(--muted)}
@@ -186,7 +202,19 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .svc-model{font-size:0.76rem;color:var(--muted);border-top:1px solid var(--border);padding-top:14px}
 .svc-model strong{color:var(--dark);font-weight:600}
 
-/* ── COMPARATIF ── */
+/* ── PRODUCT DETAIL EXPAND ── */
+.svc-expand-btn{display:flex;align-items:center;justify-content:space-between;width:100%;background:var(--bg);border:none;border-top:1px solid var(--border);padding:12px 26px;cursor:pointer;font-family:'Sora',sans-serif;font-size:0.72rem;font-weight:700;color:var(--muted);letter-spacing:0.04em;transition:.15s;gap:8px}
+.svc-expand-btn:hover{color:var(--blue);background:rgba(26,111,255,0.04)}
+.svc-expand-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;transition:transform .3s;flex-shrink:0}
+.svc-expand-btn.open svg{transform:rotate(180deg)}
+.svc-detail{display:none;padding:20px 26px;background:var(--bg);border-top:1px solid var(--border)}
+.svc-detail.open{display:block}
+.svc-detail-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--border);font-size:0.82rem}
+.svc-detail-row:last-child{border-bottom:none}
+.svc-detail-lbl{color:var(--muted)}
+.svc-detail-val{font-family:'Sora',sans-serif;font-weight:700;color:var(--dark);text-align:right}
+.svc-detail-img{background:var(--bg2);border-radius:var(--r-sm);margin-bottom:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:16px;height:90px}
+.svc-detail-img img{max-height:60px;width:auto;object-fit:contain;opacity:.85}
 .ct-wrapper {
   margin-top: 48px;
   border-radius: var(--r-lg);
@@ -243,34 +271,89 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .pnote svg{width:15px;height:15px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0}
 .pnote strong{color:var(--dark)}
 
-/* ── SIMULATEUR BLOCK ── */
-.sim-block{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;margin-top:52px;padding-top:52px;border-top:1px solid var(--border)}
-.sim-title{font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:800;color:var(--dark);margin-bottom:16px;letter-spacing:-0.03em;line-height:1.1}
+/* ── SIMULATEUR DÉPLIABLE ── */
+.sim-wrap{margin-top:64px;padding-top:64px;border-top:1px solid var(--border)}
+.sim-teaser{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.sim-teaser-text{flex:1;min-width:240px}
+.sim-title{font-size:clamp(1.5rem,2.2vw,2rem);font-weight:800;color:var(--dark);margin-bottom:10px;letter-spacing:-0.03em;line-height:1.1}
 .sim-title em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal}
-.sim-desc{font-size:0.9rem;color:var(--muted);line-height:1.75;margin-bottom:24px}
-.sim-features{display:flex;flex-direction:column;gap:8px;margin-bottom:28px}
-.sim-feat{display:flex;align-items:center;gap:10px;font-size:0.84rem;color:var(--mid)}
-.sim-feat-dot{width:6px;height:6px;border-radius:50%;background:var(--grad);flex-shrink:0}
-.sim-cta{display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem;color:#fff;background:var(--blue);padding:13px 24px;border-radius:var(--r-sm);transition:.22s}
-.sim-cta:hover{background:var(--grad);transform:translateY(-2px);box-shadow:0 10px 28px rgba(26,111,255,0.35)}
-.sim-preview{background:var(--dark);border-radius:var(--r-lg);padding:28px;position:relative;overflow:hidden}
-.sim-preview::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(26,111,255,0.25) 0%,transparent 70%)}
-.sim-preview-tag{font-family:'Sora',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px}
-.sim-preview-price{font-family:'Sora',sans-serif;font-size:3.2rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:20px}
-.sim-preview-price span{font-size:1.1rem;color:rgba(255,255,255,0.4);font-weight:500;-webkit-text-fill-color:rgba(255,255,255,0.4)}
-.sim-preview-rows{display:flex;flex-direction:column;gap:0;border-radius:var(--r-sm);overflow:hidden;border:1px solid rgba(255,255,255,0.08);margin-bottom:14px}
-.sim-preview-row{display:flex;justify-content:space-between;padding:10px 14px;font-size:0.79rem;color:rgba(255,255,255,0.65);border-bottom:1px solid rgba(255,255,255,0.06)}
-.sim-preview-row:last-child{border-bottom:none}
-.sim-preview-row-alt{color:rgba(255,255,255,0.35);font-style:italic}
-.sim-preview-total{background:rgba(26,111,255,0.15);color:#fff;font-weight:700;font-family:'Sora',sans-serif}
-.sim-preview-note{font-size:0.69rem;color:rgba(255,255,255,0.25);line-height:1.6}
+.sim-desc{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:16px;max-width:480px}
+.sim-feat-list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:0}
+.sim-feat-list li{font-size:0.82rem;color:var(--mid);display:flex;align-items:center;gap:8px}
+.sim-feat-dot{width:6px;height:6px;border-radius:50%;background:var(--grad);flex-shrink:0;display:inline-block}
+.sim-open-btn{display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem;color:#fff;background:var(--blue);padding:13px 24px;border-radius:var(--r-sm);border:none;cursor:pointer;transition:.22s;white-space:nowrap;flex-shrink:0}
+.sim-open-btn:hover{background:var(--grad);box-shadow:0 8px 24px rgba(26,111,255,0.35)}
+.sim-drawer{display:none;margin-top:36px}
+.sim-drawer.open{display:block}
+.sim-card{background:var(--white);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:36px;max-width:720px}
+[data-theme="dark"] .sim-card{background:var(--bg2)}
+.sim-label{font-family:'Sora',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.sim-pack-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:10px}
+.sim-pack-btn{padding:12px 6px;border:1.5px solid var(--border-md);border-radius:var(--r-sm);background:var(--white);cursor:pointer;text-align:center;transition:.15s;font-family:'Sora',sans-serif}
+[data-theme="dark"] .sim-pack-btn{background:var(--bg)}
+.sim-pack-btn:hover{border-color:var(--blue)}
+.sim-pack-btn.active{border:2px solid var(--blue);background:var(--blue)}
+.sim-pn{font-size:0.72rem;font-weight:700;color:var(--dark);margin-bottom:3px}
+.sim-ps{font-size:0.65rem;color:var(--muted)}
+.sim-pack-btn.active .sim-pn,.sim-pack-btn.active .sim-ps{color:#fff}
+.sim-toggle-row{text-align:right;margin-bottom:14px}
+.sim-toggle-btn{font-family:'DM Sans',sans-serif;font-size:0.78rem;color:var(--muted);background:transparent;border:1px solid var(--border-md);border-radius:var(--r-xs);padding:5px 13px;cursor:pointer;transition:.15s}
+.sim-toggle-btn:hover{color:var(--dark);border-color:var(--dark)}
+.sim-detail{background:var(--bg);border-radius:var(--r-sm);padding:14px 18px;margin-bottom:20px;display:none}
+.sim-detail.visible{display:block}
+.sim-detail-name{font-family:'Sora',sans-serif;font-size:0.8rem;font-weight:700;color:var(--dark);margin-bottom:10px}
+.sim-detail ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.sim-detail ul li{font-size:0.8rem;color:var(--mid);padding-left:16px;position:relative}
+.sim-detail ul li::before{content:'—';position:absolute;left:0;color:var(--blue)}
+.sim-seg-row{display:flex;gap:8px;margin-bottom:24px}
+.sim-seg-btn{flex:1;padding:11px;border:1.5px solid var(--border-md);border-radius:var(--r-sm);background:var(--white);cursor:pointer;font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:600;color:var(--muted);text-align:center;transition:.15s}
+[data-theme="dark"] .sim-seg-btn{background:var(--bg)}
+.sim-seg-btn:hover{border-color:var(--blue);color:var(--dark)}
+.sim-seg-btn.active{border:2px solid var(--blue);background:var(--blue);color:#fff}
+.sim-slider-block{margin-bottom:20px}
+.sim-slider-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.sim-sl-label{font-size:0.84rem;color:var(--mid)}
+.sim-sl-val{font-family:'Sora',sans-serif;font-size:0.88rem;font-weight:700;color:var(--dark)}
+.sim-range{width:100%;height:4px;border-radius:2px;background:var(--bg2);outline:none;-webkit-appearance:none;cursor:pointer;accent-color:var(--blue)}
+.sim-range::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--blue);cursor:pointer;box-shadow:0 2px 8px rgba(26,111,255,0.35)}
+.sim-range::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--blue);border:none;cursor:pointer}
+/* résultat — dark mode correct */
+.sim-result{margin-top:24px;border-radius:var(--r-md);border:1px solid var(--border-md);overflow:hidden}
+.sim-result-top{background:linear-gradient(135deg,#0A1840 0%,#1A3A8F 60%,#1A6FFF 100%);padding:24px 28px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;position:relative;overflow:hidden}
+.sim-result-top::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(86,180,255,0.25) 0%,transparent 70%);pointer-events:none}
+.sim-result-label{font-family:'Sora',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:6px}
+.sim-big-price{font-family:'Sora',sans-serif;font-size:3.2rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,0.8) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.sim-palier-pill{display:inline-block;font-family:'Sora',sans-serif;font-size:0.68rem;font-weight:700;padding:4px 12px;border-radius:100px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.85);margin-top:10px;letter-spacing:.03em}
+.sim-pj-block{text-align:right;flex-shrink:0}
+.sim-pj-value{font-family:'Sora',sans-serif;font-size:1.8rem;font-weight:800;color:#fff}
+.sim-result-rows{background:var(--white)}
+[data-theme="dark"] .sim-result-rows{background:var(--bg)}
+.sim-result-row{display:flex;justify-content:space-between;align-items:center;padding:13px 22px;border-top:1px solid var(--border);font-size:0.84rem}
+.sim-rl{color:var(--muted)}
+.sim-rv{font-family:'Sora',sans-serif;font-weight:700;color:var(--dark)}
+.sim-result-row-accent{background:rgba(26,111,255,0.04)}
+[data-theme="dark"] .sim-result-row-accent{background:rgba(26,111,255,0.08)}
+.sim-result-row-accent .sim-rl{color:var(--mid)}
+.sim-result-row-accent .sim-rv{color:var(--blue)}
+@media(max-width:600px){
+  .sim-pack-grid{grid-template-columns:repeat(3,1fr)}
+  .sim-card{padding:22px 18px}
+  .sim-big-price{font-size:2.4rem}
+  .sim-teaser{flex-direction:column;align-items:flex-start}
+}
+
+/* ── ZONE SIM LIVRAISON ── */
+.zone-sim{background:var(--bg);border:1px solid var(--border-md);border-radius:var(--r-md);padding:20px 22px;margin-top:20px}
+.zone-sim-label{font-family:'Sora',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.zone-sim-result{margin-top:14px}
+.zone-sim-row-r{display:flex;justify-content:space-between;align-items:center;font-size:0.84rem;color:var(--mid);padding:4px 0}
 
 /* ── PROCESS ── */
 .proc-track{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative;margin-top:52px}
 .proc-track::before{content:'';position:absolute;top:26px;left:calc(8.33% - 2px);right:calc(8.33% - 2px);height:1px;background:linear-gradient(90deg,rgba(26,111,255,0.3),rgba(86,180,255,0.5),rgba(26,111,255,0.3))}
 .ps{text-align:center;padding:0 8px}
-.ps-num{width:52px;height:52px;border-radius:50%;background:var(--white);border:1.5px solid rgba(26,111,255,0.3);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:0.8rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 auto 18px;position:relative;z-index:1;box-shadow:0 0 0 4px var(--white)}
-[data-theme="dark"] .ps-num{box-shadow:0 0 0 4px var(--white)}
+.ps-num{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:0.85rem;font-weight:800;color:var(--blue);background:var(--bg);border:2px solid rgba(26,111,255,0.25);margin:0 auto 18px;position:relative;z-index:2;box-shadow:0 0 0 5px var(--bg)}
+[data-theme="dark"] .ps-num{background:var(--bg);box-shadow:0 0 0 5px var(--bg)}
 .ps h4{font-family:'Sora',sans-serif;font-size:0.84rem;font-weight:700;margin-bottom:6px;color:var(--dark)}
 .ps p{font-size:0.74rem;color:var(--muted);line-height:1.55}
 
@@ -356,7 +439,11 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 .footer-siret{font-family:'Sora',sans-serif;font-size:0.66rem;font-weight:600;color:var(--muted);letter-spacing:.04em;display:flex;align-items:center;gap:8px}
 .footer-siret::before{content:'';width:5px;height:5px;background:var(--blue);border-radius:50%;flex-shrink:0}
 
-/* ── STICKY MOBILE CTA ── */
+.footer-social{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.fsoc{display:inline-flex;align-items:center;gap:7px;font-size:0.76rem;font-weight:600;color:var(--mid);background:var(--bg);border:1px solid var(--border);border-radius:var(--r-xs);padding:7px 12px;transition:.2s;text-decoration:none}
+.fsoc:hover{color:var(--dark);border-color:var(--border-md);transform:translateY(-1px)}
+.footer-legal-block{margin-top:12px;font-size:0.78rem;line-height:1.8;color:var(--muted)}
+.footer-legal-block p{margin-bottom:0;display:block}
 .sticky-cta{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:300;background:var(--blue);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem;padding:14px 28px;border-radius:100px;box-shadow:0 8px 28px rgba(26,111,255,0.45);white-space:nowrap;transition:.3s}
 .sticky-cta:hover{background:var(--grad)}
 
@@ -378,7 +465,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 @media(max-width:768px){
   .container{padding:0 18px}
   .section{padding:72px 0}
-  .svc-grid,.contact-grid,.pnotes,.form-2,.footer-grid,.sim-block{grid-template-columns:1fr}
+  .svc-grid,.contact-grid,.pnotes,.form-2,.footer-grid{grid-template-columns:1fr}
   .pgrid{grid-template-columns:repeat(2,1fr) !important}
   .stats-strip .container{grid-template-columns:repeat(2,1fr)}
   .stat-cell:nth-child(2){border-right:none}
@@ -461,12 +548,51 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
     <span class="logo-img" aria-label="AINTERCOM"></span>
   </a>
     <div class="nav-center">
-      <a href="#services" data-i18n="nav.solutions">Solutions</a>
-      <a href="#tarifs" data-i18n="nav.tarifs">Tarifs</a>
-      <a href="simulateur_aintercom_v2.html" data-i18n="nav.sim" target="_blank">Simulateur</a>
-      <a href="#genese" data-i18n="nav.story">Notre histoire</a>
-      <a href="#zone" data-i18n="nav.zone">Zone</a>
-      <a href="#faq">FAQ</a>
+      <div class="nav-item">
+        <a href="#services">Solutions <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="nav-drop">
+          <a href="#services">
+            <div class="nav-drop-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="16 2 12 7 8 2"/></svg></div>
+            <div><div class="nav-drop-title">Radios terrain</div><div class="nav-drop-sub">Motorola XT420 · 12 secteurs</div></div>
+          </a>
+          <a href="#services">
+            <div class="nav-drop-icon"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+            <div><div class="nav-drop-title">Intercom Full-Duplex</div><div class="nav-drop-sub">Hollyland Solidcom · 6 postes</div></div>
+          </a>
+          <a href="#services">
+            <div class="nav-drop-icon"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></div>
+            <div><div class="nav-drop-title">Mégaphone</div><div class="nav-drop-sub">Vonyx 65W · diffusion terrain</div></div>
+          </a>
+          <div class="nav-drop-sep"></div>
+          <a href="#tarifs">
+            <div class="nav-drop-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div><div class="nav-drop-title">Grille tarifaire</div><div class="nav-drop-sub">5 packs · Asso &amp; Pro</div></div>
+          </a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#process">Infos <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="nav-drop">
+          <a href="#genese">
+            <div class="nav-drop-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg></div>
+            <div><div class="nav-drop-title">Notre histoire</div><div class="nav-drop-sub">12 ans de terrain dans l'Ain</div></div>
+          </a>
+          <a href="#process">
+            <div class="nav-drop-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div><div class="nav-drop-title">Comment ça marche</div><div class="nav-drop-sub">6 étapes, zéro prise de tête</div></div>
+          </a>
+          <a href="#zone">
+            <div class="nav-drop-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="nav-drop-title">Zone d'intervention</div><div class="nav-drop-sub">Ain et environs · livraison</div></div>
+          </a>
+          <a href="#faq">
+            <div class="nav-drop-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><div class="nav-drop-title">FAQ</div><div class="nav-drop-sub">Toutes les réponses</div></div>
+          </a>
+        </div>
+      </div>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#contact">Contact</a>
     </div>
     <div class="nav-right">
       <a href="https://live.aintercom.fr/login.html" class="btn-live" target="_blank" rel="noopener">
@@ -477,7 +603,6 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="ctrl-btn" onclick="toggleDark()" title="Mode sombre">
           <svg viewBox="0 0 24 24" id="dark-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </div>
-        <div class="ctrl-btn" onclick="toggleLang()" title="Language" id="lang-btn" style="font-family:'Sora',sans-serif;font-size:0.72rem;font-weight:700">FR</div>
       </div>
       <a href="#contact" class="btn-devis" data-i18n="nav.devis">Demander un devis →</a>
       <div class="burger" onclick="toggleMenu()">
@@ -489,23 +614,21 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#services" onclick="toggleMenu()" data-i18n="nav.solutions">Solutions</a>
-  <a href="#tarifs" onclick="toggleMenu()" data-i18n="nav.tarifs">Tarifs</a>
-  <a href="simulateur_aintercom_v2.html" onclick="toggleMenu()" data-i18n="nav.sim" target="_blank">Simulateur</a>
-  <a href="#genese" onclick="toggleMenu()" data-i18n="nav.story">Notre histoire</a>
-  <a href="#zone" onclick="toggleMenu()" data-i18n="nav.zone">Zone</a>
+  <a href="#services" onclick="toggleMenu()">Solutions</a>
+  <a href="#tarifs" onclick="toggleMenu()">Tarifs &amp; Simulateur</a>
+  <a href="#process" onclick="toggleMenu()">Comment ça marche</a>
+  <a href="#zone" onclick="toggleMenu()">Zone d'intervention</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
   <a href="https://live.aintercom.fr/login.html" onclick="toggleMenu()" class="mobile-menu-live" target="_blank" rel="noopener">
     <span class="live-dot"></span>
-    <span data-i18n="nav.live">Interface Live</span>
+    <span>Interface Live</span>
   </a>
-  <div class="mobile-menu-controls" style="display: flex; gap: 8px; padding: 14px 16px; border-bottom: 1px solid var(--border);">
-    <div class="ctrl-btn" onclick="toggleDark(); toggleMenu()" title="Mode sombre" style="flex: 1; justify-content: center;">
+  <div class="mobile-menu-controls" style="display:flex;gap:8px;padding:14px 16px;border-bottom:1px solid var(--border)">
+    <div class="ctrl-btn" onclick="toggleDark();toggleMenu()" title="Mode sombre" style="flex:1;justify-content:center">
       <svg viewBox="0 0 24 24" id="dark-icon-mobile"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </div>
-    <div class="ctrl-btn" onclick="toggleLang(); toggleMenu()" title="Language" id="lang-btn-mobile" style="flex: 1; justify-content: center; font-family:'Sora',sans-serif;font-size:0.72rem;font-weight:700">FR</div>
   </div>
-  <a href="#contact" onclick="toggleMenu()" data-i18n="nav.devis">Demander un devis</a>
+  <a href="#contact" onclick="toggleMenu()">Demander un devis</a>
 </div>
 
 <!-- HERO -->
@@ -526,7 +649,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 <h1 data-i18n="hero.title" style="font-size: 3.2rem; line-height: 1.1; font-weight: 700;">
   Chaque équipe connectée.<br><em>Chaque événement maîtrisé.</em>
 </h1>
-    <p class="hero-sub" data-i18n="hero.sub">Un service de communication professionnel, clé en main — accessible à toutes les structures, de l'association de quartier au festival régional.</p>
+    <p class="hero-sub" data-i18n="hero.sub">Un service de communication professionnel, clé en main, accessible à toutes les structures, de l'association de quartier au festival régional.</p>
     <div class="hero-pills">
       <span class="hero-pill" data-i18n="pill.galas">🎭 Galas &amp; spectacles</span>
       <span class="hero-pill" data-i18n="pill.concerts">🎵 Concerts &amp; festivals</span>
@@ -557,20 +680,20 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 <div class="stats-strip grain-overlay">
   <div class="container">
     <div class="stat-cell rev">
-      <div class="stat-val" data-count="9" data-suffix=" km">0</div>
-      <div class="stat-lbl" data-i18n="stat.range">Portée radio garantie</div>
+      <div class="stat-val" data-count="12" data-suffix="">0</div>
+      <div class="stat-lbl">Secteurs coordonnés simultanément</div>
     </div>
     <div class="stat-cell rev">
-      <div class="stat-val" data-count="20" data-suffix=" h">0</div>
-      <div class="stat-lbl" data-i18n="stat.battery">Autonomie sans recharge</div>
+      <div class="stat-val">Plug &amp;<br>Play</div>
+      <div class="stat-lbl">Opérationnel en moins de 5 minutes</div>
     </div>
     <div class="stat-cell rev">
-      <div class="stat-val">&lt; <span data-count="5" data-suffix="'">0</span></div>
-      <div class="stat-lbl" data-i18n="stat.deploy">Déploiement complet</div>
+      <div class="stat-val">TVA 0%</div>
+      <div class="stat-lbl">Prix nets, sans surprise, tout inclus</div>
     </div>
     <div class="stat-cell rev">
-      <div class="stat-val" data-count="0" data-suffix="">0</div>
-      <div class="stat-lbl" data-i18n="stat.licence">Licence requise</div>
+      <div class="stat-val">📞</div>
+      <div class="stat-lbl">Morgan joignable pendant tout l'événement</div>
     </div>
   </div>
 </div>
@@ -593,10 +716,10 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           "12 ans à organiser des événements dans l'Ain sans jamais trouver le bon outil. Téléphones saturés, talkies jouets hors de portée, prestataires inaccessibles. On a créé ce qu'on aurait voulu avoir dès le premier jour."
         </blockquote>
         <p data-i18n="genese.p1">AINTERCOM est né d'une frustration simple et réelle : la communication professionnelle était soit bricolée, soit réservée aux grandes productions avec budget et technicien imposé. Entre les deux, le vide.</p>
-        <p data-i18n="genese.p2">Aujourd'hui, on met à disposition le même matériel que les grandes productions — Motorola, Hollyland, VONYX — pré-configuré, documenté, prêt à l'emploi en moins de 5 minutes. Pour les galas de danse comme pour les festivals de 5 000 personnes.</p>
+        <p data-i18n="genese.p2">Aujourd'hui, on met à disposition le même matériel que les grandes productions : Motorola, Hollyland, VONYX, pré-configuré, documenté, prêt à l'emploi en moins de 5 minutes. Pour les galas de danse comme pour les festivals de 5 000 personnes.</p>
         <div class="genese-sig">
           <div class="genese-sig-line"></div>
-          <span>Morgan Spirli — Fondateur AINTERCOM</span>
+          <span>Morgan Spirli, Fondateur AINTERCOM</span>
         </div>
       </div>
     </div>
@@ -618,9 +741,9 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <div class="svc-img-badge">Radio PMR446 · Sans licence</div>
         </div>
         <div class="svc-body">
-          <div class="svc-num">01 — Communication terrain</div>
+          <div class="svc-num">01 · Communication terrain</div>
           <h3 data-i18n="svc1.title">Radios professionnelles</h3>
-          <p data-i18n="svc1.desc">1 radio = 1 chef de secteur. Jusqu'à 12 secteurs coordonnés simultanément. Canaux pré-programmés et 219 codes de confidentialité — zéro interférence, communications privées garanties.</p>
+          <p data-i18n="svc1.desc">1 radio = 1 chef de secteur. Jusqu'à 12 secteurs coordonnés simultanément. Canaux pré-programmés et 219 codes de confidentialité, zéro interférence, communications privées garanties.</p>
           <div class="svc-chips">
             <span class="chip chip-blue">9 km portée</span>
             <span class="chip chip-blue">20h autonomie</span>
@@ -631,6 +754,20 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           </div>
           <div class="svc-model">Matériel · <strong>Motorola XT420 + RSM câble Kevlar</strong></div>
         </div>
+        <button class="svc-expand-btn" onclick="svcToggle(this)">
+          Voir les spécifications complètes
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="svc-detail">
+          <div class="svc-detail-img"><img src="assets/images/talkie.svg" alt="Motorola XT420"></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Autonomie batterie</span><span class="svc-detail-val">20 heures</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Bande fréquence</span><span class="svc-detail-val">PMR446 · sans licence</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Canaux</span><span class="svc-detail-val">16 canaux</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Codes confidentialité</span><span class="svc-detail-val">219 codes CTCSS/DCS</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Certifications</span><span class="svc-detail-val">IP55 · MIL-STD 810</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Micro inclus</span><span class="svc-detail-val">RSM câble Kevlar</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Contenu du pack</span><span class="svc-detail-val">Radios + chargeur(s) + valise</span></div>
+        </div>
       </div>
       <div class="svc-card rev">
         <div class="svc-img">
@@ -638,7 +775,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <div class="svc-img-badge">Intercom Full-Duplex · DECT 1.9GHz</div>
         </div>
         <div class="svc-body">
-          <div class="svc-num">02 — Régie &amp; production</div>
+          <div class="svc-num">02 · Régie &amp; production</div>
           <h3 data-i18n="svc2.title">Intercom sans fil Full-Duplex</h3>
           <p data-i18n="svc2.desc">Mains libres, zéro latence, zéro internet, réseau fermé et crypté. Le standard des grandes productions scéniques, rendu accessible. L'effet "révélation" garanti au premier essai.</p>
           <div class="svc-chips">
@@ -651,6 +788,21 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           </div>
           <div class="svc-model">Matériel · <strong>Hollyland Solidcom SE Pro 6S</strong></div>
         </div>
+        <button class="svc-expand-btn" onclick="svcToggle(this)">
+          Voir les spécifications complètes
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="svc-detail">
+          <div class="svc-detail-img"><img src="assets/images/casque.svg" alt="Hollyland Solidcom SE Pro 6S"></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Mode communication</span><span class="svc-detail-val">Full-Duplex (simultané)</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Portée</span><span class="svc-detail-val">400 m en champ libre</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Autonomie</span><span class="svc-detail-val">10 heures</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Bande fréquence</span><span class="svc-detail-val">DECT 1,9 GHz · sans licence</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Nombre de postes</span><span class="svc-detail-val">6 (1 Master + 5 Remotes)</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Latence</span><span class="svc-detail-val">Zéro latence</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Connexion</span><span class="svc-detail-val">Réseau fermé · zéro internet</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Contenu du pack</span><span class="svc-detail-val">6 casques + station charge 8 slots + sacoche</span></div>
+        </div>
       </div>
       <div class="svc-card rev">
         <div class="svc-img">
@@ -658,7 +810,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <div class="svc-img-badge">Mégaphone 65W · 2 batteries Li-Ion</div>
         </div>
         <div class="svc-body">
-          <div class="svc-num">03 — Diffusion &amp; briefing</div>
+          <div class="svc-num">03 · Diffusion &amp; briefing</div>
           <h3 data-i18n="svc3.title">Mégaphone professionnel</h3>
           <p data-i18n="svc3.desc">Soyez entendu au-delà du brouhaha. Compact, puissant, autonome. Pour les briefings terrain, annonces d'urgence, gestion des entrées et animations mobiles.</p>
           <div class="svc-chips">
@@ -668,6 +820,19 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
             <span class="chip chip-ghost">Prêt en 30s</span>
           </div>
           <div class="svc-model">Matériel · <strong>VONYX MEG065 Kit Mégaphone 65W</strong></div>
+        </div>
+        <button class="svc-expand-btn" onclick="svcToggle(this)">
+          Voir les spécifications complètes
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="svc-detail">
+          <div class="svc-detail-img"><img src="assets/images/megaphone.svg" alt="Vonyx MEG065 65W"></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Puissance</span><span class="svc-detail-val">65 Watts</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Autonomie</span><span class="svc-detail-val">2 batteries Li-Ion incluses</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Démarrage</span><span class="svc-detail-val">Prêt en 10 secondes</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Usage</span><span class="svc-detail-val">Briefings, annonces, gestion entrées</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Transport</span><span class="svc-detail-val">Sac de transport inclus</span></div>
+          <div class="svc-detail-row"><span class="svc-detail-lbl">Contenu du pack</span><span class="svc-detail-val">Mégaphone + 2 batteries + sac</span></div>
         </div>
       </div>
     </div>
@@ -760,7 +925,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="129" data-pro="249">129</span></div>
         <div class="pc-period" data-i18n="pk.period">/ weekend</div>
         <div class="pc-tva" data-i18n="pk.tva">TTC · TVA 0% (Asso loi 1901)</div>
-        <div class="pc-desc" data-i18n="pk2.desc">12 radios Motorola XT420 + micros RSM + 2 chargeurs 6 slots + valise — idéal festivals, galas, fêtes de village</div>
+        <div class="pc-desc" data-i18n="pk2.desc">12 radios Motorola XT420 + micros RSM + 2 chargeurs 6 slots + valise · idéal festivals, galas, fêtes de village</div>
       </div>
       <div class="pc rev">
         <div class="pc-name" data-i18n="pk3.name">Pack Scène</div>
@@ -768,7 +933,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="149" data-pro="279">149</span></div>
         <div class="pc-period" data-i18n="pk.period">/ weekend</div>
         <div class="pc-tva" data-i18n="pk.tva">TTC · TVA 0% (Asso loi 1901)</div>
-        <div class="pc-desc" data-i18n="pk3.desc">Hollyland Solidcom SE Pro 6S complet — Full-Duplex, zéro latence, zéro internet — pour régie &amp; scène</div>
+        <div class="pc-desc" data-i18n="pk3.desc">Hollyland Solidcom SE Pro 6S complet · Full-Duplex, zéro latence, zéro internet · régie &amp; scène</div>
       </div>
       <div class="pc rev">
         <div class="pc-name" data-i18n="pk4.name">Pack Régie</div>
@@ -776,7 +941,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="219" data-pro="399">219</span></div>
         <div class="pc-period" data-i18n="pk.period">/ weekend</div>
         <div class="pc-tva" data-i18n="pk.tva">TTC · TVA 0% (Asso loi 1901)</div>
-        <div class="pc-desc" data-i18n="pk4.desc">6 radios terrain + 6 intercoms Hollyland — Théâtre, gala, scène ET terrain couverts simultanément</div>
+        <div class="pc-desc" data-i18n="pk4.desc">6 radios terrain + 6 intercoms Hollyland · Théâtre, gala, scène ET terrain couverts simultanément</div>
       </div>
       <div class="pc rev" style="border-color:rgba(26,111,255,0.25)">
         <div class="pc-name" data-i18n="pk5.name">Pack Complet</div>
@@ -784,49 +949,216 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="329" data-pro="599">329</span></div>
         <div class="pc-period" data-i18n="pk.period">/ weekend</div>
         <div class="pc-tva" data-i18n="pk.tva">TTC · TVA 0% (Asso loi 1901)</div>
-        <div class="pc-desc" data-i18n="pk5.desc">12 radios + 6 intercoms Hollyland + Vonyx MEG065 65W — la régie de poche entière</div>
+        <div class="pc-desc" data-i18n="pk5.desc">12 radios + 6 intercoms Hollyland + Vonyx MEG065 65W · la régie de poche entière</div>
       </div>
     </div>
     <div class="pnotes rev">
-      <div class="pnote"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-i18n="pn1"><strong>Retrait à Meximieux</strong> — gratuit, sur RDV 7j/7</span></div>
-      <div class="pnote"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span data-i18n="pn2">Livraison simple <strong>+30€</strong> · Livraison + installation sur site <strong>+60€</strong></span></div>
-      <div class="pnote"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span data-i18n="pn3">Acompte <strong>30%</strong> à la signature — solde 70% sous 30j après l'événement</span></div>
-      <div class="pnote"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="pn4">Journée, semaine, quinzaine, mois — <strong>devis sur mesure</strong></span></div>
+      <div class="pnote"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Retrait à Meximieux</strong> · gratuit, sur RDV 7j/7</span></div>
+      <div class="pnote"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span>Acompte <strong>30%</strong> à la signature · solde 70% sous 30j après l'événement</span></div>
+      <div class="pnote"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Durée flexible · utilisez le simulateur ci-dessous pour calculer votre prix exact</span></div>
     </div>
 
-    <!-- SIMULATEUR INTÉGRÉ -->
-    <div class="sim-block rev">
-      <div class="sim-left">
-        <span class="stag">Outil de calcul</span>
-        <h3 class="sim-title">Votre tarif en<br><em>30 secondes.</em></h3>
-        <p class="sim-desc">Sélectionnez votre pack, votre durée et votre statut. Le simulateur calcule le prix exact, la dégressivité et les options de livraison — sans inscription, sans engagement.</p>
-        <div class="sim-features">
-          <div class="sim-feat"><div class="sim-feat-dot"></div><span>5 packs · Asso &amp; Pro</span></div>
-          <div class="sim-feat"><div class="sim-feat-dot"></div><span>Dégressivité automatique</span></div>
-          <div class="sim-feat"><div class="sim-feat-dot"></div><span>Options livraison incluses</span></div>
+    <!-- SIMULATEUR DÉPLIABLE -->
+    <div class="sim-wrap rev">
+      <!-- TEASER TOUJOURS VISIBLE -->
+      <div class="sim-teaser">
+        <div class="sim-teaser-text">
+          <span class="stag">Simulateur de tarif</span>
+          <h3 class="sim-title">Votre tarif en <em>30 secondes.</em></h3>
+          <p class="sim-desc">Sélectionnez votre pack, votre durée et votre statut. Le simulateur calcule le prix exact, la dégressivité et le coût de déplacement. Sans inscription, sans engagement.</p>
+          <ul class="sim-feat-list">
+            <li><span class="sim-feat-dot"></span>5 packs · Asso &amp; Pro</li>
+            <li><span class="sim-feat-dot"></span>Dégressivité automatique</li>
+            <li><span class="sim-feat-dot"></span>Coût de déplacement inclus</li>
+          </ul>
         </div>
-        <a href="simulateur_aintercom_v2.html" target="_blank" class="sim-cta">
-          <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
-          Ouvrir le simulateur
-        </a>
+        <button class="sim-open-btn" id="sim-open-btn" onclick="simToggleOpen(this)">
+          <svg viewBox="0 0 24 24" id="sim-open-icon" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s"><polyline points="6 9 12 15 18 9"/></svg>
+          <span id="sim-open-label">Ouvrir le simulateur</span>
+        </button>
       </div>
-      <div class="sim-right">
-        <div class="sim-preview">
-          <div class="sim-preview-tag">Aperçu — Pack Essentiel · Association · Weekend</div>
-          <div class="sim-preview-price">129<span>€ TTC</span></div>
-          <div class="sim-preview-rows">
-            <div class="sim-preview-row"><span>Pack Essentiel (12 radios)</span><span>129 €</span></div>
-            <div class="sim-preview-row"><span>Retrait à Meximieux</span><span>Gratuit</span></div>
-            <div class="sim-preview-row sim-preview-row-alt"><span>Option livraison simple</span><span>+30 €</span></div>
-            <div class="sim-preview-row sim-preview-row-alt"><span>Option installation sur site</span><span>+60 €</span></div>
-            <div class="sim-preview-row sim-preview-total"><span>Total TTC</span><span>129 €</span></div>
+
+      <!-- SIMULATEUR MASQUÉ PAR DÉFAUT -->
+      <div class="sim-drawer" id="sim-drawer">
+        <div class="sim-card">
+
+          <div class="sim-label">Pack</div>
+          <div class="sim-pack-grid">
+            <button class="sim-pack-btn active" data-pack="demi" onclick="simSelectPack(this)">
+              <div class="sim-pn">Demi-Flotte</div><div class="sim-ps">6 radios</div>
+            </button>
+            <button class="sim-pack-btn" data-pack="essentiel" onclick="simSelectPack(this)">
+              <div class="sim-pn">Essentiel</div><div class="sim-ps">12 radios</div>
+            </button>
+            <button class="sim-pack-btn" data-pack="scene" onclick="simSelectPack(this)">
+              <div class="sim-pn">Scène</div><div class="sim-ps">6 intercoms</div>
+            </button>
+            <button class="sim-pack-btn" data-pack="regie" onclick="simSelectPack(this)">
+              <div class="sim-pn">Régie</div><div class="sim-ps">6R + 6I</div>
+            </button>
+            <button class="sim-pack-btn" data-pack="complet" onclick="simSelectPack(this)">
+              <div class="sim-pn">Complet</div><div class="sim-ps">Tout inclus</div>
+            </button>
           </div>
-          <div class="sim-preview-note">TVA 0% — Association loi 1901 · Acompte 30% à la signature</div>
+
+          <div class="sim-toggle-row">
+            <button class="sim-toggle-btn" onclick="simToggleDetail(this)">+ Voir le contenu du pack</button>
+          </div>
+          <div class="sim-detail" id="sim-detail">
+            <div class="sim-detail-name" id="sim-detail-name"></div>
+            <ul id="sim-detail-list"></ul>
+          </div>
+
+          <div class="sim-label">Type de structure</div>
+          <div class="sim-seg-row">
+            <button class="sim-seg-btn active" id="sim-seg-asso" onclick="simSelectSeg('asso')">Association / Particulier</button>
+            <button class="sim-seg-btn" id="sim-seg-pro" onclick="simSelectSeg('pro')">Professionnel</button>
+          </div>
+
+          <div class="sim-slider-block">
+            <div class="sim-slider-top">
+              <span class="sim-sl-label">Durée de location</span>
+              <span class="sim-sl-val" id="sim-duree-out">3 jours</span>
+            </div>
+            <input type="range" min="1" max="30" value="3" step="1" id="sim-duree" oninput="simUpdate()" class="sim-range">
+          </div>
+          <div class="sim-slider-block">
+            <div class="sim-slider-top">
+              <span class="sim-sl-label">Distance depuis Meximieux</span>
+              <span class="sim-sl-val" id="sim-km-out">Retrait portail · gratuit</span>
+            </div>
+            <input type="range" min="0" max="150" value="0" step="5" id="sim-km" oninput="simUpdate()" class="sim-range">
+          </div>
+
+          <div class="sim-result">
+            <div class="sim-result-top">
+              <div>
+                <div class="sim-result-label">Total à facturer</div>
+                <div class="sim-big-price" id="sim-total-price">79 €</div>
+                <div class="sim-palier-pill" id="sim-palier">Weekend</div>
+              </div>
+              <div class="sim-pj-block">
+                <div class="sim-result-label">Prix / jour</div>
+                <div class="sim-pj-value" id="sim-pj-display">26 €</div>
+              </div>
+            </div>
+            <div class="sim-result-rows">
+              <div class="sim-result-row"><span class="sim-rl">Location matériel</span><span class="sim-rv" id="sim-d-loc">79 €</span></div>
+              <div class="sim-result-row"><span class="sim-rl">Déplacement A/R (0,50 €/km)</span><span class="sim-rv" id="sim-d-dep">Gratuit · retrait portail</span></div>
+              <div class="sim-result-row sim-result-row-accent"><span class="sim-rl">Acompte 30% à la signature</span><span class="sim-rv" id="sim-d-acompte">24 €</span></div>
+              <div class="sim-result-row sim-result-row-accent"><span class="sim-rl">Solde 70% sous 30 jours</span><span class="sim-rv" id="sim-d-solde">55 €</span></div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+/* ── SIMULATEUR — TOGGLE OPEN ── */
+function simToggleOpen(btn) {
+  const drawer = document.getElementById('sim-drawer');
+  const icon = document.getElementById('sim-open-icon');
+  const label = document.getElementById('sim-open-label');
+  const isOpen = drawer.classList.contains('open');
+  drawer.classList.toggle('open', !isOpen);
+  icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+  label.textContent = isOpen ? 'Ouvrir le simulateur' : 'Fermer le simulateur';
+  if (!isOpen) {
+    setTimeout(() => drawer.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
+  }
+}
+
+/* ── PRODUITS — TOGGLE DÉTAIL ── */
+function svcToggle(btn) {
+  const detail = btn.nextElementSibling;
+  const isOpen = detail.classList.contains('open');
+  detail.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  btn.querySelector('span') && (btn.querySelector('span').textContent = isOpen ? 'Voir les spécifications complètes' : 'Masquer les spécifications');
+}
+
+/* ── SIMULATEUR INLINE ── */
+const SIM_TARIFS = {
+  demi:      { asso: 79,  pro: 149 },
+  essentiel: { asso: 129, pro: 249 },
+  regie:     { asso: 219, pro: 399 },
+  scene:     { asso: 149, pro: 279 },
+  complet:   { asso: 329, pro: 599 }
+};
+const SIM_DETAILS = {
+  demi:      { name: 'Pack Demi-Flotte', items: ['6 Motorola XT420','Micro déporté RSM inclus par radio','1 chargeur 6 slots','Valise de transport'] },
+  essentiel: { name: 'Pack Essentiel', items: ['12 Motorola XT420','Micro déporté RSM inclus par radio','2 chargeurs 6 slots','Valise de transport'] },
+  regie:     { name: 'Pack Régie', items: ['6 Motorola XT420 + micro déporté','1 chargeur 6 slots','Hollyland Solidcom SE Pro 6S complet','1 master + 5 remotes + station charge 8 slots','Sacoche de transport'] },
+  scene:     { name: 'Pack Scène', items: ['Hollyland Solidcom SE Pro 6S complet','1 master + 5 remotes','Station charge 8 slots','Full-Duplex · zéro latence · zéro internet','Sacoche de transport'] },
+  complet:   { name: 'Pack Complet', items: ['12 Motorola XT420 + micros déportés','2 chargeurs 6 slots','Hollyland Solidcom SE Pro 6S complet','Vonyx MEG065 65W + sac + 2 batteries Li-ion','Valise de transport'] }
+};
+let simPack = 'demi', simSeg = 'asso', simDetailVisible = false;
+
+function simSelectPack(el) {
+  document.querySelectorAll('.sim-pack-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  simPack = el.dataset.pack;
+  simUpdateDetail();
+  simUpdate();
+}
+function simSelectSeg(seg) {
+  simSeg = seg;
+  document.getElementById('sim-seg-asso').classList.toggle('active', seg === 'asso');
+  document.getElementById('sim-seg-pro').classList.toggle('active', seg === 'pro');
+  simUpdate();
+}
+function simToggleDetail(btn) {
+  simDetailVisible = !simDetailVisible;
+  document.getElementById('sim-detail').classList.toggle('visible', simDetailVisible);
+  btn.textContent = simDetailVisible ? '− Masquer le contenu' : '+ Voir le contenu du pack';
+  simUpdateDetail();
+}
+function simUpdateDetail() {
+  const d = SIM_DETAILS[simPack];
+  document.getElementById('sim-detail-name').textContent = d.name;
+  document.getElementById('sim-detail-list').innerHTML = d.items.map(i => '<li>' + i + '</li>').join('');
+}
+function simTarifJour(base, jours) {
+  const pj = base / 3;
+  if (jours === 1)  return Math.round(base * 0.70);
+  if (jours <= 4)   return Math.round(pj);
+  if (jours <= 7)   return Math.round(pj * 0.90);
+  if (jours <= 14)  return Math.round(pj * 0.80);
+  return Math.round(pj * 0.70);
+}
+function simPalierLabel(jours) {
+  if (jours === 1)  return '1 jour';
+  if (jours <= 4)   return 'Weekend';
+  if (jours <= 7)   return 'Semaine −10%';
+  if (jours <= 14)  return 'Quinzaine −20%';
+  return 'Mois −30%';
+}
+function simUpdate() {
+  const jours = parseInt(document.getElementById('sim-duree').value);
+  const km    = parseInt(document.getElementById('sim-km').value);
+  const base  = SIM_TARIFS[simPack][simSeg];
+  const pj    = simTarifJour(base, jours);
+  const loc   = pj * jours;
+  const dep   = km === 0 ? 0 : Math.round(km * 2 * 0.5);
+  const total = loc + dep;
+  const acompte = Math.round(total * 0.30);
+  const solde   = total - acompte;
+  document.getElementById('sim-duree-out').textContent  = jours === 1 ? '1 jour' : jours + ' jours';
+  document.getElementById('sim-km-out').textContent     = km === 0 ? 'Retrait portail · gratuit' : km + ' km · déplacement calculé';
+  document.getElementById('sim-total-price').textContent = total + ' €';
+  document.getElementById('sim-palier').textContent      = simPalierLabel(jours);
+  document.getElementById('sim-pj-display').textContent  = pj + ' €';
+  document.getElementById('sim-d-loc').textContent       = loc + ' €';
+  document.getElementById('sim-d-dep').textContent       = km === 0 ? 'Gratuit · retrait portail' : dep + ' €';
+  document.getElementById('sim-d-acompte').textContent   = acompte + ' €';
+  document.getElementById('sim-d-solde').textContent     = solde + ' €';
+}
+simUpdateDetail();
+simUpdate();
+</script>
 
 <!-- PROCESS -->
 <section class="section section-bg grain-overlay" id="process">
@@ -837,12 +1169,12 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <p class="section-p" style="margin:0 auto" data-i18n="proc.sub">Un process clair, documenté à chaque étape.</p>
     </div>
     <div class="proc-track">
-      <div class="ps rev"><div class="ps-num">01</div><h4 data-i18n="proc.s1h">Contact</h4><p data-i18n="proc.s1p">Email ou téléphone — décrivez votre événement</p></div>
+      <div class="ps rev"><div class="ps-num">01</div><h4 data-i18n="proc.s1h">Contact</h4><p data-i18n="proc.s1p">Email ou téléphone : décrivez votre événement</p></div>
       <div class="ps rev"><div class="ps-num">02</div><h4 data-i18n="proc.s2h">Devis 24h</h4><p data-i18n="proc.s2p">Proposition personnalisée avec le pack adapté</p></div>
-      <div class="ps rev"><div class="ps-num">03</div><h4 data-i18n="proc.s3h">Confirmation</h4><p data-i18n="proc.s3p">Devis signé + acompte 30% par virement = date bloquée</p></div>
+      <div class="ps rev"><div class="ps-num">03</div><h4 data-i18n="proc.s3h">Confirmation</h4><p data-i18n="proc.s3p">Devis signé + acompte 30% par virement : date bloquée</p></div>
       <div class="ps rev"><div class="ps-num">04</div><h4 data-i18n="proc.s4h">Retrait</h4><p data-i18n="proc.s4p">À Meximieux ou livraison sur site</p></div>
-      <div class="ps rev"><div class="ps-num">05</div><h4 data-i18n="proc.s5h">Événement</h4><p data-i18n="proc.s5p">Opérationnel en &lt;5min — joignable pendant</p></div>
-      <div class="ps rev"><div class="ps-num">06</div><h4 data-i18n="proc.s6h">Retour</h4><p data-i18n="proc.s6p">Restitution du matériel — état des lieux retour — solde sous 30j</p></div>
+      <div class="ps rev"><div class="ps-num">05</div><h4 data-i18n="proc.s5h">Événement</h4><p data-i18n="proc.s5p">Opérationnel en moins de 5 min · Morgan joignable</p></div>
+      <div class="ps rev"><div class="ps-num">06</div><h4 data-i18n="proc.s6h">Retour</h4><p data-i18n="proc.s6p">Restitution du matériel · état des lieux · solde sous 30j</p></div>
     </div>
   </div>
 </section>
@@ -851,32 +1183,48 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 <section class="section" id="zone">
   <div class="container">
     <div class="rev">
-      <span class="stag" data-i18n="zone.tag">Zone d'intervention</span>
-      <h2 class="section-h" data-i18n="zone.title">Basé à Meximieux.<br>Autour de vous dans l'Ain.</h2>
-      <p class="section-p" data-i18n="zone.sub">Point de retrait à Meximieux. Livraison possible dans tout le département et zones limitrophes.</p>
+      <span class="stag">Zone d'intervention</span>
+      <h2 class="section-h">Basé à Meximieux.<br>Autour de vous dans l'Ain.</h2>
+      <p class="section-p">Point de retrait gratuit à Meximieux. Livraison possible dans tout le département et zones limitrophes.</p>
     </div>
     <div class="zone-wrap">
       <div class="zone-map-box rev"><div id="leaflet-map" style="width:100%;height:100%;min-height:460px;border-radius:20px;overflow:hidden"></div></div>
       <div class="rev">
         <div class="zone-tabs">
-          <div class="ztab active" onclick="zoneTab(this,'z1')" data-i18n="zt.main">Zone principale</div>
-          <div class="ztab" onclick="zoneTab(this,'z2')" data-i18n="zt.ext">Zone étendue</div>
-          <div class="ztab" onclick="zoneTab(this,'z3')" data-i18n="zt.pickup">Point de retrait</div>
+          <div class="ztab active" onclick="zoneTab(this,'z1','main')">Zone principale</div>
+          <div class="ztab" onclick="zoneTab(this,'z2','ext')">Zone étendue</div>
+          <div class="ztab" onclick="zoneTab(this,'z3','pickup')">Point de retrait</div>
         </div>
         <div class="zone-info-block active" id="z1">
-          <div class="zone-item"><div class="zdot zdot-p"></div><div><h4 data-i18n="z1.title">Zone principale — ~30 km autour de Meximieux</h4><p data-i18n="z1.desc">Couverture prioritaire du bassin de l'Ain central. Livraison avec installation possible à tarif standard. Délai de livraison garanti selon disponibilité.</p></div></div>
-          <div class="zone-item"><div class="zdot zdot-s"></div><div><h4 data-i18n="z1.t2">Comprend notamment</h4><p>Meximieux, Ambérieu-en-Bugey, Trévoux, Miribel, Bourg-en-Bresse, Montluel, Pont-de-Chéruy et leurs environs.</p></div></div>
+          <div class="zone-item"><div class="zdot zdot-p"></div><div><h4>Zone principale · ~30 km autour de Meximieux</h4><p>Livraison sur site possible. Meximieux, Ambérieu-en-Bugey, Trévoux, Miribel, Bourg-en-Bresse, Montluel, Pont-de-Chéruy et leurs environs.</p></div></div>
         </div>
         <div class="zone-info-block" id="z2">
-          <div class="zone-item"><div class="zdot zdot-s"></div><div><h4 data-i18n="z2.title">Zone étendue — jusqu'à ~60 km</h4><p data-i18n="z2.desc">Isère Nord, Rhône Est, Savoie. Livraison possible selon disponibilité. Nous contacter pour confirmer votre adresse et obtenir un tarif de déplacement adapté.</p></div></div>
-          <div class="zone-item"><div class="zdot zdot-s"></div><div><h4 data-i18n="z2.t2">Sur devis</h4><p data-i18n="z2.desc2">Pour les événements hors zone, un devis de déplacement est établi au cas par cas. N'hésitez pas à nous contacter, nous ferons notre possible.</p></div></div>
+          <div class="zone-item"><div class="zdot zdot-s"></div><div><h4>Zone étendue · jusqu'à ~60 km</h4><p>Isère Nord, Rhône Est, Savoie. Livraison selon disponibilité. Frais de déplacement calculés sur devis (0,50€/km A/R depuis Meximieux).</p></div></div>
         </div>
         <div class="zone-info-block" id="z3">
-          <div class="zone-item"><div class="zdot zdot-p"></div><div><h4 data-i18n="z3.title">Retrait à Meximieux (01800)</h4><p data-i18n="z3.desc">Retrait du matériel directement à Meximieux, sur rendez-vous. Gratuit, disponible 7 jours sur 7 selon disponibilité.</p></div></div>
-          <div class="zone-item"><div class="zdot zdot-s"></div><div><h4 data-i18n="z3.t2">Horaires flexibles</h4><p>Sur rendez-vous, 7j/7 selon disponibilité. Pas de créneau imposé — on s'adapte à votre planning. Morgan reste joignable pendant toute la durée de votre événement.</p></div></div>
+          <div class="zone-item"><div class="zdot zdot-p"></div><div><h4>Retrait à Meximieux (01800)</h4><p>Gratuit, sur rendez-vous, 7j/7. On s'adapte à votre planning, pas de créneau imposé.</p></div></div>
         </div>
+
+        <!-- SIMULATEUR LIVRAISON -->
+        <div class="zone-sim">
+          <div class="zone-sim-label">Estimez votre coût de déplacement</div>
+          <div class="zone-sim-row">
+            <div class="zone-sim-slider-wrap">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:0.82rem;color:var(--mid)">Distance depuis Meximieux</span>
+                <span class="zone-sim-val" id="zone-km-out" style="font-family:'Sora',sans-serif;font-size:0.82rem;font-weight:700;color:var(--dark)">0 km</span>
+              </div>
+              <input type="range" min="0" max="120" value="0" step="5" id="zone-km" oninput="zoneSimUpdate()" class="sim-range">
+            </div>
+          </div>
+          <div class="zone-sim-result" id="zone-sim-result">
+            <div class="zone-sim-row-r"><span>Déplacement A/R</span><span id="zone-dep-val" style="font-family:'Sora',sans-serif;font-weight:700;color:var(--blue)">Gratuit · retrait portail</span></div>
+            <div class="zone-sim-row-r" style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px;font-size:0.72rem;color:var(--muted)">Installation sur site incluse · 0,50€/km A/R</div>
+          </div>
+        </div>
+
         <div style="margin-top:24px">
-          <a href="#contact" style="display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.9rem;color:#fff;background:var(--blue);padding:14px 26px;border-radius:var(--r-sm);transition:.22s" onmouseover="this.style.background='linear-gradient(135deg,#1A6FFF,#56B4FF)'" onmouseout="this.style.background='var(--blue)'" data-i18n="zone.cta">Vérifier ma zone →</a>
+          <a href="#contact" style="display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.9rem;color:#fff;background:var(--blue);padding:14px 26px;border-radius:var(--r-sm);transition:.22s" onmouseover="this.style.background='linear-gradient(135deg,#1A6FFF,#56B4FF)'" onmouseout="this.style.background='var(--blue)'">Vérifier ma zone →</a>
         </div>
       </div>
     </div>
@@ -888,35 +1236,43 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   <div class="container">
     <div class="faq-layout">
       <div class="rev">
-        <span class="stag" data-i18n="faq.tag">FAQ</span>
-        <h2 class="section-h" data-i18n="faq.title">Tout savoir avant<br>de réserver.</h2>
-        <p class="section-p" style="margin-bottom:28px" data-i18n="faq.sub">Une question sans réponse ? Contactez-nous — réponse sous 24h.</p>
-        <a href="mailto:contact@aintercom.fr" style="display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem;color:var(--dark);background:transparent;border:1.5px solid var(--border-md);padding:13px 22px;border-radius:var(--r-sm);transition:.2s" onmouseover="this.style.borderColor='var(--dark)'" onmouseout="this.style.borderColor='var(--border-md)'" data-i18n="faq.cta">Poser une question →</a>
+        <span class="stag">FAQ</span>
+        <h2 class="section-h">Les vraies questions<br>que vous vous posez.</h2>
+        <p class="section-p" style="margin-bottom:28px">Toutes les réponses avant de nous contacter. Une question non listée ? On répond sous 24h.</p>
+        <a href="mailto:contact@aintercom.fr" style="display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem;color:var(--dark);background:transparent;border:1.5px solid var(--border-md);padding:13px 22px;border-radius:var(--r-sm);transition:.2s" onmouseover="this.style.borderColor='var(--dark)'" onmouseout="this.style.borderColor='var(--border-md)'">Poser une question →</a>
       </div>
       <div class="faq-list rev">
         <div class="fqi open">
-          <div class="fqi-q" onclick="toggleFaq(this)"><span data-i18n="q1">Faut-il une licence pour utiliser les radios ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
-          <div class="fqi-a"><div class="fqi-a-inner" data-i18n="a1">Non. Le Motorola XT420 fonctionne sur la bande PMR446, libre d'utilisation en France sans licence ni redevance. L'intercom Hollyland opère sur DECT 1.9 GHz — également libre, sans démarche ANFR. Tout est légal, dès le premier jour.</div></div>
+          <div class="fqi-q" onclick="toggleFaq(this)"><span>Combien de personnes peut-on coordonner avec un kit ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="fqi-a"><div class="fqi-a-inner">Avec le Pack Essentiel (12 radios), vous coordonnez jusqu'à 12 chefs de secteur simultanément, chacun avec son propre canal ou sur le canal commun. Le Pack Régie ajoute 6 intercoms Full-Duplex pour la scène : régisseur, sono, lumières, coulisses. Le Pack Complet couvre les deux, plus la diffusion publique avec le mégaphone 65W.</div></div>
         </div>
         <div class="fqi">
-          <div class="fqi-q" onclick="toggleFaq(this)"><span data-i18n="q2">Comment fonctionnent les canaux sécurisés ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
-          <div class="fqi-a"><div class="fqi-a-inner" data-i18n="a2">Chaque kit est livré avec des canaux pré-programmés par secteur et des codes de confidentialité activés (219 codes CTCSS/DCS). Même si d'autres organisateurs utilisent des radios PMR sur votre site, vos communications restent privées. Tout est configuré avant livraison.</div></div>
+          <div class="fqi-q" onclick="toggleFaq(this)"><span>C'est vraiment prêt en 5 minutes, sans technicien ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="fqi-a"><div class="fqi-a-inner">Oui. Tout est pré-configuré avant livraison : canaux programmés, codes de confidentialité activés, batteries chargées. Chaque valise contient une fiche plastifiée avec les étapes illustrées, et un QR code vers une vidéo de démarrage rapide. Vos bénévoles s'en sortent seuls dès la première utilisation.</div></div>
         </div>
         <div class="fqi">
-          <div class="fqi-q" onclick="toggleFaq(this)"><span data-i18n="q3">Le matériel est-il difficile à utiliser ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
-          <div class="fqi-a"><div class="fqi-a-inner" data-i18n="a3">Non. Tout est Plug & Play et pré-configuré. Chaque kit contient une fiche tuto plastifiée avec QR code vers une vidéo de démonstration. Vos bénévoles sont opérationnels en moins de 5 minutes.</div></div>
+          <div class="fqi-q" onclick="toggleFaq(this)"><span>On est une petite association avec un petit budget : c'est pour nous ? ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="fqi-a"><div class="fqi-a-inner">C'est exactement pour vous. La Demi-Flotte commence à 79€ TTC pour un weekend. TVA 0% parce qu'on est une association loi 1901 comme vous. Pas de technicien à payer, pas de camion, pas d'abonnement. Vous venez chercher le matériel, vous le rendez le lundi. Simple.</div></div>
         </div>
         <div class="fqi">
-          <div class="fqi-q" onclick="toggleFaq(this)"><span data-i18n="q4">Que se passe-t-il si le matériel est endommagé ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
-          <div class="fqi-a"><div class="fqi-a-inner" data-i18n="a4">Un état des lieux contradictoire est effectué au départ et au retour du matériel. En cas de dommage constaté, le responsable s'engage à rembourser au prix de remplacement réel (sur facture). Sans incident, aucun frais supplémentaire n'est appliqué.</div></div>
+          <div class="fqi-q" onclick="toggleFaq(this)"><span>Comment on paie ? Est-ce qu'il faut tout payer en avance ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="fqi-a"><div class="fqi-a-inner">Non. Vous réglez un acompte de 30% à la signature du contrat pour bloquer la date, et le solde de 70% dans les 30 jours suivant votre événement. Paiement par virement bancaire uniquement. Aucun surcoût caché : le prix du devis est le prix final.</div></div>
         </div>
         <div class="fqi">
-          <div class="fqi-q" onclick="toggleFaq(this)"><span data-i18n="q5">Les prix sont-ils TTC ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
-          <div class="fqi-a"><div class="fqi-a-inner" data-i18n="a5">Oui, tous les prix sont TTC. AINTERCOM est opéré par This Is It Event, association loi 1901 non assujettie à la TVA. Le taux de TVA est donc de 0% — le prix affiché est le prix final, sans aucun supplément.</div></div>
+          <div class="fqi-q" onclick="toggleFaq(this)"><span>Que se passe-t-il si on casse quelque chose ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="fqi-a"><div class="fqi-a-inner">Un état des lieux contradictoire est signé au départ et au retour. En cas de dommage constaté, vous remboursez au prix de remplacement réel sur facture (ex : 150€ par radio Motorola). Le matériel est certifié IP55 et MIL-STD 810. Il est conçu pour encaisser. Sans incident, aucun frais.</div></div>
         </div>
         <div class="fqi">
-          <div class="fqi-q" onclick="toggleFaq(this)"><span data-i18n="q6">Quelle est la politique d'annulation ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
-          <div class="fqi-a"><div class="fqi-a-inner" data-i18n="a6">Plus de 72h avant l'événement : annulation gratuite, acompte restitué sous 15 jours. Moins de 72h : retenue de l'acompte (30%). Le jour J si le matériel est préparé : facturation de 50% du total. En cas de panne matérielle de notre côté, annulation sans frais et restitution intégrale.</div></div>
+          <div class="fqi-q" onclick="toggleFaq(this)"><span>On peut annuler si l'événement est annulé ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="fqi-a"><div class="fqi-a-inner">Oui. Plus de 72h avant l'événement : annulation gratuite, acompte remboursé intégralement sous 15 jours. Moins de 72h : l'acompte (30%) est retenu. Le jour J avec le matériel déjà préparé : 50% du total. Si le problème vient de nous (panne matérielle), annulation sans frais et remboursement complet.</div></div>
+        </div>
+        <div class="fqi">
+          <div class="fqi-q" onclick="toggleFaq(this)"><span>La livraison, c'est cher ? Vous venez jusqu'où ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="fqi-a"><div class="fqi-a-inner">Le retrait à Meximieux est toujours gratuit. Pour la livraison sur site, les frais de déplacement sont calculés au réel : 0,50€/km A/R depuis Meximieux (barème fiscal 2026). L'installation sur site est incluse. Pas de supplément. Utilisez le simulateur dans la section Zone pour estimer le coût exact selon votre adresse.</div></div>
+        </div>
+        <div class="fqi">
+          <div class="fqi-q" onclick="toggleFaq(this)"><span>Est-ce qu'il faut des autorisations pour utiliser les radios ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
+          <div class="fqi-a"><div class="fqi-a-inner">Non, aucune. Les radios Motorola XT420 fonctionnent sur la bande PMR446, libre d'utilisation en France, aucune licence ANFR, aucune redevance. L'intercom Hollyland utilise la bande DECT 1.9 GHz, également libre. Vous êtes légaux dès le premier usage, sans aucune démarche administrative.</div></div>
         </div>
       </div>
     </div>
@@ -946,17 +1302,34 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <div class="fg"><label data-i18n="f.pack">Pack souhaité</label>
             <select name="pack">
               <option value="" data-i18n="f.packdef">Sélectionner...</option>
-              <option data-i18n="f.p1">Demi-Flotte — 6 radios</option>
-              <option data-i18n="f.p2">Pack Essentiel — 12 radios</option>
-              <option data-i18n="f.p3">Pack Scène — 6 intercoms Full-Duplex</option>
-              <option data-i18n="f.p4">Pack Régie — 6 radios + 6 intercoms</option>
-              <option data-i18n="f.p5">Pack Complet — Radios + Intercoms + Mégaphone</option>
+              <option data-i18n="f.p1">Demi-Flotte · 6 radios</option>
+              <option data-i18n="f.p2">Pack Essentiel · 12 radios</option>
+              <option data-i18n="f.p3">Pack Scène · 6 intercoms Full-Duplex</option>
+              <option data-i18n="f.p4">Pack Régie · 6 radios + 6 intercoms</option>
+              <option data-i18n="f.p5">Pack Complet · Radios + Intercoms + Mégaphone</option>
               <option data-i18n="f.p6">Je ne sais pas encore</option>
             </select>
           </div>
         </div>
-        <div class="fg"><label data-i18n="f.addr">Adresse postale de votre structure</label><input type="text" name="adresse" placeholder="Numéro, rue, code postal, ville"></div>
-        <div class="fg"><label data-i18n="f.event">Votre événement</label><textarea name="evenement" placeholder="Lieu, date(s), nature de l'événement, nombre d'équipes à coordonner..."></textarea></div>
+        <div class="fg"><label>Type d'événement</label>
+          <select name="type_event">
+            <option value="">Sélectionner...</option>
+            <option>Gala / Spectacle de danse</option>
+            <option>Concert / Festival</option>
+            <option>Fête de village / Braderie</option>
+            <option>Événement sportif / Trail / Course</option>
+            <option>Bal / Soirée</option>
+            <option>Événement municipal / Institutionnel</option>
+            <option>Spectacle scolaire / Théâtre amateur</option>
+            <option>Conférence / Assemblée générale</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="form-2">
+          <div class="fg"><label>Date de l'événement</label><input type="date" name="date_event"></div>
+          <div class="fg"><label>Nombre de personnes à coordonner</label><input type="number" name="nb_equipes" placeholder="Ex : 8 bénévoles" min="1"></div>
+        </div>
+        <div class="fg"><label>Adresse du lieu</label><input type="text" name="lieu" placeholder="Ville, salle, commune..."></div>
         <button type="submit" class="form-submit">
           <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           <span data-i18n="f.submit">Envoyer ma demande de devis</span>
@@ -965,17 +1338,17 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <div class="contact-aside rev">
         <div class="ccard">
           <h3 data-i18n="cc.title">Informations pratiques</h3>
-          <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="ci-lbl" data-i18n="cc.pickup">Point de retrait</div><div class="ci-val">Meximieux (01) — sur RDV</div></div></div>
+          <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="ci-lbl" data-i18n="cc.pickup">Point de retrait</div><div class="ci-val">Meximieux (01) · sur RDV</div></div></div>
           <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.43 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div class="ci-lbl" data-i18n="cc.phone">Téléphone</div><div class="ci-val">07 44 98 00 15</div></div></div>
           <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ci-lbl">Email</div><div class="ci-val">contact@aintercom.fr</div></div></div>
           <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="ci-lbl" data-i18n="cc.reply">Réponse garantie</div><div class="ci-val" data-i18n="cc.replyval">Sous 24h ouvrées</div></div></div>
         </div>
         <div class="hcard">
-          <h4 data-i18n="hc.title">Retrait & livraison</h4>
-          <div class="hr"><span data-i18n="hc.flex1">Retrait à Meximieux</span><span data-i18n="hc.rdv">Sur RDV</span></div>
-          <div class="hr"><span data-i18n="hc.flex2">Livraison sur site</span><span data-i18n="hc.flex2val">+30 / +60€</span></div>
-          <div class="hr"><span data-i18n="hc.flex3">7j/7 selon dispo</span><span>📞 07 44 98 00 15</span></div>
-          <div class="stripe-note" data-i18n="hc.stripe">Acompte 30% à la signature · Solde 70% sous 30j après l'événement · Morgan joignable pendant tout l'événement.</div>
+          <h4>Retrait &amp; livraison</h4>
+          <div class="hr"><span>Retrait à Meximieux</span><span>Gratuit · Sur RDV</span></div>
+          <div class="hr"><span>Livraison sur site</span><span>0,50€/km A/R</span></div>
+          <div class="hr"><span>Installation incluse</span><span>Sans supplément</span></div>
+          <div class="stripe-note">Acompte 30% à la signature · Solde 70% sous 30j · Morgan joignable pendant tout votre événement.</div>
         </div>
       </div>
     </div>
@@ -987,44 +1360,55 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   <div class="container">
     <div class="footer-grid">
       <div>
-         <a href="#" class="logo">
-    <span class="logo-img" aria-label="AINTERCOM"></span>
-  </a>
-        <p class="footer-tagline" data-i18n="ft.tagline">Communication événementielle professionnelle, clé en main. Pour toutes les structures. Un service This Is It Event.</p>
+        <a href="#" class="logo"><span class="logo-img" aria-label="AINTERCOM"></span></a>
+        <p class="footer-tagline">Location de kits radio &amp; intercom professionnels pour l'événementiel dans l'Ain. Plug &amp; Play, sans technicien.</p>
         <div class="footer-contacts">
           <a href="tel:0744980015" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.43 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>07 44 98 00 15</a>
           <a href="mailto:contact@aintercom.fr" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>contact@aintercom.fr</a>
-          <a href="#zone" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>Meximieux — Ain (01)</a>
+          <a href="#zone" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>Meximieux · Ain (01)</a>
+        </div>
+        <div class="footer-social">
+          <a href="#" class="fsoc" title="Laisser un avis Google" aria-label="Google Avis">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57C21.36 18.5 22.56 15.67 22.56 12.25z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <span>Google Avis</span>
+          </a>
+          <a href="#" class="fsoc" title="LinkedIn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <span>LinkedIn</span>
+          </a>
         </div>
       </div>
       <div class="fcol">
-        <h5 data-i18n="fc.solutions">Solutions</h5>
-        <a href="#services" data-i18n="fc.radio">Radios terrain</a>
-        <a href="#services" data-i18n="fc.intercom">Intercom régie</a>
-        <a href="#services" data-i18n="fc.sono">Mégaphone portable</a>
-        <a href="#tarifs" data-i18n="fc.prices">Grille tarifaire</a>
-        <a href="simulateur_aintercom_v2.html" target="_blank" data-i18n="fc.sim">Simulateur de tarif</a>
+        <h5>Solutions</h5>
+        <a href="#services">Radios · Motorola XT420</a>
+        <a href="#services">Intercom Full-Duplex · Hollyland</a>
+        <a href="#services">Mégaphone · Vonyx 65W</a>
+        <a href="#tarifs">Grille tarifaire</a>
+        <a href="#tarifs">Simulateur de prix</a>
       </div>
       <div class="fcol">
-        <h5 data-i18n="fc.info">Informations</h5>
-        <a href="#genese" data-i18n="fc.story">Notre histoire</a>
-        <a href="#process" data-i18n="fc.process">Comment ça marche</a>
-        <a href="#zone" data-i18n="fc.zone">Zone d'intervention</a>
+        <h5>Informations</h5>
+        <a href="#genese">Notre histoire</a>
+        <a href="#process">Comment ça marche</a>
+        <a href="#zone">Zone d'intervention</a>
         <a href="#faq">FAQ</a>
-        <a href="#" class="coming" data-i18n="fc.lexique">Lexique professionnel</a>
+        <a href="#contact">Demander un devis</a>
       </div>
       <div class="fcol">
-        <h5 data-i18n="fc.legal">Mentions légales</h5>
-        <a href="legal.html">Consulter les mentions légales complètes</a>
-        <p>This Is It Event</p>
-        <p data-i18n="fc.asso">Association loi 1901</p>
-        <p>SIRET 88926603700023</p>
-        <p>7 Rue Pierre Bernin, Meximieux (01800)</p>
-        <p>Ain — Auvergne-Rhône-Alpes</p>
+        <h5>Légal</h5>
+        <a href="legal.html">Mentions légales</a>
+        <a href="cgv.html">CG de location</a>
+        <div class="footer-legal-block">
+          <p>This Is It Event</p>
+          <p>Association loi 1901</p>
+          <p>SIRET 88926603700023</p>
+          <p>7 Rue Pierre Bernin</p>
+          <p>01800 Meximieux · Ain</p>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 AINTERCOM — <span data-i18n="ft.rights">Tous droits réservés</span></p>
+      <p>© 2026 AINTERCOM · Tous droits réservés</p>
       <div class="footer-siret">SIRET 88926603700023 · This Is It Event · Asso loi 1901</div>
     </div>
   </div>
@@ -1033,79 +1417,38 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 <!-- STICKY MOBILE CTA -->
 <a href="#contact" class="sticky-cta" data-i18n="mob.cta">Demander un devis →</a>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── TRANSLATIONS ── */
 const i18n = {
   fr: {
     'nav.solutions':'Solutions','nav.tarifs':'Tarifs','nav.sim':'Simulateur','nav.story':'Notre histoire','nav.zone':'Zone','nav.live':'Interface Live','nav.devis':'Demander un devis →',
-    'hero.badge':'Communication événementielle · Ain (01)','hero.title':'Chaque équipe connectée.<br><em>Chaque événement maîtrisé.</em>','hero.sub':'Un service de communication professionnel, clé en main — accessible à toutes les structures, de l\'association de quartier au festival régional.','hero.cta1':'Vérifier une disponibilité','hero.cta2':'Découvrir les solutions →','hero.scroll':'Défiler',
+    'hero.badge':'Communication événementielle · Ain (01)','hero.title':'Chaque équipe connectée.<br><em>Chaque événement maîtrisé.</em>','hero.sub':'Un service de communication professionnel, clé en main, accessible à toutes les structures, de l\'association de quartier au festival régional.','hero.cta1':'Vérifier une disponibilité','hero.cta2':'Découvrir les solutions →','hero.scroll':'Défiler',
     'pill.galas':'🎭 Galas & spectacles','pill.concerts':'🎵 Concerts & festivals','pill.village':'🏘️ Fêtes de village','pill.sport':'🏃 Événements sportifs','pill.bal':'🎪 Bals & soirées','pill.muni':'🏛️ Événements municipaux','pill.school':'🎓 Spectacles scolaires','pill.theatre':'🎼 Théâtre amateur','pill.race':'🚴 Courses & trails','pill.conf':'🤝 Conférences & AG',
     'stat.range':'Portée radio garantie','stat.battery':'Autonomie sans recharge','stat.deploy':'Déploiement complet','stat.licence':'Licence requise',
-    'genese.tag':'Notre histoire','genese.years':'ans sur le terrain','genese.title':'Nés de la<br><em>frustration du terrain.</em>','genese.quote':'"12 ans à organiser des événements dans l\'Ain sans jamais trouver le bon outil. Téléphones saturés, talkies jouets hors de portée, prestataires inaccessibles. On a créé ce qu\'on aurait voulu avoir dès le premier jour."','genese.p1':'AINTERCOM est né d\'une frustration simple et réelle : la communication professionnelle était soit bricolée, soit réservée aux grandes productions avec budget et technicien imposé.','genese.p2':'Aujourd\'hui, on met à disposition le même matériel que les grandes productions — Motorola, Hollyland, VONYX — pré-configuré, documenté, prêt en moins de 5 minutes.',
+    'genese.tag':'Notre histoire','genese.years':'ans sur le terrain','genese.title':'Nés de la<br><em>frustration du terrain.</em>','genese.quote':'"12 ans à organiser des événements dans l\'Ain sans jamais trouver le bon outil. Téléphones saturés, talkies jouets hors de portée, prestataires inaccessibles. On a créé ce qu\'on aurait voulu avoir dès le premier jour."','genese.p1':'AINTERCOM est né d\'une frustration simple et réelle : la communication professionnelle était soit bricolée, soit réservée aux grandes productions avec budget et technicien imposé.','genese.p2':'Aujourd\'hui, on met à disposition le même matériel que les grandes productions : Motorola, Hollyland, VONYX — pré-configuré, documenté, prêt en moins de 5 minutes.',
     'svc.tag':'Arsenal technique','svc.title':'Trois systèmes.<br>Une infrastructure complète.','svc.sub':'Pré-configuré, testé, documenté. Vos équipes maîtrisent le matériel en moins de 5 minutes.',
-    'svc1.title':'Radios professionnelles','svc1.desc':'1 radio = 1 chef de secteur. Jusqu\'à 12 secteurs coordonnés simultanément. Canaux pré-programmés et 219 codes de confidentialité — zéro interférence, communications privées garanties.',
+    'svc1.title':'Radios professionnelles','svc1.desc':'1 radio = 1 chef de secteur. Jusqu\'à 12 secteurs coordonnés simultanément. Canaux pré-programmés et 219 codes de confidentialité, zéro interférence, communications privées garanties.',
     'svc2.title':'Intercom sans fil Full-Duplex','svc2.desc':'Mains libres, zéro latence, zéro internet, réseau fermé et crypté. Le standard des grandes productions, rendu accessible.',
     'svc3.title':'Mégaphone professionnel','svc3.desc':'Soyez entendu au-delà du brouhaha. Compact, puissant, autonome. Pour les briefings, annonces d\'urgence et animations mobiles.',
     'cmp.tag':'Positionnement','cmp.title':'Ni bricolage.<br>Ni budget hors de portée.','cmp.sub':'AINTERCOM occupe un espace unique : la communication pro accessible à toutes les structures.','cmp.col0':'Critère','cmp.rec':'Recommandé','cmp.col2':'Débrouille maison','cmp.col3':'Prestataire spécialisé','cmp.r1':'Communication mains libres','cmp.r2':'Accessible petites structures','cmp.r3':'Canaux sécurisés anti-interférence','cmp.r4':'Qualité certifiée professionnelle','cmp.r5':'Sans technicien imposé','cmp.r6':'Opérationnel en 5 minutes',
-    'price.tag':'Grille tarifaire','price.title':'Transparent.<br>Sans surprise.','price.asso':'Associations','price.pro':'Professionnels','pk.period':'/ weekend','pk.tva':'TTC · TVA 0% (Asso loi 1901)','pk.pop':'Le plus demandé','pk1.name':'Demi-Flotte','pk1.desc':'6 radios Motorola XT420 + micros RSM câble Kevlar + 1 chargeur 6 slots + valise de transport','pk2.name':'Pack Essentiel','pk2.desc':'12 radios Motorola XT420 + micros RSM + 2 chargeurs 6 slots — idéal festivals, galas, fêtes de village','pk3.name':'Pack Scène','pk3.desc':'Hollyland Solidcom SE Pro 6S complet — Full-Duplex, zéro latence, zéro internet — régie &amp; scène','pk4.name':'Pack Régie','pk4.desc':'6 radios terrain + 6 intercoms Hollyland — Théâtre, gala, scène ET terrain couverts simultanément','pk5.name':'Pack Complet','pk5.desc':'12 radios + 6 intercoms Hollyland + Vonyx MEG065 65W — la régie de poche entière',
-    'pn1':'<strong>Retrait à Meximieux</strong> — gratuit, sur RDV 7j/7','pn2':'Livraison simple <strong>+30€</strong> · Livraison + installation sur site <strong>+60€</strong>','pn3':'Acompte <strong>30%</strong> à la signature — solde 70% sous 30j après l\'événement','pn4':'Journée, semaine, quinzaine, mois — <strong>devis sur mesure</strong>',
-    'proc.tag':'Comment ça marche','proc.title':'Six étapes. Zéro prise de tête.','proc.sub':'Un process clair, documenté à chaque étape.','proc.s1h':'Contact','proc.s1p':'Email ou téléphone — décrivez votre événement','proc.s2h':'Devis 24h','proc.s2p':'Proposition personnalisée avec le pack adapté','proc.s3h':'Confirmation','proc.s3p':'Devis signé + acompte 30% par virement = date bloquée','proc.s4h':'Retrait','proc.s4p':'À Meximieux ou livraison sur site','proc.s5h':'Événement','proc.s5p':'Opérationnel en <5min — joignable pendant','proc.s6h':'Retour','proc.s6p':'Restitution du matériel — état des lieux retour — solde sous 30j',
+    'price.tag':'Grille tarifaire','price.title':'Transparent.<br>Sans surprise.','price.asso':'Associations','price.pro':'Professionnels','pk.period':'/ weekend','pk.tva':'TTC · TVA 0% (Asso loi 1901)','pk.pop':'Le plus demandé','pk1.name':'Demi-Flotte','pk1.desc':'6 radios Motorola XT420 + micros RSM câble Kevlar + 1 chargeur 6 slots + valise de transport','pk2.name':'Pack Essentiel','pk2.desc':'12 radios Motorola XT420 + micros RSM + 2 chargeurs 6 slots · idéal festivals, galas, fêtes de village','pk3.name':'Pack Scène','pk3.desc':'Hollyland Solidcom SE Pro 6S complet · Full-Duplex, zéro latence, zéro internet · régie &amp; scène','pk4.name':'Pack Régie','pk4.desc':'6 radios terrain + 6 intercoms Hollyland · Théâtre, gala, scène ET terrain couverts simultanément','pk5.name':'Pack Complet','pk5.desc':'12 radios + 6 intercoms Hollyland + Vonyx MEG065 65W · la régie de poche entière',
+    'pn1':'<strong>Retrait à Meximieux</strong> · gratuit, sur RDV 7j/7','pn3':'Acompte <strong>30%</strong> à la signature · solde 70% sous 30j après l\'événement','pn4':'Durée flexible · utilisez le simulateur ci-dessous pour calculer votre prix exact',
+    'proc.tag':'Comment ça marche','proc.title':'Six étapes. Zéro prise de tête.','proc.sub':'Un process clair, documenté à chaque étape.','proc.s1h':'Contact','proc.s1p':'Email ou téléphone : décrivez votre événement','proc.s2h':'Devis 24h','proc.s2p':'Proposition personnalisée avec le pack adapté','proc.s3h':'Confirmation','proc.s3p':'Devis signé + acompte 30% par virement : date bloquée','proc.s4h':'Retrait','proc.s4p':'À Meximieux ou livraison sur site','proc.s5h':'Événement','proc.s5p':'Opérationnel en moins de 5 min · Morgan joignable','proc.s6h':'Retour','proc.s6p':'Restitution du matériel · état des lieux · solde sous 30j',
     'zone.tag':'Zone d\'intervention','zone.title':'Basé à Meximieux.<br>Autour de vous dans l\'Ain.','zone.sub':'Point de retrait à Meximieux. Livraison dans tout le département et zones limitrophes.','zone.cta':'Vérifier ma zone →','zt.main':'Zone principale','zt.ext':'Zone étendue','zt.pickup':'Point de retrait',
-    'z1.title':'Zone principale — ~30 km','z1.desc':'Couverture prioritaire du bassin de l\'Ain central. Livraison avec installation possible à tarif standard.','z1.t2':'Comprend notamment','z2.title':'Zone étendue — jusqu\'à ~60 km','z2.desc':'Isère Nord, Rhône Est, Savoie. Livraison selon disponibilité. Contactez-nous pour confirmer.','z2.t2':'Sur devis','z2.desc2':'Pour les événements hors zone, un devis de déplacement est établi au cas par cas.','z3.title':'Retrait à Meximieux (01800)','z3.desc':'Retrait du matériel directement à Meximieux, sur rendez-vous. Gratuit, 7j/7.','z3.t2':'Horaires flexibles',
-    'faq.tag':'FAQ','faq.title':'Tout savoir avant<br>de réserver.','faq.sub':'Une question sans réponse ? Contactez-nous — réponse sous 24h.','faq.cta':'Poser une question →',
-    'q1':'Faut-il une licence pour utiliser les radios ?','a1':'Non. Le Motorola XT420 fonctionne sur la bande PMR446, libre d\'utilisation en France sans licence ni redevance. L\'intercom Hollyland opère sur DECT 1.9 GHz — également libre, sans démarche ANFR.',
+    'z1.title':'Zone principale · ~30 km','z1.desc':'Couverture prioritaire du bassin de l\'Ain central. Livraison avec installation possible à tarif standard.','z1.t2':'Comprend notamment','z2.title':'Zone étendue · jusqu\'à ~60 km','z2.desc':'Isère Nord, Rhône Est, Savoie. Livraison selon disponibilité. Contactez-nous pour confirmer.','z2.t2':'Sur devis','z2.desc2':'Pour les événements hors zone, un devis de déplacement est établi au cas par cas.','z3.title':'Retrait à Meximieux (01800)','z3.desc':'Retrait du matériel directement à Meximieux, sur rendez-vous. Gratuit, 7j/7.','z3.t2':'Horaires flexibles',
+    'faq.tag':'FAQ','faq.title':'Tout savoir avant<br>de réserver.','faq.sub':'Une question sans réponse ? Contactez-nous, réponse sous 24h.','faq.cta':'Poser une question →',
+    'q1':'Faut-il une licence pour utiliser les radios ?','a1':'Non. Le Motorola XT420 fonctionne sur la bande PMR446, libre d\'utilisation en France sans licence ni redevance. L\'intercom Hollyland opère sur DECT 1.9 GHz, également libre, sans démarche ANFR.',
     'q2':'Comment fonctionnent les canaux sécurisés ?','a2':'Chaque kit est livré avec des canaux pré-programmés et des codes de confidentialité activés (219 codes CTCSS/DCS). Vos communications restent privées même si d\'autres utilisateurs PMR sont présents.',
     'q3':'Le matériel est-il difficile à utiliser ?','a3':'Non. Tout est Plug & Play et pré-configuré. Chaque kit contient une fiche tuto plastifiée avec QR code vers une vidéo. Opérationnel en moins de 5 minutes.',
     'q4':'Que se passe-t-il si le matériel est endommagé ?','a4':'Un état des lieux contradictoire est réalisé au départ et au retour. En cas de dommage, le responsable s\'engage à rembourser au prix de remplacement réel sur facture. Sans incident constaté, aucun frais supplémentaire.',
-    'q5':'Les prix sont-ils TTC ?','a5':'Oui. AINTERCOM est opéré par This Is It Event, association loi 1901 non assujettie à la TVA. TVA 0% — le prix affiché est le prix final.',
+    'q5':'Les prix sont-ils TTC ?','a5':'Oui. AINTERCOM est opéré par This Is It Event, association loi 1901 non assujettie à la TVA. TVA 0% : le prix affiché est le prix final.',
     'q6':'Quelle est la politique d\'annulation ?','a6':'Plus de 72h avant : annulation gratuite, acompte restitué sous 15j. Moins de 72h : retenue de l\'acompte (30%). Jour J avec matériel préparé : facturation de 50% du total. Panne matérielle de notre côté : annulation sans frais, restitution intégrale.',
-    'cta.tag':'Demande de devis','cta.title':'Vérifier une disponibilité.','cta.sub':'Réponse et devis complet sous 24h. Zéro engagement à ce stade.','f.nom':'Nom','f.prenom':'Prénom','f.struct':'Structure / Association','f.email':'Email de contact','f.tel':'Téléphone','f.pack':'Pack souhaité','f.packdef':'Sélectionner...','f.p1':'Demi-Flotte — 6 radios','f.p2':'Pack Essentiel — 12 radios','f.p3':'Pack Scène — 6 intercoms Full-Duplex','f.p4':'Pack Régie — 6 radios + 6 intercoms','f.p5':'Pack Complet — Radios + Intercoms + Mégaphone','f.p6':'Je ne sais pas encore','f.addr':'Adresse postale de votre structure','f.event':'Votre événement','f.submit':'Envoyer ma demande de devis',
+    'cta.tag':'Demande de devis','cta.title':'Vérifier une disponibilité.','cta.sub':'Réponse et devis complet sous 24h. Zéro engagement à ce stade.','f.nom':'Nom','f.prenom':'Prénom','f.struct':'Structure / Association','f.email':'Email de contact','f.tel':'Téléphone','f.pack':'Pack souhaité','f.packdef':'Sélectionner...','f.p1':'Demi-Flotte · 6 radios','f.p2':'Pack Essentiel · 12 radios','f.p3':'Pack Scène · 6 intercoms Full-Duplex','f.p4':'Pack Régie · 6 radios + 6 intercoms','f.p5':'Pack Complet · Radios + Intercoms + Mégaphone','f.p6':'Je ne sais pas encore','f.addr':'Adresse postale de votre structure','f.event':'Votre événement','f.submit':'Envoyer ma demande de devis',
     'cc.title':'Informations pratiques','cc.pickup':'Point de retrait','cc.phone':'Téléphone','cc.reply':'Réponse garantie','cc.replyval':'Sous 24h ouvrées','hc.title':'Retrait & livraison','hc.flex1':'Retrait à Meximieux','hc.flex2':'Livraison sur site','hc.flex2val':'+30 / +60€','hc.flex3':'7j/7 selon dispo','hc.rdv':'Sur RDV','hc.stripe':'Acompte 30% à la signature · Solde 70% sous 30j après l\'événement · Morgan joignable pendant tout l\'événement.',
     'ft.tagline':'Communication événementielle professionnelle, clé en main. Pour toutes les structures. Un service This Is It Event.','ft.rights':'Tous droits réservés','fc.solutions':'Solutions','fc.radio':'Radios terrain','fc.intercom':'Intercom régie','fc.sono':'Mégaphone portable','fc.prices':'Grille tarifaire','fc.sim':'Simulateur de tarif','fc.info':'Informations','fc.story':'Notre histoire','fc.process':'Comment ça marche','fc.zone':'Zone d\'intervention','fc.lexique':'Lexique professionnel','fc.legal':'Mentions légales','fc.asso':'Association loi 1901',
     'mob.cta':'Demander un devis →'
-  },
-  en: {
-    'nav.solutions':'Solutions','nav.tarifs':'Pricing','nav.sim':'Simulator','nav.story':'Our story','nav.zone':'Coverage','nav.live':'Live Interface','nav.devis':'Request a quote →',
-    'hero.badge':'Event communication · Ain (01) France','hero.title':'Every team connected.<br><em>Every event in control.</em>','hero.sub':'Professional, turnkey communication service — accessible to all organizations, from local associations to regional festivals.','hero.cta1':'Check availability','hero.cta2':'Explore solutions →','hero.scroll':'Scroll',
-    'pill.galas':'🎭 Shows & galas','pill.concerts':'🎵 Concerts & festivals','pill.village':'🏘️ Village fairs','pill.sport':'🏃 Sporting events','pill.bal':'🎪 Balls & parties','pill.muni':'🏛️ Municipal events','pill.school':'🎓 School shows','pill.theatre':'🎼 Amateur theatre','pill.race':'🚴 Races & trails','pill.conf':'🤝 Conferences & AGMs',
-    'stat.range':'Radio coverage','stat.battery':'Battery life','stat.deploy':'Full deployment','stat.licence':'Licence required',
-    'genese.tag':'Our story','genese.years':'years in the field','genese.title':'Born from<br><em>field frustration.</em>','genese.quote':'"12 years organizing events in the Ain without ever finding the right tool. Saturated phone networks, toy walkies with no range, inaccessible providers. We built what we always wished existed."','genese.p1':'AINTERCOM was born from a simple, real frustration: professional communication was either improvised or reserved for big productions with large budgets and mandatory technicians.','genese.p2':'Today, we make the same equipment used by major productions — Motorola, Hollyland, VONYX — available pre-configured, documented, and ready in under 5 minutes.',
-    'svc.tag':'Technical arsenal','svc.title':'Three systems.<br>One complete infrastructure.','svc.sub':'Pre-configured, tested, documented. Your teams master the equipment in under 5 minutes.',
-    'svc1.title':'Professional radios','svc1.desc':'1 radio = 1 sector manager. Up to 12 sectors coordinated simultaneously. Pre-programmed channels and 219 privacy codes — zero interference, guaranteed private communications.',
-    'svc2.title':'Full-Duplex wireless intercom','svc2.desc':'Hands-free, zero latency, zero internet, closed encrypted network. The standard of major stage productions, made accessible.',
-    'svc3.title':'Professional megaphone','svc3.desc':'Be heard above the noise. Compact, powerful, autonomous. For field briefings, emergency announcements and mobile hosting.',
-    'cmp.tag':'Positioning','cmp.title':'Not makeshift.<br>Not out of reach.','cmp.sub':'AINTERCOM fills a unique space: professional communication accessible to all organizations.','cmp.col0':'Criteria','cmp.rec':'Recommended','cmp.col2':'DIY / Makeshift','cmp.col3':'Specialized provider','cmp.r1':'Hands-free communication','cmp.r2':'Accessible to small organizations','cmp.r3':'Secure anti-interference channels','cmp.r4':'Certified professional quality','cmp.r5':'No mandatory technician','cmp.r6':'Operational in 5 minutes',
-    'price.tag':'Pricing','price.title':'Transparent.<br>No surprises.','price.asso':'Associations','price.pro':'Professionals','pk.period':'/ weekend','pk.tva':'All-inclusive · 0% VAT (Non-profit)','pk.pop':'Most popular','pk1.name':'Half-Fleet','pk1.desc':'6 Motorola XT420 radios + Kevlar RSM mics + 1 six-slot charger + transport case','pk2.name':'Essential Pack','pk2.desc':'12 Motorola XT420 radios + RSM mics + 2 six-slot chargers — ideal for festivals, galas, village fairs','pk3.name':'Stage Pack','pk3.desc':'Full Hollyland Solidcom SE Pro 6S — Full-Duplex, zero latency, zero internet — control room & stage','pk4.name':'Production Pack','pk4.desc':'6 field radios + 6 Hollyland intercoms — Theatre, gala, stage AND field covered simultaneously','pk5.name':'Full Pack','pk5.desc':'12 radios + 6 Hollyland intercoms + Vonyx MEG065 65W — the complete pocket production kit',
-    'pn1':'<strong>Pickup in Meximieux</strong> — free, by appointment 7/7','pn2':'Simple delivery <strong>+€30</strong> · Delivery + on-site setup <strong>+€60</strong>','pn3':'<strong>30% deposit</strong> on signing — balance 70% within 30 days after the event','pn4':'Day, week, fortnight, month — <strong>custom quotes</strong>',
-    'proc.tag':'How it works','proc.title':'Six steps. Zero hassle.','proc.sub':'A clear process, documented at every step.','proc.s1h':'Contact','proc.s1p':'Email or phone — describe your event','proc.s2h':'Quote 24h','proc.s2p':'Tailored proposal with the right pack','proc.s3h':'Confirmation','proc.s3p':'Signed quote + 30% deposit by bank transfer = date locked','proc.s4h':'Pickup','proc.s4p':'In Meximieux or delivered on-site','proc.s5h':'Event','proc.s5p':'Ready in <5min — reachable throughout','proc.s6h':'Return','proc.s6p':'Equipment return — condition check — balance within 30 days',
-    'zone.tag':'Coverage area','zone.title':'Based in Meximieux.<br>Covering the Ain region.','zone.sub':'Pickup point in Meximieux. Delivery available throughout the department and surrounding areas.','zone.cta':'Check my area →','zt.main':'Main zone','zt.ext':'Extended zone','zt.pickup':'Pickup point',
-    'z1.title':'Main zone — ~30 km','z1.desc':'Primary coverage of the central Ain area. Delivery with setup available at standard rate.','z1.t2':'Including','z2.title':'Extended zone — up to ~60 km','z2.desc':'Northern Isère, Eastern Rhône, Savoie. Delivery subject to availability.','z2.t2':'On quote','z2.desc2':'For events outside the zone, a travel quote is prepared on a case-by-case basis.','z3.title':'Pickup in Meximieux (01800)','z3.desc':'Equipment pickup directly in Meximieux, by appointment. Free, 7 days a week.','z3.t2':'Flexible hours',
-    'faq.tag':'FAQ','faq.title':'Everything you need<br>to know before booking.','faq.sub':'A question not answered here? Contact us — reply within 24h.','faq.cta':'Ask a question →',
-    'q1':'Is a licence required to use the radios?','a1':'No. The Motorola XT420 operates on the PMR446 band, free to use in France without any licence or fee. The Hollyland intercom uses the DECT 1.9 GHz band — also licence-free.',
-    'q2':'How do the secure channels work?','a2':'Each kit is delivered with pre-programmed channels and active privacy codes (219 CTCSS/DCS codes). Your communications remain private even if other PMR users are present on site.',
-    'q3':'Is the equipment difficult to use?','a3':'No. Everything is Plug & Play and pre-configured. Each kit includes a laminated quick-start card with a QR code to a demo video. Ready in under 5 minutes.',
-    'q4':'What happens if equipment is damaged?','a4':'A condition report is completed at pickup and return. In case of damage, the responsible party agrees to reimburse at the real replacement value (per invoice). No additional charges if no incident is noted.',
-    'q5':'Are prices all-inclusive?','a5':'Yes. AINTERCOM is operated by This Is It Event, a non-profit association with 0% VAT. The displayed price is the final price, no extras.',
-    'q6':'What is the cancellation policy?','a6':'More than 72h before: free cancellation, deposit refunded within 15 days. Less than 72h: deposit (30%) retained. Day of event with equipment prepared: 50% of total charged. If equipment fails on our end: full cancellation at no charge, full refund.',
-    'cta.tag':'Quote request','cta.title':'Check availability.','cta.sub':'Full quote within 24h. No commitment at this stage.','f.nom':'Last name','f.prenom':'First name','f.struct':'Organization / Association','f.email':'Contact email','f.tel':'Phone','f.pack':'Desired pack','f.packdef':'Select...','f.p1':'Half-Fleet — 6 radios','f.p2':'Essential Pack — 12 radios','f.p3':'Stage Pack — 6 Full-Duplex intercoms','f.p4':'Production Pack — 6 radios + 6 intercoms','f.p5':'Full Pack — Radios + Intercoms + Megaphone','f.p6':'Not sure yet','f.addr':'Organization postal address','f.event':'Your event','f.submit':'Send my quote request',
-    'cc.title':'Practical information','cc.pickup':'Pickup point','cc.phone':'Phone','cc.reply':'Guaranteed reply','cc.replyval':'Within 24 business hours','hc.title':'Pickup & delivery','hc.flex1':'Pickup in Meximieux','hc.flex2':'On-site delivery','hc.flex2val':'+€30 / +€60','hc.flex3':'7 days/week as available','hc.rdv':'By appointment','hc.stripe':'30% deposit on signing · Balance 70% within 30 days · Morgan reachable throughout your event.',
-    'ft.tagline':'Professional, turnkey event communication. For all organizations. A This Is It Event service.','ft.rights':'All rights reserved','fc.solutions':'Solutions','fc.radio':'Field radios','fc.intercom':'Stage intercom','fc.sono':'Portable megaphone','fc.prices':'Pricing','fc.sim':'Pricing simulator','fc.info':'Information','fc.story':'Our story','fc.process':'How it works','fc.zone':'Coverage area','fc.lexique':'Professional glossary','fc.legal':'Legal notices','fc.asso':'Non-profit association',
-    'mob.cta':'Request a quote →'
   }
 };
-let lang = localStorage.getItem('aic-lang') || 'fr';
-
-function applyLang(l) {
-  lang = l;
-  localStorage.setItem('aic-lang', l);
-  document.documentElement.lang = l;
-  document.getElementById('lang-btn').textContent = l.toUpperCase();
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    if (i18n[l][key] !== undefined) el.innerHTML = i18n[l][key];
-  });
-}
-function toggleLang() { applyLang(lang === 'fr' ? 'en' : 'fr'); }
 
 /* ── DARK MODE ── */
 let dark = localStorage.getItem('aic-dark') === '1';
@@ -1114,8 +1457,16 @@ function applyDark(d) {
   document.documentElement.setAttribute('data-theme', d ? 'dark' : 'light');
   localStorage.setItem('aic-dark', d ? '1' : '0');
   const icon = document.getElementById('dark-icon');
-  if (d) icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
-  else icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  const iconM = document.getElementById('dark-icon-mobile');
+  if (d) {
+    const sunSvg = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+    if(icon) icon.innerHTML = sunSvg;
+    if(iconM) iconM.innerHTML = sunSvg;
+  } else {
+    const moonSvg = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+    if(icon) icon.innerHTML = moonSvg;
+    if(iconM) iconM.innerHTML = moonSvg;
+  }
 }
 function toggleDark() { applyDark(!dark); }
 
@@ -1175,11 +1526,36 @@ function switchP(type, btn) {
 }
 
 /* ── ZONE TABS ── */
-function zoneTab(btn, id) {
+function zoneTab(btn, id, type) {
   document.querySelectorAll('.ztab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.zone-info-block').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById(id).classList.add('active');
+  // Interact with Leaflet map
+  if (window.aicMap) {
+    if (type === 'main') {
+      window.aicMap.flyTo([45.905, 5.195], 10, {duration: 0.8});
+      window.aicCircle30 && window.aicCircle30.setStyle({opacity:1, fillOpacity:0.12});
+      window.aicCircle60 && window.aicCircle60.setStyle({opacity:0.3, fillOpacity:0.03});
+    } else if (type === 'ext') {
+      window.aicMap.flyTo([45.905, 5.195], 8, {duration: 0.8});
+      window.aicCircle30 && window.aicCircle30.setStyle({opacity:0.5, fillOpacity:0.06});
+      window.aicCircle60 && window.aicCircle60.setStyle({opacity:1, fillOpacity:0.08});
+    } else if (type === 'pickup') {
+      window.aicMap.flyTo([45.905, 5.195], 13, {duration: 0.8});
+      window.aicCircle30 && window.aicCircle30.setStyle({opacity:0.2, fillOpacity:0.03});
+      window.aicCircle60 && window.aicCircle60.setStyle({opacity:0.1, fillOpacity:0.02});
+      window.aicMarker && window.aicMarker.openPopup();
+    }
+  }
+}
+
+/* ── ZONE SIM LIVRAISON ── */
+function zoneSimUpdate() {
+  const km = parseInt(document.getElementById('zone-km').value);
+  const dep = km === 0 ? 0 : Math.round(km * 2 * 0.5);
+  document.getElementById('zone-km-out').textContent = km === 0 ? 'Retrait portail' : km + ' km';
+  document.getElementById('zone-dep-val').textContent = km === 0 ? 'Gratuit · retrait portail' : dep + ' €';
 }
 
 /* ── MOBILE MENU ── */
@@ -1187,42 +1563,39 @@ function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
 
+/* ── NAV SMOOTH SCROLL (sans hash dans l'URL) ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({behavior: 'smooth', block: 'start'});
+      history.replaceState(null, '', window.location.pathname);
+    }
+  });
+});
 
 /* ── INIT ── */
 applyDark(dark);
-applyLang(lang);
 
 /* ── LEAFLET MAP ── */
 document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('leaflet-map')) {
-    const map = L.map('leaflet-map').setView([45.905, 5.195], 10);
-    
+    const map = L.map('leaflet-map', {zoomControl: true, scrollWheelZoom: false}).setView([45.905, 5.195], 10);
+    window.aicMap = map;
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
-      maxZoom: 18
+      attribution: '© OpenStreetMap contributors', maxZoom: 18
     }).addTo(map);
-    
-    // Marqueur sur Meximieux
-    L.marker([45.905, 5.195])
+    window.aicMarker = L.marker([45.905, 5.195])
       .addTo(map)
-      .bindPopup('<b>Meximieux</b><br>Point de retrait AINTERCOM')
+      .bindPopup('<b>Meximieux</b><br>📦 Point de retrait AINTERCOM<br>Gratuit · Sur RDV · 7j/7')
       .openPopup();
-    
-    // Cercle bleu plein rayon 30km
-    L.circle([45.905, 5.195], {
-      color: '#1A6FFF',
-      fillColor: '#1A6FFF',
-      fillOpacity: 0.1,
-      radius: 30000
+    window.aicCircle30 = L.circle([45.905, 5.195], {
+      color: '#1A6FFF', fillColor: '#1A6FFF', fillOpacity: 0.12, radius: 30000, weight: 2
     }).addTo(map);
-    
-    // Cercle bleu pointillé rayon 60km
-    L.circle([45.905, 5.195], {
-      color: '#56B4FF',
-      fillColor: '#56B4FF',
-      fillOpacity: 0.05,
-      radius: 60000,
-      dashArray: '10, 10'
+    window.aicCircle60 = L.circle([45.905, 5.195], {
+      color: '#56B4FF', fillColor: '#56B4FF', fillOpacity: 0.04, radius: 60000,
+      dashArray: '8,8', weight: 1.5, opacity: 0.4
     }).addTo(map);
   }
 });
