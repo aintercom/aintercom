@@ -11,6 +11,38 @@
 <style>
 :root{--blue:#1A6FFF;--sky:#56B4FF;--grad:linear-gradient(135deg,#1A6FFF 0%,#56B4FF 100%);--dark:#07070F;--mid:#38384A;--muted:#8A8A9E;--border:rgba(10,10,30,0.08);--border-md:rgba(10,10,30,0.13);--white:#ffffff;--bg:#F5F5FA;--bg2:#EBEBF3;--r-sm:12px;--r-md:20px;--nav-h:68px}
 [data-theme="dark"]{--white:#0E0E1A;--bg:#131320;--bg2:#1A1A2E;--dark:#F0F0FA;--mid:#B0B0C8;--muted:#6A6A85;--border:rgba(255,255,255,0.08);--border-md:rgba(255,255,255,0.13)}
+[data-theme="dark"] body{background:var(--white);color:var(--dark)}
+[data-theme="dark"] p{color:var(--mid)}
+[data-theme="dark"] td{color:var(--mid)}
+[data-theme="dark"] .art h2{color:var(--dark)}
+[data-theme="dark"] .info-val{color:var(--dark)}
+[data-theme="dark"] .info-box{background:var(--bg2);border-color:var(--border-md)}
+[data-theme="dark"] .tbl-wrap{border-color:var(--border-md)}
+[data-theme="dark"] tbody tr:nth-child(even){background:var(--bg2)}
+[data-theme="dark"] .highlight-box{background:rgba(26,111,255,0.08)}
+[data-theme="dark"] .content{color:var(--dark)}
+[data-theme="dark"] .art p{color:var(--mid)}
+[data-theme="dark"] .art li{color:var(--mid)}
+[data-theme="dark"] .art h2{color:var(--blue)}
+[data-theme="dark"] .art strong{color:var(--dark)}
+[data-theme="dark"] .contrat{background:var(--bg2);border-color:var(--border-md)}
+[data-theme="dark"] .contrat-partie{background:var(--bg)}
+[data-theme="dark"] .sign-box{background:var(--bg)}
+[data-theme="dark"] .devis{background:var(--bg2);border-color:var(--border-md)}
+[data-theme="dark"] .devis-body{background:var(--bg2)}
+[data-theme="dark"] .page-title{color:var(--dark)}
+[data-theme="dark"] .page-date{color:var(--muted)}
+[data-theme="dark"] .page-sub{color:var(--muted)}
+[data-theme="dark"] .info-label{color:var(--muted)}
+[data-theme="dark"] .cgl-art-title{color:var(--dark)}
+[data-theme="dark"] .cgl-art p{color:var(--mid)}
+[data-theme="dark"] tbody tr{background:var(--bg2)}
+[data-theme="dark"] tbody tr:hover{background:var(--bg)}
+[data-theme="dark"] td{color:var(--mid)}
+[data-theme="dark"] td strong{color:var(--dark)}
+[data-theme="dark"] td.hl{color:#56B4FF}
+[data-theme="dark"] td.ok{color:#4ade80}
+[data-theme="dark"] td.warn{color:#fbbf24}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
 html{font-size:16px;scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--dark);line-height:1.65;transition:background .3s,color .3s}
@@ -83,7 +115,7 @@ footer-mini{display:block;border-top:1px solid var(--border);padding:24px 0;text
         <div class="info-row"><span class="info-label">Siège social</span><span class="info-val">7 Rue Pierre Bernin, 01800 Meximieux</span></div>
         <div class="info-row"><span class="info-label">Responsable de publication</span><span class="info-val">Morgan Spirli</span></div>
         <div class="info-row"><span class="info-label">Téléphone</span><span class="info-val">07 44 98 00 15</span></div>
-        <div class="info-row"><span class="info-label">Email</span><span class="info-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6b0804051f0a081f2b0a02051f0e19080406450d19">[email&#160;protected]</a></span></div>
+        <div class="info-row"><span class="info-label">Email</span><span class="info-val">contact@aintercom.fr</span></div>
         <div class="info-row"><span class="info-label">Site web</span><span class="info-val">aintercom.fr</span></div>
       </div>
     </div>
@@ -96,7 +128,7 @@ footer-mini{display:block;border-top:1px solid var(--border);padding:24px 0;text
 
     <div class="art">
       <h2>Hébergement</h2>
-      <p>Le site AINTERCOM est hébergé par un prestataire tiers. Pour toute question relative à l'hébergement, contactez : <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5a6aaabb1a4a6b185a4acabb1a0b7a6aaa8eba3b7">[email&#160;protected]</a></strong></p>
+      <p>Le site AINTERCOM est hébergé par un prestataire tiers. Pour toute question relative à l'hébergement, contactez : <strong>contact@aintercom.fr</strong></p>
     </div>
 
     <div class="art">
@@ -113,7 +145,7 @@ footer-mini{display:block;border-top:1px solid var(--border);padding:24px 0;text
         <li>Elles sont conservées pour une durée maximale de 3 ans à compter du dernier contact.</li>
         <li>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données.</li>
       </ul>
-      <p>Pour exercer vos droits : <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="abc8c4c5dfcac8dfebcac2c5dfced9c8c4c685cdd9">[email&#160;protected]</a></strong> — réponse garantie sous 30 jours.</p>
+      <p>Pour exercer vos droits : <strong>contact@aintercom.fr</strong> — réponse garantie sous 30 jours.</p>
       <p>En cas de litige, vous pouvez saisir la CNIL : <a href="https://www.cnil.fr" target="_blank">www.cnil.fr</a></p>
     </div>
 
@@ -141,7 +173,7 @@ footer-mini{display:block;border-top:1px solid var(--border);padding:24px 0;text
   </div>
 </footer-mini>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 let dark = localStorage.getItem('aic-dark') === '1';
 function applyDark(d) {
   dark = d;

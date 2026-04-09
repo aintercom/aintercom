@@ -283,62 +283,64 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .sim-feat-dot{width:6px;height:6px;border-radius:50%;background:var(--grad);flex-shrink:0;display:inline-block}
 .sim-open-btn{display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem;color:#fff;background:var(--blue);padding:13px 24px;border-radius:var(--r-sm);border:none;cursor:pointer;transition:.22s;white-space:nowrap;flex-shrink:0}
 .sim-open-btn:hover{background:var(--grad);box-shadow:0 8px 24px rgba(26,111,255,0.35)}
-.sim-drawer{display:none;margin-top:36px}
+.sim-drawer{display:none;margin-top:24px}
 .sim-drawer.open{display:block}
-.sim-card{background:var(--white);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:36px;max-width:100%}
+.sim-card{background:var(--white);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:24px}
 [data-theme="dark"] .sim-card{background:var(--bg2)}
-.sim-label{font-family:'Sora',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.sim-pack-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:10px}
-.sim-pack-btn{padding:12px 6px;border:1.5px solid var(--border-md);border-radius:var(--r-sm);background:var(--white);cursor:pointer;text-align:center;transition:.15s;font-family:'Sora',sans-serif}
+.sim-body{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.sim-label{font-family:'Sora',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.sim-pack-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:8px}
+.sim-pack-btn{padding:9px 4px;border:1.5px solid var(--border-md);border-radius:var(--r-sm);background:var(--white);cursor:pointer;text-align:center;transition:.15s;font-family:'Sora',sans-serif}
 [data-theme="dark"] .sim-pack-btn{background:var(--bg)}
 .sim-pack-btn:hover{border-color:var(--blue)}
 .sim-pack-btn.active{border:2px solid var(--blue);background:var(--blue)}
-.sim-pn{font-size:0.72rem;font-weight:700;color:var(--dark);margin-bottom:3px}
-.sim-ps{font-size:0.65rem;color:var(--muted)}
+.sim-pn{font-size:0.68rem;font-weight:700;color:var(--dark);margin-bottom:2px}
+.sim-ps{font-size:0.6rem;color:var(--muted)}
 .sim-pack-btn.active .sim-pn,.sim-pack-btn.active .sim-ps{color:#fff}
-.sim-toggle-row{text-align:right;margin-bottom:14px}
-.sim-toggle-btn{font-family:'DM Sans',sans-serif;font-size:0.78rem;color:var(--muted);background:transparent;border:1px solid var(--border-md);border-radius:var(--r-xs);padding:5px 13px;cursor:pointer;transition:.15s}
+.sim-toggle-row{text-align:right;margin-bottom:10px}
+.sim-toggle-btn{font-family:'DM Sans',sans-serif;font-size:0.74rem;color:var(--muted);background:transparent;border:1px solid var(--border-md);border-radius:var(--r-xs);padding:4px 10px;cursor:pointer;transition:.15s}
 .sim-toggle-btn:hover{color:var(--dark);border-color:var(--dark)}
-.sim-detail{background:var(--bg);border-radius:var(--r-sm);padding:14px 18px;margin-bottom:20px;display:none}
+.sim-detail{background:var(--bg);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:12px;display:none}
 .sim-detail.visible{display:block}
-.sim-detail-name{font-family:'Sora',sans-serif;font-size:0.8rem;font-weight:700;color:var(--dark);margin-bottom:10px}
-.sim-detail ul{list-style:none;display:flex;flex-direction:column;gap:5px}
-.sim-detail ul li{font-size:0.8rem;color:var(--mid);padding-left:16px;position:relative}
-.sim-detail ul li::before{content:'—';position:absolute;left:0;color:var(--blue)}
-.sim-seg-row{display:flex;gap:8px;margin-bottom:24px}
-.sim-seg-btn{flex:1;padding:11px;border:1.5px solid var(--border-md);border-radius:var(--r-sm);background:var(--white);cursor:pointer;font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:600;color:var(--muted);text-align:center;transition:.15s}
+.sim-detail-name{font-family:'Sora',sans-serif;font-size:0.76rem;font-weight:700;color:var(--dark);margin-bottom:7px}
+.sim-detail ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+.sim-detail ul li{font-size:0.74rem;color:var(--mid);padding-left:12px;position:relative}
+.sim-detail ul li::before{content:'·';position:absolute;left:0;color:var(--blue)}
+.sim-seg-row{display:flex;gap:6px;margin-bottom:14px}
+.sim-seg-btn{flex:1;padding:9px;border:1.5px solid var(--border-md);border-radius:var(--r-sm);background:var(--white);cursor:pointer;font-family:'Sora',sans-serif;font-size:0.74rem;font-weight:600;color:var(--muted);text-align:center;transition:.15s}
 [data-theme="dark"] .sim-seg-btn{background:var(--bg)}
 .sim-seg-btn:hover{border-color:var(--blue);color:var(--dark)}
 .sim-seg-btn.active{border:2px solid var(--blue);background:var(--blue);color:#fff}
-.sim-slider-block{margin-bottom:20px}
-.sim-slider-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
-.sim-sl-label{font-size:0.84rem;color:var(--mid)}
-.sim-sl-val{font-family:'Sora',sans-serif;font-size:0.88rem;font-weight:700;color:var(--dark)}
+.sim-slider-block{margin-bottom:14px}
+.sim-slider-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.sim-sl-label{font-size:0.78rem;color:var(--mid)}
+.sim-sl-val{font-family:'Sora',sans-serif;font-size:0.82rem;font-weight:700;color:var(--dark)}
 .sim-range{width:100%;height:4px;border-radius:2px;background:var(--bg2);outline:none;-webkit-appearance:none;cursor:pointer;accent-color:var(--blue)}
-.sim-range::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--blue);cursor:pointer;box-shadow:0 2px 8px rgba(26,111,255,0.35)}
-.sim-range::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--blue);border:none;cursor:pointer}
-/* résultat — dark mode correct */
-.sim-result{margin-top:24px;border-radius:var(--r-md);border:1px solid var(--border-md);overflow:hidden}
-.sim-result-top{background:linear-gradient(135deg,#0A1840 0%,#1A3A8F 60%,#1A6FFF 100%);padding:24px 28px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;position:relative;overflow:hidden}
-.sim-result-top::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(86,180,255,0.25) 0%,transparent 70%);pointer-events:none}
-.sim-result-label{font-family:'Sora',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:6px}
-.sim-big-price{font-family:'Sora',sans-serif;font-size:3.2rem;font-weight:800;background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,0.8) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
-.sim-palier-pill{display:inline-block;font-family:'Sora',sans-serif;font-size:0.68rem;font-weight:700;padding:4px 12px;border-radius:100px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.85);margin-top:10px;letter-spacing:.03em}
+.sim-range::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--blue);cursor:pointer;box-shadow:0 2px 8px rgba(26,111,255,0.3)}
+.sim-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--blue);border:none;cursor:pointer}
+.sim-result{border-radius:var(--r-md);border:1px solid var(--border-md);overflow:hidden;position:sticky;top:calc(var(--nav-h) + 12px)}
+.sim-result-top{background:linear-gradient(135deg,#0A1840 0%,#1A3A8F 60%,#1A6FFF 100%);padding:18px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:relative;overflow:hidden}
+.sim-result-top::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(86,180,255,0.2) 0%,transparent 70%);pointer-events:none}
+.sim-result-label{font-family:'Sora',sans-serif;font-size:0.56rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:5px}
+.sim-big-price{font-family:'Sora',sans-serif;font-size:2.4rem;font-weight:800;color:#fff;line-height:1}
+.sim-palier-pill{display:inline-block;font-family:'Sora',sans-serif;font-size:0.62rem;font-weight:700;padding:3px 9px;border-radius:100px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.85);margin-top:7px}
 .sim-pj-block{text-align:right;flex-shrink:0}
-.sim-pj-value{font-family:'Sora',sans-serif;font-size:1.8rem;font-weight:800;color:#fff}
+.sim-pj-value{font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:800;color:#fff}
 .sim-result-rows{background:var(--white)}
 [data-theme="dark"] .sim-result-rows{background:var(--bg)}
-.sim-result-row{display:flex;justify-content:space-between;align-items:center;padding:13px 22px;border-top:1px solid var(--border);font-size:0.84rem}
+.sim-result-row{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);font-size:0.8rem}
 .sim-rl{color:var(--muted)}
 .sim-rv{font-family:'Sora',sans-serif;font-weight:700;color:var(--dark)}
 .sim-result-row-accent{background:rgba(26,111,255,0.04)}
 [data-theme="dark"] .sim-result-row-accent{background:rgba(26,111,255,0.08)}
 .sim-result-row-accent .sim-rl{color:var(--mid)}
 .sim-result-row-accent .sim-rv{color:var(--blue)}
-@media(max-width:600px){
+@media(max-width:720px){
+  .sim-body{grid-template-columns:1fr}
+  .sim-result{position:static;margin-top:16px}
   .sim-pack-grid{grid-template-columns:repeat(3,1fr)}
-  .sim-card{padding:22px 18px}
-  .sim-big-price{font-size:2.4rem}
+  .sim-card{padding:18px}
+  .sim-big-price{font-size:2rem}
   .sim-teaser{flex-direction:column;align-items:flex-start}
 }
 
@@ -352,10 +354,7 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .ps{text-align:center;padding:0 8px;opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
 .ps.step-on{opacity:1;transform:translateY(0)}
 /* ── NAV COMPACT ON SCROLL ── */
-nav.nav-compact{height:52px;background:rgba(255,255,255,0.97)}
-[data-theme="dark"] nav.nav-compact{background:rgba(14,14,26,0.98)}
-nav.nav-compact .logo-img{width:120px;height:52px}
-nav.nav-compact .btn-devis{padding:7px 16px;font-size:0.78rem}
+/* on top: dropdowns always visible */
 .proc-track{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative;margin-top:52px}
 .proc-track::before{content:'';position:absolute;top:26px;left:calc(8.33% - 2px);right:calc(8.33% - 2px);height:1px;background:linear-gradient(90deg,rgba(26,111,255,0.3),rgba(86,180,255,0.5),rgba(26,111,255,0.3))}
 .ps{text-align:center;padding:0 8px}
@@ -666,7 +665,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <span data-i18n="hero.badge">Communication événementielle · Ain (01)</span>
     </div>
 <h1 data-i18n="hero.title" style="font-size: 3.2rem; line-height: 1.1; font-weight: 700;">
-  Chaque équipe <em>connectée.</em>
+  Chaque équipe connectée.<br><em>Chaque événement maîtrisé.</em>
 </h1>
     <p class="hero-sub" data-i18n="hero.sub">Un service de communication professionnel, clé en main, accessible à toutes les structures, de l'association de quartier au festival régional.</p>
     <div class="hero-pills">
@@ -684,7 +683,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
     <div class="hero-ctas">
       <a href="#contact" class="hero-cta-primary">
         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.43 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <span data-i18n="hero.cta1">Vérifier une disponibilité</span>
+        <span data-i18n="hero.cta1">Obtenir un devis gratuit</span>
       </a>
       <a href="#services" class="hero-cta-secondary" data-i18n="hero.cta2">Découvrir les solutions →</a>
     </div>
@@ -1000,75 +999,75 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <!-- SIMULATEUR MASQUÉ PAR DÉFAUT -->
       <div class="sim-drawer" id="sim-drawer">
         <div class="sim-card">
-
-          <div class="sim-label">Pack</div>
-          <div class="sim-pack-grid">
-            <button class="sim-pack-btn active" data-pack="demi" onclick="simSelectPack(this)">
-              <div class="sim-pn">Demi-Flotte</div><div class="sim-ps">6 radios</div>
-            </button>
-            <button class="sim-pack-btn" data-pack="essentiel" onclick="simSelectPack(this)">
-              <div class="sim-pn">Essentiel</div><div class="sim-ps">12 radios</div>
-            </button>
-            <button class="sim-pack-btn" data-pack="scene" onclick="simSelectPack(this)">
-              <div class="sim-pn">Scène</div><div class="sim-ps">6 intercoms</div>
-            </button>
-            <button class="sim-pack-btn" data-pack="regie" onclick="simSelectPack(this)">
-              <div class="sim-pn">Régie</div><div class="sim-ps">6R + 6I</div>
-            </button>
-            <button class="sim-pack-btn" data-pack="complet" onclick="simSelectPack(this)">
-              <div class="sim-pn">Complet</div><div class="sim-ps">Tout inclus</div>
-            </button>
-          </div>
-
-          <div class="sim-toggle-row">
-            <button class="sim-toggle-btn" onclick="simToggleDetail(this)">+ Voir le contenu du pack</button>
-          </div>
-          <div class="sim-detail" id="sim-detail">
-            <div class="sim-detail-name" id="sim-detail-name"></div>
-            <ul id="sim-detail-list"></ul>
-          </div>
-
-          <div class="sim-label">Type de structure</div>
-          <div class="sim-seg-row">
-            <button class="sim-seg-btn active" id="sim-seg-asso" onclick="simSelectSeg('asso')">Association / Particulier</button>
-            <button class="sim-seg-btn" id="sim-seg-pro" onclick="simSelectSeg('pro')">Professionnel</button>
-          </div>
-
-          <div class="sim-slider-block">
-            <div class="sim-slider-top">
-              <span class="sim-sl-label">Durée de location</span>
-              <span class="sim-sl-val" id="sim-duree-out">3 jours</span>
-            </div>
-            <input type="range" min="1" max="30" value="3" step="1" id="sim-duree" oninput="simUpdate()" class="sim-range">
-          </div>
-          <div class="sim-slider-block">
-            <div class="sim-slider-top">
-              <span class="sim-sl-label">Distance depuis Meximieux</span>
-              <span class="sim-sl-val" id="sim-km-out">Retrait portail · gratuit</span>
-            </div>
-            <input type="range" min="0" max="150" value="0" step="5" id="sim-km" oninput="simUpdate()" class="sim-range">
-          </div>
-
-          <div class="sim-result">
-            <div class="sim-result-top">
-              <div>
-                <div class="sim-result-label">Total à facturer</div>
-                <div class="sim-big-price" id="sim-total-price">79 €</div>
-                <div class="sim-palier-pill" id="sim-palier">Weekend</div>
+          <div class="sim-body">
+            <!-- COLONNE GAUCHE : CONTRÔLES -->
+            <div class="sim-controls">
+              <div class="sim-label">Pack</div>
+              <div class="sim-pack-grid">
+                <button class="sim-pack-btn active" data-pack="demi" onclick="simSelectPack(this)">
+                  <div class="sim-pn">Demi-Flotte</div><div class="sim-ps">6 radios</div>
+                </button>
+                <button class="sim-pack-btn" data-pack="essentiel" onclick="simSelectPack(this)">
+                  <div class="sim-pn">Essentiel</div><div class="sim-ps">12 radios</div>
+                </button>
+                <button class="sim-pack-btn" data-pack="scene" onclick="simSelectPack(this)">
+                  <div class="sim-pn">Scène</div><div class="sim-ps">6 intercoms</div>
+                </button>
+                <button class="sim-pack-btn" data-pack="regie" onclick="simSelectPack(this)">
+                  <div class="sim-pn">Régie</div><div class="sim-ps">6R + 6I</div>
+                </button>
+                <button class="sim-pack-btn" data-pack="complet" onclick="simSelectPack(this)">
+                  <div class="sim-pn">Complet</div><div class="sim-ps">Tout inclus</div>
+                </button>
               </div>
-              <div class="sim-pj-block">
-                <div class="sim-result-label">Prix / jour</div>
-                <div class="sim-pj-value" id="sim-pj-display">26 €</div>
+              <div class="sim-toggle-row">
+                <button class="sim-toggle-btn" onclick="simToggleDetail(this)">+ Voir le contenu du pack</button>
+              </div>
+              <div class="sim-detail" id="sim-detail">
+                <div class="sim-detail-name" id="sim-detail-name"></div>
+                <ul id="sim-detail-list"></ul>
+              </div>
+              <div class="sim-label">Type de structure</div>
+              <div class="sim-seg-row">
+                <button class="sim-seg-btn active" id="sim-seg-asso" onclick="simSelectSeg('asso')">Association / Particulier</button>
+                <button class="sim-seg-btn" id="sim-seg-pro" onclick="simSelectSeg('pro')">Professionnel</button>
+              </div>
+              <div class="sim-slider-block">
+                <div class="sim-slider-top">
+                  <span class="sim-sl-label">Durée de location</span>
+                  <span class="sim-sl-val" id="sim-duree-out">3 jours</span>
+                </div>
+                <input type="range" min="1" max="30" value="3" step="1" id="sim-duree" oninput="simUpdate()" class="sim-range">
+              </div>
+              <div class="sim-slider-block">
+                <div class="sim-slider-top">
+                  <span class="sim-sl-label">Distance depuis Meximieux</span>
+                  <span class="sim-sl-val" id="sim-km-out">Retrait portail · gratuit</span>
+                </div>
+                <input type="range" min="0" max="150" value="0" step="5" id="sim-km" oninput="simUpdate()" class="sim-range">
               </div>
             </div>
-            <div class="sim-result-rows">
-              <div class="sim-result-row"><span class="sim-rl">Location matériel</span><span class="sim-rv" id="sim-d-loc">79 €</span></div>
-              <div class="sim-result-row"><span class="sim-rl">Déplacement A/R (0,50 €/km)</span><span class="sim-rv" id="sim-d-dep">Gratuit · retrait portail</span></div>
-              <div class="sim-result-row sim-result-row-accent"><span class="sim-rl">Acompte 30% à la signature</span><span class="sim-rv" id="sim-d-acompte">24 €</span></div>
-              <div class="sim-result-row sim-result-row-accent"><span class="sim-rl">Solde 70% sous 30 jours</span><span class="sim-rv" id="sim-d-solde">55 €</span></div>
+            <!-- COLONNE DROITE : RÉSULTAT -->
+            <div class="sim-result">
+              <div class="sim-result-top">
+                <div>
+                  <div class="sim-result-label">Total à facturer</div>
+                  <div class="sim-big-price" id="sim-total-price">79 €</div>
+                  <div class="sim-palier-pill" id="sim-palier">Weekend</div>
+                </div>
+                <div class="sim-pj-block">
+                  <div class="sim-result-label">Prix / jour</div>
+                  <div class="sim-pj-value" id="sim-pj-display">26 €</div>
+                </div>
+              </div>
+              <div class="sim-result-rows">
+                <div class="sim-result-row"><span class="sim-rl">Location matériel</span><span class="sim-rv" id="sim-d-loc">79 €</span></div>
+                <div class="sim-result-row"><span class="sim-rl">Déplacement A/R (0,50 €/km)</span><span class="sim-rv" id="sim-d-dep">Gratuit · retrait portail</span></div>
+                <div class="sim-result-row sim-result-row-accent"><span class="sim-rl">Acompte 30% à la signature</span><span class="sim-rv" id="sim-d-acompte">24 €</span></div>
+                <div class="sim-result-row sim-result-row-accent"><span class="sim-rl">Solde 70% sous 30 jours</span><span class="sim-rv" id="sim-d-solde">55 €</span></div>
+              </div>
             </div>
-          </div>
-
+          </div><!-- /sim-body -->
         </div>
       </div>
     </div>
@@ -1105,10 +1104,6 @@ function svcToggle(btn) {
   }
 }
 
-/* ── NAV COMPACT ON SCROLL ── */
-window.addEventListener('scroll', () => {
-  document.querySelector('nav').classList.toggle('nav-compact', window.scrollY > 80);
-}, {passive:true});
 
 /* ── PROCESS SEQUENTIAL ANIMATION ── */
 const procObs = new IntersectionObserver((entries) => {
@@ -1464,7 +1459,7 @@ simUpdate();
 const i18n = {
   fr: {
     'nav.solutions':'Solutions','nav.tarifs':'Tarifs','nav.sim':'Simulateur','nav.story':'Notre histoire','nav.zone':'Zone','nav.live':'Interface Live','nav.devis':'Demander un devis →',
-    'hero.badge':'Communication événementielle · Ain (01)','hero.title':'Chaque équipe connectée.<br><em>Chaque événement maîtrisé.</em>','hero.sub':'Un service de communication professionnel, clé en main, accessible à toutes les structures, de l\'association de quartier au festival régional.','hero.cta1':'Vérifier une disponibilité','hero.cta2':'Découvrir les solutions →','hero.scroll':'Défiler',
+    'hero.badge':'Communication événementielle · Ain (01)','hero.title':'Chaque équipe connectée.<br><em>Chaque événement maîtrisé.</em>','hero.sub':'Un service de communication professionnel, clé en main, accessible à toutes les structures, de l\'association de quartier au festival régional.','hero.cta1':'Obtenir un devis gratuit','hero.cta2':'Découvrir les solutions →','hero.scroll':'Défiler',
     'pill.galas':'🎭 Galas & spectacles','pill.concerts':'🎵 Concerts & festivals','pill.village':'🏘️ Fêtes de village','pill.sport':'🏃 Événements sportifs','pill.bal':'🎪 Bals & soirées','pill.muni':'🏛️ Événements municipaux','pill.school':'🎓 Spectacles scolaires','pill.theatre':'🎼 Théâtre amateur','pill.race':'🚴 Courses & trails','pill.conf':'🤝 Conférences & AG',
     'stat.range':'Portée radio garantie','stat.battery':'Autonomie sans recharge','stat.deploy':'Déploiement complet','stat.licence':'Licence requise',
     'genese.tag':'Notre histoire','genese.years':'ans sur le terrain','genese.title':'Nés de la<br><em>frustration du terrain.</em>','genese.quote':'"12 ans à organiser des événements dans l\'Ain sans jamais trouver le bon outil. Téléphones saturés, talkies jouets hors de portée, prestataires inaccessibles. On a créé ce qu\'on aurait voulu avoir dès le premier jour."','genese.p1':'AINTERCOM est né d\'une frustration simple et réelle : la communication professionnelle était soit bricolée, soit réservée aux grandes productions avec budget et technicien imposé.','genese.p2':'Aujourd\'hui, on met à disposition le même matériel que les grandes productions : Motorola, Hollyland, VONYX — pré-configuré, documenté, prêt en moins de 5 minutes.',

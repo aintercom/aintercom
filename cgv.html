@@ -11,6 +11,38 @@
 <style>
 :root{--blue:#1A6FFF;--sky:#56B4FF;--grad:linear-gradient(135deg,#1A6FFF 0%,#56B4FF 100%);--dark:#07070F;--mid:#38384A;--muted:#8A8A9E;--border:rgba(10,10,30,0.08);--border-md:rgba(10,10,30,0.13);--white:#ffffff;--bg:#F5F5FA;--bg2:#EBEBF3;--r-sm:12px;--r-md:20px;--nav-h:68px}
 [data-theme="dark"]{--white:#0E0E1A;--bg:#131320;--bg2:#1A1A2E;--dark:#F0F0FA;--mid:#B0B0C8;--muted:#6A6A85;--border:rgba(255,255,255,0.08);--border-md:rgba(255,255,255,0.13)}
+[data-theme="dark"] body{background:var(--white);color:var(--dark)}
+[data-theme="dark"] p{color:var(--mid)}
+[data-theme="dark"] td{color:var(--mid)}
+[data-theme="dark"] .art h2{color:var(--dark)}
+[data-theme="dark"] .info-val{color:var(--dark)}
+[data-theme="dark"] .info-box{background:var(--bg2);border-color:var(--border-md)}
+[data-theme="dark"] .tbl-wrap{border-color:var(--border-md)}
+[data-theme="dark"] tbody tr:nth-child(even){background:var(--bg2)}
+[data-theme="dark"] .highlight-box{background:rgba(26,111,255,0.08)}
+[data-theme="dark"] .content{color:var(--dark)}
+[data-theme="dark"] .art p{color:var(--mid)}
+[data-theme="dark"] .art li{color:var(--mid)}
+[data-theme="dark"] .art h2{color:var(--blue)}
+[data-theme="dark"] .art strong{color:var(--dark)}
+[data-theme="dark"] .contrat{background:var(--bg2);border-color:var(--border-md)}
+[data-theme="dark"] .contrat-partie{background:var(--bg)}
+[data-theme="dark"] .sign-box{background:var(--bg)}
+[data-theme="dark"] .devis{background:var(--bg2);border-color:var(--border-md)}
+[data-theme="dark"] .devis-body{background:var(--bg2)}
+[data-theme="dark"] .page-title{color:var(--dark)}
+[data-theme="dark"] .page-date{color:var(--muted)}
+[data-theme="dark"] .page-sub{color:var(--muted)}
+[data-theme="dark"] .info-label{color:var(--muted)}
+[data-theme="dark"] .cgl-art-title{color:var(--dark)}
+[data-theme="dark"] .cgl-art p{color:var(--mid)}
+[data-theme="dark"] tbody tr{background:var(--bg2)}
+[data-theme="dark"] tbody tr:hover{background:var(--bg)}
+[data-theme="dark"] td{color:var(--mid)}
+[data-theme="dark"] td strong{color:var(--dark)}
+[data-theme="dark"] td.hl{color:#56B4FF}
+[data-theme="dark"] td.ok{color:#4ade80}
+[data-theme="dark"] td.warn{color:#fbbf24}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
 html{font-size:16px;scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--dark);line-height:1.65;transition:background .3s,color .3s}
@@ -86,7 +118,7 @@ footer-mini{display:block;border-top:1px solid var(--border);padding:24px 0;text
 
     <div class="art">
       <h2>Art. 1 <span>Parties</span></h2>
-      <p><strong>Le Loueur :</strong> THIS IS IT EVENT — Association loi 1901 — SIRET 88926603700023 — 7 Rue Pierre Bernin, 01800 Meximieux — Représentée par Morgan Spirli — 07 44 98 00 15 — <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2d1dddcc6d3d1c6f2d3dbdcc6d7c0d1dddf9cd4c0">[email&#160;protected]</a></p>
+      <p><strong>Le Loueur :</strong> THIS IS IT EVENT — Association loi 1901 — SIRET 88926603700023 — 7 Rue Pierre Bernin, 01800 Meximieux — Représentée par Morgan Spirli — 07 44 98 00 15 — contact@aintercom.fr</p>
       <p><strong>Le Locataire :</strong> Toute personne physique ou morale ayant conclu un contrat de location de matériel événementiel avec le Loueur. Le Locataire reconnaît avoir pris connaissance des présentes conditions avant signature.</p>
     </div>
 
@@ -195,7 +227,7 @@ footer-mini{display:block;border-top:1px solid var(--border);padding:24px 0;text
     <div class="art">
       <h2>Art. 10 <span>Protection des données (RGPD)</span></h2>
       <p>Les informations collectées dans le cadre du contrat de location (coordonnées du Locataire, détails de l'événement) sont utilisées exclusivement pour la gestion commerciale et la facturation. Elles ne sont ni cédées ni vendues à des tiers.</p>
-      <p>Droit d'accès, de rectification et de suppression : <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cba8a4a5bfaaa8bf8baaa2a5bfaeb9a8a4a6e5adb9">[email&#160;protected]</a></strong></p>
+      <p>Droit d'accès, de rectification et de suppression : <strong>contact@aintercom.fr</strong></p>
     </div>
 
     <div class="art">
@@ -215,7 +247,7 @@ footer-mini{display:block;border-top:1px solid var(--border);padding:24px 0;text
   </div>
 </footer-mini>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 let dark = localStorage.getItem('aic-dark') === '1';
 function applyDark(d) {
   dark = d;
