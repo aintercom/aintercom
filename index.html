@@ -1206,6 +1206,18 @@ function simUpdateDetail() {
   document.getElementById('sim-detail-list').innerHTML = d.items.map(i => '<li>' + i + '</li>').join('');
 }
 function simTarifJour(base, jours) {
+  // Pour 3 jours (weekend), retourner le prix par jour arrondi
+  // qui donne exactement le total de la grille tarifaire
+  if (jours === 3) {
+    // Pour les packs où base % 3 === 0 (ex: 129, 219), retourner pj exact
+    if (base % 3 === 0) {
+      return base / 3;
+    }
+    // Pour les autres (79, 149, 329), arrondir pj à l'entier le plus proche
+    // et ajuster dans simUpdate() pour que le total soit exact
+    return Math.round(base / 3);
+  }
+  
   const pj = base / 3;
   if (jours === 1)  return Math.round(base * 0.70);
   if (jours <= 4)   return Math.round(pj);
@@ -1225,7 +1237,21 @@ function simUpdate() {
   const km    = parseInt(document.getElementById('sim-km').value);
   const base  = SIM_TARIFS[simPack][simSeg];
   const pj    = simTarifJour(base, jours);
-  const loc   = pj * jours;
+  
+  // Pour 3 jours, utiliser le prix exact de la grille tarifaire
+  let loc;
+  if (jours === 3) {
+    // Si base % 3 === 0 (ex: 129, 219), utiliser pj * jours
+    // Sinon (79, 149, 329), utiliser base directement
+    if (base % 3 === 0) {
+      loc = pj * jours;
+    } else {
+      loc = base;
+    }
+  } else {
+    loc = pj * jours;
+  }
+  
   const dep   = km === 0 ? 0 : Math.round(km * 2 * 0.5);
   const total = loc + dep;
   const acompte = Math.round(total * 0.30);
