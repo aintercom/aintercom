@@ -14,13 +14,34 @@ RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
 # ──────────────────────────────────────────────────────────────
 # REDIRECTIONS POUR URLS PROPRES
 # ──────────────────────────────────────────────────────────────
-# Redirige /legal.html vers /mentionslegales.html (301 permanent)
+# Redirige /legal.html vers /mentionslegales (301 permanent)
 RewriteCond %{THE_REQUEST} /legal\.html [NC]
-RewriteRule ^legal\.html$ /mentionslegales.html [R=301,L]
+RewriteRule ^legal\.html$ /mentionslegales [R=301,L]
 
-# Redirige /cgv.html vers /cgl.html (301 permanent)
+# Redirige /cgv.html vers /cgl (301 permanent)
 RewriteCond %{THE_REQUEST} /cgv\.html [NC]
-RewriteRule ^cgv\.html$ /cgl.html [R=301,L]
+RewriteRule ^cgv\.html$ /cgl [R=301,L]
+
+# ──────────────────────────────────────────────────────────────
+# RÉÉCRITURES POUR URLS SANS .HTML
+# ──────────────────────────────────────────────────────────────
+# Réécrit /mentionslegales vers /mentionslegales.html (interne)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^mentionslegales$ mentionslegales.html [L]
+
+# Réécrit /cgl vers /cgl.html (interne)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^cgl$ cgl.html [L]
+
+# Redirige /mentionslegales.html vers /mentionslegales (SEO)
+RewriteCond %{THE_REQUEST} /mentionslegales\.html [NC]
+RewriteRule ^mentionslegales\.html$ /mentionslegales [R=301,L]
+
+# Redirige /cgl.html vers /cgl (SEO)
+RewriteCond %{THE_REQUEST} /cgl\.html [NC]
+RewriteRule ^cgl\.html$ /cgl [R=301,L]
 
 # ──────────────────────────────────────────────────────────────
 # SECURITÉ & PERFORMANCE
