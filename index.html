@@ -250,8 +250,8 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .svc-detail-row:last-child{border-bottom:none}
 .svc-detail-lbl{color:var(--muted)}
 .svc-detail-val{font-family:'Sora',sans-serif;font-weight:700;color:var(--dark);text-align:right}
-.svc-detail-img{background:var(--bg2);border-radius:var(--r-sm);margin-bottom:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:20px;aspect-ratio:1/1}
-.svc-detail-img img{max-height:80%;max-width:80%;object-fit:contain;opacity:.9}
+.svc-detail-img{background:var(--bg2);border-radius:var(--r-sm);margin-bottom:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;aspect-ratio:1/1}
+.svc-detail-img img{width:100%;height:100%;object-fit:contain;opacity:.9;border-radius:inherit}
 .ct-wrapper {
   margin-top: 48px;
   border-radius: var(--r-lg);
@@ -814,7 +814,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="svc-detail">
-          <div class="svc-detail-img"><img src="assets/images/talkie.svg" alt="Motorola XT420"></div>
+          <div class="svc-detail-img"><img src="assets/images/prod_talkie.svg" alt="Motorola XT420"></div>
           <div class="svc-detail-row"><span class="svc-detail-lbl">Autonomie batterie</span><span class="svc-detail-val">20 heures</span></div>
           <div class="svc-detail-row"><span class="svc-detail-lbl">Bande fréquence</span><span class="svc-detail-val">PMR446 · sans licence</span></div>
           <div class="svc-detail-row"><span class="svc-detail-lbl">Canaux</span><span class="svc-detail-val">16 canaux</span></div>
@@ -848,7 +848,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="svc-detail">
-          <div class="svc-detail-img"><img src="assets/images/casque.svg" alt="Hollyland Solidcom SE Pro 6S"></div>
+          <div class="svc-detail-img"><img src="assets/images/prod_intercom.svg" alt="Hollyland Solidcom SE Pro 6S"></div>
           <div class="svc-detail-row"><span class="svc-detail-lbl">Mode communication</span><span class="svc-detail-val">Full-Duplex (simultané)</span></div>
           <div class="svc-detail-row"><span class="svc-detail-lbl">Portée</span><span class="svc-detail-val">400 m en champ libre</span></div>
           <div class="svc-detail-row"><span class="svc-detail-lbl">Autonomie</span><span class="svc-detail-val">10 heures</span></div>
@@ -881,7 +881,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="svc-detail">
-          <div class="svc-detail-img"><img src="assets/images/megaphone.svg" alt="Vonyx MEG065 65W"></div>
+          <div class="svc-detail-img"><img src="assets/images/prod_megaphone.svg" alt="Vonyx MEG065 65W"></div>
           <div class="svc-detail-row"><span class="svc-detail-lbl">Puissance</span><span class="svc-detail-val">65 Watts</span></div>
           <div class="svc-detail-row"><span class="svc-detail-lbl">Autonomie</span><span class="svc-detail-val">2 batteries Li-Ion incluses</span></div>
           <div class="svc-detail-row"><span class="svc-detail-lbl">Démarrage</span><span class="svc-detail-val">Prêt en 10 secondes</span></div>
@@ -1128,17 +1128,27 @@ function simToggleOpen(btn) {
 
 /* ── PRODUITS — TOGGLE DÉTAIL (one at a time) ── */
 function svcToggle(btn) {
+  // Trouver le détail correspondant à ce bouton
   const detail = btn.nextElementSibling;
+  
+  // Vérifier si ce détail est déjà ouvert
   const isOpen = detail.classList.contains('open');
-  // Close all others first
-  document.querySelectorAll('.svc-detail.open').forEach(d => {
+  
+  // Fermer TOUS les détails et boutons d'abord
+  document.querySelectorAll('.svc-detail').forEach(d => {
     d.classList.remove('open');
-    d.previousElementSibling.classList.remove('open');
   });
+  document.querySelectorAll('.svc-expand-btn').forEach(b => {
+    b.classList.remove('open');
+  });
+  
+  // Si le détail n'était pas ouvert, on l'ouvre maintenant
   if (!isOpen) {
     detail.classList.add('open');
     btn.classList.add('open');
   }
+  // Si le détail était déjà ouvert, on vient de le fermer (avec les autres)
+  // donc on ne fait rien de plus
 }
 
 
