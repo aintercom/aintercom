@@ -12,6 +12,17 @@ RewriteCond %{THE_REQUEST} /index\.html [NC]
 RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
 
 # ──────────────────────────────────────────────────────────────
+# REDIRECTIONS POUR URLS PROPRES
+# ──────────────────────────────────────────────────────────────
+# Redirige /legal.html vers /mentionslegales.html (301 permanent)
+RewriteCond %{THE_REQUEST} /legal\.html [NC]
+RewriteRule ^legal\.html$ /mentionslegales.html [R=301,L]
+
+# Redirige /cgv.html vers /cgl.html (301 permanent)
+RewriteCond %{THE_REQUEST} /cgv\.html [NC]
+RewriteRule ^cgv\.html$ /cgl.html [R=301,L]
+
+# ──────────────────────────────────────────────────────────────
 # SECURITÉ & PERFORMANCE
 # ──────────────────────────────────────────────────────────────
 
