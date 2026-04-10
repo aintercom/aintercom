@@ -213,7 +213,7 @@ label{font-size:10px;font-weight:700;color:var(--tx2);text-transform:uppercase;l
 .poste-card:hover{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,.1);transform:translateY(-2px)}
 .poste-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent);opacity:.7}
 .poste-dot{width:20px;height:20px;border-radius:50%;flex-shrink:0;border:2px solid var(--bg2);box-shadow:0 0 0 2px var(--border)}
-.poste-nom{font-size:16px;font-weight:800;flex:1;color:var(--tx);letter-spacing:-.2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.poste-nom{font-size:16px;font-weight:800;flex:1;color:var(--tx);letter-spacing:-.2px;overflow-wrap:break-word;word-wrap:break-word;word-break:break-word;min-width:0;line-height:1.2}
 .poste-count{font-size:12px;font-weight:700;color:var(--tx3);background:var(--bg3);padding:3px 8px;border-radius:12px;border:1px solid var(--border);flex-shrink:0}
 .poste-actions{display:flex;gap:4px;opacity:.6;transition:var(--tr);flex-shrink:0}
 .poste-card:hover .poste-actions{opacity:1}
@@ -1327,8 +1327,8 @@ function startClock(){
     const now=new Date();
     const hms=now.toLocaleTimeString('fr-FR');
     const date=now.toLocaleDateString('fr-FR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase();
-    ['hdr-clock'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=hms});
-    ['hdr-date'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=date});
+    ['hdr-clock', 'cockpit-clock'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=hms});
+    ['hdr-date', 'cockpit-date'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=date});
     if(S.globalTimer.running){S.globalTimer.elapsed++;document.getElementById('cw-global-timer').textContent=fmtTime(S.globalTimer.elapsed)}
     S.sequences.forEach((s,i)=>{if(s.active){s.elapsed++;const el=document.getElementById('seq-chrono-'+i);if(el)el.textContent=fmtSec(s.elapsed);document.getElementById('cw-now-timer').textContent=fmtSec(s.elapsed)}});
   }
@@ -2833,6 +2833,22 @@ document.addEventListener('click', e => {
 
 // ── INIT AUTH ──
 async function initAuth() {
+  // Mode développement : créer une session locale automatiquement
+  const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  
+  if (isLocalDev) {
+    // Créer un utilisateur local pour le développement
+    currentUser = {
+      id: 'local_dev_user',
+      email: 'dev@aintercom.local',
+      name: 'Développeur Local',
+      initials: 'DL',
+      isLocal: true
+    };
+    localStorage.setItem('aintercom_session', JSON.stringify(currentUser));
+    return true;
+  }
+
   // Essayer Supabase
   try {
     sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
