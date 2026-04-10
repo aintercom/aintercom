@@ -17,7 +17,7 @@
 <meta name="twitter:description" content="Location de kits radio et intercom pro pour l'événementiel dans l'Ain. Plug &amp; Play, sans technicien. Devis immédiat.">
 <meta name="twitter:site" content="@aintercom">
 <link rel="canonical" href="https://aintercom.fr/">
-<link rel="icon" href="assets/logos/favicon.png" type="image/png">
+  <link rel="icon" href="assets/logos/favicon.png?v=2" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -1362,7 +1362,7 @@ simUpdate();
       <p class="section-p" data-i18n="cta.sub">Réponse et devis complet sous 24h. Zéro engagement à ce stade.</p>
     </div>
     <div class="contact-grid">
-      <form action="mailto:contact@aintercom.fr" method="post" enctype="text/plain" class="rev">
+      <form id="devis-form" class="rev">
         <div class="form-2">
           <div class="fg"><label data-i18n="f.nom">Nom</label><input type="text" name="nom" placeholder="Votre nom"></div>
           <div class="fg"><label data-i18n="f.prenom">Prénom</label><input type="text" name="prenom" placeholder="Votre prénom"></div>
@@ -1675,5 +1675,88 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- JavaScript pour le formulaire de devis -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('devis-form');
+  if (!form) return;
+  
+  // Créer un élément pour afficher les messages
+  const messageDiv = document.createElement('div');
+  messageDiv.style.cssText = 'margin-top: 16px; padding: 12px 16px; border-radius: var(--r-sm); font-family: "Sora", sans-serif; font-weight: 600; font-size: 0.9rem; text-align: center; display: none;';
+  form.appendChild(messageDiv);
+  
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.querySelector('span').textContent;
+    
+    // Cacher tout message précédent
+    messageDiv.style.display = 'none';
+    
+    // Désactiver le bouton pendant l'envoi
+    submitBtn.disabled = true;
+    submitBtn.querySelector('span').textContent = 'Envoi en cours...';
+    
+    try {
+      // Récupérer les données du formulaire
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      
+      // Configuration Supabase
+      const SUPABASE_URL = 'https://wmbyccbyhtjzvsxxrsbe.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndtYnljY2J5aHRqenZzeHhyc2JlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3OTc0NDQsImV4cCI6MjA5MDM3MzQ0NH0.Pb3C36m05SygQcEhidH4fHXJHMvMw2XN7g5iCFkBGaM';
+      
+      // Appeler l'Edge Function
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/send-devis-v2`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        },
+        body: JSON.stringify(data)
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        // Afficher le message de succès en bleu
+        messageDiv.textContent = '✅ Message bien envoyé ! Nous vous répondrons sous 24h.';
+        messageDiv.style.display = 'block';
+        messageDiv.style.backgroundColor = 'rgba(26, 111, 255, 0.1)';
+        messageDiv.style.color = 'var(--blue)';
+        messageDiv.style.border = '1px solid rgba(26, 111, 255, 0.3)';
+        
+        form.reset(); // Réinitialiser le formulaire
+        
+        // Faire défiler pour montrer le message
+        setTimeout(() => {
+          messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      } else {
+        // Afficher l'erreur en rouge
+        messageDiv.textContent = '❌ Erreur : ' + (result.error || 'Échec de l\'envoi');
+        messageDiv.style.display = 'block';
+        messageDiv.style.backgroundColor = 'rgba(220, 38, 38, 0.1)';
+        messageDiv.style.color = '#dc2626';
+        messageDiv.style.border = '1px solid rgba(220, 38, 38, 0.3)';
+      }
+    } catch (error) {
+      // Afficher l'erreur réseau en rouge
+      messageDiv.textContent = '❌ Erreur réseau : ' + error.message;
+      messageDiv.style.display = 'block';
+      messageDiv.style.backgroundColor = 'rgba(220, 38, 38, 0.1)';
+      messageDiv.style.color = '#dc2626';
+      messageDiv.style.border = '1px solid rgba(220, 38, 38, 0.3)';
+    } finally {
+      // Réactiver le bouton
+      submitBtn.disabled = false;
+      submitBtn.querySelector('span').textContent = originalText;
+    }
+  });
+});
+</script>
 </body>
 </html>
