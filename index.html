@@ -1688,14 +1688,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- JavaScript pour le formulaire de devis -->
 <script>
+console.log('Script de formulaire chargé');
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOMContentLoaded déclenché');
   const form = document.getElementById('devis-form');
+  console.log('Formulaire trouvé:', !!form);
   if (!form) return;
   
   // Créer un élément pour afficher les messages
   const messageDiv = document.createElement('div');
   messageDiv.style.cssText = 'margin-top: 16px; padding: 12px 16px; border-radius: var(--r-sm); font-family: "Sora", sans-serif; font-weight: 600; font-size: 0.9rem; text-align: center; display: none;';
   form.appendChild(messageDiv);
+  console.log('Message div créé');
   
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
