@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AINTERCOM — Communication événementielle professionnelle | Ain (01)</title>
-<meta name="description" content="Location de kits radio et intercom pro pour l'événementiel dans l'Ain. Motorola, Hollyland, Vonyx. Plug &amp; Play, sans technicien. Devis immédiat.">
+<meta name="description" content="Location de kits radio et intercom pro pour l'événementiel dans l'Ain. Galas, festivals, fêtes de village. Motorola, Hollyland, Vonyx. Plug &amp; Play, sans technicien. Devis immédiat.">
 <meta name="keywords" content="location talkie walkie ain, intercom événementiel, communication radio festival, gala danse ain, meximieux, aintercom">
 <meta property="og:title" content="AINTERCOM — Communication événementielle professionnelle">
 <meta property="og:description" content="Kits radio & intercom pros pour vos événements dans l'Ain. Plug & Play, sans licence, sans technicien.">
@@ -21,6 +21,7 @@
   <link rel="apple-touch-icon" href="assets/favicon/favicon_aintercom.png">
   <meta name="msapplication-TileImage" content="assets/favicon/favicon_aintercom.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script>(function(){var d=localStorage.getItem('aic-dark');document.documentElement.setAttribute('data-theme',d==='1'?'dark':'light');})();</script>
@@ -52,7 +53,9 @@
     "offers":[
       {"@type":"Offer","name":"Pack Demi-Flotte","price":"79","priceCurrency":"EUR","description":"6 radios Motorola XT420 pour un weekend"},
       {"@type":"Offer","name":"Pack Essentiel","price":"129","priceCurrency":"EUR","description":"12 radios Motorola XT420 pour un weekend"},
-      {"@type":"Offer","name":"Pack Complet","price":"329","priceCurrency":"EUR","description":"12 radios + 6 intercoms + mégaphone pour un weekend"}
+      {"@type":"Offer","name":"Pack Scène","price":"149","priceCurrency":"EUR","description":"6 intercoms Hollyland Solidcom Full-Duplex pour un weekend"},
+      {"@type":"Offer","name":"Pack Régie","price":"219","priceCurrency":"EUR","description":"6 radios + 6 intercoms Hollyland pour un weekend"},
+      {"@type":"Offer","name":"Pack Complet","price":"329","priceCurrency":"EUR","description":"12 radios + 6 intercoms + mégaphone Vonyx 65W pour un weekend"}
     ]
   }
 ]
@@ -337,7 +340,8 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .pc{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:28px 22px;position:relative;transition:.3s;display:flex;flex-direction:column}
 .pc:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(26,111,255,0.1)}
 .pc.feat{background:linear-gradient(160deg,#0A1840 0%,#0E1F5E 100%);border:none;color:#fff}
-.pc-pop{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-family:'Sora',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:0 0 10px 10px;white-space:nowrap}
+.pc-pop{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-family:'Sora',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:100px;white-space:nowrap;z-index:4;box-shadow:0 4px 14px rgba(26,111,255,0.4)}
+.pc-pop-wrap{display:none}
 .pc-name{font-family:'Sora',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .pc.feat .pc-name{color:rgba(255,255,255,0.5)}
 .pc-contents{font-size:0.72rem;color:var(--muted);margin-bottom:10px}
@@ -352,6 +356,53 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .pc.feat .pc-desc{color:rgba(255,255,255,0.6)}
 .pc-caution{font-family:'Sora',sans-serif;font-size:0.66rem;font-weight:600;color:var(--muted);border-top:1px solid var(--border);padding-top:14px;margin-top:auto}
 .pc.feat .pc-caution{color:rgba(255,255,255,0.28);border-color:rgba(255,255,255,0.1)}
+
+/* ── PACK IMAGE ── */
+.pc-img{margin:-28px -22px 18px;aspect-ratio:4/3;overflow:hidden;border-radius:var(--r-md) var(--r-md) 0 0;position:relative;flex-shrink:0;cursor:pointer}
+.pc-img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .5s ease}
+.pc:hover .pc-img img{transform:scale(1.04)}
+.pc.feat .pc-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,24,64,0.3) 100%)}
+.pc-img-featured{box-shadow:0 0 0 2px rgba(86,180,255,0.6) inset}
+.pc-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(7,7,15,0.08) 100%)}
+.pc-img-zoom{position:absolute;bottom:9px;right:9px;width:28px;height:28px;background:rgba(7,7,15,0.55);backdrop-filter:blur(6px);border-radius:6px;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;pointer-events:none;z-index:2}
+.pc-img-zoom svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round}
+.pc-img:hover .pc-img-zoom{opacity:1}
+@media(max-width:768px){.pc-img{margin:-20px -16px 14px}}
+@media(max-width:480px){.pc-img{margin:-20px -16px 12px}}
+
+/* ── MODALE FICHE PACK ── */
+.pack-modal-overlay{position:fixed;inset:0;background:rgba(7,7,15,0.6);backdrop-filter:blur(8px);z-index:3000;display:none;align-items:center;justify-content:center;padding:16px}
+.pack-modal-overlay.open{display:flex}
+.pack-modal-box{background:var(--white);border:1px solid var(--border-md);border-radius:var(--r-lg);width:100%;max-width:860px;max-height:90vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.28);animation:modal-in .22s ease;position:relative}
+.pack-modal-img{position:relative;overflow:hidden;background:var(--bg2)}
+.pack-modal-img img{width:100%;height:100%;object-fit:cover;display:block}
+.pack-modal-close{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:8px;background:rgba(7,7,15,0.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.15s;z-index:10}
+.pack-modal-close:hover{background:rgba(7,7,15,0.7)}
+.pack-modal-close svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round}
+.pack-modal-content{display:flex;flex-direction:column;overflow-y:auto;padding:36px 32px}
+.pack-modal-content::-webkit-scrollbar{width:4px}
+.pack-modal-content::-webkit-scrollbar-thumb{background:var(--border-md);border-radius:2px}
+.pack-modal-tag{font-family:'Sora',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;display:block}
+.pack-modal-name{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:800;color:var(--dark);letter-spacing:-0.03em;line-height:1.1;margin-bottom:6px}
+.pack-modal-contents{font-size:0.82rem;color:var(--muted);margin-bottom:24px}
+.pack-modal-price-block{background:var(--bg);border:1px solid var(--border-md);border-radius:var(--r-md);padding:20px 22px;margin-bottom:24px}
+.pack-modal-price-label{font-family:'Sora',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.pack-modal-price-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.86rem}
+.pack-modal-price-row:last-child{border-bottom:none;padding-bottom:0}
+.pack-modal-price-seg{color:var(--mid);font-weight:500}
+.pack-modal-price-val{font-family:'Sora',sans-serif;font-weight:800;font-size:1.15rem;color:var(--dark)}
+.pack-modal-desc-title{font-family:'Sora',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.pack-modal-desc{font-size:0.88rem;color:var(--mid);line-height:1.75;flex:1}
+.pack-modal-cta{margin-top:28px;padding-top:20px;border-top:1px solid var(--border)}
+.pack-modal-cta a{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--blue);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:0.88rem;padding:14px 22px;border-radius:var(--r-sm);transition:.22s;text-decoration:none}
+.pack-modal-cta a:hover{background:var(--grad);box-shadow:0 10px 28px rgba(26,111,255,0.35);transform:translateY(-1px)}
+.pack-modal-cta a svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:700px){
+  .pack-modal-box{grid-template-columns:1fr;max-height:95vh}
+  .pack-modal-img{aspect-ratio:4/3;height:auto}
+  .pack-modal-content{padding:24px 20px}
+  .pack-modal-name{font-size:1.3rem}
+}
 .pnotes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
 .pnote{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:0.8rem;color:var(--mid)}
 .pnote svg{width:15px;height:15px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;flex-shrink:0}
@@ -722,6 +773,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   <a href="#tarifs" onclick="toggleMenu()">Tarifs &amp; Simulateur</a>
   <a href="#process" onclick="toggleMenu()">Comment ça marche</a>
   <a href="#zone" onclick="toggleMenu()">Zone d'intervention</a>
+  <a href="#genese" onclick="toggleMenu()">Notre histoire</a>
   <a href="#faq" onclick="toggleMenu()">FAQ</a>
   <a href="https://live.aintercom.fr/login.html" onclick="toggleMenu()" class="mobile-menu-live" target="_blank" rel="noopener">
     <span class="live-dot"></span>
@@ -753,7 +805,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 <h1 data-i18n="hero.title" style="font-size: 3.2rem; line-height: 1.1; font-weight: 700;">
   Chaque équipe connectée.<br><em>Chaque événement maîtrisé.</em>
 </h1>
-    <p class="hero-sub" data-i18n="hero.sub">Un service de communication professionnel, clé en main, accessible à toutes les structures, de l'association de quartier au festival régional.</p>
+    <p class="hero-sub" data-i18n="hero.sub">Un service de communication professionnel, clé en main, accessible à toutes les structures, de l'asso de village au festival régional.</p>
     <div class="hero-pills">
       <span class="hero-pill" data-i18n="pill.galas">🎭 Galas &amp; spectacles</span>
       <span class="hero-pill" data-i18n="pill.concerts">🎵 Concerts &amp; festivals</span>
@@ -802,34 +854,6 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   </div>
 </div>
 
-<!-- GENÈSE -->
-<section class="genese" id="genese">
-  <div class="container">
-    <div class="genese-grid">
-      <div class="genese-photo rev">
-        <img src="assets/images/histoire.svg" alt="Événement scène coordination">
-        <div class="genese-photo-badge">
-          <p>12</p>
-          <span data-i18n="genese.years">ans sur le terrain</span>
-        </div>
-      </div>
-      <div class="genese-text rev">
-        <span class="stag" data-i18n="genese.tag">Notre histoire</span>
-        <h2 data-i18n="genese.title">Nés de la<br><em>frustration du terrain.</em></h2>
-        <blockquote class="genese-quote" data-i18n="genese.quote">
-          "12 ans à organiser des événements dans l'Ain sans jamais trouver le bon outil. Téléphones saturés, talkies jouets hors de portée, prestataires inaccessibles. On a créé ce qu'on aurait voulu avoir dès le premier jour."
-        </blockquote>
-        <p data-i18n="genese.p1">AINTERCOM est né d'une frustration simple et réelle : la communication professionnelle était soit bricolée, soit réservée aux grandes productions avec budget et technicien imposé. Entre les deux, le vide.</p>
-        <p data-i18n="genese.p2">Aujourd'hui, on met à disposition le même matériel que les grandes productions : Motorola, Hollyland, VONYX, pré-configuré, documenté, prêt à l'emploi en moins de 5 minutes. Pour les galas de danse comme pour les festivals de 5 000 personnes.</p>
-        <div class="genese-sig">
-          <div class="genese-sig-line"></div>
-          <span>Morgan Spirli, Fondateur AINTERCOM</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- SERVICES -->
 <section class="section" id="services">
   <div class="container">
@@ -858,7 +882,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           </div>
           <div class="svc-model">Matériel · <strong>Motorola XT420 + RSM câble Kevlar</strong></div>
         </div>
-        <button class="svc-expand-btn" onclick="svcToggle(this)">
+        <button type="button" class="svc-expand-btn" onclick="svcToggle(this)">
           Voir les spécifications complètes
           <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -892,7 +916,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           </div>
           <div class="svc-model">Matériel · <strong>Hollyland Solidcom SE Pro 6S</strong></div>
         </div>
-        <button class="svc-expand-btn" onclick="svcToggle(this)">
+        <button type="button" class="svc-expand-btn" onclick="svcToggle(this)">
           Voir les spécifications complètes
           <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -925,7 +949,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           </div>
           <div class="svc-model">Matériel · <strong>VONYX MEG065 Kit Mégaphone 65W</strong></div>
         </div>
-        <button class="svc-expand-btn" onclick="svcToggle(this)">
+        <button type="button" class="svc-expand-btn" onclick="svcToggle(this)">
           Voir les spécifications complètes
           <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -943,62 +967,6 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   </div>
 </section>
 
-<!-- COMPARATIF -->
-<section class="section section-bg grain-overlay" id="comparatif">
-  <div class="container">
-    <div class="rev">
-      <span class="stag" data-i18n="cmp.tag">Positionnement</span>
-      <h2 class="section-h" data-i18n="cmp.title">Ni bricolage.<br>Ni budget hors de portée.</h2>
-      <p class="section-p" data-i18n="cmp.sub">AINTERCOM occupe un espace unique : la communication professionnelle accessible à toutes les structures, quelle que soit leur taille.</p>
-    </div>
-    <div class="ct-wrapper rev">
-      <div class="ct">
-        <div class="ct-head">
-          <div data-i18n="cmp.col0">Critère</div>
-          <div class="ct-us-h">AINTERCOM <span class="ct-badge" data-i18n="cmp.rec">Recommandé</span></div>
-          <div data-i18n="cmp.col2">Débrouille maison</div>
-          <div data-i18n="cmp.col3">Prestataire spécialisé</div>
-        </div>
-        <div class="ct-row">
-          <div class="ct-cell" data-i18n="cmp.r1">Communication mains libres</div>
-          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Full-duplex 6 postes</div>
-          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>WhatsApp saturé</div>
-          <div class="ct-cell"><div class="cti cti-p"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>Selon formule</div>
-        </div>
-        <div class="ct-row">
-          <div class="ct-cell" data-i18n="cmp.r2">Accessible petites structures</div>
-          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Dès 79€ TTC / weekend</div>
-          <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Gratuit mais limité</div>
-          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Budget 2 000€+</div>
-        </div>
-        <div class="ct-row">
-          <div class="ct-cell" data-i18n="cmp.r3">Canaux sécurisés anti-interférence</div>
-          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>219 codes confidentiels</div>
-          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Tout le monde entend</div>
-          <div class="ct-cell"><div class="cti cti-p"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>Selon matériel</div>
-        </div>
-        <div class="ct-row">
-          <div class="ct-cell" data-i18n="cmp.r4">Qualité certifiée professionnelle</div>
-          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>IP55 + MIL-STD 810</div>
-          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Jouets ou téléphones</div>
-          <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Professionnel</div>
-        </div>
-        <div class="ct-row">
-          <div class="ct-cell" data-i18n="cmp.r5">Sans technicien imposé</div>
-          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Plug & Play autonome</div>
-          <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Oui (débrouille)</div>
-          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Technicien obligatoire</div>
-        </div>
-        <div class="ct-row">
-          <div class="ct-cell" data-i18n="cmp.r6">Opérationnel en 5 minutes</div>
-          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>1 valise, fiche tuto incluse</div>
-          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Configuration longue</div>
-          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Camion + 2h install</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- TARIFS -->
 <section class="section" id="tarifs">
@@ -1015,6 +983,10 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
     </div>
     <div class="pgrid" style="grid-template-columns:repeat(5,1fr)">
       <div class="pc rev">
+        <div class="pc-img" onclick="openPackModal('demi')">
+          <img src="https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/demi-flotte.png" alt="Pack Demi-Flotte – 6 radios Motorola" loading="lazy">
+          <div class="pc-img-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+        </div>
         <div class="pc-name" data-i18n="pk1.name">Demi-Flotte</div>
         <div class="pc-contents">6 radios</div>
         <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="79" data-pro="149">79</span></div>
@@ -1023,7 +995,11 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="pc-desc" data-i18n="pk1.desc">6 radios Motorola XT420 + micros RSM câble Kevlar + 1 chargeur 6 slots + valise</div>
       </div>
       <div class="pc feat rev">
-        <div class="pc-pop" data-i18n="pk.pop">Le plus demandé</div>
+        <div class="pc-img pc-img-featured" onclick="openPackModal('essentiel')">
+          <img src="https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/pack-essentiel.png" alt="Pack Essentiel – 12 radios Motorola" loading="lazy">
+          <div class="pc-img-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+          <div class="pc-pop" data-i18n="pk.pop">Le plus demandé</div>
+        </div>
         <div class="pc-name" data-i18n="pk2.name">Pack Essentiel</div>
         <div class="pc-contents">12 radios</div>
         <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="129" data-pro="249">129</span></div>
@@ -1032,6 +1008,10 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="pc-desc" data-i18n="pk2.desc">12 radios Motorola XT420 + micros RSM + 2 chargeurs 6 slots + valise · idéal festivals, galas, fêtes de village</div>
       </div>
       <div class="pc rev">
+        <div class="pc-img" onclick="openPackModal('scene')">
+          <img src="https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/pack-scene.png" alt="Pack Scène – 6 intercoms Hollyland Full-Duplex" loading="lazy">
+          <div class="pc-img-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+        </div>
         <div class="pc-name" data-i18n="pk3.name">Pack Scène</div>
         <div class="pc-contents">6 intercoms Full-Duplex</div>
         <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="149" data-pro="279">149</span></div>
@@ -1040,6 +1020,10 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="pc-desc" data-i18n="pk3.desc">Hollyland Solidcom SE Pro 6S complet · Full-Duplex, zéro latence, zéro internet · régie &amp; scène</div>
       </div>
       <div class="pc rev">
+        <div class="pc-img" onclick="openPackModal('regie')">
+          <img src="https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/pack-regie.png" alt="Pack Régie – 6 radios + 6 intercoms" loading="lazy">
+          <div class="pc-img-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+        </div>
         <div class="pc-name" data-i18n="pk4.name">Pack Régie</div>
         <div class="pc-contents">6 radios + 6 intercoms</div>
         <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="219" data-pro="399">219</span></div>
@@ -1048,6 +1032,10 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="pc-desc" data-i18n="pk4.desc">6 radios terrain + 6 intercoms Hollyland · Théâtre, gala, scène ET terrain couverts simultanément</div>
       </div>
       <div class="pc rev" style="border-color:rgba(26,111,255,0.25)">
+        <div class="pc-img" onclick="openPackModal('complet')">
+          <img src="https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/pack-complet.png" alt="Pack Complet – 12 radios + 6 intercoms + sono" loading="lazy">
+          <div class="pc-img-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+        </div>
         <div class="pc-name" data-i18n="pk5.name">Pack Complet</div>
         <div class="pc-contents">12 radios + 6 intercoms + sono</div>
         <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="329" data-pro="599">329</span></div>
@@ -1076,7 +1064,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
             <li><span class="sim-feat-dot"></span>Coût de déplacement inclus</li>
           </ul>
         </div>
-        <button class="sim-open-btn" id="sim-open-btn" onclick="simToggleOpen(this)">
+        <button type="button" class="sim-open-btn" id="sim-open-btn" onclick="simToggleOpen(this)">
           <svg viewBox="0 0 24 24" id="sim-open-icon" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s"><polyline points="6 9 12 15 18 9"/></svg>
           <span id="sim-open-label">Ouvrir le simulateur</span>
         </button>
@@ -1090,24 +1078,24 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
             <div class="sim-controls">
               <div class="sim-label">Pack</div>
               <div class="sim-pack-grid">
-                <button class="sim-pack-btn active" data-pack="demi" onclick="simSelectPack(this)">
+                <button type="button" class="sim-pack-btn active" data-pack="demi" onclick="simSelectPack(this)">
                   <div class="sim-pn">Demi-Flotte</div><div class="sim-ps">6 radios</div>
                 </button>
-                <button class="sim-pack-btn" data-pack="essentiel" onclick="simSelectPack(this)">
+                <button type="button" class="sim-pack-btn" data-pack="essentiel" onclick="simSelectPack(this)">
                   <div class="sim-pn">Essentiel</div><div class="sim-ps">12 radios</div>
                 </button>
-                <button class="sim-pack-btn" data-pack="scene" onclick="simSelectPack(this)">
+                <button type="button" class="sim-pack-btn" data-pack="scene" onclick="simSelectPack(this)">
                   <div class="sim-pn">Scène</div><div class="sim-ps">6 intercoms</div>
                 </button>
-                <button class="sim-pack-btn" data-pack="regie" onclick="simSelectPack(this)">
+                <button type="button" class="sim-pack-btn" data-pack="regie" onclick="simSelectPack(this)">
                   <div class="sim-pn">Régie</div><div class="sim-ps">6R + 6I</div>
                 </button>
-                <button class="sim-pack-btn" data-pack="complet" onclick="simSelectPack(this)">
+                <button type="button" class="sim-pack-btn" data-pack="complet" onclick="simSelectPack(this)">
                   <div class="sim-pn">Complet</div><div class="sim-ps">Tout inclus</div>
                 </button>
               </div>
               <div class="sim-toggle-row">
-                <button class="sim-toggle-btn" onclick="simToggleDetail(this)">+ Voir le contenu du pack</button>
+                <button type="button" class="sim-toggle-btn" onclick="simToggleDetail(this)">+ Voir le contenu du pack</button>
               </div>
               <div class="sim-detail" id="sim-detail">
                 <div class="sim-detail-name" id="sim-detail-name"></div>
@@ -1115,8 +1103,8 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
               </div>
               <div class="sim-label">Type de structure</div>
               <div class="sim-seg-row">
-                <button class="sim-seg-btn active" id="sim-seg-asso" onclick="simSelectSeg('asso')">Association / Particulier</button>
-                <button class="sim-seg-btn" id="sim-seg-pro" onclick="simSelectSeg('pro')">Professionnel</button>
+                <button type="button" class="sim-seg-btn active" id="sim-seg-asso" onclick="simSelectSeg('asso')">Association / Particulier</button>
+                <button type="button" class="sim-seg-btn" id="sim-seg-pro" onclick="simSelectSeg('pro')">Professionnel</button>
               </div>
               <div class="sim-slider-block">
                 <div class="sim-slider-top">
@@ -1319,6 +1307,65 @@ simUpdateDetail();
 simUpdate();
 </script>
 
+
+<!-- COMPARATIF -->
+<section class="section section-bg grain-overlay" id="comparatif">
+  <div class="container">
+    <div class="rev">
+      <span class="stag" data-i18n="cmp.tag">Positionnement</span>
+      <h2 class="section-h" data-i18n="cmp.title">Ni bricolage.<br>Ni budget hors de portée.</h2>
+      <p class="section-p" data-i18n="cmp.sub">AINTERCOM occupe un espace unique : la communication professionnelle accessible à toutes les structures, quelle que soit leur taille.</p>
+    </div>
+    <div class="ct-wrapper rev">
+      <div class="ct">
+        <div class="ct-head">
+          <div data-i18n="cmp.col0">Critère</div>
+          <div class="ct-us-h">AINTERCOM <span class="ct-badge" data-i18n="cmp.rec">Recommandé</span></div>
+          <div data-i18n="cmp.col2">Débrouille maison</div>
+          <div data-i18n="cmp.col3">Prestataire spécialisé</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell" data-i18n="cmp.r1">Communication mains libres</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Full-duplex 6 postes</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>WhatsApp saturé</div>
+          <div class="ct-cell"><div class="cti cti-p"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>Selon formule</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell" data-i18n="cmp.r2">Accessible petites structures</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Dès 79€ TTC / weekend</div>
+          <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Gratuit mais limité</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Budget 2 000€+</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell" data-i18n="cmp.r3">Canaux sécurisés anti-interférence</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>219 codes confidentiels</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Tout le monde entend</div>
+          <div class="ct-cell"><div class="cti cti-p"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></div>Selon matériel</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell" data-i18n="cmp.r4">Qualité certifiée professionnelle</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>IP55 + MIL-STD 810</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Jouets ou téléphones</div>
+          <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Professionnel</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell" data-i18n="cmp.r5">Sans technicien imposé</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Plug & Play autonome</div>
+          <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Oui (débrouille)</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Technicien obligatoire</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell" data-i18n="cmp.r6">Opérationnel en 5 minutes</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>1 valise, fiche tuto incluse</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Configuration longue</div>
+          <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Camion + 2h install</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- PROCESS -->
 <section class="section section-bg grain-overlay" id="process">
   <div class="container">
@@ -1337,6 +1384,7 @@ simUpdate();
     </div>
   </div>
 </section>
+
 
 <!-- ZONE -->
 <section class="section" id="zone">
@@ -1390,6 +1438,36 @@ simUpdate();
   </div>
 </section>
 
+
+<!-- GENÈSE -->
+<section class="genese" id="genese">
+  <div class="container">
+    <div class="genese-grid">
+      <div class="genese-photo rev">
+        <img src="assets/images/histoire.svg" alt="Événement scène coordination">
+        <div class="genese-photo-badge">
+          <p>12</p>
+          <span data-i18n="genese.years">ans sur le terrain</span>
+        </div>
+      </div>
+      <div class="genese-text rev">
+        <span class="stag" data-i18n="genese.tag">Notre histoire</span>
+        <h2 data-i18n="genese.title">Nés de la<br><em>frustration du terrain.</em></h2>
+        <blockquote class="genese-quote" data-i18n="genese.quote">
+          "12 ans à organiser des événements dans l'Ain sans jamais trouver le bon outil. Téléphones saturés, talkies jouets hors de portée, prestataires inaccessibles. On a créé ce qu'on aurait voulu avoir dès le premier jour."
+        </blockquote>
+        <p data-i18n="genese.p1">AINTERCOM est né d'une frustration simple et réelle : la communication professionnelle était soit bricolée, soit réservée aux grandes productions avec budget et technicien imposé. Entre les deux, le vide.</p>
+        <p data-i18n="genese.p2">Aujourd'hui, on met à disposition le même matériel que les grandes productions : Motorola, Hollyland, VONYX, pré-configuré, documenté, prêt à l'emploi en moins de 5 minutes. Pour les galas de danse comme pour les festivals de 5 000 personnes.</p>
+        <div class="genese-sig">
+          <div class="genese-sig-line"></div>
+          <span>Morgan Spirli, Fondateur AINTERCOM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- FAQ -->
 <section class="section section-bg grain-overlay" id="faq">
   <div class="container">
@@ -1437,6 +1515,7 @@ simUpdate();
     </div>
   </div>
 </section>
+
 
 <!-- CONTACT -->
 <section class="section" id="contact">
@@ -1527,7 +1606,7 @@ simUpdate();
           <a href="#zone" class="fci"><div class="fci-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>Meximieux · Ain (01)</a>
         </div>
         <div class="footer-social">
-          <a href="#" class="fsoc" title="Laisser un avis Google" aria-label="Google Avis">
+          <a href="https://g.page/r/Cdwc2mW6MQ_ZEBM/review" class="fsoc" title="Laisser un avis Google" aria-label="Google Avis" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" width="18" height="18"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57C21.36 18.5 22.56 15.67 22.56 12.25z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
             <span>Google Avis</span>
           </a>
@@ -1581,7 +1660,7 @@ simUpdate();
 const i18n = {
   fr: {
     'nav.solutions':'Solutions','nav.tarifs':'Tarifs','nav.sim':'Simulateur','nav.story':'Notre histoire','nav.zone':'Zone','nav.live':'Interface Live','nav.devis':'Demander un devis →',
-    'hero.badge':'Communication événementielle · Ain (01)','hero.title':'Chaque équipe connectée.<br><em>Chaque événement maîtrisé.</em>','hero.sub':'Un service de communication professionnel, clé en main, accessible à toutes les structures, de l\'association de quartier au festival régional.','hero.cta1':'Obtenir un devis gratuit','hero.cta2':'Découvrir les solutions →','hero.scroll':'Défiler',
+    'hero.badge':'Communication événementielle · Ain (01)','hero.title':'Chaque équipe connectée.<br><em>Chaque événement maîtrisé.</em>','hero.sub':'Un service de communication professionnel, clé en main, accessible à toutes les structures, de l\'asso de village au festival régional.','hero.cta1':'Obtenir un devis gratuit','hero.cta2':'Découvrir les solutions →','hero.scroll':'Défiler',
     'pill.galas':'🎭 Galas & spectacles','pill.concerts':'🎵 Concerts & festivals','pill.village':'🏘️ Fêtes de village','pill.sport':'🏃 Événements sportifs','pill.bal':'🎪 Bals & soirées','pill.muni':'🏛️ Événements municipaux','pill.school':'🎓 Spectacles scolaires','pill.theatre':'🎼 Théâtre amateur','pill.race':'🚴 Courses & trails','pill.conf':'🤝 Conférences & AG',
     'stat.range':'Portée radio garantie','stat.battery':'Autonomie sans recharge','stat.deploy':'Déploiement complet','stat.licence':'Licence requise',
     'genese.tag':'Notre histoire','genese.years':'ans sur le terrain','genese.title':'Nés de la<br><em>frustration du terrain.</em>','genese.quote':'"12 ans à organiser des événements dans l\'Ain sans jamais trouver le bon outil. Téléphones saturés, talkies jouets hors de portée, prestataires inaccessibles. On a créé ce qu\'on aurait voulu avoir dès le premier jour."','genese.p1':'AINTERCOM est né d\'une frustration simple et réelle : la communication professionnelle était soit bricolée, soit réservée aux grandes productions avec budget et technicien imposé.','genese.p2':'Aujourd\'hui, on met à disposition le même matériel que les grandes productions : Motorola, Hollyland, VONYX — pré-configuré, documenté, prêt en moins de 5 minutes.',
@@ -2008,6 +2087,106 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
   }
+});
+</script>
+
+<!-- MODALE FICHE PACK -->
+<div class="pack-modal-overlay" id="pack-modal" onclick="closePackModalOutside(event)">
+  <div class="pack-modal-box">
+    <div class="pack-modal-img">
+      <img id="pm-img" src="" alt="">
+    </div>
+    <div class="pack-modal-content">
+      <span class="pack-modal-tag">Fiche pack · AINTERCOM</span>
+      <div class="pack-modal-name" id="pm-name"></div>
+      <div class="pack-modal-contents" id="pm-contents"></div>
+      <div class="pack-modal-price-block">
+        <div class="pack-modal-price-label">Tarif weekend</div>
+        <div class="pack-modal-price-row">
+          <span class="pack-modal-price-seg">Association / Particulier</span>
+          <span class="pack-modal-price-val"><span class="pc-cur-sm">€</span><span id="pm-price-asso"></span></span>
+        </div>
+        <div class="pack-modal-price-row">
+          <span class="pack-modal-price-seg">Professionnel</span>
+          <span class="pack-modal-price-val"><span class="pc-cur-sm">€</span><span id="pm-price-pro"></span></span>
+        </div>
+      </div>
+      <div class="pack-modal-desc-title">Contenu du pack</div>
+      <div class="pack-modal-desc" id="pm-desc"></div>
+      <div class="pack-modal-cta">
+        <a href="#contact">
+          Demander un devis
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+    <button type="button" class="pack-modal-close" onclick="closePackModal()">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+/* ── MODALE FICHE PACK ── */
+const PACK_DATA = {
+  demi: {
+    name: 'Demi-Flotte',
+    contents: '6 radios Motorola XT420',
+    asso: 79, pro: 149,
+    img: 'https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/demi-flotte.png',
+    desc: '6 radios Motorola XT420 équipées de micros RSM à câble Kevlar · 1 chargeur 6 slots · valise de transport rigide · idéal pour les petites équipes terrain jusqu\'à 6 personnes.'
+  },
+  essentiel: {
+    name: 'Pack Essentiel',
+    contents: '12 radios Motorola XT420',
+    asso: 129, pro: 249,
+    img: 'https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/pack-essentiel.png',
+    desc: '12 radios Motorola XT420 + micros RSM câble Kevlar · 2 chargeurs 6 slots · valise de transport · le pack le plus demandé, parfait pour festivals, galas et fêtes de village.'
+  },
+  scene: {
+    name: 'Pack Scène',
+    contents: '6 intercoms Full-Duplex Hollyland',
+    asso: 149, pro: 279,
+    img: 'https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/pack-scene.png',
+    desc: 'Hollyland Solidcom SE Pro 6S complet · 1 Master + 5 Remotes · station de charge 8 slots · Full-Duplex zéro latence, zéro internet · sacoche de transport · conçu pour la régie et la scène.'
+  },
+  regie: {
+    name: 'Pack Régie',
+    contents: '6 radios + 6 intercoms Hollyland',
+    asso: 219, pro: 399,
+    img: 'https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/pack-regie.png',
+    desc: '6 radios Motorola XT420 terrain + système Hollyland Solidcom SE Pro 6S complet · couvre simultanément la régie, la scène ET le terrain · idéal théâtre, gala, événement multi-zones.'
+  },
+  complet: {
+    name: 'Pack Complet',
+    contents: '12 radios + 6 intercoms + sono portable',
+    asso: 329, pro: 599,
+    img: 'https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/pack-complet.png',
+    desc: '12 radios Motorola XT420 + micros RSM · Hollyland Solidcom SE Pro 6S complet · Vonyx MEG065 65W + sac + 2 batteries Li-Ion · valise de transport · la régie de poche entière en une seule location.'
+  }
+};
+
+function openPackModal(pack) {
+  const d = PACK_DATA[pack];
+  document.getElementById('pm-img').src = d.img;
+  document.getElementById('pm-img').alt = d.name;
+  document.getElementById('pm-name').textContent = d.name;
+  document.getElementById('pm-contents').textContent = d.contents;
+  document.getElementById('pm-price-asso').textContent = d.asso;
+  document.getElementById('pm-price-pro').textContent = d.pro;
+  document.getElementById('pm-desc').textContent = d.desc;
+  document.getElementById('pack-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePackModal() {
+  document.getElementById('pack-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closePackModalOutside(e) {
+  if (e.target === document.getElementById('pack-modal')) closePackModal();
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePackModal();
 });
 </script>
 
