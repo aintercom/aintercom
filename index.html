@@ -151,6 +151,171 @@ a{text-decoration:none;color:inherit}
 .modal-foot{padding:16px 28px;border-top:1px solid var(--border);text-align:center;font-size:0.74rem;color:var(--muted);flex-shrink:0}
 @media(max-width:600px){.modal-box{border-radius:var(--r-md);max-height:95vh}.modal-head{padding:16px 18px}.modal-body{padding:24px 18px}.modal-info-row{flex-direction:column;gap:3px}.modal-info-label{min-width:auto}}
 
+/* ── NOTICE VIEWER MODAL ── */
+.modal-box.notice-viewer{max-width:920px;height:92vh;max-height:92vh}
+.modal-box.notice-viewer .modal-head{background:var(--white);border-bottom:1px solid var(--border)}
+[data-theme="dark"] .modal-box.notice-viewer .modal-head{background:var(--bg)}
+.pdf-toolbar{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.pdf-tool-btn{display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:8px 14px;font-family:'Sora',sans-serif;font-size:0.76rem;font-weight:700;color:var(--dark);cursor:pointer;transition:.15s}
+.pdf-tool-btn:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+.pdf-tool-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Barre de navigation */
+.notice-nav{display:flex;gap:4px;padding:10px 22px;background:var(--bg);border-bottom:1px solid var(--border);overflow-x:auto;flex-shrink:0;scrollbar-width:thin}
+.notice-nav::-webkit-scrollbar{height:4px}
+.notice-nav::-webkit-scrollbar-thumb{background:var(--border-md);border-radius:2px}
+.notice-nav-item{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:100px;font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:700;color:var(--muted);text-decoration:none;white-space:nowrap;transition:.15s;border:1px solid transparent}
+.notice-nav-item:hover{background:var(--white);color:var(--dark);border-color:var(--border)}
+[data-theme="dark"] .notice-nav-item:hover{background:var(--bg2)}
+.notice-nav-item.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.notice-nav-item svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.notice-nav-item em{font-style:normal;font-size:0.65rem;opacity:0.7;padding:2px 7px;border-radius:100px;background:rgba(0,0,0,0.08)}
+.notice-nav-item.active em{background:rgba(255,255,255,0.22)}
+
+/* Corps scrollable */
+.notice-body{overflow-y:auto;padding:0;background:var(--white);scroll-behavior:smooth}
+[data-theme="dark"] .notice-body{background:var(--bg)}
+.notice-body::-webkit-scrollbar{width:8px}
+.notice-body::-webkit-scrollbar-track{background:var(--bg)}
+.notice-body::-webkit-scrollbar-thumb{background:var(--border-md);border-radius:4px}
+
+/* Intro + outro */
+.nt-intro{text-align:center;padding:60px 48px 54px;background:linear-gradient(180deg,var(--bg) 0%,var(--white) 100%);border-bottom:1px solid var(--border)}
+[data-theme="dark"] .nt-intro{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)}
+.nt-tag{display:inline-block;font-family:'Sora',sans-serif;font-size:0.68rem;font-weight:700;color:var(--blue);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:22px}
+.nt-intro h1{font-family:'Sora',sans-serif;font-weight:900;font-size:2.4rem;line-height:1.08;letter-spacing:-0.03em;color:var(--dark);margin-bottom:18px}
+.nt-intro h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nt-intro p{font-size:0.92rem;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.6}
+
+.nt-outro{text-align:center;padding:50px 48px 60px;background:var(--bg);border-top:1px solid var(--border)}
+[data-theme="dark"] .nt-outro{background:var(--bg2)}
+.nt-outro h2{font-family:'Sora',sans-serif;font-weight:900;font-size:1.6rem;letter-spacing:-0.02em;color:var(--dark);margin-bottom:14px}
+.nt-outro p{font-size:0.88rem;color:var(--muted);line-height:1.65;margin-bottom:18px}
+.nt-outro-phone{display:inline-block;font-family:'Sora',sans-serif;font-weight:800;font-size:1.4rem;color:var(--blue);text-decoration:none;padding:12px 28px;border-radius:100px;border:2px solid var(--blue);transition:.2s}
+.nt-outro-phone:hover{background:var(--blue);color:#fff;transform:translateY(-2px);box-shadow:0 10px 24px rgba(26,111,255,0.3)}
+.nt-outro-contact{font-size:0.78rem !important;margin-top:18px !important}
+
+/* Sections pack */
+.nt-section{padding:44px 48px;border-bottom:1px solid var(--border)}
+.nt-section:last-child{border-bottom:none}
+.nt-page-header{margin-bottom:32px}
+.nt-page-tag{display:inline-block;font-family:'Sora',sans-serif;font-size:0.64rem;font-weight:700;color:var(--blue);letter-spacing:0.18em;text-transform:uppercase;background:rgba(26,111,255,0.1);padding:5px 12px;border-radius:100px;margin-bottom:14px}
+.nt-page-header h2{font-family:'Sora',sans-serif;font-weight:900;font-size:2rem;line-height:1.1;letter-spacing:-0.02em;color:var(--dark);margin-bottom:8px}
+.nt-page-header h2 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nt-page-sub{font-size:0.88rem;color:var(--muted);line-height:1.55}
+.nt-page-title-row{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.nt-time{flex-shrink:0;text-align:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:var(--r-md);min-width:72px}
+.nt-time strong{display:block;font-family:'Sora',sans-serif;font-weight:900;font-size:1.8rem;line-height:1}
+.nt-time span{display:block;font-family:'Sora',sans-serif;font-size:0.56rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-top:4px;opacity:0.85}
+
+/* Titres de bloc (A, B, C sections) */
+.nt-block-title{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-size:0.72rem;font-weight:700;color:var(--blue);letter-spacing:0.08em;text-transform:uppercase;margin-top:32px;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.nt-block-title .dot{width:7px;height:7px;background:var(--blue);border-radius:50%;flex-shrink:0}
+
+/* Étapes numérotées */
+.nt-steps{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px}
+.nt-steps > li{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:14px 0;border-top:1px solid var(--border);align-items:start}
+.nt-steps > li:first-child{border-top:none}
+.nt-step-num{font-family:'Sora',sans-serif;font-size:2rem;font-weight:900;color:var(--border-md);line-height:1;letter-spacing:-0.04em}
+[data-theme="dark"] .nt-step-num{color:var(--border)}
+.nt-steps h4{font-family:'Sora',sans-serif;font-size:0.94rem;font-weight:700;color:var(--dark);margin-bottom:6px;line-height:1.3}
+.nt-steps p{font-size:0.87rem;color:var(--mid);line-height:1.6;margin:0}
+.nt-steps p strong{color:var(--dark);font-weight:600}
+
+/* Callouts / encadrés */
+.nt-callout{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:var(--r-sm);margin-top:14px;border-left:3px solid}
+.nt-callout svg{width:18px;height:18px;flex-shrink:0;margin-top:2px;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.nt-callout p{margin:0;font-size:0.82rem;line-height:1.55;color:var(--mid)}
+.nt-callout p strong{color:var(--dark)}
+.nt-callout-warn{background:#fff4e5;border-color:#f59e0b}
+.nt-callout-warn svg{stroke:#d97706}
+[data-theme="dark"] .nt-callout-warn{background:rgba(245,158,11,0.12);border-color:#f59e0b}
+.nt-callout-warn-soft{background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.4)}
+.nt-callout-warn-soft svg{stroke:#b45309}
+[data-theme="dark"] .nt-callout-warn-soft{background:rgba(245,158,11,0.08)}
+.nt-callout-info{background:rgba(26,111,255,0.06);border-color:var(--blue)}
+.nt-callout-info svg{stroke:var(--blue)}
+[data-theme="dark"] .nt-callout-info{background:rgba(26,111,255,0.12)}
+.nt-callout-tip{background:rgba(26,111,255,0.04);border-color:var(--sky)}
+.nt-callout-tip svg{stroke:var(--blue)}
+[data-theme="dark"] .nt-callout-tip{background:rgba(86,180,255,0.1)}
+
+/* Pastilles voyants (LEDs) */
+.nt-leds{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:20px 0}
+.nt-led{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--r-sm);font-size:0.8rem;line-height:1.35;border:1px solid}
+.nt-led-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;box-shadow:0 0 8px currentColor}
+.nt-led-orange{background:#fff4e5;border-color:#fbbf24;color:#92400e}
+.nt-led-orange .nt-led-dot{background:#f59e0b;color:#f59e0b}
+[data-theme="dark"] .nt-led-orange{background:rgba(245,158,11,0.12);color:#fbbf24}
+.nt-led-green{background:#e9f7ef;border-color:#34d399;color:#065f46}
+.nt-led-green .nt-led-dot{background:#16a34a;color:#16a34a}
+[data-theme="dark"] .nt-led-green{background:rgba(34,197,94,0.12);color:#4ade80}
+.nt-led-red{background:#fef2f2;border-color:#fca5a5;color:#991b1b}
+.nt-led-red .nt-led-dot{background:#dc2626;color:#dc2626}
+[data-theme="dark"] .nt-led-red{background:rgba(220,38,38,0.12);color:#f87171}
+
+/* Règles de protection */
+.nt-rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;padding:18px 20px;background:var(--bg);border-radius:var(--r-md);border:1px solid var(--border)}
+[data-theme="dark"] .nt-rules{background:var(--bg2)}
+.nt-rule{display:flex;align-items:center;gap:10px;font-size:0.82rem;color:var(--mid)}
+.nt-rule span{font-size:1.1rem;flex-shrink:0}
+
+/* Modes mégaphone */
+.nt-mode{border-radius:var(--r-md);overflow:hidden;margin-bottom:14px;border:1px solid}
+.nt-mode-head{display:flex;align-items:center;gap:14px;padding:12px 18px;color:#fff}
+.nt-mode-label{font-family:'Sora',sans-serif;font-size:0.64rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;background:rgba(255,255,255,0.22);padding:4px 10px;border-radius:100px;flex-shrink:0}
+.nt-mode-head h4{font-family:'Sora',sans-serif;font-size:0.94rem;font-weight:700;color:#fff;margin:0}
+.nt-mode-blue{border-color:var(--blue)}
+.nt-mode-blue .nt-mode-head{background:var(--blue)}
+.nt-mode-orange{border-color:#f59e0b}
+.nt-mode-orange .nt-mode-head{background:#f59e0b}
+.nt-mode ol{list-style:none;counter-reset:mode-step;padding:18px 22px;margin:0;background:rgba(26,111,255,0.04)}
+.nt-mode-orange ol{background:rgba(245,158,11,0.05)}
+[data-theme="dark"] .nt-mode ol{background:rgba(26,111,255,0.08)}
+[data-theme="dark"] .nt-mode-orange ol{background:rgba(245,158,11,0.08)}
+.nt-mode ol li{counter-increment:mode-step;display:grid;grid-template-columns:26px 1fr;gap:12px;padding:6px 0;font-size:0.85rem;color:var(--mid);line-height:1.55;align-items:start}
+.nt-mode ol li::before{content:counter(mode-step);display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-family:'Sora',sans-serif;font-size:0.7rem;font-weight:800;line-height:1}
+.nt-mode-orange ol li::before{background:#f59e0b}
+.nt-mode ol li code{display:inline-block;font-family:'Sora',sans-serif;font-size:0.7rem;font-weight:700;padding:3px 8px;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--muted);letter-spacing:0.04em}
+.nt-mode ol li code.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.nt-mode ol li strong{color:var(--dark);font-weight:600}
+
+/* Dépannage */
+.nt-troubleshoot{margin-top:28px;padding:18px 22px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md)}
+[data-theme="dark"] .nt-troubleshoot{background:var(--bg2)}
+.nt-troubleshoot h5{font-family:'Sora',sans-serif;font-size:0.68rem;font-weight:700;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:12px}
+.nt-troubleshoot ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px 20px}
+.nt-troubleshoot ul li{font-size:0.8rem;color:var(--mid);line-height:1.5;padding-left:16px;position:relative}
+.nt-troubleshoot ul li::before{content:'→';position:absolute;left:0;color:var(--blue);font-weight:700}
+.nt-troubleshoot ul li strong{color:var(--dark);font-weight:600}
+
+/* Responsive */
+@media(max-width:720px){
+  .modal-box.notice-viewer{height:96vh;max-height:96vh;border-radius:var(--r-sm)}
+  .modal-box.notice-viewer .modal-head{padding:12px 14px;gap:8px;flex-wrap:wrap}
+  .pdf-toolbar{flex:1;justify-content:flex-end;order:2;width:auto;margin-top:0}
+  .pdf-tool-btn{padding:7px 10px;font-size:0.7rem}
+  .notice-nav{padding:8px 14px;gap:2px}
+  .notice-nav-item{padding:7px 10px;font-size:0.72rem}
+  .notice-nav-item svg{width:13px;height:13px}
+  .nt-intro{padding:36px 20px}
+  .nt-intro h1{font-size:1.6rem}
+  .nt-section{padding:32px 20px}
+  .nt-page-header h2{font-size:1.4rem}
+  .nt-page-title-row{flex-direction:column;gap:14px}
+  .nt-time{align-self:flex-start}
+  .nt-steps > li{grid-template-columns:44px 1fr;gap:12px;padding:12px 0}
+  .nt-step-num{font-size:1.5rem}
+  .nt-steps h4{font-size:0.88rem}
+  .nt-steps p{font-size:0.82rem}
+  .nt-outro{padding:36px 20px}
+  .nt-outro h2{font-size:1.3rem}
+  .nt-outro-phone{font-size:1.15rem;padding:10px 22px}
+  .nt-mode-head{padding:10px 14px}
+  .nt-mode-head h4{font-size:0.82rem}
+  .nt-mode ol{padding:14px 16px}
+}
+
 /* ── GRAIN TEXTURE ── */
 .grain-overlay{position:relative}
 .grain-overlay::after{content:'';position:absolute;inset:0;background-image:var(--grain);opacity:.028;pointer-events:none;border-radius:inherit}
@@ -525,6 +690,21 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .ps h4{font-family:'Sora',sans-serif;font-size:0.84rem;font-weight:700;margin-bottom:6px;color:var(--dark)}
 .ps p{font-size:0.74rem;color:var(--muted);line-height:1.55}
 
+/* ── NOTICE CTA ── */
+.notice-cta{margin-top:56px;display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;padding:26px 32px;background:linear-gradient(135deg,rgba(26,111,255,0.06),rgba(86,180,255,0.04));border:1px solid rgba(26,111,255,0.18);border-radius:var(--r-lg);position:relative;overflow:hidden}
+[data-theme="dark"] .notice-cta{background:linear-gradient(135deg,rgba(26,111,255,0.12),rgba(86,180,255,0.08));border-color:rgba(86,180,255,0.3)}
+.notice-cta::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--grad)}
+.notice-cta-icon{width:56px;height:56px;border-radius:14px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 8px 24px rgba(26,111,255,0.25)}
+.notice-cta-icon svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.notice-cta-text h4{font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:4px;color:var(--dark);letter-spacing:-0.01em}
+.notice-cta-text p{font-size:0.88rem;color:var(--muted);line-height:1.55;margin:0}
+.notice-cta-text p strong{color:var(--dark);font-weight:600}
+.notice-cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--dark);color:#fff;padding:13px 22px;border-radius:100px;font-family:'Sora',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:.01em;transition:.2s;white-space:nowrap;border:1.5px solid var(--dark)}
+.notice-cta-btn:hover{background:var(--blue);border-color:var(--blue);transform:translateY(-2px);box-shadow:0 10px 26px rgba(26,111,255,0.3)}
+.notice-cta-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+[data-theme="dark"] .notice-cta-btn{background:var(--bg);color:var(--dark);border-color:var(--border)}
+[data-theme="dark"] .notice-cta-btn:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+
 /* ── ZONE ── */
 .zone-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:52px}
 .zone-map-box{background:var(--dark);border-radius:var(--r-xl);overflow:hidden;aspect-ratio:1}
@@ -638,6 +818,10 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .stats-strip .container{grid-template-columns:repeat(2,1fr)}
   .stat-cell:nth-child(2){border-right:none}
   .proc-track{grid-template-columns:repeat(2,1fr);gap:24px}
+  .notice-cta{grid-template-columns:1fr;text-align:center;padding:22px 20px;gap:16px}
+  .notice-cta-icon{margin:0 auto}
+  .notice-cta::before{width:100%;height:4px}
+  .notice-cta-btn{justify-self:center}
   .hero h1{font-size:1.6rem}
   .nav-center{display:none}
   .btn-live,.nav-controls{display:none}
@@ -1455,6 +1639,20 @@ simUpdate();
       <div class="ps rev"><div class="ps-num">05</div><h4 data-i18n="proc.s5h">Événement</h4><p data-i18n="proc.s5p">Opérationnel en moins de 5 min · Morgan joignable</p></div>
       <div class="ps rev"><div class="ps-num">06</div><h4 data-i18n="proc.s6h">Retour</h4><p data-i18n="proc.s6p">Restitution du matériel · état des lieux · solde sous 30j</p></div>
     </div>
+
+    <div class="notice-cta rev">
+      <div class="notice-cta-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/><line x1="9" y1="9" x2="10" y2="9"/></svg>
+      </div>
+      <div class="notice-cta-text">
+        <h4>« Mais on saura s'en servir ? »</h4>
+        <p>Oui. <strong>Consultez la notice avant même de réserver</strong> pour vous en convaincre : installation en 2 à 3 minutes par pack, schémas clairs, aucune compétence technique requise.</p>
+      </div>
+      <a href="#" onclick="openModal('modal-notice');return false;" class="notice-cta-btn">
+        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        Voir la notice
+      </a>
+    </div>
   </div>
 </section>
 
@@ -1711,6 +1909,7 @@ simUpdate();
         <a href="#process">Comment ça marche</a>
         <a href="#zone">Zone d'intervention</a>
         <a href="#faq">FAQ</a>
+        <a href="#" onclick="openModal('modal-notice');return false;">Notice d'utilisation</a>
         <a href="#contact">Demander un devis</a>
       </div>
       <div class="fcol">
@@ -2080,6 +2279,240 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+<!-- MODAL NOTICE D'UTILISATION -->
+<div class="modal-overlay" id="modal-notice" onclick="closeModalOutside(event,'modal-notice')">
+  <div class="modal-box notice-viewer">
+    <div class="modal-head">
+      <div class="modal-head-left">
+        <span class="modal-tag-label">Documentation technique</span>
+        <h2 class="modal-title">Notice d'utilisation · Tous packs</h2>
+        <p class="modal-date">Installation en moins de 5 minutes · Version avril 2026</p>
+      </div>
+      <div class="pdf-toolbar">
+        <a href="https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/notice_aintercom_final_v5.pdf" download="Notice-AINTERCOM.pdf" target="_blank" rel="noopener" class="pdf-tool-btn" title="Télécharger la notice en PDF">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>PDF</span>
+        </a>
+        <button class="modal-close" onclick="closeModal('modal-notice')" aria-label="Fermer">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <nav class="notice-nav">
+      <a href="#nt-install" class="notice-nav-item"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg><span>Installation</span></a>
+      <a href="#nt-radios" class="notice-nav-item"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M6 7V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/><line x1="6" y1="12" x2="6" y2="16"/></svg><span>Radios</span><em>2 min</em></a>
+      <a href="#nt-intercom" class="notice-nav-item"><svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg><span>Intercom</span><em>3 min</em></a>
+      <a href="#nt-megaphone" class="notice-nav-item"><svg viewBox="0 0 24 24"><path d="M3 11l18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg><span>Mégaphone</span><em>1 min</em></a>
+    </nav>
+
+    <div class="modal-body notice-body" id="notice-body">
+
+      <!-- ═══════ INTRO ═══════ -->
+      <section class="nt-intro">
+        <span class="nt-tag">AINTERCOM · Documentation technique</span>
+        <h1>Notice d'utilisation<br><em>tous packs</em></h1>
+        <p>Commencez par <strong>« Installation »</strong>, puis allez directement à la page de votre pack. Tout est prêt à l'emploi.</p>
+      </section>
+
+      <!-- ═══════ INSTALLATION ═══════ -->
+      <section class="nt-section" id="nt-install">
+        <div class="nt-page-header">
+          <span class="nt-page-tag">Installation commune · Tous packs</span>
+          <h2>Avant de commencer :<br><em>Installation commune</em></h2>
+          <p class="nt-page-sub">À faire quel que soit votre pack loué · Étape préalable obligatoire</p>
+        </div>
+
+        <div class="nt-block-title"><span class="dot"></span>Alimentation · à faire en premier</div>
+        <ol class="nt-steps">
+          <li><span class="nt-step-num">01</span><div><h4>Choisissez un endroit abrité</h4><p>Installez une <strong>table stable</strong> près d'une prise électrique. Elle doit être <strong>à l'abri</strong> de la pluie et du soleil direct. Ne posez jamais le matériel directement au sol.</p></div></li>
+          <li><span class="nt-step-num">02</span><div><h4>Branchez la rallonge noire de 10 m sur une prise classique</h4><p>Branchez la rallonge sur une prise classique (type PC16). Déroulez le câble jusqu'à votre table.</p></div></li>
+          <li><span class="nt-step-num">03</span><div><h4>Branchez la multiprise noire sur la rallonge</h4><p>Posez-la sur la table. Vous avez maintenant <strong>6 prises disponibles</strong> pour brancher vos équipements.</p></div></li>
+          <li><span class="nt-step-num">04</span><div><h4>Allez à la page de votre pack</h4><p><strong>Radios</strong> · section suivante &nbsp;·&nbsp; <strong>Intercom casques</strong> &nbsp;·&nbsp; <strong>Mégaphone</strong></p></div></li>
+        </ol>
+
+        <div class="nt-callout nt-callout-warn">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <p><strong>En cas de pluie :</strong> rentrez immédiatement tout le matériel. Il ne supporte pas l'eau ni l'humidité forte.</p>
+        </div>
+
+        <div class="nt-block-title"><span class="dot"></span>Protection du matériel · valable pour tous les packs</div>
+        <div class="nt-rules">
+          <div class="nt-rule"><span>☔</span>Toujours installer à l'abri, couvert</div>
+          <div class="nt-rule"><span>🌧️</span>Pluie = rentrer immédiatement</div>
+          <div class="nt-rule"><span>☀️</span>Éviter le soleil direct</div>
+          <div class="nt-rule"><span>🚫</span>Ne jamais poser au sol</div>
+          <div class="nt-rule"><span>💧</span>Humidité forte = danger</div>
+          <div class="nt-rule"><span>✋</span>Manipuler avec soin</div>
+        </div>
+      </section>
+
+      <!-- ═══════ PACK RADIOS ═══════ -->
+      <section class="nt-section" id="nt-radios">
+        <div class="nt-page-header">
+          <span class="nt-page-tag">Pack Radios</span>
+          <div class="nt-page-title-row">
+            <div>
+              <h2>Radios</h2>
+              <p class="nt-page-sub">6 radios · Chargeur 6 emplacements · Micro déporté optionnel</p>
+            </div>
+            <div class="nt-time"><strong>2</strong><span>minutes</span></div>
+          </div>
+        </div>
+
+        <div class="nt-block-title"><span class="dot"></span>A · Mise en charge</div>
+        <ol class="nt-steps">
+          <li><span class="nt-step-num">01</span><div><h4>Sortez et branchez le chargeur 6 emplacements</h4><p>Sortez le chargeur de la valise. Branchez-le sur la multiprise.</p></div></li>
+          <li><span class="nt-step-num">02</span><div><h4>Sortez les 6 radios</h4><p>Chaque radio est déjà clé en main. <strong>Ne retirez pas la pince ceinture ni la batterie</strong> : la radio rentre telle quelle dans le chargeur.</p></div></li>
+          <li><span class="nt-step-num">03</span><div><h4>Glissez chaque radio dans un emplacement</h4><p><strong>Éteignez les radios</strong> avant de les mettre en charge. Ne forcez pas si ça résiste : vérifiez le sens.</p></div></li>
+        </ol>
+
+        <div class="nt-leds">
+          <div class="nt-led nt-led-orange"><span class="nt-led-dot"></span>Orange : en charge</div>
+          <div class="nt-led nt-led-green"><span class="nt-led-dot"></span>Vert fixe : chargée à 100 %</div>
+          <div class="nt-led nt-led-red"><span class="nt-led-dot"></span>Rouge clignotant : retirer et réinsérer</div>
+        </div>
+
+        <div class="nt-block-title"><span class="dot"></span>B · Utilisation</div>
+        <ol class="nt-steps">
+          <li><span class="nt-step-num">04</span><div><h4>Allumer : tournez la molette en haut à droite jusqu'au clic</h4><p>La radio annonce à voix haute le canal sur lequel elle est réglée. Le volume se règle avec la même molette après le clic.</p></div></li>
+          <li><span class="nt-step-num">05</span><div><h4>Choisir le canal : bouton rotatif sur le dessus</h4><p>Toutes les radios sont déjà réglées. <strong>Jusqu'à 16 canaux disponibles, dont les canaux 1 à 8 sont sécurisés.</strong> Restez tous sur le même canal ou créez des groupes différents.</p><div class="nt-callout nt-callout-info"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><p><strong>Important :</strong> ne jamais changer les réglages de base des canaux 1 à 8.</p></div></div></li>
+          <li><span class="nt-step-num">06</span><div><h4>Parler : appuyez sur le PTT (le gros bouton sur le côté gauche)</h4><p>Appuyez et maintenez le bouton PTT. Parlez clairement. <strong>Lâchez complètement pour écouter.</strong></p><div class="nt-callout nt-callout-warn-soft"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><p><strong>Attention :</strong> tant que vous maintenez le bouton, vous n'entendez pas les autres. Toujours lâcher pour écouter.</p></div></div></li>
+        </ol>
+
+        <div class="nt-block-title"><span class="dot"></span>C · Micro déporté (option mains libres)</div>
+        <ol class="nt-steps">
+          <li><span class="nt-step-num">07</span><div><h4>Branchez le micro sur le connecteur 2 broches sur le côté de la radio</h4><p>Il clique en place. Clipez la radio à la ceinture, le micro sur l'épaule ou le col.</p></div></li>
+          <li><span class="nt-step-num">08</span><div><h4>Pour parler : bouton PTT sur le côté de la tête du micro déporté</h4><p>Même principe : <strong>appuyez pour parler, lâchez pour écouter</strong>.</p><div class="nt-callout nt-callout-tip"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg><p>Si le micro déporté n'est pas branché, le micro intégré de la radio reste actif normalement.</p></div></div></li>
+        </ol>
+
+        <div class="nt-troubleshoot">
+          <h5>Si ça ne fonctionne pas</h5>
+          <ul>
+            <li><strong>Radio muette</strong> : vérifiez le volume (molette droite)</li>
+            <li><strong>Pas de contact</strong> : vérifiez que tous sont sur le même canal</li>
+            <li><strong>Bip au démarrage</strong> : normal, la radio s'initialise</li>
+            <li><strong>Bips répétés</strong> : batterie faible, remettre en charge</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ═══════ PACK INTERCOM ═══════ -->
+      <section class="nt-section" id="nt-intercom">
+        <div class="nt-page-header">
+          <span class="nt-page-tag">Pack Intercom</span>
+          <div class="nt-page-title-row">
+            <div>
+              <h2>Casques intercom</h2>
+              <p class="nt-page-sub">6 casques · Communication simultanée · 400 m de portée · Aucun réglage requis</p>
+            </div>
+            <div class="nt-time"><strong>3</strong><span>minutes</span></div>
+          </div>
+        </div>
+
+        <div class="nt-block-title"><span class="dot"></span>A · Batteries et casques</div>
+        <ol class="nt-steps">
+          <li><span class="nt-step-num">01</span><div><h4>Ouvrez la sacoche à plat sur la table</h4><p>Ouvrez la <strong>poche avant avec la fermeture éclair</strong>.</p></div></li>
+          <li><span class="nt-step-num">02</span><div><h4>Sortez le chargeur et branchez-le sur la multiprise</h4><p>Le chargeur 8 emplacements est dans la poche avant. Sortez aussi les <strong>6 batteries</strong> de leur sachet. Placez-les dans les emplacements du chargeur. Les <strong>2 emplacements restants</strong> sont votre réserve.</p><div class="nt-callout nt-callout-info"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg><p><strong>Rotation batteries :</strong> 1 batterie dans le casque · 1 en charge · changez quand le casque fait des bips.</p></div></div></li>
+          <li><span class="nt-step-num">03</span><div><h4>Les batteries sont déjà installées dans les casques</h4><p>Rien à faire au départ. <strong>Si une batterie est vide</strong>, éjectez-la en appuyant sur <strong>PRESS UNLOCK</strong> (du côté opposé au micro). Remettez la batterie chargée jusqu'au <strong>clic</strong>. Ne forcez pas : vérifiez le sens si ça résiste.</p></div></li>
+          <li><span class="nt-step-num">04</span><div><h4>Sortez les casques de leur pochette</h4><p>Rangez les pochettes vides dans la poche avant. Posez doucement les casques dans la sacoche ouverte.</p><div class="nt-callout nt-callout-warn-soft"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg><p><strong>Fragile :</strong> ne pas faire tomber, ne pas tirer les câbles.</p></div></div></li>
+        </ol>
+
+        <div class="nt-block-title"><span class="dot"></span>B · Allumer et utiliser</div>
+        <ol class="nt-steps">
+          <li><span class="nt-step-num">05</span><div><h4>Trouvez le casque MASTER : bandeau cuir <span style="color:var(--blue)">VERT</span> sur le dessus</h4><p>Les 5 autres ont le bandeau <strong>noir</strong>. <strong>Le MASTER doit toujours être allumé en premier.</strong> Sans lui, personne ne s'entend.</p></div></li>
+          <li><span class="nt-step-num">06</span><div><h4>Allumez le MASTER : glissez l'interrupteur de OFF vers ON</h4><p>Ce n'est pas un bouton à maintenir : c'est un <strong>petit interrupteur coulissant</strong>. Ça s'allume tout de suite. <strong>Vous pouvez n'utiliser que 2, 3, 4 ou 5 casques sur 6, mais le MASTER doit toujours être allumé.</strong></p></div></li>
+          <li><span class="nt-step-num">07</span><div><h4>Allumez les autres casques un par un</h4><p>Même geste. La connexion se fait <strong>automatiquement</strong>. Tout le monde s'entend immédiatement.</p><div class="nt-leds" style="margin-top:14px"><div class="nt-led nt-led-green"><span class="nt-led-dot"></span>Voyant vert fixe : connecté</div><div class="nt-led nt-led-red"><span class="nt-led-dot"></span>Voyant rouge clignotant : trop loin du MASTER</div></div></div></li>
+          <li><span class="nt-step-num">08</span><div><h4>Parler et régler le volume</h4><p>Baissez le micro vers la bouche : <strong>voyant vert = vous êtes entendu</strong>. Montez le micro vers le haut : <strong>sourdine automatique (voyant rouge)</strong>. Volume avec les boutons <strong>+</strong> et <strong>-</strong> de chaque côté du bouton sourdine.</p></div></li>
+          <li><span class="nt-step-num">09</span><div><h4>Bouton MUTE : se couper du groupe</h4><p>Un gros bouton est situé sur le côté du casque (au centre, côté branche du micro). Appuyez pour vous couper. Appuyez de nouveau pour revenir dans le groupe.</p></div></li>
+        </ol>
+
+        <div class="nt-troubleshoot">
+          <h5>Si ça ne fonctionne pas</h5>
+          <ul>
+            <li><strong>Casque qui ne se connecte pas</strong> : éteignez et rallumez APRÈS le MASTER</li>
+            <li><strong>Pas de son</strong> : vérifiez le volume avec les boutons +/-</li>
+            <li><strong>Voix saccadée</strong> : trop loin du MASTER, rapprochez-vous</li>
+            <li><strong>Voyant rouge clignotant</strong> : hors portée, rapprochez-vous</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ═══════ PACK MÉGAPHONE ═══════ -->
+      <section class="nt-section" id="nt-megaphone">
+        <div class="nt-page-header">
+          <span class="nt-page-tag">Pack Mégaphone</span>
+          <div class="nt-page-title-row">
+            <div>
+              <h2>Mégaphone</h2>
+              <p class="nt-page-sub">65 W · 2 batteries · Micro déporté intégré · Sirène · Sangle</p>
+            </div>
+            <div class="nt-time"><strong>1</strong><span>minute</span></div>
+          </div>
+        </div>
+
+        <div class="nt-block-title"><span class="dot"></span>A · Mise en place</div>
+        <ol class="nt-steps">
+          <li><span class="nt-step-num">01</span><div><h4>Sortez le mégaphone et son sac</h4><p>Posez le mégaphone sur la table. Ouvrez le sac et sortez ce qu'il contient.</p></div></li>
+          <li><span class="nt-step-num">02</span><div><h4>La batterie est déjà installée dans le mégaphone</h4><p>Si besoin de la changer : ouvrez le <strong>capot arrière</strong> avec le petit crochet. La batterie s'enfonce <strong>en haut au centre</strong>. Si ça coince un peu, c'est normal : fermez le capot en forçant doucement.</p></div></li>
+          <li><span class="nt-step-num">03</span><div><h4>Chargez la deuxième batterie (dans le sac)</h4><p>Branchez-la sur son câble. <strong>Voyant vert = chargée.</strong> Gardez-la en charge pendant l'événement : c'est votre rechange immédiate.</p></div></li>
+          <li><span class="nt-step-num">04</span><div><h4>Choisissez comment tenir le mégaphone</h4><p>Trois options selon votre usage : <strong>tenez-le à la main</strong> par le manche, <strong>posez-le sur une table</strong> devant vous, ou <strong>fixez la sangle</strong> pour le porter en bandoulière et avoir les mains libres.</p></div></li>
+        </ol>
+
+        <div class="nt-block-title"><span class="dot"></span>B · 3 modes d'utilisation</div>
+
+        <div class="nt-mode nt-mode-blue">
+          <div class="nt-mode-head"><span class="nt-mode-label">Mode 1</span><h4>Micro fixe · vous tenez le mégaphone à la main</h4></div>
+          <ol>
+            <li>Bouton <strong>ON/OFF du micro déporté</strong> (côté droit, en haut) sur <strong>OFF</strong></li>
+            <li>Sur le corps du mégaphone : glissez le <strong>petit sélecteur coulissant</strong> vers la droite sur <strong>MIC</strong> &nbsp;<code>USB/SD</code>&nbsp;<code>OFF</code>&nbsp;<code class="active">MIC</code></li>
+            <li>Tenez le manche, appuyez sur la <strong>gâchette pour parler</strong> · Voyant rouge allumé = vous êtes entendu</li>
+            <li>Volume : molette crantée à droite du micro, sous le bouton ON/OFF</li>
+          </ol>
+        </div>
+
+        <div class="nt-mode nt-mode-blue">
+          <div class="nt-mode-head"><span class="nt-mode-label">Mode 2</span><h4>Micro déporté · vous êtes mains libres</h4></div>
+          <ol>
+            <li>Décrochez le micro déporté de son emplacement. Il reste relié par son câble.</li>
+            <li>Bouton <strong>ON/OFF du micro déporté</strong> (côté droit, en haut) sur <strong>ON</strong></li>
+            <li>Parlez directement dans le micro : <strong>plus besoin d'appuyer sur la gâchette</strong>. Volume : molette crantée (côté droit, en bas)</li>
+            <li>Posez le mégaphone sur la table ou portez-le avec la sangle : vos mains sont libres, juste le micro à tenir.</li>
+          </ol>
+        </div>
+
+        <div class="nt-mode nt-mode-orange">
+          <div class="nt-mode-head"><span class="nt-mode-label">Mode 3</span><h4>⚠️ Sirène · Urgence uniquement</h4></div>
+          <ol>
+            <li>Vous devez d'abord être en <strong>Mode 2</strong> : bouton ON/OFF du micro sur <strong>ON</strong></li>
+            <li><strong>Baissez d'abord la molette de volume :</strong> la sirène est très forte</li>
+            <li>Sur le devant du micro, il y a 3 boutons rouges : <strong>SIREN</strong> à gauche · <strong>REC</strong> au centre · <strong>PLAY</strong> à droite. Appuyez sur <strong>SIREN</strong>.</li>
+          </ol>
+        </div>
+
+        <div class="nt-troubleshoot">
+          <h5>Si ça ne fonctionne pas</h5>
+          <ul>
+            <li><strong>Son faible</strong> : vérifiez le volume et la batterie</li>
+            <li><strong>Batterie à plat</strong> : utilisez la rechange du sac</li>
+            <li><strong>Sifflement</strong> : éloignez-vous des enceintes</li>
+            <li><strong>Micro inaudible</strong> : bouton ON/OFF sur ON</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ═══════ OUTRO ═══════ -->
+      <section class="nt-outro">
+        <h2>Merci de votre confiance</h2>
+        <p>Un problème pendant votre événement ?<br><strong>Morgan est disponible toute la durée de votre location.</strong></p>
+        <a href="tel:0744980015" class="nt-outro-phone">07 44 98 00 15</a>
+        <p class="nt-outro-contact">contact@aintercom.fr · aintercom.fr</p>
+      </section>
+
+    </div>
+  </div>
+</div>
+
 <!-- MODAL MENTIONS LÉGALES -->
 <div class="modal-overlay" id="modal-ml" onclick="closeModalOutside(event,'modal-ml')">
   <div class="modal-box">
@@ -2315,6 +2748,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function openModal(id) {
   document.getElementById(id).classList.add('open');
   document.body.style.overflow = 'hidden';
+  if (id === 'modal-notice') initNoticeNav();
 }
 function closeModal(id) {
   document.getElementById(id).classList.remove('open');
@@ -2328,6 +2762,43 @@ document.addEventListener('keydown', function(e) {
     document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
   }
 });
+
+// ── NAVIGATION DE LA NOTICE (scroll-spy + smooth scroll) ──
+let noticeNavReady = false;
+function initNoticeNav() {
+  if (noticeNavReady) return;
+  noticeNavReady = true;
+  const body = document.getElementById('notice-body');
+  const navItems = document.querySelectorAll('.notice-nav-item');
+  // Smooth scroll au clic + marquage actif immédiat
+  navItems.forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        body.scrollTo({ top: target.offsetTop - 8, behavior: 'smooth' });
+        navItems.forEach(n => n.classList.remove('active'));
+        this.classList.add('active');
+      }
+    });
+  });
+  // Scroll-spy : mettre à jour l'onglet actif selon la section visible
+  const sections = ['nt-install', 'nt-radios', 'nt-intercom', 'nt-megaphone']
+    .map(id => document.getElementById(id)).filter(Boolean);
+  body.addEventListener('scroll', function() {
+    const scrollTop = body.scrollTop;
+    let currentId = null;
+    sections.forEach(s => {
+      if (s.offsetTop - 80 <= scrollTop) currentId = s.id;
+    });
+    if (currentId) {
+      navItems.forEach(n => {
+        n.classList.toggle('active', n.getAttribute('href') === '#' + currentId);
+      });
+    }
+  }, { passive: true });
+}
 </script>
 
 <!-- MODALE FICHE PACK -->
