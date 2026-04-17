@@ -485,6 +485,33 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .zone-sim-result{margin-top:14px}
 .zone-sim-row-r{display:flex;justify-content:space-between;align-items:center;font-size:0.84rem;color:var(--mid);padding:4px 0}
 
+/* ── ADDRESS AUTOCOMPLETE WIDGET ── */
+.addr-widget{position:relative;width:100%}
+.addr-input-wrap{position:relative}
+.addr-input{width:100%;padding:11px 38px 11px 14px;border:1.5px solid var(--border-md);border-radius:var(--r-sm);background:var(--white);font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--dark);outline:none;transition:.2s}
+[data-theme="dark"] .addr-input{background:var(--bg)}
+.addr-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,111,255,0.1)}
+.addr-input::placeholder{color:var(--muted)}
+.addr-loading{position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none}
+.addr-spinner{width:16px;height:16px;border:2px solid rgba(26,111,255,0.2);border-top-color:var(--blue);border-radius:50%;animation:addr-spin .7s linear infinite}
+@keyframes addr-spin{to{transform:rotate(360deg)}}
+.addr-suggestions{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--white);border:1px solid var(--border-md);border-radius:var(--r-sm);max-height:240px;overflow-y:auto;box-shadow:0 12px 32px rgba(0,0,0,0.12);z-index:50}
+[data-theme="dark"] .addr-suggestions{background:var(--bg2)}
+.addr-suggestion{padding:10px 14px;font-size:0.85rem;color:var(--dark);cursor:pointer;border-bottom:1px solid var(--border);transition:background .1s}
+.addr-suggestion:last-child{border-bottom:none}
+.addr-suggestion:hover{background:var(--bg)}
+[data-theme="dark"] .addr-suggestion:hover{background:var(--white)}
+.addr-no-result{padding:12px 14px;font-size:0.82rem;color:var(--muted);font-style:italic}
+.addr-result{display:flex;align-items:center;gap:8px;margin-top:10px;padding:10px 12px;background:rgba(26,111,255,0.06);border:1px solid rgba(26,111,255,0.15);border-radius:var(--r-sm);font-size:0.82rem;color:var(--dark)}
+.addr-check{color:var(--blue);font-weight:700;flex-shrink:0}
+.addr-result-text{line-height:1.4}
+.addr-clear{margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:0 4px;line-height:1;flex-shrink:0}
+.addr-clear:hover{color:var(--dark)}
+.addr-pickup{font-size:0.78rem;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:6px}
+.addr-pickup-btn{background:none;border:none;color:var(--blue);cursor:pointer;font-family:inherit;font-size:inherit;padding:0;text-decoration:underline;text-underline-offset:2px}
+.addr-pickup-btn:hover{color:var(--dark)}
+.addr-error{margin-top:8px;padding:8px 12px;background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.2);border-radius:var(--r-sm);font-size:0.78rem;color:#dc2626}
+
 /* ── PROCESS STEP ANIMATION ── */
 .ps{text-align:center;padding:0 8px;opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
 .ps.step-on{opacity:1;transform:translateY(0)}
@@ -1109,10 +1136,18 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
               </div>
               <div class="sim-slider-block">
                 <div class="sim-slider-top">
-                  <span class="sim-sl-label">Distance depuis Meximieux</span>
+                  <span class="sim-sl-label">Lieu de livraison</span>
                   <span class="sim-sl-val" id="sim-km-out">Retrait portail · gratuit</span>
                 </div>
-                <input type="range" min="0" max="150" value="0" step="5" id="sim-km" oninput="simUpdate()" class="sim-range">
+                <div class="addr-widget">
+                  <div class="addr-input-wrap">
+                    <input type="text" class="addr-input" id="sim-addr-input" placeholder="Adresse ou ville de livraison" autocomplete="off">
+                    <div class="addr-loading" id="sim-addr-loading" style="display:none"><div class="addr-spinner"></div></div>
+                  </div>
+                  <div class="addr-suggestions" id="sim-addr-suggestions" style="display:none"></div>
+                  <div class="addr-result" id="sim-addr-result" style="display:none"></div>
+                  <div class="addr-pickup">ou <button type="button" class="addr-pickup-btn" onclick="simSetPickup()">retrait au dépôt de Meximieux (gratuit)</button></div>
+                </div>
               </div>
             </div>
             <!-- COLONNE DROITE : RÉSULTAT -->
@@ -1295,9 +1330,21 @@ function simPalierLabel(jours) {
   if (jours <= 14)  return 'Quinzaine −20%';
   return 'Mois −30%';
 }
+// État : km aller simple entre dépôt et lieu de livraison (simulateur Tarifs)
+let simCurrentKm = 0;
+
+function simSetPickup() {
+  simCurrentKm = 0;
+  const input = document.getElementById('sim-addr-input');
+  const result = document.getElementById('sim-addr-result');
+  if (input) input.value = '';
+  if (result) result.style.display = 'none';
+  simUpdate();
+}
+
 function simUpdate() {
   const jours = parseInt(document.getElementById('sim-duree').value);
-  const km    = parseInt(document.getElementById('sim-km').value);
+  const km    = simCurrentKm;
   const base  = SIM_TARIFS[simPack][simSeg];
   const pj    = simTarifJour(base, jours);
   
@@ -1320,7 +1367,7 @@ function simUpdate() {
   const acompte = Math.round(total * 0.30);
   const solde   = total - acompte;
   document.getElementById('sim-duree-out').textContent  = jours === 1 ? '1 jour' : jours + ' jours';
-  document.getElementById('sim-km-out').textContent     = km === 0 ? 'Retrait portail · gratuit' : km + ' km · déplacement calculé';
+  document.getElementById('sim-km-out').textContent     = km === 0 ? 'Retrait portail · gratuit' : (km * 2) + ' km A/R · déplacement calculé';
   document.getElementById('sim-total-price').textContent = total + ' €';
   document.getElementById('sim-palier').textContent      = simPalierLabel(jours);
   document.getElementById('sim-pj-display').textContent  = pj + ' €';
@@ -1443,11 +1490,19 @@ simUpdate();
           <div class="zone-sim-label">Estimez votre coût de déplacement</div>
           <div class="zone-sim-row">
             <div class="zone-sim-slider-wrap">
-              <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-                <span style="font-size:0.82rem;color:var(--mid)">Distance depuis Meximieux</span>
-                <span class="zone-sim-val" id="zone-km-out" style="font-family:'Sora',sans-serif;font-size:0.82rem;font-weight:700;color:var(--dark)">0 km</span>
+              <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+                <span style="font-size:0.82rem;color:var(--mid)">Adresse de votre événement</span>
+                <span class="zone-sim-val" id="zone-km-out" style="font-family:'Sora',sans-serif;font-size:0.82rem;font-weight:700;color:var(--dark)">Non renseignée</span>
               </div>
-              <input type="range" min="0" max="120" value="0" step="5" id="zone-km" oninput="zoneSimUpdate()" class="sim-range">
+              <div class="addr-widget">
+                <div class="addr-input-wrap">
+                  <input type="text" class="addr-input" id="zone-addr-input" placeholder="Adresse ou ville de l'événement" autocomplete="off">
+                  <div class="addr-loading" id="zone-addr-loading" style="display:none"><div class="addr-spinner"></div></div>
+                </div>
+                <div class="addr-suggestions" id="zone-addr-suggestions" style="display:none"></div>
+                <div class="addr-result" id="zone-addr-result" style="display:none"></div>
+                <div class="addr-pickup">ou <button type="button" class="addr-pickup-btn" onclick="zoneSetPickup()">retrait au dépôt de Meximieux (gratuit)</button></div>
+              </div>
             </div>
           </div>
           <div class="zone-sim-result" id="zone-sim-result">
@@ -1815,12 +1870,171 @@ function zoneTab(btn, id, type) {
 }
 
 /* ── ZONE SIM LIVRAISON ── */
+// État : km aller simple (simulateur Zone)
+let zoneCurrentKm = 0;
+
+function zoneSetPickup() {
+  zoneCurrentKm = 0;
+  const input = document.getElementById('zone-addr-input');
+  const result = document.getElementById('zone-addr-result');
+  if (input) input.value = '';
+  if (result) result.style.display = 'none';
+  zoneSimUpdate();
+}
+
 function zoneSimUpdate() {
-  const km = parseInt(document.getElementById('zone-km').value);
+  const km = zoneCurrentKm;
   const dep = km === 0 ? 0 : Math.round(km * 2 * 0.5);
-  document.getElementById('zone-km-out').textContent = km === 0 ? 'Retrait portail' : km + ' km';
+  document.getElementById('zone-km-out').textContent = km === 0 ? 'Non renseignée' : (km * 2) + ' km A/R';
   document.getElementById('zone-dep-val').textContent = km === 0 ? 'Gratuit · retrait portail' : dep + ' €';
 }
+
+/* ── ADDRESS AUTOCOMPLETE + ROUTE DISTANCE ── */
+// Adresse de départ (dépôt AINTERCOM)
+const AIC_DEPART_ADDRESS = '7 Rue Pierre Bernin, 01800 Meximieux';
+// Coordonnées de secours si l'API de géocodage échoue (7 rue Pierre Bernin, Meximieux)
+let AIC_DEPART_COORDS = [5.1946, 45.9066]; // [lon, lat] approximatif, sera affiné au chargement
+
+// Géocode l'adresse de départ une fois au chargement pour être précis
+(async function initDepartCoords() {
+  try {
+    const res = await fetch('https://api-adresse.data.gouv.fr/search/?q=' + encodeURIComponent(AIC_DEPART_ADDRESS) + '&limit=1');
+    const data = await res.json();
+    if (data.features && data.features.length > 0) {
+      AIC_DEPART_COORDS = data.features[0].geometry.coordinates;
+    }
+  } catch(e) { /* on garde les coords de secours */ }
+})();
+
+// Recherche d'adresses via l'API officielle française (gratuite, sans clé)
+async function aicGeocode(query) {
+  if (!query || query.length < 3) return [];
+  try {
+    const res = await fetch('https://api-adresse.data.gouv.fr/search/?q=' + encodeURIComponent(query) + '&limit=5');
+    const data = await res.json();
+    return data.features || [];
+  } catch(e) {
+    return [];
+  }
+}
+
+// Calcule la distance routière (aller simple) entre deux points GPS via OSRM public
+async function aicRouteDistanceKm(coordsA, coordsB) {
+  if (!coordsA || !coordsB) return null;
+  try {
+    const url = 'https://router.project-osrm.org/route/v1/driving/' + coordsA[0] + ',' + coordsA[1] + ';' + coordsB[0] + ',' + coordsB[1] + '?overview=false';
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.routes && data.routes.length > 0) {
+      return Math.round(data.routes[0].distance / 1000);
+    }
+    return null;
+  } catch(e) {
+    return null;
+  }
+}
+
+// Monte un widget d'autocomplétion d'adresse
+// inputId : id de l'input texte
+// suggId : id du div des suggestions
+// loadId : id du div du spinner
+// resultId : id du div "résultat"
+// onDistanceChange : callback(km_aller_simple, label_adresse)
+function aicSetupAddressWidget(inputId, suggId, loadId, resultId, onDistanceChange) {
+  const input = document.getElementById(inputId);
+  const sugg = document.getElementById(suggId);
+  const load = document.getElementById(loadId);
+  const result = document.getElementById(resultId);
+  if (!input || !sugg || !load || !result) return;
+  
+  let debounceTimer = null;
+  
+  input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    const query = input.value.trim();
+    result.style.display = 'none';
+    if (query.length < 3) {
+      sugg.innerHTML = '';
+      sugg.style.display = 'none';
+      load.style.display = 'none';
+      return;
+    }
+    load.style.display = 'block';
+    debounceTimer = setTimeout(async () => {
+      const features = await aicGeocode(query);
+      load.style.display = 'none';
+      if (features.length === 0) {
+        sugg.innerHTML = '<div class="addr-no-result">Aucun résultat, vérifiez l\'orthographe</div>';
+        sugg.style.display = 'block';
+        return;
+      }
+      sugg.innerHTML = features.map((f, i) => 
+        '<div class="addr-suggestion" data-idx="' + i + '">' + 
+          f.properties.label.replace(/</g, '&lt;') + 
+        '</div>'
+      ).join('');
+      sugg.style.display = 'block';
+      sugg.querySelectorAll('.addr-suggestion').forEach(el => {
+        el.addEventListener('click', async () => {
+          const feature = features[parseInt(el.dataset.idx)];
+          const label = feature.properties.label;
+          const coords = feature.geometry.coordinates;
+          input.value = label;
+          sugg.innerHTML = '';
+          sugg.style.display = 'none';
+          load.style.display = 'block';
+          // Calcul de la distance routière
+          const km = await aicRouteDistanceKm(AIC_DEPART_COORDS, coords);
+          load.style.display = 'none';
+          if (km === null) {
+            result.innerHTML = '<span class="addr-check">⚠️</span><span class="addr-result-text">Impossible de calculer la distance. Nous vous la confirmerons lors du devis.</span><button type="button" class="addr-clear" title="Effacer">×</button>';
+            result.style.display = 'flex';
+            result.querySelector('.addr-clear').addEventListener('click', () => {
+              input.value = '';
+              result.style.display = 'none';
+              onDistanceChange(0, '');
+            });
+            return;
+          }
+          const kmAR = km * 2;
+          result.innerHTML = '<span class="addr-check">✓</span><span class="addr-result-text"><strong>' + label + '</strong><br>Distance A/R : <strong>' + kmAR + ' km</strong> (' + km + ' km × 2)</span><button type="button" class="addr-clear" title="Effacer">×</button>';
+          result.style.display = 'flex';
+          result.querySelector('.addr-clear').addEventListener('click', () => {
+            input.value = '';
+            result.style.display = 'none';
+            onDistanceChange(0, '');
+          });
+          onDistanceChange(km, label);
+        });
+      });
+    }, 300);
+  });
+  
+  // Ferme les suggestions si clic en dehors
+  document.addEventListener('click', e => {
+    if (!input.contains(e.target) && !sugg.contains(e.target)) {
+      sugg.style.display = 'none';
+    }
+  });
+}
+
+// Initialisation des deux widgets d'adresse (Tarifs + Zone)
+document.addEventListener('DOMContentLoaded', function() {
+  // Simulateur Tarifs
+  aicSetupAddressWidget('sim-addr-input', 'sim-addr-suggestions', 'sim-addr-loading', 'sim-addr-result', function(km, label) {
+    if (typeof simCurrentKm !== 'undefined') {
+      simCurrentKm = km;
+      if (typeof simUpdate === 'function') simUpdate();
+    }
+  });
+  // Simulateur Zone
+  aicSetupAddressWidget('zone-addr-input', 'zone-addr-suggestions', 'zone-addr-loading', 'zone-addr-result', function(km, label) {
+    if (typeof zoneCurrentKm !== 'undefined') {
+      zoneCurrentKm = km;
+      if (typeof zoneSimUpdate === 'function') zoneSimUpdate();
+    }
+  });
+});
 
 /* ── MOBILE MENU ── */
 function toggleMenu() {
