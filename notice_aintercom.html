@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<style>
+@page { size: A4 portrait; margin: 0; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Lato', 'Liberation Sans', Arial, sans-serif;
+  background: white;
+  color: #0D1B2A;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  page-break-inside: avoid;
+  overflow: hidden;
+}
+.page:last-child { page-break-after: auto; }
+
+/* ─── STRIPE ─── */
+.top-stripe { height: 4px; background: #1A6FFF; flex-shrink: 0; }
+
+/* ─── LOGO BAR ─── */
+.logo-bar {
+  display: flex; align-items: center; justify-content: flex-end;
+  padding: 3mm 12mm; flex-shrink: 0;
+  border-bottom: 1px solid #E5EAF0;
+}
+.page-tag {
+  font-size: 6.5pt; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: #8A9AB5;
+}
+
+/* ─── COVER (PATCH 1 : moderne, épurée, centrée) ─── */
+.cover-page {
+  width: 210mm; height: 297mm;
+  display: flex; flex-direction: column;
+  page-break-after: always;
+  background: #0D1B2A;
+  position: relative;
+}
+.cover-stripe-top { height: 5px; background: #1A6FFF; }
+.cover-stripe-bottom { height: 5px; background: #1A6FFF; flex-shrink: 0; }
+
+/* Bande bleue décorative gauche */
+.cover-accent-bar {
+  position: absolute;
+  left: 0; top: 5px; bottom: 5px;
+  width: 6mm;
+  background: #1A6FFF;
+  opacity: 0.12;
+}
+
+.cover-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20mm;
+}
+.cover-eyebrow {
+  font-size: 7pt; font-weight: 700; letter-spacing: 4px;
+  text-transform: uppercase; color: #1A6FFF; margin-bottom: 8mm;
+}
+.cover-title {
+  font-weight: 900; font-size: 38pt; color: #FFFFFF;
+  line-height: 1.0; letter-spacing: -2px;
+}
+.cover-title .blue { color: #1A6FFF; }
+.cover-rule {
+  width: 20mm; height: 3px; background: #1A6FFF;
+  margin: 8mm auto;
+}
+.cover-packs {
+  display: flex; gap: 4mm; justify-content: center; margin-bottom: 8mm;
+}
+.cover-pack-badge {
+  background: rgba(26, 111, 255, 0.15);
+  border: 1px solid rgba(26, 111, 255, 0.35);
+  color: #7AACFF;
+  font-size: 7.5pt; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 10px; border-radius: 3px;
+}
+.cover-desc {
+  font-size: 9pt; color: #4A6A8A; line-height: 1.65;
+}
+.cover-footer {
+  padding: 7mm 14mm;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.cover-footer-contact {
+  font-size: 7pt; color: #2A4A6A; line-height: 1.7;
+  text-align: left;
+}
+.cover-footer-site {
+  font-size: 8pt; font-weight: 700; color: #1A6FFF;
+}
+
+/* ─── HERO ─── */
+.hero {
+  background: #0D1B2A; padding: 6mm 12mm;
+  flex-shrink: 0; display: flex;
+  align-items: center; justify-content: space-between;
+}
+.hero-left h1 {
+  font-weight: 900; font-size: 17pt; color: #FFFFFF;
+  letter-spacing: -0.5px; line-height: 1.05;
+}
+.hero-left .hero-sub {
+  margin-top: 1.5mm; font-size: 7pt; color: #7A9BC4; font-weight: 400;
+}
+.hero-right { text-align: right; }
+.hero-badge {
+  display: inline-block; background: #1A6FFF; color: white;
+  font-size: 7pt; font-weight: 700; letter-spacing: 0.5px;
+  padding: 3px 10px; border-radius: 3px;
+}
+.hero-time-block {
+  margin-top: 2mm;
+  display: flex; flex-direction: column; align-items: flex-end;
+}
+.hero-time-num {
+  font-weight: 900; font-size: 28pt; color: #1A6FFF;
+  line-height: 1; letter-spacing: -2px;
+}
+.hero-time-label {
+  font-size: 6.5pt; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: #4A6A8A; margin-top: -1mm;
+}
+
+/* HERO COVER (installation) */
+.hero-cover {
+  background: linear-gradient(135deg, #0D1B2A 0%, #1A3A5C 100%);
+  padding: 7mm 12mm; flex-shrink: 0;
+}
+.hero-cover h1 {
+  font-weight: 900; font-size: 20pt; color: white;
+  line-height: 1.05; letter-spacing: -0.5px;
+}
+.hero-cover .hero-accent { color: #1A6FFF; }
+.hero-cover .hero-desc {
+  margin-top: 1.5mm; font-size: 8pt; color: #7A9BC4; font-weight: 400;
+}
+
+/* ─── CONTENT ─── */
+.content {
+  flex: 1; padding: 3.5mm 12mm 3mm;
+  display: flex; flex-direction: column;
+}
+
+/* ─── SECTION LABEL ─── */
+.section-label {
+  display: flex; align-items: center; gap: 3mm;
+  margin-bottom: 2mm; margin-top: 3mm;
+}
+.section-label:first-child { margin-top: 0; }
+.section-dot { width: 4px; height: 4px; border-radius: 50%; background: #1A6FFF; flex-shrink: 0; }
+.section-label span {
+  font-size: 6pt; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: #1A6FFF;
+}
+.section-line { flex: 1; height: 1px; background: #E5EAF0; }
+
+/* ─── STEP ─── */
+.step {
+  display: flex; align-items: flex-start; gap: 3.5mm;
+  padding-bottom: 2mm; page-break-inside: avoid;
+}
+.step + .step { border-top: 1px solid #F0F3F8; padding-top: 2mm; }
+.step-num {
+  flex-shrink: 0; width: 10mm; font-weight: 900; font-size: 24pt;
+  color: #1A6FFF; line-height: 1; text-align: right;
+  letter-spacing: -1px; opacity: 0.25;
+}
+.step-body {
+  flex: 1; display: flex; flex-direction: column; gap: 0.5mm; padding-top: 0.5mm;
+}
+.step-title { font-size: 9pt; font-weight: 700; color: #0D1B2A; line-height: 1.2; }
+.step-title .accent { color: #1A6FFF; }
+.step-desc { font-size: 8pt; color: #3D5068; line-height: 1.42; }
+.step-desc b { font-weight: 700; color: #0D1B2A; }
+.step-note {
+  display: flex; align-items: flex-start; gap: 2mm;
+  margin-top: 1.5mm; padding: 2mm 2.5mm;
+  background: #F5F8FF; border-radius: 3px; page-break-inside: avoid;
+}
+.step-note-icon { font-size: 8pt; flex-shrink: 0; line-height: 1.3; }
+.step-note-text { font-size: 7pt; color: #5A7399; line-height: 1.35; }
+.step-note-text b { color: #0D1B2A; font-weight: 700; }
+
+/* ─── INDICATORS ─── */
+.indicators { display: flex; gap: 2mm; padding: 1.5mm 0; flex-wrap: wrap; }
+.ind {
+  display: flex; align-items: center; gap: 2mm;
+  padding: 1.5px 7px 1.5px 5px; border-radius: 3px;
+  font-size: 7pt; font-weight: 700;
+}
+.ind-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.ind-amber { background: #FFFBEB; color: #92400E; border: 1px solid #FDE68A; }
+.ind-amber .ind-dot { background: #F59E0B; }
+.ind-green { background: #ECFDF5; color: #065F46; border: 1px solid #6EE7B7; }
+.ind-green .ind-dot { background: #10B981; }
+.ind-red { background: #FEF2F2; color: #7F1D1D; border: 1px solid #FCA5A5; }
+.ind-red .ind-dot { background: #EF4444; }
+
+/* ─── WARN BOX ─── */
+.warn-box {
+  display: flex; align-items: flex-start; gap: 2.5mm;
+  background: #FFFBEB; border: 1.5px solid #F59E0B;
+  border-left: 4px solid #F59E0B; border-radius: 0 4px 4px 0;
+  padding: 2.5mm 3mm; margin: 2mm 0; page-break-inside: avoid;
+}
+.warn-icon { font-size: 10pt; flex-shrink: 0; line-height: 1.3; }
+.warn-text { font-size: 7.5pt; color: #78350F; line-height: 1.4; }
+.warn-text b { font-weight: 700; color: #B45309; }
+
+/* ─── PROBLEM BOX ─── */
+.problem-box {
+  margin-top: 2mm; background: #F8FAFF;
+  border: 1px solid #D1DCEE; border-radius: 4px;
+  padding: 2mm 3mm; page-break-inside: avoid;
+}
+.problem-title {
+  font-size: 6.5pt; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: #8A9AB5; margin-bottom: 1.5mm;
+}
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5mm 5mm; }
+.problem-item {
+  display: flex; align-items: flex-start; gap: 2mm;
+  font-size: 7pt; color: #3D5068; line-height: 1.35;
+}
+.problem-item::before { content: "->"; color: #1A6FFF; font-weight: 700; flex-shrink: 0; }
+
+/* ─── PROTECTION ─── */
+.protection-band {
+  background: #F8FAFF; border: 1px solid #D1DCEE;
+  border-radius: 4px; padding: 2.5mm 3.5mm; margin-top: 2mm;
+  page-break-inside: avoid;
+}
+.protection-title {
+  font-size: 6.5pt; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: #8A9AB5; margin-bottom: 1.5mm;
+}
+.protection-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5mm; }
+.prot-item { font-size: 7.5pt; color: #3D5068; line-height: 1.35; }
+
+/* ─── INFO BOX ─── */
+.info-box {
+  display: flex; align-items: flex-start; gap: 2.5mm;
+  background: #F0F7FF; border: 1px solid #BFDBFE;
+  border-left: 3px solid #1A6FFF; border-radius: 0 4px 4px 0;
+  padding: 2mm 3mm; margin-top: 1.5mm; page-break-inside: avoid;
+}
+.info-icon { font-size: 9pt; flex-shrink: 0; line-height: 1.3; }
+.info-text { font-size: 7.5pt; color: #1E3A5F; line-height: 1.35; }
+.info-text b { font-weight: 700; }
+
+/* ─── MODES MÉGAPHONE (PATCH 4 : refonte totale) ─── */
+.mode-section {
+  display: flex; flex-direction: column; gap: 2mm; margin-top: 0;
+}
+.mode-card {
+  border-radius: 5px;
+  page-break-inside: avoid;
+  overflow: hidden;
+}
+.mode-card-blue {
+  border: 1.5px solid #BFDBFE;
+}
+.mode-card-warn {
+  border: 1.5px solid #FDE68A;
+}
+.mode-card-header {
+  display: flex; align-items: center; gap: 3mm;
+  padding: 2.5mm 3.5mm;
+}
+.mode-card-blue .mode-card-header { background: #1A6FFF; }
+.mode-card-warn .mode-card-header { background: #F59E0B; }
+.mode-card-label {
+  font-size: 7.5pt; font-weight: 900; color: white;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.mode-card-title {
+  font-size: 9pt; font-weight: 700; color: white;
+}
+.mode-card-body {
+  padding: 2.5mm 3.5mm;
+  display: flex; flex-direction: column; gap: 1.5mm;
+}
+.mode-card-blue .mode-card-body { background: #F5F9FF; }
+.mode-card-warn .mode-card-body { background: #FFFDF0; }
+.mode-row {
+  display: flex; align-items: flex-start; gap: 2.5mm;
+  font-size: 7.5pt; color: #2C3E60; line-height: 1.4;
+}
+.mode-step-num {
+  flex-shrink: 0;
+  width: 16px; height: 16px;
+  background: #1A6FFF;
+  color: white; border-radius: 50%;
+  font-size: 7pt; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.mode-step-num-warn { background: #F59E0B; }
+.mode-row b { font-weight: 700; color: #0D1B2A; }
+.mode-row .tag {
+  display: inline-block;
+  background: #1A6FFF; color: white;
+  font-size: 6.5pt; font-weight: 700;
+  padding: 0 4px; border-radius: 2px;
+}
+.mode-row .tag-warn {
+  background: #F59E0B;
+}
+.mode-row .pos-row {
+  display: inline-flex; gap: 2mm; margin-left: 1mm;
+}
+.mode-row .pos-item {
+  font-size: 6.5pt; color: #8A9AB5;
+  border: 1px solid #D1DCEE; border-radius: 2px; padding: 0 3px;
+}
+.mode-row .pos-item.active { color: #1A6FFF; border-color: #1A6FFF; font-weight: 700; }
+
+/* ─── FOOTER ─── */
+.page-footer {
+  background: #0D1B2A; padding: 3.5mm 12mm;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.footer-contact-name { font-size: 8.5pt; font-weight: 900; color: white; margin-bottom: 0.5mm; }
+.footer-contact-details { font-size: 6.5pt; color: #4A6A8A; line-height: 1.5; }
+.footer-site { font-size: 7.5pt; font-weight: 700; color: #1A6FFF; }
+
+/* ─── PROBLEM BOX SLIM (mégaphone) ─── */
+.problem-box-slim {
+  margin-top: 1.5mm;
+  background: #F8FAFF;
+  border: 1px solid #D1DCEE;
+  border-radius: 4px;
+  padding: 2mm 3mm;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1mm 1.5mm;
+  page-break-inside: avoid;
+}
+.problem-slim-title {
+  font-size: 6.5pt; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: #8A9AB5; white-space: nowrap;
+}
+.problem-slim-item {
+  font-size: 7pt; color: #3D5068;
+}
+.problem-slim-sep {
+  font-size: 7pt; color: #B0BCCF; font-weight: 700;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     PAGE DE GARDE  (PATCH 1 : moderne, centrée)
+══════════════════════════════════════════ -->
+<div class="cover-page">
+  <div class="cover-stripe-top"></div>
+  <div class="cover-accent-bar"></div>
+  <div class="cover-body">
+    <div class="cover-eyebrow">AINTERCOM &middot; Documentation technique</div>
+    <div class="cover-title">NOTICE<br/>D&rsquo;UTILISATION<br/><span class="blue">TOUT PACKS</span></div>
+    <div class="cover-rule"></div>
+    <div class="cover-packs">
+      <div class="cover-pack-badge">&#128251; Radios</div>
+      <div class="cover-pack-badge">&#127911; Intercom</div>
+      <div class="cover-pack-badge">&#128226; M&eacute;gaphone</div>
+    </div>
+    <div class="cover-desc">
+      Commencez par la page &laquo;&nbsp;Installation&nbsp;&raquo;,<br/>
+      puis allez directement &agrave; la page de votre pack.
+    </div>
+  </div>
+  <div class="cover-stripe-bottom"></div>
+  <div class="cover-footer">
+    <div class="cover-footer-contact">
+      Morgan Spirli &middot; 07 44 98 00 15<br/>
+      contact@aintercom.fr
+    </div>
+    <div class="cover-footer-site">aintercom.fr</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 1 : INSTALLATION COMMUNE
+══════════════════════════════════════════ -->
+<div class="page">
+  <div class="top-stripe"></div>
+  <div class="logo-bar"><span class="page-tag">Installation commune &middot; Tous packs</span></div>
+  <div class="hero hero-cover">
+    <h1>Avant de commencer :<br/><span class="hero-accent">Installation commune</span></h1>
+    <div class="hero-desc">&Agrave; faire quel que soit votre pack lou&eacute; &middot; &Eacute;tape pr&eacute;alable obligatoire</div>
+  </div>
+  <div class="content">
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <span>Alimentation &middot; &Agrave; faire en premier</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-title">Choisissez un endroit abrit&eacute;</div>
+        <div class="step-desc">Installez une <b>table stable</b> pr&egrave;s d&rsquo;une prise &eacute;lectrique. Elle doit &ecirc;tre <b>&agrave; l&rsquo;abri</b> de la pluie et du soleil direct. Ne posez jamais le mat&eacute;riel directement au sol.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-title">Branchez la rallonge noire de 10&nbsp;m sur une prise classique</div>
+        <div class="step-desc">Branchez la rallonge sur une prise classique (type PC16). D&eacute;roulez le c&acirc;ble jusqu&rsquo;&agrave; votre table.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-title">Branchez la multiprise noire sur la rallonge</div>
+        <div class="step-desc">Posez-la sur la table. Vous avez maintenant <b>6 prises disponibles</b> pour brancher vos &eacute;quipements.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <div class="step-title">Allez &agrave; la page de votre pack</div>
+        <div class="step-desc"><b>Radios</b> : page suivante &middot; <b>Intercom casques</b> : page&nbsp;3 &middot; <b>M&eacute;gaphone</b> : page&nbsp;4</div>
+      </div>
+    </div>
+    <div class="warn-box">
+      <div class="warn-icon">&#9888;&#65039;</div>
+      <div class="warn-text"><b>En cas de pluie</b> : rentrez imm&eacute;diatement tout le mat&eacute;riel. Il ne supporte pas l&rsquo;eau ni l&rsquo;humidit&eacute; forte.</div>
+    </div>
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <span>Protection du mat&eacute;riel &middot; Valable pour tous les packs</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="protection-band">
+      <div class="protection-title">R&egrave;gles &agrave; respecter en toutes circonstances</div>
+      <div class="protection-grid">
+        <div class="prot-item">&#9730;&#65039;&nbsp; Toujours installer &agrave; l&rsquo;abri, couvert</div>
+        <div class="prot-item">&#127783;&#65039;&nbsp; Pluie = rentrer imm&eacute;diatement</div>
+        <div class="prot-item">&#9728;&#65039;&nbsp; &Eacute;viter le soleil direct</div>
+        <div class="prot-item">&#128225;&nbsp; Ne jamais poser au sol</div>
+        <div class="prot-item">&#128167;&nbsp; Humidit&eacute; forte = danger</div>
+        <div class="prot-item">&#129306;&nbsp; Manipuler avec soin</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div>
+      <div class="footer-contact-name">&#128222; Un probl&egrave;me ? Appelez Morgan : 07 44 98 00 15</div>
+      <div class="footer-contact-details">contact@aintercom.fr &middot; aintercom.fr &middot; Disponible toute la dur&eacute;e de votre &eacute;v&eacute;nement</div>
+    </div>
+    <div class="footer-site">aintercom.fr</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 2 : RADIOS
+══════════════════════════════════════════ -->
+<div class="page">
+  <div class="top-stripe"></div>
+  <div class="logo-bar"><span class="page-tag">Pack Radios</span></div>
+  <div class="hero">
+    <div class="hero-left">
+      <h1>Radios</h1>
+      <div class="hero-sub">6 radios &middot; Chargeur 6 emplacements &middot; Micro d&eacute;port&eacute; optionnel</div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-badge">&#128251; PACK RADIOS</div>
+      <div class="hero-time-block">
+        <div class="hero-time-num">2</div>
+        <div class="hero-time-label">minutes</div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <span>A &middot; Mise en charge</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-title">Sortez et branchez le chargeur 6 emplacements</div>
+        <div class="step-desc">Sortez le chargeur de la valise. Branchez-le sur la multiprise.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-title">Sortez les 6 radios</div>
+        <div class="step-desc">Chaque radio est d&eacute;j&agrave; cl&eacute; en main. <b>Ne retirez pas la pince ceinture ni la batterie</b> : la radio rentre telle quelle dans le chargeur.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-title">Glissez chaque radio dans un emplacement</div>
+        <div class="step-desc"><b>&Eacute;teignez les radios</b> avant de les mettre en charge. Ne forcez pas si &ccedil;a r&eacute;siste : v&eacute;rifiez le sens.</div>
+        <div class="indicators">
+          <div class="ind ind-amber"><div class="ind-dot"></div>Orange : en charge</div>
+          <div class="ind ind-green"><div class="ind-dot"></div>Vert fixe : charg&eacute;e &agrave; 100&nbsp;%</div>
+          <div class="ind ind-red"><div class="ind-dot"></div>Rouge clignotant : retirer et r&eacute;ins&eacute;rer</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <span>B &middot; Utilisation</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <div class="step-title">Allumer : tournez la molette en haut &agrave; droite jusqu&rsquo;au clic</div>
+        <div class="step-desc">La radio annonce &agrave; voix haute le canal sur lequel elle est r&eacute;gl&eacute;e. Le volume se r&egrave;gle avec la m&ecirc;me molette apr&egrave;s le clic.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-body">
+        <div class="step-title">Choisir le canal : bouton rotatif sur le dessus</div>
+        <div class="step-desc">Toutes les radios sont d&eacute;j&agrave; r&eacute;gl&eacute;es. <b>Jusqu&rsquo;&agrave; 16 canaux disponibles, dont les canaux 1 &agrave; 8 sont s&eacute;curis&eacute;s.</b> Restez tous sur le m&ecirc;me canal ou cr&eacute;ez des groupes diff&eacute;rents.</div>
+        <div class="step-note">
+          <div class="step-note-icon">&#128274;</div>
+          <div class="step-note-text"><b>Important :</b> ne jamais changer les r&eacute;glages de base des canaux 1 &agrave; 8.</div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">06</div>
+      <div class="step-body">
+        <div class="step-title">Parler : appuyez sur le PTT (le gros bouton sur le c&ocirc;t&eacute; gauche)</div>
+        <div class="step-desc">Appuyez et maintenez le bouton PTT. Parlez clairement. <b>L&acirc;chez compl&egrave;tement pour &eacute;couter.</b></div>
+        <div class="step-note">
+          <div class="step-note-icon">&#9888;&#65039;</div>
+          <div class="step-note-text"><b>Attention :</b> tant que vous maintenez le bouton, vous n&rsquo;entendez pas les autres. Toujours l&acirc;cher pour &eacute;couter.</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <span>C &middot; Micro d&eacute;port&eacute; (option mains libres)</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="step">
+      <div class="step-num">07</div>
+      <div class="step-body">
+        <div class="step-title">Branchez le micro sur le connecteur 2 broches sur le c&ocirc;t&eacute; de la radio</div>
+        <div class="step-desc">Il clique en place. Clipez la radio &agrave; la ceinture, le micro sur l&rsquo;&eacute;paule ou le col.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">08</div>
+      <div class="step-body">
+        <div class="step-title">Pour parler : bouton PTT sur le c&ocirc;t&eacute; de la t&ecirc;te du micro d&eacute;port&eacute;</div>
+        <div class="step-desc">M&ecirc;me principe : <b>appuyez pour parler, l&acirc;chez pour &eacute;couter.</b></div>
+        <div class="info-box">
+          <div class="info-icon">&#128161;</div>
+          <div class="info-text">Si le micro d&eacute;port&eacute; n&rsquo;est pas branch&eacute;, le micro int&eacute;gr&eacute; de la radio reste actif normalement.</div>
+        </div>
+      </div>
+    </div>
+    <div class="problem-box">
+      <div class="problem-title">Si &ccedil;a ne fonctionne pas</div>
+      <div class="problem-grid">
+        <div class="problem-item">Radio muette : v&eacute;rifiez le volume (molette droite)</div>
+        <div class="problem-item">Bip au d&eacute;marrage : normal, la radio s&rsquo;initialise</div>
+        <div class="problem-item">Pas de contact : v&eacute;rifiez que tous sont sur le m&ecirc;me canal</div>
+        <div class="problem-item">Bips r&eacute;p&eacute;t&eacute;s : batterie faible, remettre en charge</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div>
+      <div class="footer-contact-name">&#128222; Morgan : 07 44 98 00 15</div>
+      <div class="footer-contact-details">contact@aintercom.fr &middot; aintercom.fr &middot; Joignable pendant toute la dur&eacute;e de votre &eacute;v&eacute;nement</div>
+    </div>
+    <div class="footer-site">aintercom.fr</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 3 : INTERCOM CASQUES
+══════════════════════════════════════════ -->
+<div class="page">
+  <div class="top-stripe"></div>
+  <div class="logo-bar"><span class="page-tag">Pack Intercom</span></div>
+  <div class="hero">
+    <div class="hero-left">
+      <h1>Casques intercom</h1>
+      <div class="hero-sub">6 casques &middot; Communication simultan&eacute;e &middot; 400&nbsp;m de port&eacute;e &middot; Aucun r&eacute;glage requis</div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-badge">&#127911; PACK INTERCOM</div>
+      <div class="hero-time-block">
+        <div class="hero-time-num">3</div>
+        <div class="hero-time-label">minutes</div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <span>A &middot; Batteries et casques</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-title">Ouvrez la sacoche &agrave; plat sur la table</div>
+        <div class="step-desc">Ouvrez la <b>poche avant avec la fermeture &eacute;clair</b>.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-title">Sortez le chargeur et branchez-le sur la multiprise</div>
+        <div class="step-desc">Le chargeur 8 emplacements est dans la poche avant. Sortez aussi les <b>6 batteries</b> de leur sachet. Placez-les dans les emplacements du chargeur. Les <b>2 emplacements restants</b> sont votre r&eacute;serve.</div>
+        <div class="step-note">
+          <div class="step-note-icon">&#128260;</div>
+          <div class="step-note-text"><b>Rotation batteries :</b> 1 batterie dans le casque &middot; 1 en charge &middot; changez quand le casque fait des bips.</div>
+        </div>
+      </div>
+    </div>
+    <!-- PATCH 2 : batterie déjà installée + PRESS UNLOCK pour changement -->
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-title">Les batteries sont d&eacute;j&agrave; install&eacute;es dans les casques</div>
+        <div class="step-desc">Rien &agrave; faire au d&eacute;part. <b>Si une batterie est vide</b>, &eacute;jectez-la en appuyant sur <b>PRESS UNLOCK</b> (du c&ocirc;t&eacute; oppos&eacute; au micro). Remettez la batterie charg&eacute;e jusqu&rsquo;au <b>clic</b>. Ne forcez pas : v&eacute;rifiez le sens si &ccedil;a r&eacute;siste.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <div class="step-title">Sortez les casques de leur pochette</div>
+        <!-- PATCH 3 : suppression "Ne pas empiler" -->
+        <div class="step-desc">Rangez les pochettes vides dans la poche avant. Posez doucement les casques dans la sacoche ouverte.</div>
+        <div class="step-note">
+          <div class="step-note-icon">&#9888;&#65039;</div>
+          <div class="step-note-text"><b>Fragile :</b> ne pas faire tomber, ne pas tirer les c&acirc;bles.</div>
+        </div>
+      </div>
+    </div>
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <span>B &middot; Allumer et utiliser</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-body">
+        <div class="step-title">Trouvez le casque MASTER : bandeau cuir <span class="accent">VERT</span> sur le dessus</div>
+        <div class="step-desc">Les 5 autres ont le bandeau <b>noir</b>. <b>Le MASTER doit toujours &ecirc;tre allum&eacute; en premier.</b> Sans lui, personne ne s&rsquo;entend.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">06</div>
+      <div class="step-body">
+        <div class="step-title">Allumez le MASTER : glissez l&rsquo;interrupteur de OFF vers ON</div>
+        <div class="step-desc">Ce n&rsquo;est pas un bouton &agrave; maintenir : c&rsquo;est un <b>petit interrupteur coulissant</b>. &Ccedil;a s&rsquo;allume tout de suite. <b>Vous pouvez n&rsquo;utiliser que 2, 3, 4 ou 5 casques sur 6, mais le MASTER doit toujours &ecirc;tre allum&eacute;.</b></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">07</div>
+      <div class="step-body">
+        <div class="step-title">Allumez les autres casques un par un</div>
+        <div class="step-desc">M&ecirc;me geste. La connexion se fait <b>automatiquement</b>. Tout le monde s&rsquo;entend imm&eacute;diatement.</div>
+        <div class="indicators">
+          <div class="ind ind-green"><div class="ind-dot"></div>Voyant vert fixe : connect&eacute;</div>
+          <div class="ind ind-red"><div class="ind-dot"></div>Voyant rouge clignotant : trop loin du MASTER</div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">08</div>
+      <div class="step-body">
+        <div class="step-title">Parler et r&eacute;gler le volume</div>
+        <div class="step-desc">Baissez le micro vers la bouche : <b>voyant vert = vous &ecirc;tes entendu</b>. Montez le micro vers le haut : <b>sourdine automatique (voyant rouge)</b>. Volume avec les boutons <b>+</b> et <b>-</b> de chaque c&ocirc;t&eacute; du bouton sourdine.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">09</div>
+      <div class="step-body">
+        <div class="step-title">Bouton MUTE : se couper du groupe</div>
+        <div class="step-desc">Un <b>gros bouton est situ&eacute; sur le c&ocirc;t&eacute; du casque</b> (au centre, c&ocirc;t&eacute; branche du micro). Appuyez pour vous couper. Appuyez de nouveau pour revenir dans le groupe.</div>
+      </div>
+    </div>
+    <div class="problem-box">
+      <div class="problem-title">Si &ccedil;a ne fonctionne pas</div>
+      <div class="problem-grid">
+        <div class="problem-item">Casque qui ne se connecte pas : &eacute;teignez et rallumez APR&Egrave;S le MASTER</div>
+        <div class="problem-item">Pas de son : v&eacute;rifiez le volume avec les boutons +/-</div>
+        <div class="problem-item">Voix saccad&eacute;e : trop loin du MASTER, rapprochez-vous</div>
+        <div class="problem-item">Voyant rouge clignotant : hors port&eacute;e, rapprochez-vous</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div>
+      <div class="footer-contact-name">&#128222; Morgan : 07 44 98 00 15</div>
+      <div class="footer-contact-details">contact@aintercom.fr &middot; aintercom.fr &middot; Joignable pendant toute la dur&eacute;e de votre &eacute;v&eacute;nement</div>
+    </div>
+    <div class="footer-site">aintercom.fr</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 4 : MÉGAPHONE
+══════════════════════════════════════════ -->
+<div class="page">
+  <div class="top-stripe"></div>
+  <div class="logo-bar"><span class="page-tag">Pack M&eacute;gaphone</span></div>
+  <div class="hero">
+    <div class="hero-left">
+      <h1>M&eacute;gaphone</h1>
+      <div class="hero-sub">65&nbsp;W &middot; 2 batteries &middot; Micro d&eacute;port&eacute; int&eacute;gr&eacute; &middot; Sir&egrave;ne &middot; Sangle</div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-badge">&#128226; PACK M&Eacute;GAPHONE</div>
+      <div class="hero-time-block">
+        <div class="hero-time-num">1</div>
+        <div class="hero-time-label">minute</div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <span>A &middot; Mise en place</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-title">Sortez le m&eacute;gaphone et son sac</div>
+        <div class="step-desc">Posez le m&eacute;gaphone sur la table. Ouvrez le sac et sortez ce qu&rsquo;il contient.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-title">La batterie est d&eacute;j&agrave; install&eacute;e dans le m&eacute;gaphone</div>
+        <div class="step-desc">Si besoin de la changer : ouvrez le <b>capot arri&egrave;re</b> avec le petit crochet. La batterie s&rsquo;enfonce <b>en haut au centre</b>. Si &ccedil;a coince un peu, c&rsquo;est normal : fermez le capot en for&ccedil;ant doucement.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-title">Chargez la deuxi&egrave;me batterie (dans le sac)</div>
+        <div class="step-desc">Branchez-la sur son c&acirc;ble. <b>Voyant vert = charg&eacute;e.</b> Gardez-la en charge pendant l&rsquo;&eacute;v&eacute;nement : c&rsquo;est votre rechange imm&eacute;diate.</div>
+      </div>
+    </div>
+    <!-- PATCH 5 : sangle reformulée -->
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <div class="step-title">Choisissez comment tenir le m&eacute;gaphone</div>
+        <div class="step-desc">Trois options selon votre usage : <b>tenez-le &agrave; la main</b> par le manche, <b>posez-le sur une table</b> devant vous, ou <b>fixez la sangle</b> pour le porter en bandouli&egrave;re et avoir les mains libres.</div>
+      </div>
+    </div>
+
+    <!-- PATCH 4 : modes totalement réécrits, séparés, clairs -->
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <span>B &middot; 3 modes d&rsquo;utilisation</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="mode-section">
+
+      <!-- MODE 1 -->
+      <div class="mode-card mode-card-blue">
+        <div class="mode-card-header">
+          <div class="mode-card-label">Mode 1</div>
+          <div class="mode-card-title">Micro fixe &middot; vous tenez le m&eacute;gaphone &agrave; la main</div>
+        </div>
+        <div class="mode-card-body">
+          <div class="mode-row">
+            <div class="mode-step-num">1</div>
+            <div>Bouton ON/OFF du micro d&eacute;port&eacute; (c&ocirc;t&eacute; droit, en haut) sur <b>OFF</b></div>
+          </div>
+          <div class="mode-row">
+            <div class="mode-step-num">2</div>
+            <div>Sur le corps du m&eacute;gaphone : glissez le <b>petit s&eacute;lecteur coulissant</b> vers la droite sur <b>MIC</b>
+              <span class="pos-row">
+                <span class="pos-item">USB/SD</span>
+                <span class="pos-item">OFF</span>
+                <span class="pos-item active">MIC</span>
+              </span>
+            </div>
+          </div>
+          <div class="mode-row">
+            <div class="mode-step-num">3</div>
+            <div>Tenez le manche, appuyez sur la <b>g&acirc;chette</b> pour parler &middot; <b>Voyant rouge allum&eacute; = vous &ecirc;tes entendu</b></div>
+          </div>
+          <div class="mode-row">
+            <div class="mode-step-num">4</div>
+            <div>Volume : molette crant&eacute;e <b>&agrave; droite du micro, sous le bouton ON/OFF</b></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODE 2 -->
+      <div class="mode-card mode-card-blue">
+        <div class="mode-card-header">
+          <div class="mode-card-label">Mode 2</div>
+          <div class="mode-card-title">Micro d&eacute;port&eacute; &middot; vous &ecirc;tes mains libres</div>
+        </div>
+        <div class="mode-card-body">
+          <div class="mode-row">
+            <div class="mode-step-num">1</div>
+            <div>D&eacute;crochez le micro d&eacute;port&eacute; de son emplacement. Il reste reli&eacute; par son c&acirc;ble.</div>
+          </div>
+          <div class="mode-row">
+            <div class="mode-step-num">2</div>
+            <div>Bouton ON/OFF du micro d&eacute;port&eacute; (c&ocirc;t&eacute; droit, en haut) sur <b>ON</b></div>
+          </div>
+          <div class="mode-row">
+            <div class="mode-step-num">3</div>
+            <div>Parlez directement dans le micro : <b>plus besoin d&rsquo;appuyer sur la g&acirc;chette</b>. Volume : molette crant&eacute;e (c&ocirc;t&eacute; droit, en bas)</div>
+          </div>
+          <div class="mode-row">
+            <div class="mode-step-num">4</div>
+            <div>Posez le m&eacute;gaphone sur la table ou portez-le avec la sangle : vos mains sont libres, juste le micro &agrave; tenir.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODE 3 -->
+      <div class="mode-card mode-card-warn">
+        <div class="mode-card-header">
+          <div class="mode-card-label">Mode 3</div>
+          <div class="mode-card-title">&#9888;&#65039; Sir&egrave;ne &middot; Urgence uniquement</div>
+        </div>
+        <div class="mode-card-body">
+          <div class="mode-row">
+            <div class="mode-step-num mode-step-num-warn">1</div>
+            <div>Vous devez d&rsquo;abord &ecirc;tre en <b>Mode 2</b> : bouton ON/OFF du micro sur <b>ON</b></div>
+          </div>
+          <div class="mode-row">
+            <div class="mode-step-num mode-step-num-warn">2</div>
+            <div><b>Baissez d&rsquo;abord la molette de volume</b> : la sir&egrave;ne est tr&egrave;s forte</div>
+          </div>
+          <div class="mode-row">
+            <div class="mode-step-num mode-step-num-warn">3</div>
+            <div>Sur le devant du micro, il y a 3 boutons rouges : <b>SIREN &agrave; gauche &middot; REC au centre &middot; PLAY &agrave; droite</b>. Appuyez sur <b>SIREN</b>.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- fin mode-section -->
+
+    <div class="problem-box-slim">
+      <span class="problem-slim-title">Si &ccedil;a ne fonctionne pas&nbsp;&mdash;&nbsp;</span>
+      <span class="problem-slim-item">Son faible : volume et batterie</span>
+      <span class="problem-slim-sep">&middot;</span>
+      <span class="problem-slim-item">Batterie &agrave; plat : rechange du sac</span>
+      <span class="problem-slim-sep">&middot;</span>
+      <span class="problem-slim-item">Sifflement : &eacute;loignez des enceintes</span>
+      <span class="problem-slim-sep">&middot;</span>
+      <span class="problem-slim-item">Micro inaudible : bouton ON/OFF sur ON</span>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <div>
+      <div class="footer-contact-name">&#128222; Morgan : 07 44 98 00 15</div>
+      <div class="footer-contact-details">contact@aintercom.fr &middot; aintercom.fr &middot; Joignable pendant toute la dur&eacute;e de votre &eacute;v&eacute;nement</div>
+    </div>
+    <div class="footer-site">aintercom.fr</div>
+  </div>
+</div>
+
+
+
+<!-- ══════════════════════════════════════════
+     PAGE DE CLÔTURE
+══════════════════════════════════════════ -->
+<div class="cover-page" style="page-break-after:auto;">
+  <div class="cover-stripe-top"></div>
+  <div class="cover-accent-bar"></div>
+  <div class="cover-body">
+    <div class="cover-eyebrow">AINTERCOM &middot; Documentation technique</div>
+    <div class="cover-title">MERCI<br/>DE VOTRE<br/><span class="blue">CONFIANCE</span></div>
+    <div class="cover-rule"></div>
+    <div class="cover-packs">
+      <div class="cover-pack-badge">&#128251; Radios</div>
+      <div class="cover-pack-badge">&#127911; Intercom</div>
+      <div class="cover-pack-badge">&#128226; M&eacute;gaphone</div>
+    </div>
+    <div class="cover-desc">
+      Un probl&egrave;me pendant votre &eacute;v&eacute;nement ?<br/>
+      <strong style="color:#7AACFF;">Morgan est disponible toute la dur&eacute;e de votre location.</strong>
+    </div>
+    <div style="margin-top:10mm; display:flex; flex-direction:column; gap:2mm; align-items:center;">
+      <div style="font-size:13pt; font-weight:900; color:#FFFFFF; letter-spacing:-0.5px;">07 44 98 00 15</div>
+      <div style="font-size:8pt; color:#4A6A8A;">contact@aintercom.fr &nbsp;&middot;&nbsp; aintercom.fr</div>
+    </div>
+  </div>
+  <div class="cover-stripe-bottom"></div>
+  <div class="cover-footer">
+    <div class="cover-footer-contact">
+      NOTICE D&rsquo;UTILISATION &middot; TOUT PACKS<br/>
+      AINTERCOM &copy; 2025
+    </div>
+    <div class="cover-footer-site">aintercom.fr</div>
+  </div>
+</div>
+
+</body>
+</html>
