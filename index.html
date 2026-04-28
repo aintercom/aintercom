@@ -919,7 +919,9 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .fqi-tog svg{width:11px;height:11px;stroke:var(--muted);fill:none;stroke-width:2.5;stroke-linecap:round;transition:transform .3s}
 .fqi.open .fqi-tog{background:var(--blue);border-color:var(--blue)}
 .fqi.open .fqi-tog svg{stroke:#fff;transform:rotate(45deg)}
-.fqi-a{max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.4,0,.2,1)}
+.fqi-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease}
+.fqi.open .fqi-a{grid-template-rows:1fr}
+.fqi-a-inner{overflow:hidden}
 .fqi-a-inner{padding:0 22px 18px;font-size:0.86rem;color:var(--muted);line-height:1.78}
 
 /* ── CONTACT ── */
@@ -2209,13 +2211,9 @@ document.querySelectorAll('.rev').forEach(el => revObs.observe(el));
 function toggleFaq(btn) {
   const item = btn.parentElement;
   const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.fqi').forEach(i => { i.classList.remove('open'); i.querySelector('.fqi-a').style.maxHeight = '0'; });
-  if (!isOpen) { item.classList.add('open'); const a = item.querySelector('.fqi-a'); a.style.maxHeight = a.scrollHeight + 'px'; }
+  document.querySelectorAll('.fqi').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
 }
-document.addEventListener('DOMContentLoaded', () => {
-  const f = document.querySelector('.fqi.open .fqi-a');
-  if (f) f.style.maxHeight = f.scrollHeight + 'px';
-});
 
 /* ── PRICING SWITCH ── */
 function switchP(type, btn) {
