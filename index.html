@@ -1640,11 +1640,10 @@ function simCalcPrice(pack, seg, jours) {
   return Math.round(t.semaine + (t.mois - t.semaine) * (jours - 7) / 23);
 }
 function simPalierLabel(pack, seg, jours) {
-  const t = SIM_TARIFS[pack][seg];
   const price = simCalcPrice(pack, seg, jours);
-  const remise = Math.round((1 - price / (jours * t.jour)) * 100);
+  const pj = Math.round(price / jours);
   const label = jours <= 1 ? 'Journée' : jours <= 3 ? 'Week-end' : jours <= 7 ? 'Semaine' : 'Mensuel';
-  return jours <= 1 ? label : label + ' −' + remise + '%';
+  return jours <= 1 ? label : label + ' · ' + pj + '€/j';
 }
 // État : km aller simple entre dépôt et lieu de livraison (simulateur Tarifs)
 let simCurrentKm = 0;
