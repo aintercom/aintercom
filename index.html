@@ -131,7 +131,7 @@
         "name":"On est une petite association avec un petit budget : c'est pour nous ?",
         "acceptedAnswer":{
           "@type":"Answer",
-          "text":"C'est exactement pour vous. La Demi-Flotte commence à 119€ TTC pour un weekend (tarif associatif). TVA 0% parce qu'on est une association loi 1901 comme vous. Pas de technicien à payer, pas de camion, pas d'abonnement. Vous venez chercher le matériel, vous le rendez le lundi. Simple."
+          "text":"C'est exactement pour vous. La Demi-Flotte commence à 79€ TTC pour un weekend (tarif associatif). TVA 0% parce qu'on est une association loi 1901 comme vous. Pas de technicien à payer, pas de camion, pas d'abonnement. Vous venez chercher le matériel, vous le rendez le lundi. Simple."
         }
       },
       {
@@ -1335,14 +1335,13 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         </div>
         <div class="pc-name" data-i18n="pk1.name">Pack Demi-Flotte</div>
         <div class="pc-contents">6 Radios Motorola XT420</div>
-        <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="119" data-pro="179">119</span></div>
+        <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="79" data-pro="149">79</span></div>
         <div class="pc-period" data-i18n="pk.period">/ weekend</div>
         <div class="pc-tva" data-i18n="pk.tva">TTC · TVA 0% (Asso loi 1901)</div>
         <div class="pc-desc" data-i18n="pk1.desc">6 radios Motorola XT420 + micros RSM câble Kevlar + 1 chargeur 6 slots + valise</div>
       </div>
-      <div class="pc feat rev">
-        <div class="pc-pop" data-i18n="pk.pop">Le plus demandé</div>
-        <div class="pc-img pc-img-featured" onclick="openPackModal('essentiel')">
+      <div class="pc rev">
+        <div class="pc-img" onclick="openPackModal('essentiel')">
           <img src="https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/pack-essentiel.png" alt="Pack Essentiel – 12 radios Motorola" loading="lazy">
           <div class="pc-img-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
         </div>
@@ -1365,8 +1364,9 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="pc-tva" data-i18n="pk.tva">TTC · TVA 0% (Asso loi 1901)</div>
         <div class="pc-desc" data-i18n="pk3.desc">Hollyland Solidcom SE Pro 6S complet · Full-Duplex, zéro latence, zéro internet · régie &amp; scène</div>
       </div>
-      <div class="pc rev">
-        <div class="pc-img" onclick="openPackModal('regie')">
+      <div class="pc feat rev">
+        <div class="pc-pop" data-i18n="pk.pop">Le plus demandé</div>
+        <div class="pc-img pc-img-featured" onclick="openPackModal('regie')">
           <img src="https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/pack-regie.png" alt="Pack Régie – 6 radios + 6 intercoms" loading="lazy">
           <div class="pc-img-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
         </div>
@@ -1593,7 +1593,7 @@ document.querySelectorAll('.proc-track').forEach(el => procObs.observe(el));
 
 /* ── SIMULATEUR INLINE ── */
 const SIM_TARIFS = {
-  demi:      { asso:{jour:85,  we:119, semaine:299,  mois:715 },  pro:{jour:125, we:179, semaine:445,  mois:1075} },
+  demi:      { asso:{jour:55,  we:79,  semaine:199,  mois:475 },  pro:{jour:104, we:149, semaine:370,  mois:895 } },
   essentiel: { asso:{jour:165, we:239, semaine:595,  mois:1435},  pro:{jour:235, we:339, semaine:845,  mois:2035} },
   scene:     { asso:{jour:89,  we:129, semaine:325,  mois:775 },  pro:{jour:135, we:189, semaine:475,  mois:1135} },
   regie:     { asso:{jour:175, we:249, semaine:625,  mois:1495},  pro:{jour:245, we:349, semaine:875,  mois:2095} },
@@ -1705,7 +1705,7 @@ simUpdate();
         </div>
         <div class="ct-row">
           <div class="ct-cell" data-i18n="cmp.r2">Accessible petites structures</div>
-          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Dès 119€ TTC / weekend</div>
+          <div class="ct-cell us"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Dès 79€ TTC / weekend</div>
           <div class="ct-cell"><div class="cti cti-y"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Gratuit mais limité</div>
           <div class="ct-cell"><div class="cti cti-n"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Budget 2 000€+</div>
         </div>
@@ -1884,7 +1884,7 @@ simUpdate();
         </div>
         <div class="fqi">
           <div class="fqi-q" onclick="toggleFaq(this)"><span>On est une petite association avec un petit budget : c'est pour nous ? ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
-          <div class="fqi-a"><div class="fqi-a-inner">C'est exactement pour vous. La Demi-Flotte commence à 119€ TTC pour un weekend (tarif associatif). TVA 0% parce qu'on est une association loi 1901 comme vous. Pas de technicien à payer, pas de camion, pas d'abonnement. Vous venez chercher le matériel, vous le rendez le lundi. Simple.</div></div>
+          <div class="fqi-a"><div class="fqi-a-inner">C'est exactement pour vous. La Demi-Flotte commence à 79€ TTC pour un weekend (tarif associatif). TVA 0% parce qu'on est une association loi 1901 comme vous. Pas de technicien à payer, pas de camion, pas d'abonnement. Vous venez chercher le matériel, vous le rendez le lundi. Simple.</div></div>
         </div>
         <div class="fqi">
           <div class="fqi-q" onclick="toggleFaq(this)"><span>Comment on paie ? Est-ce qu'il faut tout payer en avance ?</span><div class="fqi-tog"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div>
@@ -2954,7 +2954,7 @@ function initNoticeNav() {
 const PACK_DATA = {
   demi: {
     name: 'Pack Demi-Flotte', contents: '6 Radios Motorola XT420',
-    prices: { asso:{jour:85,we:119,semaine:299,mois:715}, pro:{jour:125,we:179,semaine:445,mois:1075} },
+    prices: { asso:{jour:55,we:79,semaine:199,mois:475}, pro:{jour:104,we:149,semaine:370,mois:895} },
     img: 'https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/demi-flotte.png',
     desc: '6 radios Motorola XT420 équipées de micros RSM à câble Kevlar · 1 chargeur 6 slots · valise de transport rigide · idéal pour les petites équipes terrain jusqu\'à 6 personnes.'
   },
