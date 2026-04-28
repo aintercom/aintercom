@@ -1632,14 +1632,19 @@ function simUpdateDetail() {
   document.getElementById('sim-detail-name').textContent = d.name;
   document.getElementById('sim-detail-list').innerHTML = d.items.map(i => '<li>' + i + '</li>').join('');
 }
-function simGetPalier(jours) {
-  if (jours === 1) return 'jour';
-  if (jours <= 3)  return 'we';
-  if (jours <= 7)  return 'semaine';
-  return 'mois';
+function simCalcPrice(pack, seg, jours) {
+  const t = SIM_TARIFS[pack][seg];
+  if (jours <= 1) return t.jour;
+  if (jours <= 3)  return Math.round(t.jour + (t.we - t.jour) * (jours - 1) / 2);
+  if (jours <= 7)  return Math.round(t.we + (t.semaine - t.we) * (jours - 3) / 4);
+  return Math.round(t.semaine + (t.mois - t.semaine) * (jours - 7) / 23);
 }
-function simPalierLabel(jours) {
-  return {jour:'Journée', we:'Week-end', semaine:'Semaine', mois:'Mois'}[simGetPalier(jours)] || '';
+function simPalierLabel(pack, seg, jours) {
+  const t = SIM_TARIFS[pack][seg];
+  const price = simCalcPrice(pack, seg, jours);
+  const remise = Math.round((1 - price / (jours * t.jour)) * 100);
+  const label = jours <= 1 ? 'Journée' : jours <= 3 ? 'Week-end' : jours <= 7 ? 'Semaine' : 'Mensuel';
+  return jours <= 1 ? label : label + ' −' + remise + '%';
 }
 // État : km aller simple entre dépôt et lieu de livraison (simulateur Tarifs)
 let simCurrentKm = 0;
@@ -1654,20 +1659,18 @@ function simSetPickup() {
 }
 
 function simUpdate() {
-  const jours  = parseInt(document.getElementById('sim-duree').value);
-  const km     = simCurrentKm;
-  const palier = simGetPalier(jours);
-  const price  = SIM_TARIFS[simPack][simSeg][palier];
-  const nbj    = {jour:1, we:3, semaine:7, mois:30}[palier];
-  const dep    = km === 0 ? 0 : Math.round(km * 2 * 0.5);
-  const total  = price + dep;
+  const jours   = parseInt(document.getElementById('sim-duree').value);
+  const km      = simCurrentKm;
+  const price   = simCalcPrice(simPack, simSeg, jours);
+  const dep     = km === 0 ? 0 : Math.round(km * 2 * 0.5);
+  const total   = price + dep;
   const acompte = Math.round(total * 0.30);
   const solde   = total - acompte;
-  const pj      = Math.round(price / nbj);
+  const pj      = Math.round(price / jours);
   document.getElementById('sim-duree-out').textContent   = jours === 1 ? '1 jour' : jours + ' jours';
   document.getElementById('sim-km-out').textContent      = km === 0 ? 'Retrait portail · gratuit' : (km * 2) + ' km A/R · déplacement calculé';
   document.getElementById('sim-total-price').textContent = total + ' €';
-  document.getElementById('sim-palier').textContent      = simPalierLabel(jours);
+  document.getElementById('sim-palier').textContent      = simPalierLabel(simPack, simSeg, jours);
   document.getElementById('sim-pj-display').textContent  = pj + ' €';
   document.getElementById('sim-d-loc').textContent       = price + ' €';
   document.getElementById('sim-d-dep').textContent       = km === 0 ? 'Gratuit · retrait portail' : dep + ' €';
