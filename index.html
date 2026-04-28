@@ -98,11 +98,12 @@
     "areaServed":"Ain, Isère Nord, Rhône Est, France",
     "description":"Location de radios Motorola XT420, intercoms Hollyland Solidcom Full-Duplex et mégaphones Vonyx pour événements. Plug & Play, sans technicien imposé, livraison sur site dans l'Ain.",
     "offers":[
-      {"@type":"Offer","name":"Pack Demi-Flotte","price":"79","priceCurrency":"EUR","description":"6 radios Motorola XT420 pour un weekend","availability":"https://schema.org/InStock"},
-      {"@type":"Offer","name":"Pack Essentiel","price":"129","priceCurrency":"EUR","description":"12 radios Motorola XT420 pour un weekend","availability":"https://schema.org/InStock"},
-      {"@type":"Offer","name":"Pack Scène","price":"149","priceCurrency":"EUR","description":"6 intercoms Hollyland Solidcom Full-Duplex pour un weekend","availability":"https://schema.org/InStock"},
-      {"@type":"Offer","name":"Pack Régie","price":"219","priceCurrency":"EUR","description":"6 radios + 6 intercoms Hollyland pour un weekend","availability":"https://schema.org/InStock"},
-      {"@type":"Offer","name":"Pack Complet","price":"329","priceCurrency":"EUR","description":"12 radios + 6 intercoms + mégaphone Vonyx 65W pour un weekend","availability":"https://schema.org/InStock"}
+      {"@type":"Offer","name":"Pack Demi-Flotte – Journée","price":"85","priceCurrency":"EUR","description":"6 radios Motorola XT420 – tarif associatif journée","availability":"https://schema.org/InStock"},
+      {"@type":"Offer","name":"Pack Demi-Flotte – Week-end","price":"119","priceCurrency":"EUR","description":"6 radios Motorola XT420 – tarif associatif week-end","availability":"https://schema.org/InStock"},
+      {"@type":"Offer","name":"Pack Essentiel – Week-end","price":"239","priceCurrency":"EUR","description":"12 radios Motorola XT420 – tarif associatif week-end","availability":"https://schema.org/InStock"},
+      {"@type":"Offer","name":"Pack Scène – Week-end","price":"129","priceCurrency":"EUR","description":"6 intercoms Hollyland Solidcom Full-Duplex – tarif associatif week-end","availability":"https://schema.org/InStock"},
+      {"@type":"Offer","name":"Pack Régie – Week-end","price":"249","priceCurrency":"EUR","description":"6 radios + 6 intercoms Hollyland – tarif associatif week-end","availability":"https://schema.org/InStock"},
+      {"@type":"Offer","name":"Pack Complet – Week-end","price":"379","priceCurrency":"EUR","description":"12 radios + 6 intercoms + mégaphone Vonyx 65W + kit élec – tarif associatif week-end","availability":"https://schema.org/InStock"}
     ]
   },
   {
@@ -632,8 +633,31 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .pc-period{font-size:0.76rem;color:var(--muted);margin-bottom:4px}
 .pc-tva{font-size:0.68rem;color:var(--muted);margin-bottom:16px;font-family:'Sora',sans-serif}
 .pc.feat .pc-period,.pc.feat .pc-tva{color:rgba(255,255,255,0.38)}
-.pc-desc{font-size:0.82rem;color:var(--mid);line-height:1.55;flex:1;margin-bottom:16px}
+.pc-desc{font-size:0.82rem;color:var(--mid);line-height:1.55;flex:1;margin-bottom:12px}
 .pc.feat .pc-desc{color:rgba(255,255,255,0.6)}
+/* ── PRICING TABLE ── */
+.pc-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:0.76rem}
+.pc-table thead th{font-family:'Sora',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);padding:0 0 6px;text-align:right}
+.pc-table thead th:first-child{text-align:left}
+.pc.feat .pc-table thead th{color:rgba(255,255,255,0.4)}
+.pc-table tbody td{font-family:'Sora',sans-serif;font-size:0.77rem;font-weight:600;padding:5px 0;text-align:right;border-top:1px solid var(--border);color:var(--dark)}
+.pc-table tbody td:first-child{text-align:left;font-weight:500;font-size:0.71rem;color:var(--muted)}
+.pc.feat .pc-table tbody td{border-color:rgba(255,255,255,0.1);color:#fff}
+.pc.feat .pc-table tbody td:first-child{color:rgba(255,255,255,0.45)}
+.pc-table tr.pc-tr-we td{background:rgba(26,111,255,0.07);font-weight:800}
+.pc-table tr.pc-tr-we td:first-child{color:var(--blue);font-weight:700}
+.pc.feat .pc-table tr.pc-tr-we td{background:rgba(255,255,255,0.1)}
+.pc-table .pc-td-asso{color:var(--blue)}
+.pc.feat .pc-table .pc-td-asso{color:rgba(150,210,255,1)}
+/* ── MENTION INCLUS ── */
+.pincl{font-size:0.72rem;color:var(--muted);text-align:center;margin-top:14px;padding:11px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);display:flex;align-items:center;gap:8px;justify-content:center}
+.pincl svg{width:14px;height:14px;stroke:var(--blue);fill:none;stroke-width:2;flex-shrink:0;stroke-linecap:round;stroke-linejoin:round}
+/* ── DURÉE SIMULATEUR ── */
+.sim-dur-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px}
+.sim-dur-btn{padding:9px 4px;border:1.5px solid var(--border-md);border-radius:var(--r-sm);background:var(--white);cursor:pointer;text-align:center;transition:.15s;font-family:'Sora',sans-serif;font-size:0.73rem;font-weight:700;color:var(--muted)}
+[data-theme="dark"] .sim-dur-btn{background:var(--bg)}
+.sim-dur-btn:hover{border-color:var(--blue);color:var(--dark)}
+.sim-dur-btn.active{border:2px solid var(--blue);background:var(--blue);color:#fff}
 .pc-caution{font-family:'Sora',sans-serif;font-size:0.66rem;font-weight:600;color:var(--muted);border-top:1px solid var(--border);padding-top:14px;margin-top:auto}
 .pc.feat .pc-caution{color:rgba(255,255,255,0.28);border-color:rgba(255,255,255,0.1)}
 
@@ -1298,10 +1322,6 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <span class="stag" data-i18n="price.tag">Grille tarifaire</span>
         <h2 class="section-h" data-i18n="price.title">Transparent.<br>Sans surprise.</h2>
       </div>
-      <div class="ptog">
-        <div class="pt on" onclick="switchP('asso',this)" data-i18n="price.asso">Associations</div>
-        <div class="pt" onclick="switchP('pro',this)" data-i18n="price.pro">Professionnels</div>
-      </div>
     </div>
     <div class="pgrid" style="grid-template-columns:repeat(5,1fr)">
       <div class="pc rev">
@@ -1309,11 +1329,17 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <img src="https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/demi-flotte.png" alt="Pack Demi-Flotte – 6 radios Motorola" loading="lazy">
           <div class="pc-img-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
         </div>
-        <div class="pc-name" data-i18n="pk1.name">Demi-Flotte</div>
-        <div class="pc-contents">6 radios</div>
-        <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="79" data-pro="149">79</span></div>
-        <div class="pc-period" data-i18n="pk.period">/ weekend</div>
-        <div class="pc-tva" data-i18n="pk.tva">TTC · TVA 0% (Asso loi 1901)</div>
+        <div class="pc-name" data-i18n="pk1.name">Pack Demi-Flotte</div>
+        <div class="pc-contents">6 Radios Motorola XT420</div>
+        <table class="pc-table">
+          <thead><tr><th></th><th>ASSO</th><th>PRO</th></tr></thead>
+          <tbody>
+            <tr><td>Journée</td><td class="pc-td-asso">85€</td><td>125€</td></tr>
+            <tr class="pc-tr-we"><td>Week-end</td><td class="pc-td-asso">119€</td><td>179€</td></tr>
+            <tr><td>Semaine</td><td class="pc-td-asso">299€</td><td>445€</td></tr>
+            <tr><td>Mois</td><td class="pc-td-asso">715€</td><td>1 075€</td></tr>
+          </tbody>
+        </table>
         <div class="pc-desc" data-i18n="pk1.desc">6 radios Motorola XT420 + micros RSM câble Kevlar + 1 chargeur 6 slots + valise</div>
       </div>
       <div class="pc feat rev">
@@ -1323,10 +1349,16 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <div class="pc-img-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
         </div>
         <div class="pc-name" data-i18n="pk2.name">Pack Essentiel</div>
-        <div class="pc-contents">12 radios</div>
-        <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="129" data-pro="249">129</span></div>
-        <div class="pc-period" data-i18n="pk.period">/ weekend</div>
-        <div class="pc-tva" data-i18n="pk.tva">TTC · TVA 0% (Asso loi 1901)</div>
+        <div class="pc-contents">12 Radios Motorola XT420</div>
+        <table class="pc-table">
+          <thead><tr><th></th><th>ASSO</th><th>PRO</th></tr></thead>
+          <tbody>
+            <tr><td>Journée</td><td class="pc-td-asso">165€</td><td>235€</td></tr>
+            <tr class="pc-tr-we"><td>Week-end</td><td class="pc-td-asso">239€</td><td>339€</td></tr>
+            <tr><td>Semaine</td><td class="pc-td-asso">595€</td><td>845€</td></tr>
+            <tr><td>Mois</td><td class="pc-td-asso">1 435€</td><td>2 035€</td></tr>
+          </tbody>
+        </table>
         <div class="pc-desc" data-i18n="pk2.desc">12 radios Motorola XT420 + micros RSM + 2 chargeurs 6 slots + valise · idéal festivals, galas, fêtes de village</div>
       </div>
       <div class="pc rev">
@@ -1335,10 +1367,16 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <div class="pc-img-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
         </div>
         <div class="pc-name" data-i18n="pk3.name">Pack Scène</div>
-        <div class="pc-contents">6 intercoms Full-Duplex</div>
-        <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="149" data-pro="279">149</span></div>
-        <div class="pc-period" data-i18n="pk.period">/ weekend</div>
-        <div class="pc-tva" data-i18n="pk.tva">TTC · TVA 0% (Asso loi 1901)</div>
+        <div class="pc-contents">6 Intercoms Hollyland Solidcom</div>
+        <table class="pc-table">
+          <thead><tr><th></th><th>ASSO</th><th>PRO</th></tr></thead>
+          <tbody>
+            <tr><td>Journée</td><td class="pc-td-asso">89€</td><td>135€</td></tr>
+            <tr class="pc-tr-we"><td>Week-end</td><td class="pc-td-asso">129€</td><td>189€</td></tr>
+            <tr><td>Semaine</td><td class="pc-td-asso">325€</td><td>475€</td></tr>
+            <tr><td>Mois</td><td class="pc-td-asso">775€</td><td>1 135€</td></tr>
+          </tbody>
+        </table>
         <div class="pc-desc" data-i18n="pk3.desc">Hollyland Solidcom SE Pro 6S complet · Full-Duplex, zéro latence, zéro internet · régie &amp; scène</div>
       </div>
       <div class="pc rev">
@@ -1347,10 +1385,16 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <div class="pc-img-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
         </div>
         <div class="pc-name" data-i18n="pk4.name">Pack Régie</div>
-        <div class="pc-contents">6 radios + 6 intercoms</div>
-        <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="219" data-pro="399">219</span></div>
-        <div class="pc-period" data-i18n="pk.period">/ weekend</div>
-        <div class="pc-tva" data-i18n="pk.tva">TTC · TVA 0% (Asso loi 1901)</div>
+        <div class="pc-contents">6 Radios + 6 Intercoms</div>
+        <table class="pc-table">
+          <thead><tr><th></th><th>ASSO</th><th>PRO</th></tr></thead>
+          <tbody>
+            <tr><td>Journée</td><td class="pc-td-asso">175€</td><td>245€</td></tr>
+            <tr class="pc-tr-we"><td>Week-end</td><td class="pc-td-asso">249€</td><td>349€</td></tr>
+            <tr><td>Semaine</td><td class="pc-td-asso">625€</td><td>875€</td></tr>
+            <tr><td>Mois</td><td class="pc-td-asso">1 495€</td><td>2 095€</td></tr>
+          </tbody>
+        </table>
         <div class="pc-desc" data-i18n="pk4.desc">6 radios terrain + 6 intercoms Hollyland · Théâtre, gala, scène ET terrain couverts simultanément</div>
       </div>
       <div class="pc rev" style="border-color:rgba(26,111,255,0.25)">
@@ -1359,17 +1403,27 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <div class="pc-img-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
         </div>
         <div class="pc-name" data-i18n="pk5.name">Pack Complet</div>
-        <div class="pc-contents">12 radios + 6 intercoms + sono</div>
-        <div class="pc-price"><span class="pc-cur">€</span><span class="pc-val p-n" data-asso="329" data-pro="599">329</span></div>
-        <div class="pc-period" data-i18n="pk.period">/ weekend</div>
-        <div class="pc-tva" data-i18n="pk.tva">TTC · TVA 0% (Asso loi 1901)</div>
-        <div class="pc-desc" data-i18n="pk5.desc">12 radios + 6 intercoms Hollyland + Vonyx MEG065 65W · la régie de poche entière</div>
+        <div class="pc-contents">12 Radios + 6 Intercoms + Mégaphone + Kit Élec</div>
+        <table class="pc-table">
+          <thead><tr><th></th><th>ASSO</th><th>PRO</th></tr></thead>
+          <tbody>
+            <tr><td>Journée</td><td class="pc-td-asso">265€</td><td>370€</td></tr>
+            <tr class="pc-tr-we"><td>Week-end</td><td class="pc-td-asso">379€</td><td>529€</td></tr>
+            <tr><td>Semaine</td><td class="pc-td-asso">945€</td><td>1 325€</td></tr>
+            <tr><td>Mois</td><td class="pc-td-asso">2 275€</td><td>3 175€</td></tr>
+          </tbody>
+        </table>
+        <div class="pc-desc" data-i18n="pk5.desc">12 radios + 6 intercoms Hollyland + Vonyx MEG065 65W + kit électrique · la régie de poche entière</div>
       </div>
     </div>
     <div class="pnotes rev">
       <div class="pnote"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Retrait à Meximieux</strong> · gratuit, sur RDV 7j/7</span></div>
       <div class="pnote"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span>Acompte <strong>30%</strong> à la signature · solde 70% sous 30j après l'événement</span></div>
       <div class="pnote"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Durée flexible · utilisez le simulateur ci-dessous pour calculer votre prix exact</span></div>
+    </div>
+    <div class="pincl">
+      <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <span>Tarifs TTC incluant la préparation, la charge des batteries et la désinfection du matériel</span>
     </div>
 
     <!-- SIMULATEUR DÉPLIABLE -->
@@ -1428,12 +1482,12 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
                 <button type="button" class="sim-seg-btn active" id="sim-seg-asso" onclick="simSelectSeg('asso')">Association / Particulier</button>
                 <button type="button" class="sim-seg-btn" id="sim-seg-pro" onclick="simSelectSeg('pro')">Professionnel</button>
               </div>
-              <div class="sim-slider-block">
-                <div class="sim-slider-top">
-                  <span class="sim-sl-label">Durée de location</span>
-                  <span class="sim-sl-val" id="sim-duree-out">3 jours</span>
-                </div>
-                <input type="range" min="1" max="30" value="3" step="1" id="sim-duree" oninput="simUpdate()" class="sim-range">
+              <div class="sim-label">Durée de location</div>
+              <div class="sim-dur-grid">
+                <button type="button" class="sim-dur-btn" data-dur="jour" onclick="simSelectDur(this)">Journée</button>
+                <button type="button" class="sim-dur-btn active" data-dur="we" onclick="simSelectDur(this)">Week-end</button>
+                <button type="button" class="sim-dur-btn" data-dur="semaine" onclick="simSelectDur(this)">Semaine</button>
+                <button type="button" class="sim-dur-btn" data-dur="mois" onclick="simSelectDur(this)">Mois</button>
               </div>
               <div class="sim-slider-block">
                 <div class="sim-slider-top">
@@ -1565,11 +1619,11 @@ document.querySelectorAll('.proc-track').forEach(el => procObs.observe(el));
 
 /* ── SIMULATEUR INLINE ── */
 const SIM_TARIFS = {
-  demi:      { asso: 79,  pro: 149 },
-  essentiel: { asso: 129, pro: 249 },
-  regie:     { asso: 219, pro: 399 },
-  scene:     { asso: 149, pro: 279 },
-  complet:   { asso: 329, pro: 599 }
+  demi:      { asso:{jour:85,  we:119, semaine:299,  mois:715 },  pro:{jour:125, we:179, semaine:445,  mois:1075} },
+  essentiel: { asso:{jour:165, we:239, semaine:595,  mois:1435},  pro:{jour:235, we:339, semaine:845,  mois:2035} },
+  scene:     { asso:{jour:89,  we:129, semaine:325,  mois:775 },  pro:{jour:135, we:189, semaine:475,  mois:1135} },
+  regie:     { asso:{jour:175, we:249, semaine:625,  mois:1495},  pro:{jour:245, we:349, semaine:875,  mois:2095} },
+  complet:   { asso:{jour:265, we:379, semaine:945,  mois:2275},  pro:{jour:370, we:529, semaine:1325, mois:3175} }
 };
 const SIM_DETAILS = {
   demi:      { name: 'Pack Demi-Flotte', items: ['6 Motorola XT420','Micro déporté RSM inclus par radio','1 chargeur 6 slots','Valise de transport'] },
@@ -1578,7 +1632,7 @@ const SIM_DETAILS = {
   scene:     { name: 'Pack Scène', items: ['Hollyland Solidcom SE Pro 6S complet','1 master + 5 remotes','Station charge 8 slots','Full-Duplex · zéro latence · zéro internet','Sacoche de transport'] },
   complet:   { name: 'Pack Complet', items: ['12 Motorola XT420 + micros déportés','2 chargeurs 6 slots','Hollyland Solidcom SE Pro 6S complet','Vonyx MEG065 65W + sac + 2 batteries Li-ion','Valise de transport'] }
 };
-let simPack = 'demi', simSeg = 'asso', simDetailVisible = false;
+let simPack = 'demi', simSeg = 'asso', simDur = 'we', simDetailVisible = false;
 
 function simSelectPack(el) {
   document.querySelectorAll('.sim-pack-btn').forEach(b => b.classList.remove('active'));
@@ -1604,32 +1658,17 @@ function simUpdateDetail() {
   document.getElementById('sim-detail-name').textContent = d.name;
   document.getElementById('sim-detail-list').innerHTML = d.items.map(i => '<li>' + i + '</li>').join('');
 }
-function simTarifJour(base, jours) {
-  // Pour 3 jours (weekend), retourner le prix par jour arrondi
-  // qui donne exactement le total de la grille tarifaire
-  if (jours === 3) {
-    // Pour les packs où base % 3 === 0 (ex: 129, 219), retourner pj exact
-    if (base % 3 === 0) {
-      return base / 3;
-    }
-    // Pour les autres (79, 149, 329), arrondir pj à l'entier le plus proche
-    // et ajuster dans simUpdate() pour que le total soit exact
-    return Math.round(base / 3);
-  }
-  
-  const pj = base / 3;
-  if (jours === 1)  return Math.round(base * 0.70);
-  if (jours <= 4)   return Math.round(pj);
-  if (jours <= 7)   return Math.round(pj * 0.90);
-  if (jours <= 14)  return Math.round(pj * 0.80);
-  return Math.round(pj * 0.70);
+function simSelectDur(el) {
+  document.querySelectorAll('.sim-dur-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  simDur = el.dataset.dur;
+  simUpdate();
 }
-function simPalierLabel(jours) {
-  if (jours === 1)  return '1 jour';
-  if (jours <= 4)   return 'Weekend';
-  if (jours <= 7)   return 'Semaine −10%';
-  if (jours <= 14)  return 'Quinzaine −20%';
-  return 'Mois −30%';
+function simPalierLabel(dur) {
+  return {jour:'Journée', we:'Week-end', semaine:'Semaine', mois:'Mois'}[dur] || dur;
+}
+function simNbJours(dur) {
+  return {jour:1, we:3, semaine:7, mois:30}[dur] || 3;
 }
 // État : km aller simple entre dépôt et lieu de livraison (simulateur Tarifs)
 let simCurrentKm = 0;
@@ -1644,35 +1683,19 @@ function simSetPickup() {
 }
 
 function simUpdate() {
-  const jours = parseInt(document.getElementById('sim-duree').value);
   const km    = simCurrentKm;
-  const base  = SIM_TARIFS[simPack][simSeg];
-  const pj    = simTarifJour(base, jours);
-  
-  // Pour 3 jours, utiliser le prix exact de la grille tarifaire
-  let loc;
-  if (jours === 3) {
-    // Si base % 3 === 0 (ex: 129, 219), utiliser pj * jours
-    // Sinon (79, 149, 329), utiliser base directement
-    if (base % 3 === 0) {
-      loc = pj * jours;
-    } else {
-      loc = base;
-    }
-  } else {
-    loc = pj * jours;
-  }
-  
+  const price = SIM_TARIFS[simPack][simSeg][simDur];
+  const jours = simNbJours(simDur);
   const dep   = km === 0 ? 0 : Math.round(km * 2 * 0.5);
-  const total = loc + dep;
+  const total = price + dep;
   const acompte = Math.round(total * 0.30);
   const solde   = total - acompte;
-  document.getElementById('sim-duree-out').textContent  = jours === 1 ? '1 jour' : jours + ' jours';
-  document.getElementById('sim-km-out').textContent     = km === 0 ? 'Retrait portail · gratuit' : (km * 2) + ' km A/R · déplacement calculé';
+  const pj    = Math.round(price / jours);
+  document.getElementById('sim-km-out').textContent      = km === 0 ? 'Retrait portail · gratuit' : (km * 2) + ' km A/R · déplacement calculé';
   document.getElementById('sim-total-price').textContent = total + ' €';
-  document.getElementById('sim-palier').textContent      = simPalierLabel(jours);
+  document.getElementById('sim-palier').textContent      = simPalierLabel(simDur);
   document.getElementById('sim-pj-display').textContent  = pj + ' €';
-  document.getElementById('sim-d-loc').textContent       = loc + ' €';
+  document.getElementById('sim-d-loc').textContent       = price + ' €';
   document.getElementById('sim-d-dep').textContent       = km === 0 ? 'Gratuit · retrait portail' : dep + ' €';
   document.getElementById('sim-d-acompte').textContent   = acompte + ' €';
   document.getElementById('sim-d-solde').textContent     = solde + ' €';
