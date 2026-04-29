@@ -2034,6 +2034,12 @@ simUpdate();
           <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           <span data-i18n="f.submit">Envoyer ma demande de devis</span>
         </button>
+        <div style="margin-top:18px;padding:14px 16px;background:rgba(26,111,255,0.06);border:1px solid rgba(26,111,255,0.18);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.84rem;color:var(--mid);text-align:center;line-height:1.6">
+          Un souci avec le formulaire ? Joignez-nous directement :<br>
+          <a href="tel:0744980015" style="color:var(--blue);font-weight:700;text-decoration:none">📞 07 44 98 00 15</a>
+          &nbsp;·&nbsp;
+          <a href="mailto:contact@aintercom.fr" style="color:var(--blue);font-weight:700;text-decoration:none">✉ contact@aintercom.fr</a>
+        </div>
       </form>
       <div class="contact-aside rev">
         <div class="ccard">
@@ -3119,78 +3125,50 @@ document.addEventListener('DOMContentLoaded', function() {
     submitBtn.querySelector('span').textContent = 'Envoi en cours...';
     
     try {
-      // Récupérer les données du formulaire
       const formData = new FormData(form);
       const data = Object.fromEntries(formData.entries());
-      
-      // VALIDATION DES CHAMPS OBLIGATOIRES
+
+      // Champs obligatoires
       const requiredFields = ['nom', 'prenom', 'email'];
-      const missingFields = [];
-      
-      for (const field of requiredFields) {
-        if (!data[field] || data[field].trim() === '') {
-          missingFields.push(field);
-        }
-      }
-      
+      const missingFields = requiredFields.filter(f => !data[f] || data[f].trim() === '');
       if (missingFields.length > 0) {
-        const fieldNames = {
-          'nom': 'Nom',
-          'prenom': 'Prénom', 
-          'email': 'Email'
-        };
-        const missingNames = missingFields.map(f => fieldNames[f] || f);
-        throw new Error(`Veuillez remplir les champs obligatoires : ${missingNames.join(', ')}`);
+        const fieldNames = {nom:'Nom', prenom:'Prénom', email:'Email'};
+        throw new Error(`Veuillez remplir les champs obligatoires : ${missingFields.map(f => fieldNames[f]).join(', ')}`);
       }
-      
-      // Validation de l'email
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(data.email)) {
         throw new Error('Veuillez entrer une adresse email valide');
       }
-      
-      // Configuration Supabase
-      const SUPABASE_URL = 'https://wmbyccbyhtjzvsxxrsbe.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndtYnljY2J5aHRqenZzeHhyc2JlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3OTc0NDQsImV4cCI6MjA5MDM3MzQ0NH0.Pb3C36m05SygQcEhidH4fHXJHMvMw2XN7g5iCFkBGaM';
-      
-      // Appeler l'Edge Function
-      const response = await fetch(`${SUPABASE_URL}/functions/v1/send-devis-v2`, {
+
+      // Métadonnées Formsubmit
+      data._subject = `Nouvelle demande de devis AINTERCOM — ${data.nom} ${data.prenom}`;
+      data._template = 'table';
+      data._captcha = 'false';
+      data._replyto = data.email;
+      data._autoresponse = `Bonjour ${data.prenom},\n\nNous avons bien reçu votre demande de devis pour AINTERCOM. Nous vous répondons sous 24h ouvrées avec une proposition personnalisée.\n\nÀ très vite,\nMorgan — AINTERCOM\n07 44 98 00 15`;
+
+      // Envoi vers Formsubmit.co
+      const response = await fetch('https://formsubmit.co/ajax/contact@aintercom.fr', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-        },
+        headers: {'Content-Type':'application/json', 'Accept':'application/json'},
         body: JSON.stringify(data)
       });
-      
       const result = await response.json();
-      
-      if (result.success) {
-        // Afficher le message de succès en bleu
-        messageDiv.textContent = '✅ Message bien envoyé ! Nous vous répondrons sous 24h.';
+
+      if (result.success === 'true' || result.success === true) {
+        messageDiv.innerHTML = '✅ Message bien envoyé ! Nous vous répondons sous 24h.';
         messageDiv.style.display = 'block';
         messageDiv.style.backgroundColor = 'rgba(26, 111, 255, 0.1)';
         messageDiv.style.color = 'var(--blue)';
         messageDiv.style.border = '1px solid rgba(26, 111, 255, 0.3)';
-        
-        form.reset(); // Réinitialiser le formulaire
-        
-        // Faire défiler pour montrer le message
-        setTimeout(() => {
-          messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 100);
+        form.reset();
+        setTimeout(() => messageDiv.scrollIntoView({behavior:'smooth', block:'nearest'}), 100);
       } else {
-        // Afficher l'erreur en rouge
-        messageDiv.textContent = '❌ Erreur : ' + (result.error || 'Échec de l\'envoi');
-        messageDiv.style.display = 'block';
-        messageDiv.style.backgroundColor = 'rgba(220, 38, 38, 0.1)';
-        messageDiv.style.color = '#dc2626';
-        messageDiv.style.border = '1px solid rgba(220, 38, 38, 0.3)';
+        throw new Error(result.message || 'Échec de l\'envoi');
       }
-      
+
     } catch (error) {
-      // Afficher l'erreur en rouge
-      messageDiv.textContent = '❌ ' + error.message;
+      messageDiv.innerHTML = '❌ ' + error.message + '<br><br><strong>Joignez-nous directement :</strong><br>📞 <a href="tel:0744980015" style="color:#dc2626;font-weight:700">07 44 98 00 15</a> · ✉ <a href="mailto:contact@aintercom.fr" style="color:#dc2626;font-weight:700">contact@aintercom.fr</a>';
       messageDiv.style.display = 'block';
       messageDiv.style.backgroundColor = 'rgba(220, 38, 38, 0.1)';
       messageDiv.style.color = '#dc2626';
