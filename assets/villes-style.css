@@ -62,4 +62,36 @@ footer h3{font-family:'Sora',sans-serif;color:#fff;font-size:0.95rem;font-weight
 .footer-cities a:hover{background:#1A6FFF;color:#fff}
 .footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .footer-bottom a{color:#56B4FF}
-@media(max-width:720px){.stats-grid{grid-template-columns:1fr;gap:18px}.hero{padding:56px 0 50px}section.block{padding:50px 0}.cta-final{padding:50px 0}}
+@media(max-width:720px){
+.container{padding:0 18px}
+nav{padding:10px 0}
+.logo-img{height:42px !important}
+.nav-back{font-size:0.76rem}
+.hero{padding:48px 0 44px}
+.hero-badge{font-size:0.68rem;padding:6px 12px;margin-bottom:18px}
+.hero h1{font-size:2rem;line-height:1.1;margin-bottom:18px}
+.hero-sub{font-size:0.95rem;margin-bottom:26px}
+.hero-cta{flex-direction:column;align-items:stretch;gap:10px}
+.btn-primary,.btn-secondary{justify-content:center;font-size:0.88rem;padding:14px 22px}
+.stats{padding:24px 0}
+.stats-grid{grid-template-columns:1fr;gap:14px}
+.stat-num{font-size:1.6rem}
+.stat-lbl{font-size:0.78rem}
+section.block{padding:42px 0}
+h2.section-h{font-size:1.4rem;margin-bottom:16px}
+.section-p{font-size:0.93rem;margin-bottom:14px}
+.stag{font-size:0.66rem;padding:5px 12px;margin-bottom:14px}
+.packs-grid{grid-template-columns:1fr;gap:14px;margin-top:24px}
+.pack::after{display:none}
+.faq-item{padding:18px 20px}
+.faq-q{font-size:0.9rem}
+.faq-a{font-size:0.86rem}
+.cta-final{padding:48px 0}
+.cta-final h2{font-size:1.5rem}
+footer{padding:36px 0 24px}
+.footer-cities{gap:8px}
+.footer-cities a{font-size:0.78rem;padding:6px 12px}
+.footer-bottom{flex-direction:column;align-items:flex-start;gap:8px;font-size:0.78rem}
+.breadcrumbs{padding:10px 0;font-size:0.74rem}
+.breadcrumbs .sep{margin:0 6px}
+}
