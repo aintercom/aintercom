@@ -31,8 +31,15 @@ h2.section-h{font-family:'Sora',sans-serif;font-size:clamp(1.6rem,3.4vw,2.4rem);
 .section-p{font-size:1rem;color:#38384A;max-width:780px;margin-bottom:18px}
 .section-p strong{color:#07070F;font-weight:600}
 .packs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:34px}
-.pack{background:#fff;border:1px solid rgba(10,10,30,0.08);border-radius:18px;padding:0;transition:.3s;overflow:hidden;display:flex;flex-direction:column}
+.pack{background:#fff;border:1px solid rgba(10,10,30,0.08);border-radius:18px;padding:0;transition:.3s;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;cursor:pointer;position:relative}
 .pack:hover{border-color:#1A6FFF;transform:translateY(-3px);box-shadow:0 12px 30px rgba(26,111,255,0.08)}
+.pack::after{content:'Demander un devis →';position:absolute;bottom:24px;right:22px;font-family:'Sora',sans-serif;font-size:0.74rem;font-weight:700;color:#1A6FFF;opacity:0;transform:translateX(-6px);transition:.25s}
+.pack:hover::after{opacity:1;transform:translateX(0)}
+.breadcrumbs{padding:14px 0;background:#F5F5FA;border-bottom:1px solid rgba(10,10,30,0.06);font-size:0.78rem;color:#8A8A9E}
+.breadcrumbs a{color:#8A8A9E;text-decoration:none;transition:.15s}
+.breadcrumbs a:hover{color:#1A6FFF}
+.breadcrumbs .sep{margin:0 8px;color:rgba(10,10,30,0.25)}
+.breadcrumbs .current{color:#07070F;font-weight:600}
 .pack-img{aspect-ratio:16/10;background:#F5F5FA;overflow:hidden}
 .pack-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
 .pack:hover .pack-img img{transform:scale(1.05)}
