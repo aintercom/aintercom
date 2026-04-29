@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://aintercom.fr/</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://aintercom.fr/notice_aintercom.html</loc>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
+  <url><loc>https://aintercom.fr/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://aintercom.fr/meximieux/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aintercom.fr/lagnieu/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aintercom.fr/amberieu-en-bugey/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aintercom.fr/bourg-en-bresse/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aintercom.fr/lyon/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://aintercom.fr/villeurbanne/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aintercom.fr/tignieu/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aintercom.fr/saint-vulbas/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aintercom.fr/blyes/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aintercom.fr/belley/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aintercom.fr/oyonnax/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aintercom.fr/epinac/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://aintercom.fr/annecy/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aintercom.fr/macon/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aintercom.fr/chambery/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aintercom.fr/aix-les-bains/</loc><lastmod>2026-04-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aintercom.fr/notice_aintercom.html</loc><lastmod>2026-04-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
