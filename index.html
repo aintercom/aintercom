@@ -1688,7 +1688,7 @@ function simCalcPrice(pack, seg, jours) {
 function simPalierLabel(pack, seg, jours) {
   const price = simCalcPrice(pack, seg, jours);
   const pj = Math.round(price / jours);
-  const label = jours <= 1 ? 'Journée' : jours <= 3 ? 'Week-end' : jours <= 7 ? 'Semaine' : 'Mensuel';
+  const label = jours <= 1 ? 'Journée' : jours === 2 ? '2 jours' : jours === 3 ? 'Week-end' : jours <= 7 ? 'Semaine' : 'Mensuel';
   return jours <= 1 ? label : label + ' · ' + pj + '€/j';
 }
 // État : km aller simple entre dépôt et lieu de livraison (simulateur Tarifs)
