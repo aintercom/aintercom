@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AINTERCOM RÉSEAU · Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="/assets/favicon/favicon_aintercom.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#1A6FFF;
+  --grad:linear-gradient(135deg,#1A6FFF 0%,#56B4FF 100%);
+  --black:#07070F;
+  --bg:#0E0E1A;
+  --bg2:#16162A;
+  --bg3:#1F1F38;
+  --border:rgba(255,255,255,0.08);
+  --border-md:rgba(255,255,255,0.14);
+  --white:#fff;
+  --muted:#8A8AA8;
+  --green:#16a34a;
+  --red:#dc2626;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer;border:none;background:none}
+a{color:inherit;text-decoration:none}
+
+/* ── LOGIN ── */
+#login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-box{background:var(--bg2);border:1px solid var(--border);padding:40px;width:100%;max-width:380px}
+.login-brand{font-family:'Sora',sans-serif;font-weight:900;font-size:1rem;letter-spacing:-0.04em;margin-bottom:4px}
+.login-brand span{display:block;color:var(--blue);font-size:0.66rem;letter-spacing:0.2em;font-weight:700;margin-top:2px}
+.login-box h1{font-family:'Sora',sans-serif;font-weight:800;font-size:1.4rem;margin:24px 0 8px;letter-spacing:-0.02em}
+.login-box p{color:var(--muted);font-size:0.88rem;margin-bottom:24px}
+.login-box input{width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border-md);color:var(--white);outline:none;font-size:0.92rem;letter-spacing:0.06em}
+.login-box input:focus{border-color:var(--blue)}
+.login-box button{margin-top:12px;width:100%;padding:14px;background:var(--blue);color:var(--white);font-family:'Sora',sans-serif;font-weight:700;font-size:0.92rem;letter-spacing:0.04em;transition:.2s}
+.login-box button:hover{background:#56B4FF}
+.login-error{color:var(--red);font-size:0.82rem;margin-top:10px;display:none}
+
+/* ── APP LAYOUT ── */
+#app{display:none;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.topbar-brand{font-family:'Sora',sans-serif;font-weight:900;font-size:0.95rem;letter-spacing:-0.04em;display:flex;align-items:baseline;gap:8px}
+.topbar-brand span{color:var(--blue);font-size:0.62rem;letter-spacing:0.22em;font-weight:700}
+.topbar-status{display:flex;align-items:center;gap:14px}
+.live-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(22,163,74,0.12);border:1px solid rgba(22,163,74,0.3);padding:6px 12px;border-radius:100px;font-family:'Sora',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green)}
+.live-badge::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.btn-secondary{font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:600;color:var(--muted);padding:7px 14px;border:1px solid var(--border-md);transition:.2s;background:transparent}
+.btn-secondary:hover{color:var(--white);border-color:var(--white)}
+
+.layout{display:grid;grid-template-columns:1.4fr 1fr;gap:0;min-height:calc(100vh - 60px)}
+.col-edit{padding:32px 28px;border-right:1px solid var(--border);overflow-y:auto}
+.col-preview{padding:32px 28px;background:var(--bg2);position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto}
+
+/* ── EDITOR ── */
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.section-title{font-family:'Sora',sans-serif;font-size:0.7rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+.section-count{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--muted)}
+
+.playlist-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.entry{background:var(--bg2);border:1px solid var(--border);padding:14px;display:grid;grid-template-columns:48px 80px 1fr auto;gap:14px;align-items:center;transition:.2s}
+.entry:hover{border-color:var(--border-md)}
+.entry-handle{display:flex;flex-direction:column;gap:2px}
+.entry-handle button{width:24px;height:18px;background:var(--bg3);color:var(--muted);font-size:0.68rem;display:flex;align-items:center;justify-content:center;transition:.15s}
+.entry-handle button:hover{background:var(--blue);color:var(--white)}
+.entry-handle button:disabled{opacity:0.3;cursor:not-allowed}
+.entry-thumb{width:80px;height:80px;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:0.6rem;color:var(--muted);font-family:'Sora',sans-serif;font-weight:700;letter-spacing:0.1em;text-align:center;padding:6px}
+.entry-thumb img,.entry-thumb video{width:100%;height:100%;object-fit:cover}
+.entry-thumb.gradient{color:rgba(255,255,255,0.85)}
+.entry-info{min-width:0}
+.entry-title{font-family:'Sora',sans-serif;font-weight:700;font-size:0.92rem;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.entry-meta{font-size:0.72rem;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.entry-meta span{display:inline-block;padding:2px 6px;background:var(--bg3);border-radius:3px;margin-right:4px}
+.entry-actions{display:flex;gap:6px}
+.entry-btn{padding:6px 10px;font-size:0.74rem;font-weight:600;font-family:'Sora',sans-serif;letter-spacing:0.04em;background:var(--bg3);transition:.15s}
+.entry-btn:hover{background:var(--white);color:var(--bg)}
+.entry-btn.del:hover{background:var(--red);color:var(--white)}
+
+.empty-state{padding:32px;text-align:center;color:var(--muted);background:var(--bg2);border:1px dashed var(--border-md);font-size:0.88rem}
+
+/* ── ADD / EDIT FORM ── */
+.add-btn{width:100%;padding:14px;background:var(--blue);color:var(--white);font-family:'Sora',sans-serif;font-weight:700;font-size:0.86rem;letter-spacing:0.04em;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.add-btn:hover{background:#56B4FF}
+
+.editor-form{background:var(--bg2);border:1px solid var(--blue);padding:24px;margin-top:14px;display:none}
+.editor-form.active{display:block}
+.editor-form-head{font-family:'Sora',sans-serif;font-weight:800;font-size:1.05rem;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+.type-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-bottom:18px;border:1px solid var(--border-md)}
+.type-tabs button{padding:10px;background:var(--bg);font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.05em;color:var(--muted);transition:.15s;border-right:1px solid var(--border-md)}
+.type-tabs button:last-child{border-right:none}
+.type-tabs button.active{background:var(--blue);color:var(--white)}
+.type-tabs button:hover:not(.active){background:var(--bg3);color:var(--white)}
+
+.field{margin-bottom:14px}
+.field label{display:block;font-family:'Sora',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border-md);color:var(--white);outline:none;font-size:0.88rem;font-family:'DM Sans',sans-serif;transition:.15s}
+.field input[type="number"]{font-family:'JetBrains Mono',monospace}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--blue)}
+.field textarea{resize:vertical;min-height:64px}
+.field-hint{font-size:0.72rem;color:var(--muted);margin-top:4px;font-style:italic}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.color-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.color-row .field{margin:0}
+.color-row input[type="color"]{width:100%;height:42px;padding:2px;border:1px solid var(--border-md);background:var(--bg);cursor:pointer}
+
+.editor-actions{display:flex;gap:8px;margin-top:18px}
+.editor-actions button{padding:11px 18px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.84rem;letter-spacing:0.04em;transition:.2s;flex:1}
+.btn-cancel{background:var(--bg3);color:var(--muted)}
+.btn-cancel:hover{background:var(--bg);color:var(--white)}
+.btn-save{background:var(--green);color:var(--white)}
+.btn-save:hover{background:#22c55e}
+
+/* ── PUBLISH ── */
+.publish{margin-top:36px;padding:24px;background:var(--bg2);border:1px solid var(--border)}
+.publish h3{font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.publish p{font-size:0.86rem;color:var(--muted);margin-bottom:14px;line-height:1.6}
+.json-preview{background:var(--bg);border:1px solid var(--border);padding:14px;font-family:'JetBrains Mono',monospace;font-size:0.74rem;line-height:1.5;color:#a8b3c5;max-height:240px;overflow:auto;white-space:pre;border-radius:0;margin-bottom:14px;tab-size:2}
+.publish-actions{display:flex;gap:8px;flex-wrap:wrap}
+.publish-actions button,.publish-actions a{padding:11px 18px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.04em;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-copy{background:var(--white);color:var(--bg)}
+.btn-copy:hover{background:var(--muted)}
+.btn-download{background:var(--bg3);color:var(--white)}
+.btn-download:hover{background:var(--bg)}
+.btn-github{background:var(--blue);color:var(--white)}
+.btn-github:hover{background:#56B4FF}
+
+/* ── PREVIEW (right column) ── */
+.preview-head{margin-bottom:20px}
+.preview-tag{font-family:'Sora',sans-serif;font-size:0.7rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.preview-head h2{font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-0.02em}
+.preview-meta{font-size:0.78rem;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:6px}
+.tv-mock{width:100%;max-width:340px;margin:0 auto;background:#0a0a14;border-radius:12px;padding:14px 14px 22px;position:relative;box-shadow:0 32px 60px rgba(0,0,0,0.5)}
+.tv-mock::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:50px;height:3px;background:#1a1a2a;border-radius:2px}
+.tv-mock-screen{width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;position:relative;border-radius:3px}
+.preview-slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;display:flex;align-items:center;justify-content:center}
+.preview-slide.active{opacity:1;z-index:2}
+.preview-slide img,.preview-slide video{width:100%;height:100%;object-fit:cover}
+.preview-slide.gradient{padding:20px}
+.preview-slide-content{text-align:center;color:#fff;width:100%}
+.ps-eyebrow{font-family:'Sora',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;opacity:0.85;margin-bottom:14px}
+.ps-headline{font-family:'Sora',sans-serif;font-weight:900;font-size:1.7rem;line-height:0.95;letter-spacing:-0.03em;margin-bottom:14px;white-space:pre-line}
+.ps-footer{font-family:'Sora',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.04em;background:rgba(0,0,0,0.3);padding:6px 12px;border-radius:3px;display:inline-block}
+.tv-mock-plate{margin-top:14px;background:var(--black);color:var(--white);padding:8px 18px;font-family:'Sora',sans-serif;font-weight:900;font-size:0.7rem;letter-spacing:0.3em;text-align:center;display:inline-flex;align-items:center;gap:8px;left:50%;position:relative;transform:translateX(-50%)}
+.tv-mock-plate::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse 1.6s infinite}
+
+.preview-info{margin-top:24px;background:var(--bg);border:1px solid var(--border);padding:16px}
+.preview-info-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.78rem}
+.preview-info-row:last-child{border-bottom:none}
+.preview-info-row span{color:var(--muted)}
+.preview-info-row strong{font-family:'Sora',sans-serif;font-weight:700}
+
+.preview-link{margin-top:16px;text-align:center}
+.preview-link a{display:inline-flex;align-items:center;gap:6px;font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:700;color:var(--blue);padding:10px 16px;border:1px solid var(--blue);transition:.2s}
+.preview-link a:hover{background:var(--blue);color:var(--white)}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .col-preview{position:relative;top:auto;height:auto}
+  .entry{grid-template-columns:48px 60px 1fr;gap:10px}
+  .entry-actions{grid-column:1/-1;display:flex;gap:6px}
+  .entry-thumb{width:60px;height:60px}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="login-box">
+    <div class="login-brand">AINTERCOM<span>RÉSEAU · ADMIN</span></div>
+    <h1>Accès restreint</h1>
+    <p>Saisissez le mot de passe administrateur pour gérer la diffusion.</p>
+    <input type="password" id="pwd" placeholder="Mot de passe" autocomplete="current-password">
+    <div class="login-error" id="loginError">Mot de passe incorrect</div>
+    <button id="loginBtn">Accéder à l'admin</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-brand">AINTERCOM <span>· RÉSEAU · ADMIN</span></div>
+    <div class="topbar-status">
+      <div class="live-badge">Diffusion live</div>
+      <button class="btn-secondary" id="logoutBtn">Déconnexion</button>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <!-- COL EDITOR -->
+    <div class="col-edit">
+
+      <div class="section-head">
+        <span class="section-title">Playlist active</span>
+        <span class="section-count" id="entryCount">0 visuels</span>
+      </div>
+
+      <div class="playlist-list" id="playlist"></div>
+
+      <button class="add-btn" id="addBtn">+ Ajouter un visuel</button>
+
+      <!-- INLINE FORM -->
+      <div class="editor-form" id="editorForm">
+        <div class="editor-form-head">
+          <span id="formTitle">Nouveau visuel</span>
+        </div>
+
+        <div class="type-tabs">
+          <button data-type="image" class="active">Image</button>
+          <button data-type="video">Vidéo</button>
+          <button data-type="gradient">Gradient (test)</button>
+        </div>
+
+        <div class="field">
+          <label>Titre interne (utilisé en gestion)</label>
+          <input type="text" id="fTitle" placeholder="Ex : Gala Étoiles Meximieux">
+        </div>
+
+        <!-- Image / Video fields -->
+        <div id="mediaFields">
+          <div class="field">
+            <label>URL Bunny.net (image ou vidéo)</label>
+            <input type="url" id="fSrc" placeholder="https://enjoylife.b-cdn.net/Aintercom/...">
+            <div class="field-hint">Format requis : 1080×1920 portrait. Vidéo MP4 max 15s, sans son.</div>
+          </div>
+        </div>
+
+        <!-- Gradient fields -->
+        <div id="gradientFields" style="display:none">
+          <div class="field">
+            <label>Eyebrow (date · ville)</label>
+            <input type="text" id="fEyebrow" placeholder="15 JUIN 2026 · PÉROUGES">
+          </div>
+          <div class="field">
+            <label>Headline (titre principal — \n pour saut de ligne)</label>
+            <textarea id="fHeadline" placeholder="Brocante&#10;de printemps"></textarea>
+          </div>
+          <div class="field">
+            <label>Pied (lieu, horaire)</label>
+            <input type="text" id="fFooter" placeholder="Place de la Halle · 8h–18h">
+          </div>
+          <div class="color-row">
+            <div class="field">
+              <label>Couleur 1</label>
+              <input type="color" id="fColor1" value="#1A6FFF">
+            </div>
+            <div class="field">
+              <label>Couleur 2</label>
+              <input type="color" id="fColor2" value="#56B4FF">
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Durée d'affichage (secondes)</label>
+          <input type="number" id="fDuration" value="8" min="3" max="60">
+        </div>
+
+        <div class="editor-actions">
+          <button class="btn-cancel" id="cancelBtn">Annuler</button>
+          <button class="btn-save" id="saveBtn">Enregistrer</button>
+        </div>
+      </div>
+
+      <!-- PUBLISH -->
+      <div class="publish">
+        <h3>Publier sur le réseau</h3>
+        <p>Quand ta playlist est prête, copie le JSON ci-dessous et colle-le dans <code>display/playlist.json</code> sur GitHub. Les écrans et la page publique sont synchronisés en moins de 60 secondes.</p>
+        <div class="json-preview" id="jsonPreview"></div>
+        <div class="publish-actions">
+          <button class="btn-copy" id="copyBtn">📋 Copier le JSON</button>
+          <button class="btn-download" id="downloadBtn">⬇ Télécharger playlist.json</button>
+          <a class="btn-github" href="https://github.com/aintercom/aintercom/edit/main/display/playlist.json" target="_blank" rel="noopener">↗ Ouvrir GitHub</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COL PREVIEW -->
+    <div class="col-preview">
+      <div class="preview-head">
+        <span class="preview-tag">Aperçu écran TV</span>
+        <h2>Rendu en direct</h2>
+        <div class="preview-meta">Cycle complet · <span id="cycleTotal">0s</span></div>
+      </div>
+
+      <div class="tv-mock">
+        <div class="tv-mock-screen" id="tvMockScreen"></div>
+      </div>
+      <div style="text-align:center"><div class="tv-mock-plate">AINTERCOM</div></div>
+
+      <div class="preview-info">
+        <div class="preview-info-row"><span>Visuel actif</span><strong id="activeName">—</strong></div>
+        <div class="preview-info-row"><span>Type</span><strong id="activeType">—</strong></div>
+        <div class="preview-info-row"><span>Position</span><strong id="activePos">—</strong></div>
+        <div class="preview-info-row"><span>Réseau</span><strong>6 écrans synchronisés</strong></div>
+      </div>
+
+      <div class="preview-link">
+        <a href="screen.html?rotate=90" target="_blank" rel="noopener">↗ Ouvrir l'écran TV en plein écran</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ── CONFIG ── */
+const ADMIN_PASSWORD = 'aintercom2026'; // À changer si besoin
+const PLAYLIST_URL = 'playlist.json';
+const GITHUB_EDIT_URL = 'https://github.com/aintercom/aintercom/edit/main/display/playlist.json';
+
+/* ── STATE ── */
+let playlist = [];
+let networkMeta = { active_screens: 6 };
+let editingId = null;
+let currentType = 'image';
+let cycleTimer = null;
+let activeIdx = 0;
+
+/* ── LOGIN ── */
+const loginEl = document.getElementById('login');
+const appEl = document.getElementById('app');
+const pwdInput = document.getElementById('pwd');
+const loginErr = document.getElementById('loginError');
+
+function attemptLogin(){
+  if (pwdInput.value === ADMIN_PASSWORD){
+    sessionStorage.setItem('aic-admin', '1');
+    showApp();
+  } else {
+    loginErr.style.display = 'block';
+    pwdInput.value = '';
+    pwdInput.focus();
+  }
+}
+document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+pwdInput.addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); });
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  sessionStorage.removeItem('aic-admin');
+  location.reload();
+});
+if (sessionStorage.getItem('aic-admin') === '1') showApp();
+else pwdInput.focus();
+
+function showApp(){
+  loginEl.style.display = 'none';
+  appEl.style.display = 'block';
+  loadPlaylist();
+}
+
+/* ── LOAD ── */
+async function loadPlaylist(){
+  try {
+    const res = await fetch(PLAYLIST_URL + '?t=' + Date.now(), {cache:'no-store'});
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    networkMeta = { ...networkMeta, ...data, visuals: undefined };
+    playlist = (data.visuals || []).map(v => ({...v, id: v.id || genId()}));
+  } catch(e) {
+    playlist = [];
+  }
+  render();
+}
+
+function genId(){
+  return 'v-' + Date.now() + '-' + Math.random().toString(36).slice(2,7);
+}
+
+/* ── RENDER ── */
+const playlistEl = document.getElementById('playlist');
+const entryCountEl = document.getElementById('entryCount');
+const cycleTotalEl = document.getElementById('cycleTotal');
+
+function render(){
+  // List
+  if (playlist.length === 0){
+    playlistEl.innerHTML = '<div class="empty-state">Aucun visuel pour le moment. Cliquez sur "Ajouter un visuel" ci-dessous.</div>';
+  } else {
+    playlistEl.innerHTML = playlist.map((v, i) => entryHTML(v, i)).join('');
+    bindEntryEvents();
+  }
+  entryCountEl.textContent = playlist.length + ' visuel' + (playlist.length > 1 ? 's' : '');
+  const total = playlist.reduce((acc, v) => acc + (v.duration || 8), 0);
+  cycleTotalEl.textContent = total + 's';
+  updateJsonPreview();
+  rebuildPreview();
+}
+
+function entryHTML(v, i){
+  let thumb = '';
+  if (v.type === 'image' && v.src){
+    thumb = `<img src="${escapeHtml(v.src)}" alt="">`;
+  } else if (v.type === 'video' && v.src){
+    thumb = `<video src="${escapeHtml(v.src)}" muted></video>`;
+  } else {
+    const c1 = (v.gradient && v.gradient[0]) || '#1A6FFF';
+    const c2 = (v.gradient && v.gradient[1]) || '#56B4FF';
+    return `
+      <div class="entry" data-id="${v.id}">
+        <div class="entry-handle">
+          <button data-act="up" ${i===0?'disabled':''}>▲</button>
+          <button data-act="down" ${i===playlist.length-1?'disabled':''}>▼</button>
+        </div>
+        <div class="entry-thumb gradient" style="background:linear-gradient(135deg,${c1} 0%,${c2} 100%)">${escapeHtml(v.title||'').slice(0,16)}</div>
+        <div class="entry-info">
+          <div class="entry-title">${escapeHtml(v.title||'(sans titre)')}</div>
+          <div class="entry-meta"><span>GRADIENT</span><span>${v.duration||8}s</span></div>
+        </div>
+        <div class="entry-actions">
+          <button class="entry-btn" data-act="edit">Éditer</button>
+          <button class="entry-btn del" data-act="del">×</button>
+        </div>
+      </div>
+    `;
+  }
+  return `
+    <div class="entry" data-id="${v.id}">
+      <div class="entry-handle">
+        <button data-act="up" ${i===0?'disabled':''}>▲</button>
+        <button data-act="down" ${i===playlist.length-1?'disabled':''}>▼</button>
+      </div>
+      <div class="entry-thumb">${thumb}</div>
+      <div class="entry-info">
+        <div class="entry-title">${escapeHtml(v.title||'(sans titre)')}</div>
+        <div class="entry-meta"><span>${(v.type||'').toUpperCase()}</span><span>${v.duration||8}s</span></div>
+      </div>
+      <div class="entry-actions">
+        <button class="entry-btn" data-act="edit">Éditer</button>
+        <button class="entry-btn del" data-act="del">×</button>
+      </div>
+    </div>
+  `;
+}
+
+function bindEntryEvents(){
+  playlistEl.querySelectorAll('.entry').forEach(el => {
+    const id = el.dataset.id;
+    el.querySelectorAll('button[data-act]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const act = btn.dataset.act;
+        const idx = playlist.findIndex(v => v.id === id);
+        if (idx === -1) return;
+        if (act === 'up' && idx > 0){ swap(idx, idx-1); }
+        else if (act === 'down' && idx < playlist.length-1){ swap(idx, idx+1); }
+        else if (act === 'edit'){ openEditor(playlist[idx]); }
+        else if (act === 'del'){ if (confirm('Supprimer "' + (playlist[idx].title||'ce visuel') + '" ?')) { playlist.splice(idx,1); render(); } }
+      });
+    });
+  });
+}
+
+function swap(a, b){
+  const tmp = playlist[a];
+  playlist[a] = playlist[b];
+  playlist[b] = tmp;
+  render();
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ── EDITOR ── */
+const editorForm = document.getElementById('editorForm');
+const formTitle = document.getElementById('formTitle');
+const fTitle = document.getElementById('fTitle');
+const fSrc = document.getElementById('fSrc');
+const fEyebrow = document.getElementById('fEyebrow');
+const fHeadline = document.getElementById('fHeadline');
+const fFooter = document.getElementById('fFooter');
+const fColor1 = document.getElementById('fColor1');
+const fColor2 = document.getElementById('fColor2');
+const fDuration = document.getElementById('fDuration');
+const mediaFields = document.getElementById('mediaFields');
+const gradientFields = document.getElementById('gradientFields');
+
+document.getElementById('addBtn').addEventListener('click', () => openEditor(null));
+document.getElementById('cancelBtn').addEventListener('click', closeEditor);
+document.getElementById('saveBtn').addEventListener('click', saveEntry);
+
+document.querySelectorAll('.type-tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.type-tabs button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentType = btn.dataset.type;
+    toggleTypeFields();
+  });
+});
+
+function toggleTypeFields(){
+  if (currentType === 'gradient'){
+    mediaFields.style.display = 'none';
+    gradientFields.style.display = 'block';
+  } else {
+    mediaFields.style.display = 'block';
+    gradientFields.style.display = 'none';
+  }
+}
+
+function openEditor(entry){
+  editingId = entry ? entry.id : null;
+  formTitle.textContent = entry ? 'Éditer : ' + (entry.title || '') : 'Nouveau visuel';
+  // Set type
+  const t = entry ? (entry.type || 'image') : 'image';
+  currentType = t;
+  document.querySelectorAll('.type-tabs button').forEach(b => b.classList.toggle('active', b.dataset.type === t));
+  toggleTypeFields();
+  // Fill values
+  fTitle.value = entry ? (entry.title || '') : '';
+  fSrc.value = entry ? (entry.src || '') : '';
+  fEyebrow.value = entry ? (entry.eyebrow || '') : '';
+  fHeadline.value = entry ? (entry.headline || '') : '';
+  fFooter.value = entry ? (entry.footer || '') : '';
+  fColor1.value = (entry && entry.gradient && entry.gradient[0]) || '#1A6FFF';
+  fColor2.value = (entry && entry.gradient && entry.gradient[1]) || '#56B4FF';
+  fDuration.value = entry ? (entry.duration || 8) : 8;
+  editorForm.classList.add('active');
+  editorForm.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function closeEditor(){
+  editingId = null;
+  editorForm.classList.remove('active');
+}
+
+function saveEntry(){
+  const title = fTitle.value.trim();
+  if (!title){ alert('Le titre est requis.'); fTitle.focus(); return; }
+  const duration = parseInt(fDuration.value, 10) || 8;
+
+  let entry = { id: editingId || genId(), title, type: currentType, duration };
+
+  if (currentType === 'gradient'){
+    if (!fHeadline.value.trim()){ alert('Le headline est requis pour un gradient.'); fHeadline.focus(); return; }
+    entry.eyebrow = fEyebrow.value.trim();
+    entry.headline = fHeadline.value.trim();
+    entry.footer = fFooter.value.trim();
+    entry.gradient = [fColor1.value, fColor2.value];
+  } else {
+    const src = fSrc.value.trim();
+    if (!src){ alert('L\'URL Bunny.net est requise.'); fSrc.focus(); return; }
+    entry.src = src;
+  }
+
+  if (editingId){
+    const idx = playlist.findIndex(v => v.id === editingId);
+    if (idx !== -1) playlist[idx] = entry;
+  } else {
+    playlist.push(entry);
+  }
+  closeEditor();
+  render();
+}
+
+/* ── JSON OUTPUT ── */
+const jsonPreviewEl = document.getElementById('jsonPreview');
+
+function buildJson(){
+  return {
+    network: networkMeta.network || "AINTERCOM RÉSEAU · Plaine de l'Ain",
+    active_screens: networkMeta.active_screens || 6,
+    updated_at: new Date().toISOString(),
+    default_duration: networkMeta.default_duration || 8,
+    visuals: playlist.map(v => {
+      const out = { id: v.id, title: v.title, type: v.type, duration: v.duration };
+      if (v.type === 'gradient'){
+        out.gradient = v.gradient;
+        if (v.eyebrow) out.eyebrow = v.eyebrow;
+        if (v.headline) out.headline = v.headline;
+        if (v.footer) out.footer = v.footer;
+      } else if (v.src){
+        out.src = v.src;
+      }
+      return out;
+    })
+  };
+}
+
+function updateJsonPreview(){
+  const json = buildJson();
+  jsonPreviewEl.textContent = JSON.stringify(json, null, 2);
+}
+
+document.getElementById('copyBtn').addEventListener('click', async () => {
+  const text = JSON.stringify(buildJson(), null, 2);
+  try {
+    await navigator.clipboard.writeText(text);
+    const btn = document.getElementById('copyBtn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copié !';
+    setTimeout(() => btn.textContent = orig, 1500);
+  } catch(e){
+    alert('Copie impossible. Sélectionne le JSON manuellement.');
+  }
+});
+
+document.getElementById('downloadBtn').addEventListener('click', () => {
+  const text = JSON.stringify(buildJson(), null, 2);
+  const blob = new Blob([text], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'playlist.json';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+/* ── LIVE PREVIEW (right column TV mock) ── */
+const tvMock = document.getElementById('tvMockScreen');
+const activeName = document.getElementById('activeName');
+const activeType = document.getElementById('activeType');
+const activePos = document.getElementById('activePos');
+
+function rebuildPreview(){
+  clearTimeout(cycleTimer);
+  tvMock.innerHTML = '';
+  if (playlist.length === 0){
+    activeName.textContent = '—';
+    activeType.textContent = '—';
+    activePos.textContent = '—';
+    return;
+  }
+  playlist.forEach(v => tvMock.appendChild(buildPreviewSlide(v)));
+  activeIdx = 0;
+  setActive(0);
+  cycle();
+}
+
+function buildPreviewSlide(v){
+  const slide = document.createElement('div');
+  slide.className = 'preview-slide ' + (v.type || 'gradient');
+  if (v.type === 'image' && v.src){
+    const img = document.createElement('img');
+    img.src = v.src; img.alt = '';
+    slide.appendChild(img);
+  } else if (v.type === 'video' && v.src){
+    const vid = document.createElement('video');
+    vid.src = v.src; vid.muted = true; vid.autoplay = true; vid.loop = true; vid.playsInline = true;
+    slide.appendChild(vid);
+  } else {
+    const c1 = (v.gradient && v.gradient[0]) || '#1A6FFF';
+    const c2 = (v.gradient && v.gradient[1]) || '#56B4FF';
+    slide.style.background = `linear-gradient(135deg,${c1} 0%,${c2} 100%)`;
+    const content = document.createElement('div');
+    content.className = 'preview-slide-content';
+    if (v.eyebrow){
+      const e = document.createElement('div');
+      e.className = 'ps-eyebrow';
+      e.textContent = v.eyebrow;
+      content.appendChild(e);
+    }
+    if (v.headline){
+      const h = document.createElement('div');
+      h.className = 'ps-headline';
+      h.textContent = v.headline;
+      content.appendChild(h);
+    }
+    if (v.footer){
+      const f = document.createElement('div');
+      f.innerHTML = '<span class="ps-footer">' + escapeHtml(v.footer) + '</span>';
+      content.appendChild(f);
+    }
+    slide.appendChild(content);
+  }
+  return slide;
+}
+
+function setActive(i){
+  const slides = tvMock.querySelectorAll('.preview-slide');
+  slides.forEach((s,k) => s.classList.toggle('active', k === i));
+  const v = playlist[i];
+  if (v){
+    activeName.textContent = v.title || '—';
+    activeType.textContent = (v.type || 'gradient').toUpperCase();
+    activePos.textContent = (i+1) + ' / ' + playlist.length;
+  }
+}
+
+function cycle(){
+  if (playlist.length === 0) return;
+  const v = playlist[activeIdx];
+  const ms = (v.duration || 8) * 1000;
+  cycleTimer = setTimeout(() => {
+    activeIdx = (activeIdx + 1) % playlist.length;
+    setActive(activeIdx);
+    cycle();
+  }, ms);
+}
+
+</script>
+
+</body>
+</html>

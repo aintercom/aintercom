@@ -1,0 +1,48 @@
+{
+  "network": "AINTERCOM RÉSEAU · Plaine de l'Ain",
+  "active_screens": 6,
+  "updated_at": "2026-04-30T18:00:00+02:00",
+  "default_duration": 8,
+  "visuals": [
+    {
+      "id": "demo-brocante-perouges",
+      "title": "Brocante de Pérouges",
+      "type": "gradient",
+      "duration": 8,
+      "gradient": ["#1A6FFF", "#56B4FF"],
+      "eyebrow": "15 JUIN 2026 · PÉROUGES",
+      "headline": "Brocante\nde printemps",
+      "footer": "Place de la Halle · 8h–18h"
+    },
+    {
+      "id": "demo-gala-meximieux",
+      "title": "Gala de danse Étoiles",
+      "type": "gradient",
+      "duration": 8,
+      "gradient": ["#7c3aed", "#ec4899"],
+      "eyebrow": "22 JUIN 2026 · MEXIMIEUX",
+      "headline": "Gala\nÉtoiles",
+      "footer": "Salle des fêtes · 20h30"
+    },
+    {
+      "id": "demo-trail-lagnieu",
+      "title": "Trail des 3 châteaux",
+      "type": "gradient",
+      "duration": 8,
+      "gradient": ["#059669", "#10b981"],
+      "eyebrow": "29 JUIN 2026 · LAGNIEU",
+      "headline": "Trail\ndes 3 châteaux",
+      "footer": "12 km · 6 km · 2 km enfants"
+    },
+    {
+      "id": "demo-fete-amberieu",
+      "title": "Fête de village d'Ambérieu",
+      "type": "gradient",
+      "duration": 8,
+      "gradient": ["#ea580c", "#f59e0b"],
+      "eyebrow": "5 JUILLET 2026 · AMBÉRIEU",
+      "headline": "Fête\ndu village",
+      "footer": "Concerts · Feu d'artifice · Bal"
+    }
+  ]
+}

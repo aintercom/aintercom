@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<title>AINTERCOM RÉSEAU · Écran</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;width:100%;background:#000;overflow:hidden;font-family:'Sora',sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+body{position:relative;cursor:none;display:flex;align-items:center;justify-content:center}
+
+/* ── PORTRAIT STAGE (9:16 lock) ── */
+.portrait-stage{position:relative;background:#000;overflow:hidden;aspect-ratio:9/16}
+@media (min-aspect-ratio: 9/16){
+  .portrait-stage{height:100vh;width:auto}
+}
+@media (max-aspect-ratio: 9/16){
+  .portrait-stage{width:100vw;height:auto}
+}
+
+/* ── HARDWARE ROTATION (URL param ?rotate=90 or 270) ── */
+body.rotated{display:block;width:100vh;height:100vw;transform-origin:top left}
+body.rotate-90{transform:translateX(100vw) rotate(90deg)}
+body.rotate-270{transform:translateY(100vh) rotate(-90deg)}
+body.rotated .portrait-stage{width:100%;height:100%;aspect-ratio:auto}
+
+#stage{position:absolute;inset:0;background:#000}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
+.slide.active{opacity:1;z-index:2}
+
+/* Gradient slide */
+.slide-gradient{display:flex;align-items:center;justify-content:center;padding:6vh 6vw}
+.slide-gradient .content{text-align:center;width:100%;max-width:90%}
+.eyebrow{font-size:clamp(0.9rem,2.2vw,1.6rem);font-weight:700;letter-spacing:0.22em;text-transform:uppercase;opacity:0.85;margin-bottom:6vh}
+.headline{font-weight:900;font-size:clamp(3rem,11vw,9rem);line-height:0.92;letter-spacing:-0.04em;margin-bottom:6vh;white-space:pre-line}
+.footer-line{display:inline-block;font-size:clamp(0.95rem,2.4vw,1.8rem);font-weight:600;letter-spacing:0.05em;background:rgba(0,0,0,0.28);padding:14px 28px;border-radius:6px}
+
+/* Image / Video slide */
+.slide-media{display:flex;align-items:center;justify-content:center;background:#000}
+.slide-media img,.slide-media video{width:100%;height:100%;object-fit:cover}
+
+/* ── BRAND PLATE ── */
+.brand-plate{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:10;background:rgba(0,0,0,0.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#fff;padding:10px 22px;font-weight:900;font-size:0.78rem;letter-spacing:0.32em;border-radius:2px;display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,0.12)}
+.brand-plate::before{content:'';width:6px;height:6px;background:#16a34a;border-radius:50%;box-shadow:0 0 10px #16a34a;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* ── ERROR / LOADING ── */
+.status{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0a0a14;color:rgba(255,255,255,0.6);z-index:50;text-align:center;padding:40px}
+.status h1{font-size:clamp(1.4rem,3.5vw,2.2rem);font-weight:800;margin-bottom:12px;color:#fff}
+.status p{font-size:clamp(0.9rem,1.6vw,1.1rem);max-width:600px;line-height:1.6}
+.status-hidden{display:none}
+.spinner{width:54px;height:54px;border:3px solid rgba(255,255,255,0.15);border-top-color:#1A6FFF;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:24px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Hide cursor */
+*{cursor:none !important}
+</style>
+</head>
+<body>
+
+<div class="portrait-stage">
+  <div id="stage"></div>
+
+  <div class="brand-plate">AINTERCOM</div>
+
+  <div class="status" id="status">
+    <div class="spinner"></div>
+    <h1>AINTERCOM RÉSEAU</h1>
+    <p>Connexion au réseau de diffusion…</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ── ROTATION via URL param ?rotate=90 or 270
+  const params = new URLSearchParams(location.search);
+  const rot = params.get('rotate');
+  if (rot === '90'){ document.body.classList.add('rotated','rotate-90'); }
+  else if (rot === '270' || rot === '-90'){ document.body.classList.add('rotated','rotate-270'); }
+
+  const stage = document.getElementById('stage');
+  const status = document.getElementById('status');
+  const PLAYLIST_URL = 'playlist.json';
+  const REFRESH_MS = 60000; // refresh playlist every 60s
+
+  let playlist = [];
+  let currentIdx = 0;
+  let cycleTimer = null;
+  let lastUpdated = null;
+
+  function buildSlide(v){
+    const slide = document.createElement('div');
+    slide.className = 'slide slide-' + (v.type || 'gradient');
+    slide.dataset.id = v.id || '';
+
+    if (v.type === 'image' && v.src){
+      const img = document.createElement('img');
+      img.src = v.src;
+      img.alt = v.title || '';
+      slide.classList.add('slide-media');
+      slide.appendChild(img);
+    } else if (v.type === 'video' && v.src){
+      const vid = document.createElement('video');
+      vid.src = v.src;
+      vid.muted = true;
+      vid.autoplay = true;
+      vid.loop = false;
+      vid.playsInline = true;
+      slide.classList.add('slide-media');
+      slide.appendChild(vid);
+    } else {
+      // gradient fallback
+      const grad = (v.gradient && v.gradient.length === 2)
+        ? `linear-gradient(135deg, ${v.gradient[0]} 0%, ${v.gradient[1]} 100%)`
+        : 'linear-gradient(135deg, #1A6FFF 0%, #56B4FF 100%)';
+      slide.style.background = grad;
+      slide.classList.add('slide-gradient');
+      const content = document.createElement('div');
+      content.className = 'content';
+      if (v.eyebrow){
+        const e = document.createElement('div');
+        e.className = 'eyebrow';
+        e.textContent = v.eyebrow;
+        content.appendChild(e);
+      }
+      if (v.headline){
+        const h = document.createElement('div');
+        h.className = 'headline';
+        h.textContent = v.headline;
+        content.appendChild(h);
+      }
+      if (v.footer){
+        const f = document.createElement('div');
+        f.innerHTML = '<span class="footer-line">' + v.footer.replace(/[<>]/g,'') + '</span>';
+        content.appendChild(f);
+      }
+      slide.appendChild(content);
+    }
+    return slide;
+  }
+
+  function rebuildStage(){
+    stage.innerHTML = '';
+    playlist.forEach(v => stage.appendChild(buildSlide(v)));
+    if (playlist.length > 0){
+      currentIdx = 0;
+      activateSlide(0);
+    }
+  }
+
+  function activateSlide(idx){
+    const slides = stage.querySelectorAll('.slide');
+    slides.forEach((s,i) => s.classList.toggle('active', i === idx));
+    // Restart any video on the active slide
+    const video = slides[idx] && slides[idx].querySelector('video');
+    if (video){
+      try { video.currentTime = 0; video.play(); } catch(e){}
+    }
+    scheduleNext();
+  }
+
+  function scheduleNext(){
+    clearTimeout(cycleTimer);
+    if (playlist.length === 0) return;
+    const v = playlist[currentIdx];
+    const dur = (v && v.duration ? v.duration : 8) * 1000;
+    cycleTimer = setTimeout(() => {
+      currentIdx = (currentIdx + 1) % playlist.length;
+      activateSlide(currentIdx);
+    }, dur);
+  }
+
+  function showStatus(msg, sub){
+    status.classList.remove('status-hidden');
+    status.querySelector('h1').textContent = msg || 'AINTERCOM RÉSEAU';
+    if (sub) status.querySelector('p').textContent = sub;
+  }
+  function hideStatus(){
+    status.classList.add('status-hidden');
+  }
+
+  async function loadPlaylist(){
+    try {
+      const res = await fetch(PLAYLIST_URL + '?t=' + Date.now(), {cache: 'no-store'});
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      const newUpdated = data.updated_at || '';
+      const visuals = (data.visuals || []).filter(v => v && (v.type === 'gradient' || v.src));
+      if (visuals.length === 0){
+        showStatus('AINTERCOM RÉSEAU', 'Aucun visuel programmé pour le moment.');
+        return;
+      }
+      // Only rebuild if playlist content changed
+      if (newUpdated !== lastUpdated){
+        lastUpdated = newUpdated;
+        playlist = visuals;
+        hideStatus();
+        rebuildStage();
+      }
+    } catch(err){
+      console.warn('[AINTERCOM] Playlist load failed:', err);
+      if (playlist.length === 0){
+        showStatus('Connexion en cours', 'Tentative de reconnexion automatique…');
+      }
+    }
+  }
+
+  // Initial load + periodic refresh
+  loadPlaylist();
+  setInterval(loadPlaylist, REFRESH_MS);
+
+  // Wake lock to prevent screen sleep (best-effort, supported on most modern browsers)
+  if ('wakeLock' in navigator){
+    navigator.wakeLock.request('screen').catch(()=>{});
+  }
+})();
+</script>
+
+</body>
+</html>
