@@ -542,10 +542,23 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 
 /* ── HERO ── */
 .hero{position:relative;height:100vh;min-height:600px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-.hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.85}
+.hero-bg{position:absolute;inset:-5%;z-index:0;will-change:transform}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.85;animation:heroKenBurns 24s ease-in-out infinite alternate;will-change:transform}
 .hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(4,4,18,0.82) 0%,rgba(4,4,18,0.55) 50%,rgba(10,20,60,0.45) 100%)}
+.hero-bg-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,0.55) 100%);z-index:1}
 .hero-content{position:relative;z-index:2;text-align:center;color:#fff;padding:0 24px}
+@keyframes heroKenBurns{0%{transform:scale(1.05) translate(0,0)}100%{transform:scale(1.15) translate(-1.5%,-1%)}}
+@keyframes heroFadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero-badge,.hero h1,.hero-sub,.hero-pills,.hero-ctas{opacity:0;animation:heroFadeUp .9s cubic-bezier(.2,.8,.2,1) forwards}
+.hero-badge{animation-delay:.1s}
+.hero h1{animation-delay:.25s}
+.hero-sub{animation-delay:.4s}
+.hero-pills{animation-delay:.55s}
+.hero-ctas{animation-delay:.7s}
+@media(prefers-reduced-motion:reduce){
+  .hero-bg img{animation:none}
+  .hero-badge,.hero h1,.hero-sub,.hero-pills,.hero-ctas{opacity:1;animation:none}
+}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);color:#fff;font-family:'Sora',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;padding:7px 16px;border-radius:100px;margin-bottom:28px}
 .hero-badge-dot{width:6px;height:6px;background:var(--sky);border-radius:50%;animation:pulse-dot 2s infinite}
 .hero h1{font-size:clamp(2.2rem,4vw,3.6rem);font-weight:800;color:#fff;max-width:880px;margin:0 auto 20px;line-height:1.1}
@@ -1192,6 +1205,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
     <img src="https://enjoylife.b-cdn.net/Aintercom/Aintercom%20Main/hero-aintercom.jpg" alt="Régie événementielle AINTERCOM avec intercoms Full-Duplex" loading="eager" fetchpriority="high">
     <div class="hero-bg-overlay"></div>
   </div>
+  <div class="hero-bg-vignette"></div>
   <div class="hero-content">
     <div class="hero-badge">
       <span class="hero-badge-dot"></span>
@@ -2452,6 +2466,31 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+/* ── HERO CINEMATIC: PARALLAX + TILT ── */
+(function(){
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+  const heroBg = document.querySelector('.hero-bg');
+  const heroContent = document.querySelector('.hero-content');
+  const hero = document.querySelector('.hero');
+  if (!heroBg || !heroContent || !hero) return;
+
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        heroBg.style.transform = 'translate3d(0,' + (y * 0.35) + 'px,0)';
+        heroContent.style.transform = 'translate3d(0,' + (y * 0.15) + 'px,0)';
+      }
+      ticking = false;
+    });
+    ticking = true;
+  }
+  window.addEventListener('scroll', onScroll, {passive: true});
+})();
 
 /* ── INIT ── */
 applyDark(dark);
