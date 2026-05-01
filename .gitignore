@@ -95,3 +95,7 @@ coverage/
 
 # Documentation build
 docs/_build/
+
+# Audit / SEO export folders (Screaming Frog, etc.)
+frog/
+2026.*/
