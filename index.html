@@ -36,8 +36,9 @@
 <link rel="preload" as="image" href="assets/images/hero-aintercom.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap"></noscript>
+  <noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/></noscript>
   <script>(function(){var d=localStorage.getItem('aic-dark');document.documentElement.setAttribute('data-theme',d==='1'?'dark':'light');})();</script>
   <script type="application/ld+json">
 [
@@ -2495,29 +2496,49 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 /* ── INIT ── */
 applyDark(dark);
 
-/* ── LEAFLET MAP ── */
-document.addEventListener('DOMContentLoaded', function() {
-  if (document.getElementById('leaflet-map')) {
-    const map = L.map('leaflet-map', {zoomControl: true, scrollWheelZoom: false, dragging: !L.Browser.mobile, tap: false}).setView([45.905, 5.195], 10);
-    window.aicMap = map;
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors', maxZoom: 18
-    }).addTo(map);
-    window.aicMarker = L.marker([45.905, 5.195])
-      .addTo(map)
-      .bindPopup('<b>Meximieux</b><br>📦 Point de retrait AINTERCOM<br>Gratuit · Sur RDV · 7j/7')
-      .openPopup();
-    window.aicCircle30 = L.circle([45.905, 5.195], {
-      color: '#1A6FFF', fillColor: '#1A6FFF', fillOpacity: 0.12, radius: 30000, weight: 2
-    }).addTo(map);
-    window.aicCircle60 = L.circle([45.905, 5.195], {
-      color: '#56B4FF', fillColor: '#56B4FF', fillOpacity: 0.04, radius: 60000,
-      dashArray: '8,8', weight: 1.5, opacity: 0.4
-    }).addTo(map);
+/* ── LEAFLET MAP (lazy-loaded au scroll) ── */
+(function(){
+  const mapEl = document.getElementById('leaflet-map');
+  if (!mapEl) return;
+  let loaded = false;
+  function loadLeaflet(){
+    if (loaded) return; loaded = true;
+    const cssLink = document.createElement('link');
+    cssLink.rel = 'stylesheet';
+    cssLink.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    document.head.appendChild(cssLink);
+    const s = document.createElement('script');
+    s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    s.onload = function(){
+      const map = L.map('leaflet-map', {zoomControl: true, scrollWheelZoom: false, dragging: !L.Browser.mobile, tap: false}).setView([45.905, 5.195], 10);
+      window.aicMap = map;
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors', maxZoom: 18
+      }).addTo(map);
+      window.aicMarker = L.marker([45.905, 5.195])
+        .addTo(map)
+        .bindPopup('<b>Meximieux</b><br>📦 Point de retrait AINTERCOM<br>Gratuit · Sur RDV · 7j/7')
+        .openPopup();
+      window.aicCircle30 = L.circle([45.905, 5.195], {
+        color: '#1A6FFF', fillColor: '#1A6FFF', fillOpacity: 0.12, radius: 30000, weight: 2
+      }).addTo(map);
+      window.aicCircle60 = L.circle([45.905, 5.195], {
+        color: '#56B4FF', fillColor: '#56B4FF', fillOpacity: 0.04, radius: 60000,
+        dashArray: '8,8', weight: 1.5, opacity: 0.4
+      }).addTo(map);
+    };
+    document.body.appendChild(s);
   }
-});
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ loadLeaflet(); io.disconnect(); } });
+    }, {rootMargin: '300px'});
+    io.observe(mapEl);
+  } else {
+    loadLeaflet();
+  }
+})();
 </script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <!-- MODAL NOTICE D'UTILISATION -->
 <div class="modal-overlay" id="modal-notice" onclick="closeModalOutside(event,'modal-notice')">
