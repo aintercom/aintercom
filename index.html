@@ -1380,7 +1380,6 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   </div>
 </section>
 
-
 <!-- TARIFS -->
 <section class="section" id="tarifs">
   <div class="container">
@@ -1645,7 +1644,6 @@ window.addEventListener('resize', () => {
   _svcResizeT = setTimeout(equalizeSvcCards, 150);
 });
 
-
 /* ── PROCESS SEQUENTIAL ANIMATION ── */
 const procObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -1747,7 +1745,6 @@ simUpdateDetail();
 simUpdate();
 </script>
 
-
 <!-- COMPARATIF -->
 <section class="section section-bg grain-overlay" id="comparatif">
   <div class="container">
@@ -1805,7 +1802,6 @@ simUpdate();
   </div>
 </section>
 
-
 <!-- PROCESS -->
 <section class="section section-bg grain-overlay" id="process">
   <div class="container">
@@ -1838,7 +1834,6 @@ simUpdate();
     </div>
   </div>
 </section>
-
 
 <!-- ZONE -->
 <section class="section" id="zone">
@@ -1900,7 +1895,6 @@ simUpdate();
   </div>
 </section>
 
-
 <!-- GENÈSE -->
 <section class="genese" id="genese">
   <div class="container">
@@ -1928,7 +1922,6 @@ simUpdate();
     </div>
   </div>
 </section>
-
 
 <!-- FAQ -->
 <section class="section section-bg grain-overlay" id="faq">
@@ -1989,7 +1982,6 @@ simUpdate();
     </div>
   </div>
 </section>
-
 
 <!-- CONTACT -->
 <section class="section" id="contact">
@@ -3201,11 +3193,11 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Métadonnées Formsubmit
-      data._subject = `Nouvelle demande de devis AINTERCOM — ${data.nom} ${data.prenom}`;
+      data._subject = `Nouvelle demande de devis AINTERCOM, ${data.nom} ${data.prenom}`;
       data._template = 'table';
       data._captcha = 'false';
       data._replyto = data.email;
-      data._autoresponse = `Bonjour ${data.prenom},\n\nNous avons bien reçu votre demande de devis pour AINTERCOM. Nous vous répondons sous 24h ouvrées avec une proposition personnalisée.\n\nÀ très vite,\nMorgan — AINTERCOM\n07 44 98 00 15`;
+      data._autoresponse = `Bonjour ${data.prenom},\n\nNous avons bien reçu votre demande de devis pour AINTERCOM. Nous vous répondons sous 24h ouvrées avec une proposition personnalisée.\n\nÀ très vite,\nMorgan, AINTERCOM\n07 44 98 00 15`;
 
       // Envoi vers Formsubmit.co
       const response = await fetch('https://formsubmit.co/ajax/contact@aintercom.fr', {
