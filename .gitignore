@@ -99,3 +99,6 @@ docs/_build/
 # Audit / SEO export folders (Screaming Frog, etc.)
 frog/
 2026.*/
+
+# Contenu interne (LinkedIn batches, stratégie) — local uniquement, jamais publié
+content/
