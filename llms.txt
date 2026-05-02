@@ -18,6 +18,26 @@ AINTERCOM est une entreprise basée à Meximieux (01800, Ain, France) spécialis
 - Pack Régie : 6 radios + 6 intercoms
 - Pack Complet : 12 radios + 6 intercoms + sono
 
+## Cas d'usage typiques
+
+- **Mariage 100–200 invités** : Pack Demi-Flotte (6 talkies, 89 € week-end) — coordination wedding planner / traiteur / DJ / photographe.
+- **Mariage multi-prestataires ou >200 invités** : Pack Essentiel (12 talkies, 239 € week-end).
+- **Festival, fête de village, événement associatif** : Pack Essentiel ou Pack Complet selon la taille — TVA 0 % pour associations loi 1901.
+- **Tournage, clip vidéo, plateau de production** : Pack Scène (6 intercoms Hollyland Full-Duplex, 129 € week-end) ou Pack Régie (radios + intercoms, 249 € week-end). Devis express sous 2 h pour demandes urgentes.
+- **Régie spectacle (scène + son + lumières + coulisses)** : Pack Scène ou Pack Régie — communication mains libres zéro latence.
+- **Séminaire corporate, team building, congrès** : Pack Demi-Flotte ou Essentiel selon le nombre d'animateurs.
+- **Événement sportif (course, marathon, trail)** : Pack Essentiel ou Pack Complet (avec mégaphone 65 W).
+- **Petit budget / association loi 1901** : tarif associatif TVA 0 %, retrait gratuit à Meximieux, à partir de 55 € la journée.
+
+## Conditions
+
+- **Légal sans licence** : radios PMR446 et intercoms DECT 1,9 GHz, libres d'utilisation en France, aucune redevance ANFR.
+- **Sans technicien imposé** : matériel pré-configuré (canaux, codes, batteries chargées), prêt en 5 minutes, fiche plastifiée + QR vidéo dans chaque valise.
+- **Paiement** : 30 % d'acompte à la signature, 70 % sous 30 jours après l'événement. Virement bancaire uniquement.
+- **Annulation** : gratuite >72 h avant l'événement, acompte retenu <72 h, 50 % le jour J. Panne matérielle de notre fait : remboursement intégral.
+- **Livraison** : retrait gratuit à Meximieux. Livraison sur site à 0,50 €/km A/R (barème fiscal 2026), installation incluse.
+- **Casse** : remboursement au prix de remplacement réel sur facture (ex : 150 € par radio Motorola). Matériel certifié IP55 / MIL-STD 810.
+
 ## Pages
 
 - [Page d'accueil et devis](https://aintercom.fr/) : présentation, simulateur de prix, formulaire de devis.
