@@ -1838,9 +1838,11 @@ function simBuildDevisPdf(logo) {
 
   // Bloc droite : logo (ou fallback texte si chargement échoue)
   if (logo && logo.dataUrl) {
-    const targetW = 42;
-    const targetH = targetW * (logo.h / logo.w);
-    doc.addImage(logo.dataUrl, 'PNG', W - M - targetW, 18, targetW, targetH);
+    const maxW = 42, maxH = 20;
+    const ratio = logo.h / logo.w;
+    let tw = maxW, th = maxW * ratio;
+    if (th > maxH) { th = maxH; tw = maxH / ratio; }
+    doc.addImage(logo.dataUrl, 'PNG', W - M - tw, 18, tw, th);
   } else {
     doc.setFont('helvetica', 'bold'); doc.setFontSize(22); doc.setTextColor(26, 111, 255);
     doc.text('AINTERCOM', W - M, 30, { align: 'right' });
@@ -1864,11 +1866,12 @@ function simBuildDevisPdf(logo) {
   doc.text('(structure, adresse, email,', 110, 85.5);
   doc.text(' SIRET ou RNA)', 110, 90);
 
-  // === OBJET / DATE ÉVÉNEMENT ===
+  // === OBJET / DURÉE / LIEU ===
   doc.setTextColor(20,20,30); doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
   doc.text('Objet : Location matériel · ' + pkd.name, M, 110);
-  let lieuLine = km === 0 ? 'Retrait à Meximieux (gratuit)' : ('Livraison ' + (simDestLabel ? '· ' + simDestLabel + ' ' : '') + '· ' + (km*2) + ' km A/R');
-  doc.text('Durée : ' + dureeLbl + '  ·  Lieu : ' + lieuLine, M, 116);
+  doc.text('Durée : ' + dureeLbl, M, 116);
+  let lieuLine = km === 0 ? 'Retrait à Meximieux (gratuit)' : ('Livraison' + (simDestLabel ? ' · ' + simDestLabel : '') + ' · ' + (km*2) + ' km A/R');
+  doc.text('Lieu : ' + lieuLine, M, 122);
 
   // === TABLEAU PRIX ===
   const rows = [];
@@ -1878,13 +1881,19 @@ function simBuildDevisPdf(logo) {
     rows.push(['Frais de déplacement A/R\n' + (km*2) + ' km × 0,50 €/km depuis Meximieux', '1 unité', fmt(dep), '0 %', fmt(dep)]);
   }
   doc.autoTable({
-    startY: 128,
+    startY: 132,
     head: [['Description', 'Qté', 'Prix unitaire', 'TVA (%)', 'Total HT']],
     body: rows,
     theme: 'plain',
     headStyles: { fillColor: [30, 30, 40], textColor: 255, fontStyle: 'bold', fontSize: 9, halign: 'left', cellPadding: { top: 4, bottom: 4, left: 4, right: 4 } },
     bodyStyles: { fontSize: 9, valign: 'top', cellPadding: { top: 4, bottom: 4, left: 4, right: 4 }, textColor: [40,40,50] },
-    columnStyles: { 0: { cellWidth: 88 }, 1: { halign: 'center', cellWidth: 18 }, 2: { halign: 'right', cellWidth: 26 }, 3: { halign: 'center', cellWidth: 18 }, 4: { halign: 'right', cellWidth: 30 } },
+    columnStyles: {
+      0: { cellWidth: 80 },
+      1: { halign: 'center', cellWidth: 18 },
+      2: { halign: 'right', cellWidth: 25 },
+      3: { halign: 'center', cellWidth: 17 },
+      4: { halign: 'right', cellWidth: 30 }
+    },
     margin: { left: M, right: M }
   });
   let y = doc.lastAutoTable.finalY + 6;
@@ -1929,6 +1938,44 @@ function simBuildDevisPdf(logo) {
   doc.text(ref + ' · 1/1', W - M, 287, { align: 'right' });
 
   doc.save('AINTERCOM-Devis-' + ref + '.pdf');
+
+  // Notification silencieuse à AINTERCOM (fire-and-forget)
+  simNotifyDevis({
+    ref, pack: pkd.name, seg: segLabel, duree: dureeLbl, lieu: lieuLine,
+    total: fmt(total), acompte: fmt(acompte), solde: fmt(solde),
+    dateStr: dateStr + ' ' + dd(now.getHours()) + ':' + dd(now.getMinutes())
+  });
+}
+
+let simNotifyLastTs = 0;
+function simNotifyDevis(d) {
+  const now = Date.now();
+  if (now - simNotifyLastTs < 20000) return; // throttle 20s
+  simNotifyLastTs = now;
+  try {
+    const payload = {
+      _subject: '🔔 Nouveau devis simulateur · ' + d.pack + ' · ' + d.total,
+      _captcha: 'false',
+      _template: 'table',
+      Référence: d.ref,
+      Pack: d.pack,
+      Statut: d.seg,
+      'Durée': d.duree,
+      'Lieu de livraison': d.lieu,
+      'Total TTC': d.total,
+      'Acompte 30 %': d.acompte,
+      'Solde 70 %': d.solde,
+      'Date génération': d.dateStr,
+      Page: location.href,
+      Navigateur: navigator.userAgent
+    };
+    fetch('https://formsubmit.co/ajax/contact@aintercom.fr', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json', 'Accept':'application/json'},
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(() => {});
+  } catch (e) {}
 }
 </script>
 
