@@ -50,11 +50,12 @@
   </div>
   <div class="site-nav-mobile" id="site-nav-mobile">
     <a href="${BASE}/#services">Solutions</a>
+    <a href="${BASE}/#tarifs">Tarifs &amp; Simulateur</a>
     <a href="${BASE}/#process">Comment ça marche</a>
-    <a href="${BASE}/#tarifs">Tarifs</a>
-    <a href="${BASE}/insights/">Articles</a>
-    <a href="${BASE}/#contact">Contact</a>
-    <a href="${BASE}/#contact" class="site-nav-mobile-cta">Réserver un kit →</a>
+    <a href="${BASE}/#zone">Zone d'intervention</a>
+    <a href="${BASE}/#genese">Notre histoire</a>
+    <a href="${BASE}/#faq">FAQ</a>
+    <a href="${BASE}/#contact" class="site-nav-mobile-cta">Réserver un kit</a>
   </div>
 </nav>
 <div class="site-back">
