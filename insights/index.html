@@ -22,12 +22,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://aintercom.fr/assets/villes-style.css">
 <style>
-.insights-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; padding: 0 20px; max-width: 1200px; margin: 40px auto; }}
-.insights-card {{ background: white; border: 1px solid rgba(10,10,30,0.08); border-radius: 12px; padding: 24px; transition: .2s; text-decoration: none; color: #07070F; }}
-.insights-card:hover {{ transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,111,255,0.12); }}
-.insights-card .stag {{ font-size: 0.75rem; color: #1A6FFF; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }}
-.insights-card h3 {{ font-family: 'Sora', sans-serif; font-size: 1.15rem; margin: 8px 0 12px; line-height: 1.3; }}
-.insights-card p {{ font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: #38384A; line-height: 1.5; margin: 0; }}
+.insights-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;padding:0 24px;max-width:1180px;margin:48px auto 64px}
+.insights-card{background:#fff;border:1px solid rgba(10,10,30,0.08);border-radius:18px;padding:26px;transition:.25s;text-decoration:none;color:#07070F;display:flex;flex-direction:column;gap:10px;position:relative}
+.insights-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(26,111,255,0.12);border-color:rgba(26,111,255,0.25)}
+.insights-card .stag{font-family:'Sora',sans-serif;font-size:0.66rem;color:#1A6FFF;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:rgba(26,111,255,0.08);padding:4px 10px;border-radius:100px;align-self:flex-start;margin-bottom:4px}
+.insights-card h3{font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:700;margin:0;line-height:1.3;color:#07070F;letter-spacing:-0.015em}
+.insights-card p{font-family:'DM Sans',sans-serif;font-size:0.9rem;color:#5A5A6E;line-height:1.6;margin:0;flex:1}
+.insights-card::after{content:'Lire →';font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:700;color:#1A6FFF;margin-top:6px;opacity:0.7;transition:.2s}
+.insights-card:hover::after{opacity:1;transform:translateX(2px)}
+@media(max-width:720px){.insights-grid{padding:0 18px;gap:14px;margin:32px auto 48px}.insights-card{padding:22px}}
 </style>
 </head>
 <body>

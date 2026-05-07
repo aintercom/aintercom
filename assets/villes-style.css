@@ -109,8 +109,49 @@ footer h3{font-family:'Sora',sans-serif;color:#fff;font-size:0.95rem;font-weight
 .footer-cities a:hover{background:#1A6FFF;color:#fff}
 .footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .footer-bottom a{color:#56B4FF}
+/* === INSIGHTS · article + composants === */
+.insights-content{max-width:780px;margin:0 auto;padding:56px 24px 48px}
+.insights-lead{font-family:'DM Sans',sans-serif;font-size:1.18rem;line-height:1.7;color:#38384A;font-weight:500;margin:0 0 36px;padding:18px 22px;background:rgba(26,111,255,0.04);border-left:3px solid #1A6FFF;border-radius:0 12px 12px 0}
+.insights-content h2{font-family:'Sora',sans-serif;font-size:1.55rem;font-weight:700;margin:48px 0 18px;color:#07070F;line-height:1.25;letter-spacing:-0.015em}
+.insights-content h3{font-family:'Sora',sans-serif;font-size:1.18rem;font-weight:700;margin:32px 0 14px;color:#07070F}
+.insights-content p{font-family:'DM Sans',sans-serif;font-size:1.04rem;line-height:1.78;color:#2D2D3E;margin:0 0 18px}
+.insights-content ul{font-family:'DM Sans',sans-serif;font-size:1.04rem;line-height:1.78;color:#2D2D3E;padding-left:24px;margin:0 0 22px}
+.insights-content li{margin-bottom:8px}
+.insights-content strong{color:#07070F;font-weight:700;background:linear-gradient(to top,rgba(86,180,255,0.22) 38%,transparent 38%);padding:0 2px}
+.insights-content a:not(.btn-primary){color:#1A6FFF;font-weight:600;border-bottom:1px solid rgba(26,111,255,0.3);transition:.15s}
+.insights-content a:not(.btn-primary):hover{border-bottom-color:#1A6FFF;color:#0d5be0}
+.insights-cta-box{background:linear-gradient(135deg,#0A1840 0%,#1A6FFF 100%);padding:34px 36px;border-radius:18px;margin:48px 0;color:#fff;box-shadow:0 16px 40px rgba(26,111,255,0.18)}
+.insights-cta-box h3{color:#fff;margin:0 0 10px;font-family:'Sora',sans-serif;font-size:1.32rem;font-weight:800}
+.insights-cta-box p{color:rgba(255,255,255,0.88);margin:0 0 20px;font-size:0.96rem}
+.insights-cta-box .btn-primary{display:inline-block;background:#fff;color:#1A6FFF;padding:13px 26px;border-radius:10px;font-family:'Sora',sans-serif;font-weight:700;border-bottom:none;transition:.2s}
+.insights-cta-box .btn-primary:hover{background:rgba(255,255,255,0.92);transform:translateY(-1px)}
+.insights-related{background:#F5F5FA;padding:28px 32px;border-radius:18px;margin:36px 0 0;border:1px solid rgba(10,10,30,0.06)}
+.insights-related h3{margin:0 0 16px;font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:700;color:#07070F}
+.insights-related ul{list-style:none;padding:0;margin:0}
+.insights-related li{margin-bottom:10px;padding-left:22px;position:relative}
+.insights-related li::before{content:'→';position:absolute;left:0;color:#1A6FFF;font-weight:700}
+.insights-related a{color:#07070F !important;font-weight:600;border-bottom:none !important;transition:.15s}
+.insights-related a:hover{color:#1A6FFF !important}
+.author-card{display:flex;gap:16px;align-items:center;padding:22px 26px;background:#F5F5FA;border-radius:14px;margin:48px 0 32px;border:1px solid rgba(10,10,30,0.06)}
+.author-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#1A6FFF 0%,#56B4FF 100%);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;flex-shrink:0;letter-spacing:-0.02em}
+.author-info{font-size:0.92rem;color:#5A5A6E;line-height:1.55}
+.author-info strong{color:#07070F;display:block;font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;margin-bottom:2px}
+/* Hero specifique aux insights : un peu moins haut que les villes */
+.hero.hero-insight{padding:64px 0 48px}
+.hero.hero-insight h1{font-size:clamp(1.7rem,3.6vw,2.5rem)}
+
 @media(max-width:720px){
 .container{padding:0 18px}
+.insights-content{padding:36px 20px 32px}
+.insights-lead{font-size:1.04rem;padding:14px 18px;margin-bottom:28px}
+.insights-content h2{font-size:1.32rem;margin:36px 0 14px}
+.insights-content h3{font-size:1.08rem;margin:24px 0 12px}
+.insights-content p,.insights-content ul{font-size:0.96rem;line-height:1.7}
+.insights-cta-box{padding:24px 22px;margin:32px 0}
+.insights-cta-box h3{font-size:1.14rem}
+.insights-related{padding:22px 22px}
+.author-card{padding:18px 20px;margin:36px 0 24px;flex-direction:row;gap:14px}
+.author-avatar{width:48px;height:48px}
 nav{padding:10px 0}
 /* mobile : conservation de la même hauteur que home (pas de réduction) */
 .nav-back{font-size:0.76rem}
