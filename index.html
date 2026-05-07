@@ -570,8 +570,10 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .hero h1 em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal}
 .hero-sub{font-size:1.08rem;color:rgba(255,255,255,0.7);max-width:580px;margin:0 auto 28px;line-height:1.75}
 .hero-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:720px;margin:0 auto 36px}
-.hero-pill{font-size:0.74rem;font-weight:500;color:rgba(255,255,255,0.75);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:6px 14px;border-radius:100px;transition:.2s;cursor:default}
-.hero-pill:hover{background:rgba(255,255,255,0.15);color:#fff}
+.hero-pill{font-size:0.74rem;font-weight:500;color:rgba(255,255,255,0.75);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:6px 14px;border-radius:100px;transition:.2s;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.hero-pill:hover{background:rgba(255,255,255,0.18);color:#fff;border-color:rgba(255,255,255,0.35);transform:translateY(-1px)}
+.hero-pill::after{content:"→";opacity:0;margin-left:-2px;transition:.2s;font-weight:600}
+.hero-pill:hover::after{opacity:1;margin-left:0}
 .hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .hero-cta-primary{display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:0.92rem;color:#fff;background:var(--blue);padding:15px 28px;border-radius:var(--r-sm);transition:.22s}
 .hero-cta-primary:hover{background:var(--grad);transform:translateY(-2px);box-shadow:0 12px 32px rgba(26,111,255,0.4)}
@@ -1213,14 +1215,14 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 </h1>
     <p class="hero-sub" data-i18n="hero.sub">Le matériel des grandes productions, rendu accessible. De l'asso de village au festival régional. Pré-configuré, livré, sans technicien imposé.</p>
     <div class="hero-pills">
-      <span class="hero-pill" data-i18n="pill.galas">🎭 Galas, spectacles &amp; théâtre</span>
-      <span class="hero-pill" data-i18n="pill.concerts">🎵 Concerts &amp; festivals</span>
-      <span class="hero-pill" data-i18n="pill.village">🏘️ Fêtes de village &amp; bals</span>
-      <span class="hero-pill" data-i18n="pill.sport">🏃 Sport, courses &amp; trails</span>
-      <span class="hero-pill" data-i18n="pill.muni">🏛️ Événements municipaux</span>
-      <span class="hero-pill" data-i18n="pill.wedding">💒 Mariages &amp; réceptions</span>
-      <span class="hero-pill" data-i18n="pill.shoot">🎬 Tournages &amp; productions</span>
-      <span class="hero-pill" data-i18n="pill.corpo">🏢 Corporate, séminaires &amp; conférences</span>
+      <a class="hero-pill" href="/insights/regisseur-gala-energie-mentale/" data-i18n="pill.galas">🎭 Galas, spectacles &amp; théâtre</a>
+      <a class="hero-pill" href="/insights/securite-festival-4-minutes-urgence/" data-i18n="pill.concerts">🎵 Concerts &amp; festivals</a>
+      <a class="hero-pill" href="/insights/fete-musique-comite-fetes-organisation/" data-i18n="pill.village">🏘️ Fêtes de village &amp; bals</a>
+      <a class="hero-pill" href="/insights/trail-course-securite-radio-foret/" data-i18n="pill.sport">🏃 Sport, courses &amp; trails</a>
+      <a class="hero-pill" href="/insights/megaphone-vonyx-65w-evenement-public/" data-i18n="pill.muni">🏛️ Événements municipaux</a>
+      <a class="hero-pill" href="/insights/wedding-planner-mariage-talkie-walkie/" data-i18n="pill.wedding">💒 Mariages &amp; réceptions</a>
+      <a class="hero-pill" href="/insights/intercom-vs-talkie-tournage-difference/" data-i18n="pill.shoot">🎬 Tournages &amp; productions</a>
+      <a class="hero-pill" href="/insights/correction-live-sponsor-intercom-regie/" data-i18n="pill.corpo">🏢 Corporate, séminaires &amp; conférences</a>
     </div>
     <div class="hero-ctas">
       <a href="#contact" class="hero-cta-primary">
