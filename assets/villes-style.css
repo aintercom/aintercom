@@ -22,6 +22,7 @@ a{color:inherit;text-decoration:none}
 .site-nav-drop-ico svg{width:15px;height:15px;stroke:#1A6FFF;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .site-nav-drop-t{display:block;font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:700;color:#07070F;margin-bottom:1px}
 .site-nav-drop-s{display:block;font-size:0.7rem;color:#8A8A9E}
+.site-nav-drop-sep{height:1px;background:rgba(10,10,30,0.08);margin:6px 4px}
 .site-nav-right{display:flex;align-items:center;gap:8px}
 .site-nav-cta{display:inline-flex;align-items:center;font-family:'Sora',sans-serif;font-size:0.83rem;font-weight:700;color:#fff;background:#1A6FFF;padding:9px 20px;border-radius:9px;transition:.2s;white-space:nowrap}
 .site-nav-cta:hover{background:linear-gradient(135deg,#1A6FFF 0%,#56B4FF 100%);box-shadow:0 6px 20px rgba(26,111,255,0.3)}

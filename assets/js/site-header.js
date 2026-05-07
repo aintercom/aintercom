@@ -19,6 +19,8 @@
           <a href="${BASE}/#services"><span class="site-nav-drop-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="16 2 12 7 8 2"/></svg></span><span><span class="site-nav-drop-t">Radios terrain</span><span class="site-nav-drop-s">Motorola XT420 · 12 secteurs</span></span></a>
           <a href="${BASE}/#services"><span class="site-nav-drop-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></span><span><span class="site-nav-drop-t">Intercom Full-Duplex</span><span class="site-nav-drop-s">Hollyland Solidcom · 6 postes</span></span></a>
           <a href="${BASE}/#services"><span class="site-nav-drop-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></span><span><span class="site-nav-drop-t">Mégaphone</span><span class="site-nav-drop-s">Vonyx 65W · diffusion terrain</span></span></a>
+          <div class="site-nav-drop-sep"></div>
+          <a href="${BASE}/#tarifs"><span class="site-nav-drop-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span><span class="site-nav-drop-t">Grille tarifaire</span><span class="site-nav-drop-s">5 packs · Asso &amp; Pro</span></span></a>
         </div>
       </div>
       <div class="site-nav-item">
@@ -35,7 +37,6 @@
         <div class="site-nav-drop">
           <a href="${BASE}/#tarifs"><span class="site-nav-drop-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg></span><span><span class="site-nav-drop-t">Grille tarifaire</span><span class="site-nav-drop-s">5 packs · Asso &amp; Pro</span></span></a>
           <a href="${BASE}/#tarifs"><span class="site-nav-drop-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span><span class="site-nav-drop-t">Simulateur tarifaire</span><span class="site-nav-drop-s">Calculez votre prix en 30 sec</span></span></a>
-          <a href="${BASE}/insights/"><span class="site-nav-drop-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg></span><span><span class="site-nav-drop-t">Articles & retours terrain</span><span class="site-nav-drop-s">Insights AINTERCOM</span></span></a>
         </div>
       </div>
       <a href="${BASE}/#contact">Contact</a>
