@@ -1567,7 +1567,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 <span id="sim-devis-label">Télécharger ce devis (PDF)</span>
               </button>
-              <p class="sim-devis-note">À envoyer à votre trésorier·ère ou à conserver pour votre production · valable 30 jours · à confirmer pour réservation effective</p>
+              <p class="sim-devis-note">Devis à titre indicatif · à envoyer à votre trésorier·ère ou à conserver pour votre production. Pour réserver effectivement, contactez-nous : nous établirons le devis officiel avec nos CGL.</p>
             </div>
           </div><!-- /sim-body -->
         </div>
@@ -1819,6 +1819,13 @@ function simBuildDevisPdf(logo) {
   doc.setFontSize(32);
   doc.setTextColor(20, 20, 30);
   doc.text('Devis', M, 28);
+  // Badge "À titre indicatif" sous le titre
+  doc.setFillColor(255, 243, 205);
+  doc.setDrawColor(245, 158, 11);
+  doc.setLineWidth(0.3);
+  doc.roundedRect(M, 32, 76, 6, 1.5, 1.5, 'FD');
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(8); doc.setTextColor(146, 84, 11);
+  doc.text('À TITRE INDICATIF · DEVIS OFFICIEL SUR DEMANDE', M + 38, 36, { align: 'center' });
 
   // Bloc gauche : numéro, dates
   doc.setFontSize(9); doc.setTextColor(20,20,30);
@@ -1904,11 +1911,13 @@ function simBuildDevisPdf(logo) {
   doc.setFont('helvetica', 'normal'); doc.setTextColor(60,60,70);
   doc.text('Acompte 30 % à la confirmation : ' + fmt(acompte) + '   ·   Solde 70 % sous 30 jours après l\'événement : ' + fmt(solde), M, y);
   y += 8;
-  doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(90,90,100);
-  const note1 = "Devis valable 30 jours à compter de la date d'émission. La réservation devient effective à réception de : (1) ce devis signé, (2) versement de l'acompte 30 %, (3) numéro SIRET ou RNA de la structure. Les Conditions Générales de Location & de Prestation (CGL v2.1) s'appliquent et sont annexées au devis officiel signé.";
+  doc.setFont('helvetica', 'bold'); doc.setFontSize(8); doc.setTextColor(146, 84, 11);
+  doc.text('Document à titre indicatif — pas un devis officiel', M, y); y += 5;
+  doc.setFont('helvetica', 'normal'); doc.setTextColor(90,90,100);
+  const note1 = "Ce document est généré automatiquement depuis le simulateur en ligne et n'a aucune valeur contractuelle. Pour réserver le matériel et obtenir le devis officiel signable accompagné des Conditions Générales de Location & de Prestation (CGL v2.1), contactez AINTERCOM : contact@aintercom.fr · 07 44 98 00 15.";
   doc.text(doc.splitTextToSize(note1, W - 2*M), M, y); y += 14;
-  const note2 = "Devis généré depuis le simulateur en ligne aintercom.fr — pour confirmer ou ajuster ce devis : contact@aintercom.fr · 07 44 98 00 15";
-  doc.text(doc.splitTextToSize(note2, W - 2*M), M, y); y += 10;
+  const note2 = "La réservation devient effective uniquement après : (1) signature du devis officiel, (2) versement de l'acompte 30 %, (3) fourniture du SIRET ou RNA de la structure cliente. Devis indicatif valable 30 jours à compter de la date d'émission.";
+  doc.text(doc.splitTextToSize(note2, W - 2*M), M, y); y += 14;
   doc.setFontSize(8); doc.setTextColor(120,120,130);
   doc.text('TVA non applicable — Article 293 B du CGI', M, y);
 
