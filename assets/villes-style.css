@@ -7,7 +7,7 @@ a{color:inherit;text-decoration:none}
 .site-nav{position:sticky;top:0;z-index:500;height:68px;display:flex;align-items:center;background:rgba(255,255,255,0.88);backdrop-filter:blur(28px) saturate(1.8);-webkit-backdrop-filter:blur(28px) saturate(1.8);border-bottom:1px solid rgba(10,10,30,0.08)}
 .site-nav-inner{max-width:1160px;margin:0 auto;padding:0 36px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .site-nav-logo{display:inline-flex;align-items:center}
-.site-nav-logo img{height:54px;width:auto;display:block}
+.site-nav-logo img{height:90px;width:auto;display:block}
 .site-nav-center{display:flex;align-items:center;gap:2px}
 .site-nav-center>a,.site-nav-item>a{display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',sans-serif;font-size:0.83rem;font-weight:500;color:#8A8A9E;padding:8px 14px;border-radius:8px;transition:.2s;white-space:nowrap}
 .site-nav-center>a:hover,.site-nav-item>a:hover{color:#07070F;background:#F5F5FA}
@@ -53,7 +53,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop
 nav .container{display:flex;align-items:center;justify-content:space-between}
 .logo,.logo-link{display:inline-flex;align-items:center;text-decoration:none}
 .logo{font-family:'Sora',sans-serif;font-weight:800;font-size:1.15rem;color:#07070F;letter-spacing:-0.02em}
-.logo-img{height:54px;width:auto;display:block}
+.logo-img{height:90px;width:auto;display:block}
 .nav-back{font-family:'Sora',sans-serif;font-size:0.82rem;font-weight:600;color:#1A6FFF}
 .hero{background:linear-gradient(135deg,#07070F 0%,#1a1a2e 100%);color:#fff;padding:80px 0 70px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-50%;right:-20%;width:60%;height:200%;background:radial-gradient(circle,rgba(26,111,255,0.15) 0%,transparent 60%);pointer-events:none}
@@ -112,7 +112,7 @@ footer h3{font-family:'Sora',sans-serif;color:#fff;font-size:0.95rem;font-weight
 @media(max-width:720px){
 .container{padding:0 18px}
 nav{padding:10px 0}
-.logo-img{height:42px !important}
+/* mobile : conservation de la même hauteur que home (pas de réduction) */
 .nav-back{font-size:0.76rem}
 .hero{padding:48px 0 44px}
 .hero-badge{font-size:0.68rem;padding:6px 12px;margin-bottom:18px}

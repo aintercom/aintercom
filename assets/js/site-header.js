@@ -10,7 +10,7 @@
 <nav class="site-nav">
   <div class="site-nav-inner">
     <a href="${BASE}/" class="site-nav-logo" aria-label="AINTERCOM — accueil">
-      <img src="${BASE}/assets/logos/logo-color.webp" alt="AINTERCOM" width="180" height="54">
+      <img src="${BASE}/assets/logos/logo-color.webp" alt="AINTERCOM" width="180" height="90">
     </a>
     <div class="site-nav-center">
       <div class="site-nav-item">
