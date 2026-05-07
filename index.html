@@ -1858,14 +1858,6 @@ function simBuildDevisPdf(logo) {
   let yL = 81;
   ['Association loi 1901', '7 Rue Pierre Bernin', '01800 Meximieux, FR', 'contact@aintercom.fr', 'SIRET 88926603700023'].forEach(t => { doc.text(t, M, yL); yL += 4.5; });
 
-  // === DESTINATAIRE (droite, placeholder) ===
-  doc.setFont('helvetica', 'bold'); doc.setFontSize(11); doc.setTextColor(20,20,30);
-  doc.text('DESTINATAIRE', 110, 75);
-  doc.setFont('helvetica', 'italic'); doc.setFontSize(9); doc.setTextColor(150, 150, 160);
-  doc.text('À compléter', 110, 81);
-  doc.text('(structure, adresse, email,', 110, 85.5);
-  doc.text(' SIRET ou RNA)', 110, 90);
-
   // === OBJET / DURÉE / LIEU ===
   doc.setTextColor(20,20,30); doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
   doc.text('Objet : Location matériel · ' + pkd.name, M, 110);
