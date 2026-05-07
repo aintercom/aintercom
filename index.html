@@ -685,7 +685,7 @@ nav{position:sticky;top:0;z-index:500;height:var(--nav-h);display:flex;align-ite
 .pt.on{background:var(--dark);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.14)}
 [data-theme="dark"] .pt.on{background:var(--blue)}
 .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.pc{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:28px 22px;position:relative;transition:.3s;display:flex;flex-direction:column}
+.pc{background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:28px 22px;position:relative;transition:.3s;display:flex;flex-direction:column;cursor:pointer}
 .pc:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(26,111,255,0.1)}
 .pc.feat{background:linear-gradient(160deg,#0A1840 0%,#0E1F5E 100%);border:none;color:#fff}
 .pc-pop{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-family:'Sora',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 16px;border-radius:100px;white-space:nowrap;z-index:4;box-shadow:0 6px 18px rgba(26,111,255,0.45)}
@@ -3138,6 +3138,17 @@ function closePackModalOutside(e) {
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closePackModal();
+});
+
+/* ── PACK SELECTION : la couleur bleue suit le clic, le badge "Le plus demandé" reste sur Pack Régie ── */
+document.querySelectorAll('.pgrid .pc').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.pgrid .pc').forEach(c => c.classList.remove('feat'));
+    card.classList.add('feat');
+    document.querySelectorAll('.pgrid .pc-img').forEach(img => img.classList.remove('pc-img-featured'));
+    const img = card.querySelector('.pc-img');
+    if (img) img.classList.add('pc-img-featured');
+  });
 });
 </script>
 
