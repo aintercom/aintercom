@@ -1519,6 +1519,14 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 </section>
 
 <script>
+/* ════════════════════════════════════════════════════════════════
+   CLÉ WEB3FORMS — backend du formulaire de devis & des notifications.
+   À REMPLACER par la clé reçue par email après inscription gratuite
+   sur https://web3forms.com (saisir contact@aintercom.fr, la clé
+   arrive aussitôt par mail). C'est la seule ligne à modifier.
+   ════════════════════════════════════════════════════════════════ */
+window.AIC_W3F_KEY = '8b8d4cba-5582-4932-b216-bfd664638e65';
+
 /* ── SIMULATEUR · TOGGLE OPEN ── */
 function simToggleOpen(btn) {
   const drawer = document.getElementById('sim-drawer');
@@ -1888,9 +1896,9 @@ function simNotifyDevis(d) {
   simNotifyLastTs = now;
   try {
     const payload = {
-      _subject: '🔔 Nouveau devis simulateur · ' + d.pack + ' · ' + d.total,
-      _captcha: 'false',
-      _template: 'table',
+      access_key: window.AIC_W3F_KEY,
+      subject: '🔔 Nouveau devis simulateur · ' + d.pack + ' · ' + d.total,
+      from_name: 'Simulateur AINTERCOM',
       Référence: d.ref,
       Pack: d.pack,
       Statut: d.seg,
@@ -1903,7 +1911,7 @@ function simNotifyDevis(d) {
       Page: location.href,
       Navigateur: navigator.userAgent
     };
-    fetch('https://formsubmit.co/ajax/contact@aintercom.fr', {
+    fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: {'Content-Type':'application/json', 'Accept':'application/json'},
       body: JSON.stringify(payload),
@@ -2161,6 +2169,7 @@ function simNotifyDevis(d) {
     </div>
     <div class="contact-grid">
       <form id="devis-form" class="rev">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
         <div class="form-2">
           <div class="fg"><label for="f-nom" data-i18n="f.nom">Nom</label><input id="f-nom" type="text" name="nom" placeholder="Votre nom" required></div>
           <div class="fg"><label for="f-prenom" data-i18n="f.prenom">Prénom</label><input id="f-prenom" type="text" name="prenom" placeholder="Votre prénom" required></div>
@@ -3346,15 +3355,19 @@ document.addEventListener('DOMContentLoaded', function() {
         throw new Error('Veuillez entrer une adresse email valide');
       }
 
-      // Métadonnées Formsubmit
-      data._subject = `Nouvelle demande de devis AINTERCOM, ${data.nom} ${data.prenom}`;
-      data._template = 'table';
-      data._captcha = 'false';
-      data._replyto = data.email;
-      data._autoresponse = `Bonjour ${data.prenom},\n\nNous avons bien reçu votre demande de devis pour AINTERCOM. Nous vous répondons sous 24h ouvrées avec une proposition personnalisée.\n\nÀ très vite,\nMorgan, AINTERCOM\n07 44 98 00 15`;
+      // Garde-fou : clé Web3Forms non configurée
+      if (!window.AIC_W3F_KEY || /REMPLACER/.test(window.AIC_W3F_KEY)) {
+        throw new Error('Le formulaire est momentanément indisponible.');
+      }
 
-      // Envoi vers Formsubmit.co
-      const response = await fetch('https://formsubmit.co/ajax/contact@aintercom.fr', {
+      // Métadonnées Web3Forms
+      data.access_key = window.AIC_W3F_KEY;
+      data.subject = `Nouvelle demande de devis AINTERCOM, ${data.nom} ${data.prenom}`;
+      data.from_name = `${data.prenom} ${data.nom} · formulaire AINTERCOM`;
+      data.replyto = data.email;
+
+      // Envoi vers Web3Forms
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {'Content-Type':'application/json', 'Accept':'application/json'},
         body: JSON.stringify(data)
